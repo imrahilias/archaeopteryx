@@ -1,0 +1,24 @@
+# fresh debian + xmonad install howto
+# #=notes
+# $=commands
+
+$ apt-get	install	xorg
+$ apt-get	install	xmonad
+
+# nano .xinitrc > ecex xmonad
+
+# import /etc/apt/sources.list or edit
+# import entry for opera, if public key error > google 'opera public key debian'
+
+$ apt-get install dzen2
+$ apt-get install conky
+$ apt-get install dmenu
+$ apt-get install rxvt-unicode-256color # aka urxvt (daemon+client)
+$ apt-get install emacs
+
+# import rcs (bash,zsh,xresources,xinit,emacs) scripts
+# import xmonad.hs
+
+# modifie xinitrc if neccessary
+
+$ xinit

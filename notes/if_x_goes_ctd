@@ -1,0 +1,16 @@
+# check boot log:
+# cat /var/log/boot
+# cat /var/log/boot | grep FAIL
+# cat /var/log/boot | grep WARN
+
+# check kernel messages:
+# dmesg | less
+
+# if sysfs warning, unknown scheduler value:
+# cat /sys/block/sda/queue/scheduler
+
+# for ssd optimization:
+# echo deadline > /sys/block/sda/queue/scheduler
+
+# recheck:
+# cat /sys/block/sda/queue/scheduler

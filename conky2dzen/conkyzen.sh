@@ -5,19 +5,19 @@
 #Layout
 BAR_H=9
 BIGBAR_W=65
-WIDTH_L=960
-WIDTH_R=960 #WIDTH_L + WIDTH_R = 1920
+WIDTH_L=1720
+WIDTH_R=200 #WIDTH_L + WIDTH_R = 1920
 HEIGHT=16
 X_POS_L=0
 X_POS_R=$WIDTH_L
 Y_POS_D=1064
 Y_POS_U=0
 
-#rc
+#rcs
 #CONKYFILE="${HOME}/.conkyrc"
-BAR_TOP_R="${HOME}/scripts/conkybattoprrc"
-BAR_BOT_R="${HOME}/scripts/conkybatbotrrc"
-BAR_BOT_L="${HOME}/scripts/conkybatbotlrc"
+BAR_TOP_R="${HOME}/scripts/conkybartrrc"
+BAR_BOT_R="${HOME}/scripts/conkybarbrrc"
+BAR_BOT_L="${HOME}/scripts/conkybarblrc"
 
 #Colors and font
 CRIT="#99cc66"
