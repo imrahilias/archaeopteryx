@@ -1,0 +1,21 @@
+#~/.conkyrc
+# > conky.sourceforge.net/variables.html
+
+background no
+out_to_console yes
+#out_to_x no
+update_interval 1.0
+
+#TEXT
+#DOWN: ${downspeed eth0}  #move > recht unten?
+#UP: ${upspeed eth0}  #move > recht unten?
+#CPU: 
+#${cpu cpu1} 
+#${cpu cpu2} 
+#${cpu cpu3} 
+#${cpu cpu4} 
+#${freq_g} 
+#MEM: ${membar}
+#${mem} 
+#AVGL ^fg()[${loadavg 1 2 3}] #average load > google (1min, 5min, 15minauslastung, faktor) ######move > rechts unten?
+#^fg()${time %A %d %b %H:%M}

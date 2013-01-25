@@ -1,0 +1,34 @@
+!~/.xresources
+! <xfontsel> for selection
+
+xterm*font: -*-fixed-medium-r-*-*-13-*-*-*-*-*-iso8859-*
+xterm*font1: -*-*-*-*-*-*-2-*-*-*-*-*-*-*
+xterm*font2: -misc-fixed-*-r-normal-*-8-*-*-*-*-*-iso8859-*
+xterm*font3: -b&h-lucidatypewriter-bold-*-*-*-12-*-*-*-*-*-*-*
+xterm*font4: -*-screen-bold-r-normal-*-16-*-*-*-*-*-iso8859-*
+xterm*font5: -*-lucidatypewriter-medium-*-*-*-18-*-*-*-*-*-*-*
+xterm*font6: -*-lucidatypewriter-medium-*-*-*-20-*-*-*-*-*-*-*
+xterm*font7: -dec-terminal-bold-r-normal-*-14-*-*-*-*-*-iso8859-*
+
+xterm*foreground:  grey
+xterm*background:  #080808
+XTerm*metaSendsEscape: true
+XTerm*eightBitInput: false
+
+!URXVT
+URxvt*loginShell: true ! > ttps://wiki.archlinux.org/index.php/Rxvt-unicode
+urxvt*transparent: true
+urxvt*shading: 15
+urxvt*fading: 20
+urxvt*scrollBar: false
+urxvt*saveLines: 1000
+urxvt*pointerBlank: true
+!URxvt*.font: -misc-fixed-*-*-*-*-13-*-*-*-*-*-*-*
+URxvt*.font: xft:andalemo:size=10
+
+urxvt*foreground:       #bbbbbb
+urxvt*background:       #000000
+
+!transparency
+!URxvt*.depth: 32
+!URxvt*.background: [95]#000000
