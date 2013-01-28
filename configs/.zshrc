@@ -118,7 +118,7 @@ RPROMPT='$(cmd_fail)$(git_branch)%T'
 #=========================================
 #export HS='alsa_output.usb-047f_c001-00-U0x47f0xc001.analog-stereo'
 #export SP='alsa_output.pci-0000_00_1b.0.analog-stereo'
-export EDITOR='/hom/imrahil/scripts//emc'
+export EDITOR='/home/imrahil/scripts/emc'
 export PATH='/bin:/usr/bin:/usr/local/bin:/home/imrahil/scripts:/sbin:/usr/sbin:/usr/local/sbin:/usr/games:/usr/local/games'
 #path+=/scripts #hängt zur $path eben was an...
 
@@ -178,7 +178,9 @@ alias swapoffa='sudo swapoff -a'
 alias scan='scanimage --format=tiff --mode=Color' #>http://lists.alioth.debian.org/pipermail/sane-devel/2001-December/001177.html
 alias b='bash'
 alias am='alsamixer'
-
+alias tug_vpn='sudo vpnc-connect tug'
+alias vpn0='sudo vpnc-disconnect'
+alias tug_ssh='ssh imrahil@faepnx.tugraz.at'
 
 #=========================================
 # MISC
