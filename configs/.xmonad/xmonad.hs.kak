@@ -241,7 +241,7 @@ myUrgencyHook = withUrgencyHook dzenUrgencyHook
 
 -- StatusBars
 myWorkspaceBar, myBottomStatusBar :: String
-myWorkspaceBar    = "dzen2 -x '8' -y '0' -h '16' -w '960' -ta 'l' -p -e ''"
+myWorkspaceBar    = "dzen2 -x '8' -y '0' -h '16' -w '1420' -ta 'l' -p -e ''"
 myBottomStatusBar = "/usr/bin/dzconky.sh"
 --myTopStatusBar    = "/usr/bin/topstatusbar.sh"
 

@@ -181,6 +181,8 @@ alias am='alsamixer'
 alias tug_vpn='sudo vpnc-connect tug'
 alias vpn0='sudo vpnc-disconnect'
 alias tug_ssh='ssh imrahil@faepnx.tugraz.at'
+alias jdl='sudo jdownloader'
+alias dd='df -ahT'
 
 #=========================================
 # MISC

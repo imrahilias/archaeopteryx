@@ -24,4 +24,5 @@ xrdb -merge ~/.xresources
 ~/scripts/conkyzen.sh
 
 # Launch window manager
-exec ck-launch-session dbus-launch --sh-syntax --exit-with-session /usr/bin/xmonad
+#exec ck-launch-session --sh-syntax --exit-with-session /usr/bin/xmonad
+exec xmonad

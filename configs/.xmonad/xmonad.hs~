@@ -113,7 +113,7 @@ myFocusedBorderColor = colorBlue
 
 -- Workspaces
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = ["NULL", "WEB", "CODE", "DOC", "FILE", "CHAT", "AUDIO", "VIDEO", "LOAD", "Α", "Β", "Γ", "Δ", "Ε"] --never, NEVER name Workspaces identically!
+myWorkspaces = ["NULL", "WEB", "CODE", "DOC", "CHAT", "AUDIO", "VIDEO", "LOAD", "Α", "Β", "Γ", "Δ", "Ε", "Ζ"] --never, NEVER name Workspaces identically!
 
 
 --------------------------------------------------------------------------------------------
@@ -131,9 +131,8 @@ myManageHook = (composeAll . concat $
 	[ [className    =? c     --> doShiftAndGo (myWorkspaces !! 1)     | c <- myWeb] --move myWeb windows to workspace 1 by classname
 	, [className    =? c     --> doShiftAndGo (myWorkspaces !! 2)     | c <- myCode]
 	, [className    =? c     --> doShiftAndGo (myWorkspaces !! 3)     | c <- myDoc]
-	, [className    =? c     --> doShiftAndGo (myWorkspaces !! 4)     | c <- myFile]
-	, [className    =? c     --> doShiftAndGo (myWorkspaces !! 5)     | c <- myChat]
-	, [className    =? c     --> doShiftAndGo (myWorkspaces !! 7)     | c <- myVideo]
+	, [className    =? c     --> doShiftAndGo (myWorkspaces !! 4)     | c <- myChat]
+	, [className    =? c     --> doShiftAndGo (myWorkspaces !! 6)     | c <- myVideo]
 	, [className    =? c     --> doCenterFloat                        | c <- myFloatCC]
 --	, [name         =? n     --> doCenterFloat                        | n <- myFloatCN]
 --	, [name         =? n     --> doSideFloat NW                       | n <- myFloatSN]
@@ -147,8 +146,7 @@ myManageHook = (composeAll . concat $
 		name            = stringProperty "WM_NAME"
 		myWeb           = ["Iceweasel", "Firefox", "Opera"]
                 myCode          = ["Emacs", "Emacs"]
-                myFile          = ["Thunar", "Gentoo"]
-                myDoc           = ["xpdf", "Xpdf", "evince", "Evince", "libreoffice-startcenter", "libreoffice-writer", "libreoffice-calc"]
+                myDoc           = ["xpdf", "Xpdf", "evince", "Evince"]
 		myChat          = ["Psi", "Pidgin"]
                 myVideo         = ["Vlc", "Mplayer"]
 		myFloatCC       = ["Vlc", "MPlayer", "File-roller", "Nvidia-settings", "XFontSel", "XCalc", "XClock", "Main"]
@@ -212,23 +210,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   , ((modm              , xK_comma ), sendMessage (IncMasterN 1))    -- Increment the number of windows in the master area
   , ((modm              , xK_period), sendMessage (IncMasterN (-1)))    -- Deincrement the number of windows in the master area
   , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))    -- Quit xmonad
-  , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart") --   
-  , ((modm              , xK_e     ), spawn "emc") -- Spawn Emacs (kinda runANDraise:)
---, ((modm              , xK_e     ), runOrRaise "emc" (className =? "Emacs"))    -- Find or Spawn Emacs
-  , ((modm              , xK_i     ), runOrRaise "opera" (className =? "Opera"))    -- Find or Spawn Opera (i = internet)
-  , ((modm              , xK_o     ), spawn "libreoffice")    -- Spawn libreoffice selection menu (o = office)
---, ((modm              , xK_w     ), runOrRaise "lowriter" (className =? "libreoffice-writer"))    -- Find or Spawn Writer
-  , ((modm              , xK_f     ), spawn "thunar") -- Spawn Thunar (f = file)
-  , ((modm              , xK_g     ), spawn "gentoo") -- Spawn Gentoo (g = gentoo, file 2)
-  -- multimedia  
-{-, ((0,            0x1008ff13), safeSpawn "amixer" ["-q", "set", "Master", "1+"])
-  , ((0,            0x1008ff11), safeSpawn "amixer" ["-q", "set", "Master", "1-"])
-  , ((0,            0x1008ff12), safeSpawn "amixer" ["-q", "set", "Master", "toggle"])
-  , ((0,            0x1008ff14), safeSpawn "mocp" ["-G"])
-  , ((0,            0x1008ff15), safeSpawn "mocp" ["-s"])
-  , ((0,            0x1008ff16), safeSpawn "mocp" ["-r"])
-  , ((0,            0x1008ff17), safeSpawn "mocp" ["-f"]) 
--}
+  , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")    -- Restart xmonad
+  , ((modm              , xK_i), runOrRaise "iceweasel" (className =? "Iceweasel"))     -- Find or Spawn Iceweasel
+  , ((modm              , xK_e), runOrRaise "emc" (className =? "Emacs"))    -- Find or Spawn Emacs
+  , ((modm              , xK_o), runOrRaise "opera" (className =? "Opera"))    -- Find or Spawn Opera
   ]
   ++
 
