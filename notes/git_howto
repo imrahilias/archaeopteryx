@@ -1,0 +1,7 @@
+github howto:
+
+1) in the dir linked to the rep: (instead of * selection of files/dirs): $git add *
+
+2) $git commit -m "message, commit description"
+
+3) §git push

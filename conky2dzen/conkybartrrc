@@ -12,15 +12,13 @@ TEXT
  ${cpu cpu1}\
  ${cpu cpu2}\
  ${cpu cpu3}\
- ${cpu cpu4}\
-^fg()\
-#^fg(\#3955c4)
-#${freq_g}
-#^fg() |
- CPU\
- |\
- MEM\
+ ${cpu cpu4} \
+ ^fg()CPU\
+ ^fg(\#3955c4)\
+ ${freq_g}\
+^fg() \
+ MEM \
 ^fg(\#3955c4)\
- ${membar}\
-#${mem}
+#${membar}
+ ${mem} \
 ${time ^fg() %A %d %b ^fg(#BD5500)%H:%M}

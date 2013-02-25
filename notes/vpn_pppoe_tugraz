@@ -1,0 +1,69 @@
+######  > http://mg34.vc-graz.ac.at/index.php?option=com_content&view=article&id=110:alternativen-zum-cisco-vpn-client-vpnc-pppoe&catid=34:internet&Itemid=55
+
+Alternativen zum Cisco VPN-Client, vpnc, PPPoE 
+ Flo  Heimausschuss  -  Internet 
+
+Der Cisco VPN-Client ist nicht die einzige Möglichkeit einen vc-graz Internetzugang zu nutzen.
+
+Der Client von Cisco macht öfter Probleme, entweder weil es für viele Platformen keine ordentlichen Versionen gibt (64bit Windows, viele Linuxe), zu wenig Rechenleistung verfügbar ..
+
+Infos dazu auch hier auf der offiziellen vc-graz Seite. Hier einige Tipps..
+vpnc: Ist eine open source Implementierung kompatibel mit dem Cisco VPN Concentrator des ZID. Funktioniert normal ganz gut, wesentlich besser, weil aktueller, als die Linux Version des Cisco VPN Clients. Gibts bei den meisten Linux-Distributionen als Paket plus plugin für den Network-Manager. (Ob vpnc auch auf Windows läuft, keine Ahnung). Ist auch sehr nützlich um im (W)LAN der TU an den Internetzugang zu kommen.
+PPTP ist ein relativ seltenes VPN System (verschlüsselt, von MS). Keine Erfahrung damit, ist eher lästig (glaube ich), gibts aber auch.
+PPPoE: die Nummer-1-Alternative ist das System mit dem viele DSL Modems arbeiten. Das hat den Vorteil, dass praktisch jedes Betriebssystem von selber damit umgehen kann. Ein Vor-Nachteil ist, dass PPPoE unverschlüsselt ist. Bei den obigen Alternativen ist der Datenverkehr vom Client bis zum VPN Concentrator (und nur bis dahin!) verschlüsselt. Meine persönliche Ansicht ist, dass das ziemlich sinnlos ist, die Verschlüsselung kostet aber relativ viel Rechenleistung und beschränkt die Bandbreite auf kleinen Routern massiv. 
+Die PPPoE Alternative wurde lange offiziell kaum erwähnt, mittlerweile gibts von der TU eine Seite dazu.
+PPPoE verwenden
+
+Die PPPoE Verbindung ist erfahrungsgemäß viel stabiler als die über VPN, unverschlüsselt, und daher resourcen-schonend, aber etwas unsicherer. 
+
+Für alle Betriebsysteme gilt, man geht so vor als ob man ein DSL Modem verwenden möchte. Unter Linux kann das entweder der Network-Manager (verhindert aber dann den LAN Zugriff, sollte aber in neueren Versionen behoben werden) oder unter debian basierten Distributionen das Paket pppoeconfig. Das erleichtert und automatisiert das einrichten des PPP daemons enorm.
+
+Außerdem findet PPPoE seinen Zugangspunkt automatisch auf dem Ethernet layer (falls ihr euch fragt wohin der connected). Bei Service Name (oder ähnlich) lässt man das Feld einfach frei, ist nur notwendig, wenn es mehrere Zugangspunkte gäbe. 
+
+Das gleiche funktioniert auch im LAN der TUGraz, nur ist PPPoE nicht WLAN kompatibel (oder?).
+
+#####
+
+
+
+
+##### PPPoE > ETHERNET
+# > http://wiki.debian.org/PPPoE
+
+How to enable PPPoE for an already installed system
+
+In order to make PPPoE run on a Debian station you should follow the following steps: 
+install a Linux kernel which has: 
+ppp and pppoe support enabled (module or built-in). Kernels compiled by Debian have them. 
+Ethernet driver for the interface on which you expect to connect using PPPoE 
+
+
+install pppoeconf (it will pull ppp and optionally pppoe )
+
+
+Run pppoeconf to generate and/or modify /etc/ppp/peers/dsl-provider, /etc/ppp/*ap-secrets files and /etc/network/interfaces. 
+It is best, in most cases, to keep the suggested answers
+
+-
+auto eth0
+iface eth0 inet manual
+
+auto dsl-provider
+iface dsl-provider inet ppp
+pre-up    /sbin/ifconfig eth0 up
+provider dsl-provider
+-
+
+PPPoE with userspace pppoe driver
+
+Alternatively, user-space agent pppoe can be used. 
+
+-
+pty "pppoe -I eth0 -T 80 -m 1452"
+-
+
+
+Notes:
+If the name server information is not taken from the pppoe data, you will have to insert yourself that data in /etc/resolv.conf
+
+#####
