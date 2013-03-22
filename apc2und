@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#spc2line changes space in name of dir/file to underline
+
+# first try, bash character replacement:
+# cp "$1" "${1// /_}"
+#Edit: a few more things occurred to me. First, you really should use mv -i in case there's already a file with underscores ("a_e_i" or whatever). Second, this only works on simple filenames -- if you give it a file path with spaces in an enclosing directory, (e.g. "foo bar/baz quux/a e i"), it tries to rename it into a directory with the spaces converted, which doesn't exist, leading to comedy. So here's a proposed better version:
+#http://stackoverflow.com/questions/6782067/simple-bash-script-to-change-spaces-to-underlines-in-a-file-name
+
+# second try:
+mv -ir "$1" "$(dirname "$1")/$(basename "${1// /_}")"

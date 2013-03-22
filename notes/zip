@@ -1,0 +1,14 @@
+# to add dirs (1,2,3,4) with files (-r) to archive asdf:
+$ zip asdf.zip -r 1 2 3 4
+
+whole dir with:
+$ zip asdf.zip -r
+
+$ passwd protection (prompt 4 passwd & verification):
+$ zip asdf.zip * -e
+
+# to unzip files (1,2,3,4) to archive asdf:
+$ unzip asdf.zip asdf
+
+# to view:
+$ unzip -l asdf.zip

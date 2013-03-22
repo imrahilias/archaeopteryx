@@ -5,6 +5,7 @@ echo ''
 
 # Set
 DAT=$(date +"%y%m%d")
+NAM=$(uname -n)
 
 # check 3 arguments are given #
 case $# in
@@ -23,11 +24,11 @@ case $# in
 	    exit 0
 	    ;;
         # loc = zero
-	-z) LOC="/media/zero/projects/computer/linux/configs/"$USER"_$DAT" #$USER gets evaluated via shell later on...
+	-z) LOC="/media/zero/projects/computer/linux/configs/"$USER"_"$NAM"_$DAT" #$USER gets evaluated via shell later on...
 	    echo "copy configs > zero..."
 	    ;;
         # loc = exil
-	-e) LOC="/media/exil/projects/computer/linux/configs/"$USER"_$DAT"
+	-e) LOC="/media/exil/projects/computer/linux/configs/"$USER"_"$NAM"_$DAT"
 	    echo "copy configs > exil..."
 	    ;;
         # error message
@@ -40,7 +41,7 @@ case $# in
        ;;
     2) #  loc = custom
        if [ $1 == "-c" ]; then
-	   LOC="$2/configs_"$USER"_$DAT"
+	   LOC="$2/configs_"$USER"_"$NAM"_$DAT"
 	   echo "copy configs > wherever..."
        fi
        ;;
@@ -53,17 +54,6 @@ case $# in
 esac
 echo ''
 
-# root backup -----------------------------------------------------------------------------ERROR
-if [[ $UID == 0 ]]; then
-    echo "enabling superpowers..."
-    echo "dont try, it doesnt work. needs fix :/"; echo "...failed"; echo ''
-    exit 0
-    echo "copy fstab..."
-    cp /etc/fstab $LOC; echo "   fstab >"
-    echo "...done"
-    echo "disabling superpowers..."
-    echo "...done"; echo ''
-fi
 
 # init location
 echo "setting up location..."
@@ -74,15 +64,20 @@ echo "...done"; echo ''
 
 # copy scripts
 echo "copy scripts..."
-cp -Rf $HOME/scripts $LOC; echo "scripts/ >"
+cp -R $HOME/scripts $LOC; echo "scripts/ >"
 echo "{"; echo "$(ls $HOME/scripts)"; echo "}"
 echo "...done"; echo ''
 
 # copy xmonad
 echo "copy xmonad..."
 mkdir $LOC/.xmonad
-cp -Rf $HOME/.xmonad/xmonad.hs* $LOC/.xmonad; echo ".xmonad/ >"
+cp -R $HOME/.xmonad/xmonad.hs* $LOC/.xmonad; echo ".xmonad/ >"
 echo "{"; echo "$(ls $HOME/.xmonad | grep xmonad.hs*)"; echo "}"; echo ''
+
+# copy rcs
+echo "copy rcs..."
+cp $/etc/fstab $LOC; echo "   fstab >"
+echo "...done"; echo ''
 
 # copy rcs
 echo "copy rcs..."
@@ -94,11 +89,18 @@ cp $HOME/.emacs $LOC; echo "   .emacs >"
 cp $HOME/.xinitrc $LOC; echo "   .xinitrc >"
 cp $HOME/.xresources $LOC; echo "   .xresources >"
 cp $HOME/.zshrc $LOC; echo "   .zshrc >"
+cp $HOME/.moc/config $LOC/.moc_config; echo "   .moc/* >"
+echo "...done"; echo ''
+
+# copy notes
+echo "copy notes..."
+cp -R $HOME/notes $LOC; echo "notes >"
+echo "{"; echo "$(ls $HOME/notes)"; echo "}"
 echo "...done"; echo ''
 
 # reminder
 echo "keep in mind, this are rcs,they are invisible!"
-touch "$LOC/here_are_invisible_files_cant_you_see"
+touch '$LOC/here_are_invisible_files_cant_you_see?!' # strong votes cause of '?!'
 echo "added reminder..."; echo ''
 
 # end

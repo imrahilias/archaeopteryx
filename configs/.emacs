@@ -72,3 +72,39 @@
 
 (set-face-foreground 'default "gray")
 (set-face-background 'default "black")
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(inhibit-startup-screen t))
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
+
+
+
+;: latex
+; > piotrkazmierczak.com/2010/05/13/emacs-as-the-ultimate-latex-editor/
+
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq TeX-save-query nil)
+(setq TeX-PDF-mode t)
+
+;(require 'flymake)
+;
+;(defun flymake-get-tex-args (file-name)
+;(list "pdflatex"
+;(list "-file-line-error" "-draftmode" "-interaction=nonstopmode" file-name)))
+;
+;(add-hook 'LaTeX-mode-hook 'flymake-mode)
+
+;(setq ispell-program-name "aspell") ; could be ispell as well, depending on your preferences
+;(setq ispell-dictionary "english") ; this can obviously be set to any language your spell-checking program supports
+;
+;(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+;(add-hook 'LaTeX-mode-hook 'flyspell-buffer)

@@ -1,0 +1,32 @@
+add scanner samsung 3205w (wlan)
+----------------------------------
+
+SCAN
+----
+
+$ scanimage > asdf.tiff
+# aliased as 'scan'
+
+
+SETUP
+-----
+
+> bchemnet.com/suldr/
+
+follow orders
+
+$ scanimage -h
+$ scanimage -L
+§ scanimage > --format=tiff sadf.tiff
+
+> lists.alioth.debian.org/pipermail/sane-devel/2001-December/001177.html
+
+Alternatively: SANE
+-------------------
+
+$ ai sane
+
+config sane > sane-project.org/man/sane-xerox_mfp.5.html
+
+xscan GUI
+$ ai xsane
