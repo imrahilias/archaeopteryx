@@ -1,35 +1,37 @@
 #!/bin/bash
 # conf2bak.sh
 # config saving algorithm
-echo ''
 
-# Set
-DAT=$(date +"%y%m%d")
-NAM=$(uname -n)
+# default
+date=$(date +"%y%m%d")
+name=$(uname -n)
 
 # check 3 arguments are given #
 case $# in
-    0) echo "usage: conf2bak [-h|-z|-e|-c location]"
+    0) echo "usage: conf2bak [-h|-z|-e|-l|-c location]"
 	echo "try: -h for help"
 	exit 0
 	;;
     1) case "$1" in
         # display help message
 	-h) echo "config backup editor @M"
-	    echo "usage: conf2bak [--help|-z|-e|-c location]"
-	    echo "       --help   displays this text"
-	    echo "       -z       copies configs to zero (int hdd)"
-	    echo "       -e       copies configs to exil (ext hdd)"
-	    echo "       -c location     copies configs to specified location (see mount/blkid)"  
+	    echo "usage: conf2bak [-h|-z|-e|-l|-c location]"
+	    echo "       -h              displays this text"
+	    echo "       -z              copies configs to zero (int hdd)"
+	    echo "       -e              copies configs to exil (ext hdd)"
+	    echo "       -l              copies configs to local dir"
+	    echo "       -c location     copies configs to specified location, path/to/dir"
+	    echo "                       important: location must exist! (see mount/blkid)"  
 	    exit 0
 	    ;;
         # loc = zero
-	-z) LOC="/media/zero/projects/computer/linux/configs/"$USER"_"$NAM"_$DAT" #$USER gets evaluated via shell later on...
-	    echo "copy configs > zero..."
+	-z) loc="/media/zero/projects/computer/linux/configs/"$USER"_$name_$date" #$USER gets evaluated via shell later on...
 	    ;;
         # loc = exil
-	-e) LOC="/media/exil/projects/computer/linux/configs/"$USER"_"$NAM"_$DAT"
-	    echo "copy configs > exil..."
+	-e) loc="/media/exil/projects/computer/linux/configs/"$USER"_$name_$date"
+	    ;;
+        # loc = local
+	-l) loc=$HOME"/"$USER"_$name_$date"
 	    ;;
         # error message
 	*) echo "invalid option"
@@ -41,8 +43,7 @@ case $# in
        ;;
     2) #  loc = custom
        if [ $1 == "-c" ]; then
-	   LOC="$2/configs_"$USER"_"$NAM"_$DAT"
-	   echo "copy configs > wherever..."
+	   loc="$2/configs_"$USER"_$name_$date"
        fi
        ;;
     *) # error message
@@ -52,57 +53,43 @@ case $# in
        exit 0
        ;;
 esac
-echo ''
-
 
 # init location
-echo "setting up location..."
-mkdir $LOC
-echo "...done"; echo ''
-echo "backup location: $LOC"
-echo "...done"; echo ''
+echo "--- setting up location ---"
+mkdir $loc
+echo "backup location: $loc"
 
 # copy scripts
-echo "copy scripts..."
-cp -R $HOME/scripts $LOC; echo "scripts/ >"
-echo "{"; echo "$(ls $HOME/scripts)"; echo "}"
-echo "...done"; echo ''
+echo "--- copy scripts ---"
+cp -R $HOME/scripts $loc; echo "scripts/"
+rm $loc/scripts/*~; rm $loc/scripts/*"#" # remove backups, maybe exclude somehow bevor cp?
+echo "{"; echo "$(ls $loc/scripts)"; echo "}"
 
 # copy xmonad
-echo "copy xmonad..."
-mkdir $LOC/.xmonad
-cp -R $HOME/.xmonad/xmonad.hs* $LOC/.xmonad; echo ".xmonad/ >"
-echo "{"; echo "$(ls $HOME/.xmonad | grep xmonad.hs*)"; echo "}"; echo ''
+echo "--- copy xmonad ---"
+mkdir $loc/.xmonad
+cp -R $HOME/.xmonad/xmonad.hs $loc/.xmonad; echo ".xmonad/.xonad.hs"
 
 # copy rcs
-echo "copy rcs..."
-cp $/etc/fstab $LOC; echo "   fstab >"
-echo "...done"; echo ''
+echo "--- copy fstab ---"
+cp /etc/fstab $loc; echo "fstab"
 
 # copy rcs
-echo "copy rcs..."
-cp $HOME/.bashrc $LOC; echo "   .bashrc >"
-cp $HOME/.background.* $LOC; echo "   .background.* >"
-cp $HOME/.conkyrc $LOC; echo "   .conkyrc >"
-cp $HOME/.dircolors $LOC; echo "   .dircolors >"
-cp $HOME/.emacs $LOC; echo "   .emacs >"
-cp $HOME/.xinitrc $LOC; echo "   .xinitrc >"
-cp $HOME/.xresources $LOC; echo "   .xresources >"
-cp $HOME/.zshrc $LOC; echo "   .zshrc >"
-cp $HOME/.moc/config $LOC/.moc_config; echo "   .moc/* >"
-echo "...done"; echo ''
+echo "--- copy rcs ---"
+cp $HOME/.emacs $loc;                  echo ".emacs"
+cp $HOME/.xinitrc $loc;                echo ".xinitrc"
+cp $HOME/.xresources $loc;             echo ".xresources"
+cp $HOME/.zshrc $loc;                  echo ".zshrc"
+mkdir $loc/.moc
+cp $HOME/.moc/config $loc/.moc;        echo ".moc/config"
+
 
 # copy notes
-echo "copy notes..."
-cp -R $HOME/notes $LOC; echo "notes >"
+echo "--- copy notes ---"
+cp -R $HOME/notes $loc; echo "notes/"
 echo "{"; echo "$(ls $HOME/notes)"; echo "}"
-echo "...done"; echo ''
 
 # reminder
 echo "keep in mind, this are rcs,they are invisible!"
-touch '$LOC/here_are_invisible_files_cant_you_see?!' # strong votes cause of '?!'
-echo "added reminder..."; echo ''
-
-# end
-echo "nothin else to do ... so doin nothin..."
-echo "...done :)"; echo ''
+touch "$loc/here_are_invisible_files_cant_you_see"
+echo "added reminder...";

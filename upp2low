@@ -1,0 +1,35 @@
+#!/bin/bash
+# upp2low
+# changes all files in all subdirs;  uppercase 2 lowercase.
+# since rename uses sed syntax (most of it), it went down pretty easy:D
+
+# defaults
+dir='*'
+sub='1'
+
+case "$#" in # check if arguments are given
+    0) echo "usage: upp2low [level] [dir]"
+       echo "transforms uppercase 2 lowercase."
+       echo "default dir: start with all files in $dir"
+       echo "default level of depth; go down $sub layer"
+       ;;
+    1) sub=$1
+       echo "custom level of depth; go down $sub layer"
+       echo "default dir: start with all files in $dir"
+       ;;
+    2) sub=$1
+       dir=$2
+       echo "custom level of depth; go down $sub layer"
+       echo "custom dir : start with all files in $dir"
+       ;;
+esac
+
+# do it
+for (( c=1; c<=$sub; c++ ))
+do
+    echo "[$dir] depth of subdir: $c"
+    rename -v 'y/A-Z/a-z/' $dir
+    dir=$(echo "$dir""/*") # move on to next layer of subdirs (and so forth...)
+done
+
+echo "done"

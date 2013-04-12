@@ -40,7 +40,7 @@ import XMonad.Layout.OneBig
 import XMonad.Layout.Master
 import XMonad.Layout.Reflect
 import XMonad.Layout.MosaicAlt
-import XMonad.Layout.NoBorders (noBorders,smartBorders,withBorder)
+import XMonad.Layout.NoBorders (noBorders,smartBorders,withBorder) -- smartBorders eliminates border in fullscreen mode
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
@@ -79,7 +79,7 @@ main = do
 	      , normalBorderColor	= myNormalBorderColor
 	      , focusedBorderColor	= myFocusedBorderColor
 	      , manageHook		= manageDocks <+> myManageHook
-	      , layoutHook 		= avoidStruts  $ layoutHook defaultConfig --avoidStruts verhindert überschreiben von dzen
+	      , layoutHook 		= smartBorders $ avoidStruts  $ layoutHook defaultConfig --avoidStruts verhindert überschreiben von dzen
 	      , logHook          	= (myLogHook workspaceBar)
               , workspaces              = myWorkspaces
               }
@@ -102,7 +102,7 @@ colorMagenta         = "#8e82a2"
 colorBlue            = "#3955c4"
 colorRed             = "#d74b73"
 colorGreen           = "#99cc66"
-myArrow              = "^fg(" ++ colorWhiteAlt ++ ")>^fg(" ++ colorBlue ++ ")>^fg(" ++ colorGray ++ ")>"
+colorOrange          = "#bd5500"
 myNormalBorderColor  = colorBlackAlt
 myFocusedBorderColor = colorBlue
 
@@ -113,7 +113,7 @@ myFocusedBorderColor = colorBlue
 
 -- Workspaces
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = ["NULL", "WEB", "CODE", "DOC", "FILE", "CHAT", "AUDIO", "VIDEO", "LOAD", "Α", "Β", "Γ", "Δ", "Ε"] --never, NEVER name Workspaces identically!
+myWorkspaces = ["NULL", "WEB", "CODE", "FILE", "DOC", "CHAT", "AUDIO", "VIDEO", "LOAD", "Α", "Β", "Γ", "Δ", "Ε"] --never, NEVER name Workspaces identically!
 
 
 --------------------------------------------------------------------------------------------
@@ -130,10 +130,11 @@ myManageHook :: ManageHook
 myManageHook = (composeAll . concat $
 	[ [className    =? c     --> doShiftAndGo (myWorkspaces !! 1)     | c <- myWeb] --move myWeb windows to workspace 1 by classname
 	, [className    =? c     --> doShiftAndGo (myWorkspaces !! 2)     | c <- myCode]
-	, [className    =? c     --> doShiftAndGo (myWorkspaces !! 3)     | c <- myDoc]
-	, [className    =? c     --> doShiftAndGo (myWorkspaces !! 4)     | c <- myFile]
+	, [className    =? c     --> doShiftAndGo (myWorkspaces !! 3)     | c <- myFile]
+	, [className    =? c     --> doShiftAndGo (myWorkspaces !! 4)     | c <- myDoc]
 	, [className    =? c     --> doShiftAndGo (myWorkspaces !! 5)     | c <- myChat]
 	, [className    =? c     --> doShiftAndGo (myWorkspaces !! 7)     | c <- myVideo]
+	, [className    =? c     --> doShiftAndGo (myWorkspaces !! 8)     | c <- myLoad]
 	, [className    =? c     --> doCenterFloat                        | c <- myFloatCC]
 --	, [name         =? n     --> doCenterFloat                        | n <- myFloatCN]
 --	, [name         =? n     --> doSideFloat NW                       | n <- myFloatSN]
@@ -149,8 +150,9 @@ myManageHook = (composeAll . concat $
                 myCode          = ["Emacs", "Emacs"]
                 myFile          = ["Thunar", "Gentoo"]
                 myDoc           = ["xpdf", "Xpdf", "evince", "Evince", "libreoffice-startcenter", "libreoffice-writer", "libreoffice-calc"]
-		myChat          = ["Psi", "Pidgin"]
+		myChat          = ["psi", "Pidgin"]
                 myVideo         = ["Vlc", "Mplayer"]
+                myLoad          = ["jd-Main"]
 		myFloatCC       = ["Vlc", "MPlayer", "File-roller", "Nvidia-settings", "XFontSel", "XCalc", "XClock", "Main"]
 
 
@@ -175,7 +177,8 @@ myLogHook h = dynamicLogWithPP $ defaultPP
 	, ppExtras          = []
 	, ppSep             = "^fg(" ++ colorGray ++ ")|"
 	, ppWsSep           = ""
-	, ppCurrent         = dzenColor colorBlue     colorBlack . pad
+--	, ppCurrent         = dzenColor colorBlue     colorBlack . pad
+	, ppCurrent         = dzenColor colorOrange   colorBlack . pad
 	, ppUrgent          = dzenColor colorGreen    colorBlack . pad 
 	, ppVisible         = dzenColor colorGray     colorBlack . pad
 	, ppHidden          = dzenColor colorWhiteAlt colorBlack . pad
@@ -211,24 +214,31 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   , ((modm,               xK_t     ), withFocused $ windows . W.sink)    -- Push window back into tiling
   , ((modm              , xK_comma ), sendMessage (IncMasterN 1))    -- Increment the number of windows in the master area
   , ((modm              , xK_period), sendMessage (IncMasterN (-1)))    -- Deincrement the number of windows in the master area
-  , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))    -- Quit xmonad
+  , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))   -- Quit xmonad
   , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart") --   
-  , ((modm              , xK_e     ), spawn "emc") -- Spawn Emacs (kinda runANDraise:)
+  , ((modm              , xK_e     ), spawn "emacsclient -c -a ''") -- Spawn Emacs (kinda runANDraise:) > emacsclient --help or ~/scripts/emc
+--, ((modm              , xK_e     ), spawn "emc") -- Spawn Emacs (kinda runANDraise:)
 --, ((modm              , xK_e     ), runOrRaise "emc" (className =? "Emacs"))    -- Find or Spawn Emacs
   , ((modm              , xK_i     ), runOrRaise "opera" (className =? "Opera"))    -- Find or Spawn Opera (i = internet)
   , ((modm              , xK_o     ), spawn "libreoffice")    -- Spawn libreoffice selection menu (o = office)
 --, ((modm              , xK_w     ), runOrRaise "lowriter" (className =? "libreoffice-writer"))    -- Find or Spawn Writer
-  , ((modm              , xK_f     ), spawn "thunar") -- Spawn Thunar (f = file)
-  , ((modm              , xK_g     ), spawn "gentoo") -- Spawn Gentoo (g = gentoo, file 2)
-  -- multimedia  
-{-, ((0,            0x1008ff13), safeSpawn "amixer" ["-q", "set", "Master", "1+"])
-  , ((0,            0x1008ff11), safeSpawn "amixer" ["-q", "set", "Master", "1-"])
-  , ((0,            0x1008ff12), safeSpawn "amixer" ["-q", "set", "Master", "toggle"])
-  , ((0,            0x1008ff14), safeSpawn "mocp" ["-G"])
-  , ((0,            0x1008ff15), safeSpawn "mocp" ["-s"])
-  , ((0,            0x1008ff16), safeSpawn "mocp" ["-r"])
-  , ((0,            0x1008ff17), safeSpawn "mocp" ["-f"]) 
--}
+  , ((modm              , xK_f     ), spawn "dbus-launch & thunar") -- Spawn Thunar (f = file)
+  , ((modm .|. shiftMask, xK_f     ), spawn "sudo dbus-launch & thunar") -- Spawn SUPERThunar (f = file)
+  , ((modm              , xK_g     ), spawn "gentoo --root-ok") -- Spawn Gentoo as root (g = gentoo, file manager #2)
+-- multimedia  
+  , ((0,            0x1008ff13     ), safeSpawn "amixer" ["-q", "set", "Master", "1+"])
+  , ((0,            0x1008ff11     ), safeSpawn "amixer" ["-q", "set", "Master", "1-"])
+  , ((0,            0x1008ff12     ), safeSpawn "amixer" ["-q", "set", "Master", "toggle"])
+  , ((0,            0x1008ff81     ), safeSpawn "mocp" ["-p"])   -- moc > playlist starten (moc muss laufen)
+  , ((0,            0x1008ff16     ), safeSpawn "mocp" ["-r"])   -- moc > previous track in playlist
+  , ((0,            0x1008ff14     ), safeSpawn "mocp" ["-G"])   -- moc > toggle play/pause
+  , ((0,            0x1008ff17     ), safeSpawn "mocp" ["-f"])   -- moc > next track in playlist
+  ]
+  ++
+
+-- Screenshot commands
+  [ ((0,            xK_Print       ), spawn "screen jpg")
+  , ((modm,         xK_Print       ), spawn "screen png")
   ]
   ++
 

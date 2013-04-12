@@ -1,6 +1,5 @@
 #!/bin/sh
-#
-# ~/.xinitrc
+# ~/.xinitrc > imrahil@triceratops
 
 # Source files
 #xrdb -merge .Xdefaults #@jinn
@@ -22,6 +21,9 @@ xrdb -merge ~/.xresources
 
 # Fire up Conky | dzen
 ~/scripts/conkyzen.sh
+
+# remove dbus session, maybe it helps?!
+rm -rf ~/.dbus/session-bus/*
 
 # Launch window manager
 #exec ck-launch-session dbus-launch --sh-syntax --exit-with-session /usr/bin/xmonad # dbus-launch (...) actually causes problems it should prevail!

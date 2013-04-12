@@ -1,5 +1,6 @@
-!~/.xresources
+!~/.xresources > imrahil@triceratops
 ! <xfontsel> for selection
+
 
 xterm*font: -*-fixed-medium-r-*-*-13-*-*-*-*-*-iso8859-*
 xterm*font1: -*-*-*-*-*-*-2-*-*-*-*-*-*-*
@@ -23,12 +24,13 @@ urxvt*loginshell: true ! > ttps://wiki.archlinux.org/index.php/Rxvt-unicode
 urxvt*transparent: true
 urxvt*shading: 15
 urxvt*fading: 20
-urxvt*scrollbar: true
+urxvt*scrollbar: false
 urxvt*saveLines: 10000
 urxvt*pointerblank: true
 !urxvt*.font: -misc-fixed-*-*-*-*-13-*-*-*-*-*-*-*
 urxvt*.font: xft:andalemo:size=10
 !urxvt*.font: -*-fixed-medium-r-*-*-13-*-*-*-*-*-iso8859-*
+urxvt*letterSpace: 0
 
 !urxvt*foreground:       #bbbbbb
 !urxvt*background:       #000000
@@ -36,9 +38,6 @@ urxvt*.font: xft:andalemo:size=10
 !transparency
 !urxvt*.depth: 32
 !urxvt*.background: [95]#000000
-
-urxvt*letterSpace: 0
-
 
 ! Colors --------------------------------------------------------------
 ! black 0-8; red 1-9; green 2-10; yellow 3-11; blue 4-12; magenta 5-13; cyan 6-14; white 7-15
@@ -115,5 +114,5 @@ xcalc*ti.button39.background: gray95
 ! Xclock --------------------------------------------------------------------
 xclock*update:            1
 xclock*analog:            true
-xclock*Foreground:        gray
+xclock*foreground:        gray
 xclock*background:        black

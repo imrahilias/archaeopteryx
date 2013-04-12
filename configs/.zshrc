@@ -1,3 +1,5 @@
+# ~/.zshrc 4 imrahil@triceratops
+
 #=========================================
 # Auto-completions
 #=========================================
@@ -47,10 +49,12 @@ setopt rm_star_wait # Wait, and ask if the user is serious when doing rm *
 setopt append_history # Don't overwrite history
 #setopt inc_append_history # saves in chronological order, all sessions
 setopt share_history # even more, sessioins share the same file!
-histfile=~/.histfile
-histsize=10000
-savehist=10000
-
+#histfile=~/.histfile
+#histsize=10000
+#savehist=10000
+HISTFILE=~/.histfile # CASE SENSITIVE?!
+HISTSIZE=10000
+SAVEHIST=10000
 
 #=========================================
 # Syntax highlighting (by nicoulaj@github)
@@ -187,20 +191,20 @@ alias editxm='emc $HOME/.xmonad/xmonad.hs'
 alias mnta='sudo mount -a'
 alias uma='sudo umount -a'
 alias mntz='sudo mount /media/zero'
-alias mnte='sudo mount /media/exil' # -o uid=1000,gid=1000' # options cause due fstab error, possibly due 'noauto'?!
-alias mnt0='sudo mount /media/0k3' # -o uid=1000,gid=1000' # options cause due fstab error, possibly due 'noauto'?!
+alias mnte='sudo mount /media/exil'
+alias mnt0='sudo mount /media/0k3'
 alias mntwinssd='sudo mount /media/win7ssd'
 alias mntwinhdd='sudo mount /media/win7hdd'
 alias mntdebext='sudo mount /media/deb_ext'
 alias mntdebhdd='sudo mount /media/deb_hdd'
 alias mntr='mntz && mnte && mntwinssd && mntwinhdd && mntdebext && mntdebhdd'
-alias sansa='sudo mount UUID=0CAA-BE9D /media/sansa -o uid=1000,gid=1000' # options cause NO entry in fstab due error!
+alias sansa='sudo mount UUID=0CAA-BE9D /media/sansa'
 
 # apt aliases
 alias ai='sudo apt-get install'
 alias au='sudo apt-get update'
 alias asr='apt-cache search'
-alias ar='sudo apt-get remove'
+alias arm='sudo apt-get remove'
 
 #misc aliases
 alias s='sudo su -' #--> zum einfacher zu root zu kommen... siehe /etc/sudoers für details
@@ -208,16 +212,22 @@ alias sudo='sudo '
 alias psm='ps au'
 alias xxx='sudo halt'
 alias swapoffa='sudo swapoff -a'
-alias scan='scanimage --format=tiff' # notes or scanimage -h > http://lists.alioth.debian.org/pipermail/sane-devel/2001-December/001177.html
-alias b='bash'
+alias scan='scanimage --format=tiff --mode=Color' #>http://lists.alioth.debian.org/pipermail/sane-devel/2001-December/001177.html
 alias am='alsamixer'
-alias tug_vpn='sudo vpnc-connect tug'
+#alias tug='sudo vpnc-connect tug' # in jinns script implementiert
+alias tug='sudo tug_connect'
 alias vpn0='sudo vpnc-disconnect'
 alias tug_ssh='ssh imrahil@faepnx.tugraz.at'
 alias jdl='sudo jdownloader'
-alias dd='df -ah'
+alias dh='dh -h'
+alias dha='dh -ah'
+alias df='df -h'
+alias dfa='df -ah'
 alias x='xinit'
 alias pp='ping 8.8.8.8'
+alias oe1='mplayer http://mp3stream3.apasf.apa.at:8000/listen.pls'
+alias countf='find . -type f | wc -l' # number of all files in dir
+alias countd='find . -type d | wc -l' # number of all subdirs in dir
 
 
 #=========================================
