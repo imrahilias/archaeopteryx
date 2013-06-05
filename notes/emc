@@ -4,4 +4,5 @@
 # -c opens a new window instead of using the term.
 # -a "" is a bit complicated, kinda bug use:D
 # checkout emacsclient --help
-emacsclient -c -a ""
+#
+# emacsclient -c -a ""

@@ -1,0 +1,11 @@
+#~/.conkybatbotlrc
+# > conky.sourceforge.net/variables.html
+
+background no
+out_to_console yes
+#out_to_x no
+update_interval 1.0
+
+TEXT
+DOWN: ${downspeed eth0}
+UP: ${upspeed eth0}

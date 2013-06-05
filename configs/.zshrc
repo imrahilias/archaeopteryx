@@ -29,30 +29,28 @@ zstyle ':completion:*:*:kill:*:processes' command 'ps haxopid:5,user:4,%cpu:4,ni
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' force-list always
 zstyle ':completion:*:processes' command "ps -au${USER}"
-zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin
-
-[ -r /usr/share/doc/pkgfile/command-not-found.zsh ] && . /usr/share/doc/pkgfile/command-not-found.zsh # files just 4 arch...
-
+#zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin
+zstyle ':completion:*:sudo:*' /bin /usr/bin /usr/local/bin /home/imrahil/scripts /sbin /usr/sbin /usr/local/sbin /usr/games /usr/local/games
 
 #=========================================
 # Options
 #=========================================
-setopt correct #correct mistakes
-#setopt auto_list # list choice on ambiguous command
-setopt listtypes # %1 killed. will show up exactly when it is killed.
-setopt auto_cd # change dir by just typing its name wo cd
-setopt auto_pushd # automatically adds dirs to stack
-setopt prompt_subst
-setopt no_beep #never ever beep ever (alt: unsetopt beep)
-setopt rm_star_wait # Wait, and ask if the user is serious when doing rm *
-#setopt completealiases # is enabled elsewhere/ otherwise no effect
-setopt append_history # Don't overwrite history
-#setopt inc_append_history # saves in chronological order, all sessions
-setopt share_history # even more, sessioins share the same file!
-#histfile=~/.histfile
-#histsize=10000
-#savehist=10000
-HISTFILE=~/.histfile # CASE SENSITIVE?!
+setopt correct                  #correct mistakes
+#setopt auto_list                # list choice on ambiguous command
+setopt listtypes                # %1 killed. will show up exactly when it is killed.
+setopt auto_cd                  # change dir by just typing its name wo cd
+setopt auto_pushd               # automatically adds dirs to stack
+setopt prompt_subst             # prompt more dynamic, allow function in prompt
+setopt no_beep                  # never ever beep ever (alt: unsetopt beep)
+setopt rm_star_wait             # Wait, and ask if the user is serious when doing rm *
+#setopt completealiases          # is enabled elsewhere/ otherwise no effect
+setopt append_history           # Don't overwrite history
+#setopt inc_append_history       # saves in chronological order, all sessions
+setopt share_history            # even more, sessioins share the same file!
+setopt hist_ignore_all_dups     # when runing a command several times, only store one
+setopt hist_reduce_blanks       # reduce whitespace in history
+setopt hist_ignore_space        # do not remember commands starting with space
+HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
 
@@ -113,10 +111,66 @@ function cmd_fail {
 # Other Functions
 #=========================================
 
+# cd + ls
 function chpwd() {
     emulate -L zsh
     ls -1bh --group-directories-first --color=auto # runs ls (...) after typing cd!
 }
+
+
+# archive handling
+extract() {
+    if [ -f $1 ]; then
+        case $1 in
+            *.tar.bz2)      tar xjvf $1     ;;
+            *.tar.gz)       tar xzvf $1     ;;
+            *.tgz)          tar xzvf $1     ;;
+            *.bz2)          bzip2 -d $1     ;;
+            *.gz)           gunzip -d $1    ;;
+            *.tar)          tar xvf $1      ;;
+            *.zip)          unzip $1        ;;
+            *.Z)            uncompress $1   ;;
+            *.rar)          rar x $1      ;;
+            *.7z)           7z x $1         ;;
+            *)              echo "'$1' Error. I have no idea what to do with that";;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+lsarchive() {
+    if [ -f $1 ]; then
+        case $1 in
+            *.tar.bz2)      tar jtf $1      ;;
+            *.tar.gz)       tar ztf $1      ;;
+            *.tar)          tar tf $1       ;;
+            *.tgz)          tar ztf $1      ;;
+            *.zip)          unzip -l $1     ;;
+            *.rar)          rar vb $1       ;;
+            *.7z)           7z l $1         ;;
+            *)              echo"'$1' Error. I have no idea what to do with that";;
+        esac
+    else
+        echo "'$1' is not a valid archive"
+    fi
+}
+
+
+# anti tar-bomb
+atb() { l=$(tar tf $1); if [ $(echo "$l" | wc -l) -eq $(echo "$l" | grep $(echo "$l" | head -n1) | wc -l) ]; then tar xf $1; else mkdir ${1%.t(ar.gz||ar.bz2||gz||bz||ar)} && tar xf $1 -C ${1%.t(ar.gz||ar.bz2||gz||bz||ar)}; fi ;}
+
+
+# quick dir change
+rationalize-dot() {
+    if [[ $LBUFFER = *.. ]]; then
+        LBUFFER+=/..
+    else
+        LBUFFER+=.
+    fi
+}
+zle -N rationalize-dot
+bindkey . rationalize-dot
 
 
 #=========================================
@@ -151,7 +205,7 @@ RPROMPT='$(cmd_fail)$(git_branch)%T'
 #=========================================
 #export HS='alsa_output.usb-047f_c001-00-U0x47f0xc001.analog-stereo'
 #export SP='alsa_output.pci-0000_00_1b.0.analog-stereo'
-export EDITOR='emacs'
+export EDITOR='emacsclient -c -a ""'
 #export EDITOR='emacsclient -c -a ""'
 export PATH='/bin:/usr/bin:/usr/local/bin:/home/imrahil/scripts:/sbin:/usr/sbin:/usr/local/sbin:/usr/games:/usr/local/games'
 #path+=/scripts #hängt zur $path eben was an...
@@ -171,12 +225,12 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
+
 # list aliasas
 alias ö='ls -1Bh --group-directories-first' # '1' 4 one entry/line, 'B' ignores backups (~), 'h' 4 human readable (kiB, MiB, ...)
 alias öö='ls -1ABh --group-directories-first' # 'A' 4 almost all
 alias l='ls -Bhno --group-directories-first' # 'n' 4 numeric uid/gid, 'o' like 'l' without group 
 alias ll='ls -ABhno --group-directories-first'
-#alias ll='ls -alph'     # --> ls --help for more ('h' for human readable sizes (kiB, MiB, GiB...), 'p' for / for dirs) 
 alias d='dirs -v' # lists zsh directory stack (enter <cd +- tab>, plus & minus (reverse) literally, with completion!'
 
 # edit aliases
@@ -206,21 +260,22 @@ alias au='sudo apt-get update'
 alias asr='apt-cache search'
 alias arm='sudo apt-get remove'
 
-#misc aliases
+# non root aliases
 alias s='sudo su -' #--> zum einfacher zu root zu kommen... siehe /etc/sudoers für details
 alias sudo='sudo '
-alias psm='ps au'
 alias xxx='sudo halt'
 alias swapoffa='sudo swapoff -a'
+
+# misc aliases
+alias psm='ps au'
 alias scan='scanimage --format=tiff --mode=Color' #>http://lists.alioth.debian.org/pipermail/sane-devel/2001-December/001177.html
 alias am='alsamixer'
-#alias tug='sudo vpnc-connect tug' # in jinns script implementiert
 alias tug='sudo tug_connect'
 alias vpn0='sudo vpnc-disconnect'
 alias tug_ssh='ssh imrahil@faepnx.tugraz.at'
 alias jdl='sudo jdownloader'
-alias dh='dh -h'
-alias dha='dh -ah'
+alias du='du -h'
+alias dua='du -ah'
 alias df='df -h'
 alias dfa='df -ah'
 alias x='xinit'
@@ -229,6 +284,9 @@ alias oe1='mplayer http://mp3stream3.apasf.apa.at:8000/listen.pls'
 alias countf='find . -type f | wc -l' # number of all files in dir
 alias countd='find . -type d | wc -l' # number of all subdirs in dir
 
+# network aliases
+alias syn='setxkbmap de && synergys --config ~/.synergy' # setxkbmap cause otherwise keys are qwerty... reported bug.
+alias syn='killall  synergys'
 
 #=========================================
 # MISC
@@ -238,5 +296,5 @@ alias countd='find . -type d | wc -l' # number of all subdirs in dir
 stty -ixon
 
 #key setups
-bindkey -e # emacs key bindings: yeiha:D
+bindkey -e # emacs key bindings: yeeha:D
 #bindkey ' ' magic-space # also do history expansion on space ... doesnt work

@@ -24,7 +24,7 @@ urxvt*loginshell: true ! > ttps://wiki.archlinux.org/index.php/Rxvt-unicode
 urxvt*transparent: true
 urxvt*shading: 15
 urxvt*fading: 20
-urxvt*scrollbar: false
+urxvt*scrollBar: false
 urxvt*saveLines: 10000
 urxvt*pointerblank: true
 !urxvt*.font: -misc-fixed-*-*-*-*-13-*-*-*-*-*-*-*
