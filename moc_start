@@ -1,5 +1,0 @@
-#!/bin/zsh
-# moc_start
-# to start moc...
-
-/bin/urxvtc & mocp
