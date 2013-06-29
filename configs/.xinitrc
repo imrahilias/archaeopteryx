@@ -12,7 +12,9 @@ xrdb -merge ~/.xresources
 
 # Fire up Conky | dzen
 ~/scripts/conkyzen
-conky -c ~/.conky/conkybg
+conky -c ~/.conky/conkybg &
+#conky -c ~/.conky/conkybr & # > many conkys > own windows! (c notes)
+conky -c ~/.conky/conkyrings # drawing the lua rings (descrition of them as well, if wanted)
 
 # remove dbus session, maybe it helps?!
 rm -rf ~/.dbus/session-bus/*
