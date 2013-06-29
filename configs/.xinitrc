@@ -12,6 +12,7 @@ xrdb -merge ~/.xresources
 
 # Fire up Conky | dzen
 ~/scripts/conkyzen
+conky -c ~/.conky/conkybg
 
 # remove dbus session, maybe it helps?!
 rm -rf ~/.dbus/session-bus/*

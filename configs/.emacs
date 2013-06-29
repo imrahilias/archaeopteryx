@@ -1,7 +1,6 @@
 ;;fun
 ;;(global-set-key (kbd "C-x C-s") 'spook)
 
-
 ;; inital scratch text
 (setq initial-scratch-message "")
 
@@ -74,7 +73,7 @@
 (global-linum-mode 1)
 
 ;; make it easy on eyes ...
-(set-foreground-color "gray")
+(set-foreground-color "grey")
 (set-background-color "black")
 
 (set-face-foreground 'default "gray")

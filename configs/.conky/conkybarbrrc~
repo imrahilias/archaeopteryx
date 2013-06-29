@@ -16,6 +16,6 @@ ${color #161616}<^fg(\#444444)<^fg(\#EEEEEE)<^fg(\#3955c4)<   \
 ^fg() | \
 ^fg(\#3955c4) ${loadavg 2} \
 ^fg() | \
-^fg(\#3955c4) ${loadavg 3}  \
+^fg(\#3955c4) ${loadavg 3} \
 
 #average load > google (1min, 5min, 15minauslastung, faktor) ######move > rechts unten?

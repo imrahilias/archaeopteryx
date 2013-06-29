@@ -23,4 +23,4 @@ TEXT
 ^fg(\#3955c4)\
 #${membar}
  ${mem} \
-${time ^fg() %A %d %b ^fg(#BD5500)%H:%M} \
+${time ^fg() %A %d %b ^fg(#BD5500)%H:%M}

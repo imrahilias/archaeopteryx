@@ -214,6 +214,13 @@ export PATH='/bin:/usr/bin:/usr/local/bin:/home/imrahil/scripts:/sbin:/usr/sbin:
 #=========================================
 # Aliases
 #=========================================
+
+# colors
+red="\e[31m"
+blue="\e[34m"
+default="\e[0m"
+
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -242,17 +249,17 @@ alias editx='emc $HOME/.xinitrc'
 alias editxm='emc $HOME/.xmonad/xmonad.hs'
 
 # mount aliases
-alias mnta='sudo mount -a'
-alias uma='sudo umount -a'
-alias mntz='sudo mount /media/zero'
-alias mnte='sudo mount /media/exil'
-alias mnt0='sudo mount /media/0k3'
-alias mntwinssd='sudo mount /media/win7ssd'
-alias mntwinhdd='sudo mount /media/win7hdd'
-alias mntdebext='sudo mount /media/deb_ext'
-alias mntdebhdd='sudo mount /media/deb_hdd'
-alias mntr='mntz && mnte && mntwinssd && mntwinhdd && mntdebext && mntdebhdd'
-alias sansa='sudo mount UUID=0CAA-BE9D /media/sansa'
+alias mnta='sudo mount -a; echo -e $red"mounted:"$default; mount' # echo 4 color, semicolon 4 1. command, if ok, than 2. com
+alias uma='sudo umount -a; echo -e $red"mounted:"$default;mount'
+alias mntz='sudo mount /media/zero; echo -e $red"mounted:"$default; mount | grep zero'
+alias mnte='sudo mount /media/exil; echo -e $red"mounted:"$default; mount | grep exil'
+alias mnt0='sudo mount /media/0k3; echo -e $red"mounted:"$default; mount | grep 0k3'
+alias mntwinssd='sudo mount /media/win7ssd; echo -e $red"mounted:"$default; mount | grep win'
+alias mntwinhdd='sudo mount /media/win7hdd; echo -e $red"mounted:"$default; mount | grep win'
+alias mntdebext='sudo mount /media/deb_ext; echo -e $red"mounted:"$default; mount | grep deb'
+alias mntdebhdd='sudo mount /media/deb_hdd; echo -e $red"mounted:"$default; mount | grep deb'
+alias mntr='mntz; mnte; mntwinssd; mntwinhdd; mntdebext; mntdebhdd; echo -e $red"mounted:"$default; mount'
+alias sansa='sudo mount UUID=104F-DA19 /media/sansa; echo -e $red"mounted:"$default; mount | grep sansa'
 
 # apt aliases
 alias ai='sudo apt-get install'
@@ -285,8 +292,12 @@ alias countf='find . -type f | wc -l' # number of all files in dir
 alias countd='find . -type d | wc -l' # number of all subdirs in dir
 
 # network aliases
-alias syn='setxkbmap de && synergys --config ~/.synergy' # setxkbmap cause otherwise keys are qwerty... reported bug.
-alias syn='killall  synergys'
+alias syns='setxkbmap de & synergys --config ~/.synergy' # setxkbmap cause otherwise keys are qwerty... reported bug.
+alias sync='synergyc 192.168.0.11'
+alias syn0='killall synergys & killall synergyc'
+alias vncs='x11vnc -many &' # with passwd: '-rfbauth ~/.x11vncpasswd' -many means that when a connection is terminated starts listening again - only one connection at a time. > http://www.debian-administration.org/articles/135
+alias vnc0='killall x11vnc'
+
 
 #=========================================
 # MISC

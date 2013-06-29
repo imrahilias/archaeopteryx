@@ -91,8 +91,9 @@ main = do
 --------------------------------------------------------------------------------------------
 
 -- Colors and fonts
-myFont               = "-*-fixed-medium-r-*-*-13-*-*-*-*-*-iso8859-*"
-dzenFont             = myFont
+--myFont = "xft:Bitstream Vera Sans Mono:pixelsize=10"       
+--myFont               ="xft:Bitstream Vera Sans Mono:pixelsize=12" -- # "-*-fixed-medium-r-*-*-13-*-*-*-*-*-iso8859-*"
+--dzenFont             = 'myFont'
 colorBlack           = "#020202" --Background (Dzen_BG)
 colorBlackAlt        = "#1c1c1c" --Black Xdefaults
 colorGray            = "#444444" --Gray       (Dzen_FG2)
@@ -152,7 +153,7 @@ myManageHook = (composeAll . concat $
                 myFile          = ["Thunar", "Gentoo"]
                 myDoc           = ["xpdf", "Xpdf", "evince", "Evince", "libreoffice-startcenter", "libreoffice-writer", "libreoffice-calc"]
 		myChat          = ["psi", "Pidgin", "Skype", "Ts3client_linux_amd64"]
-                myVideo         = ["Vlc", "Mplayer"]
+                myVideo         = ["Vlc", "MPlayer"]
                 myLoad          = ["jd-Main"]
 		myFloatCC       = ["Vlc", "MPlayer", "File-roller", "Nvidia-settings", "XFontSel", "XCalc", "XClock", "Main"]
 
@@ -163,7 +164,7 @@ myManageHook = (composeAll . concat $
 
 -- UrgencyHook
 myUrgencyHook = withUrgencyHook dzenUrgencyHook
-	{ args = ["-fn", dzenFont, "-bg", colorBlack, "-fg", colorGreen] }
+	{ args = ["-bg", colorBlack, "-fg", colorGreen] } -- "-fn", dzenFont
 
 -- StatusBars
 myWorkspaceBar :: String
@@ -234,15 +235,20 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   , ((0,            0x1008ff13     ), safeSpawn "amixer" ["-q", "set", "Master", "1+"])
   , ((0,            0x1008ff11     ), safeSpawn "amixer" ["-q", "set", "Master", "1-"])
   , ((0,            0x1008ff12     ), safeSpawn "amixer" ["-q", "set", "Master", "toggle"])
-  , ((0,            0x1008ff81     ), safeSpawn "mocp" ["-p"])   -- moc > start playlist (moc running)
-  , ((0,            0x1008ff16     ), safeSpawn "mocp" ["-r"])   -- moc > previous track in playlist
-  , ((0,            0x1008ff14     ), safeSpawn "mocp" ["-G"])   -- moc > toggle play/pause
-  , ((0,            0x1008ff17     ), safeSpawn "mocp" ["-f"])   -- moc > next track in playlist
+  , ((0,            0x1008ff81     ), safeSpawn "ncmpcpp" ["play"])   -- ncmpcpp > start playlist (moc running)
+  , ((0,            0x1008ff16     ), safeSpawn "ncmpcpp" ["prev"])   -- ncmpcpp > previous track in playlist
+  , ((0,            0x1008ff14     ), safeSpawn "ncmpcpp" ["toggle"])   -- ncmpcpp > toggle play/pause
+  , ((0,            0x1008ff17     ), safeSpawn "ncmpcpp" ["next"])   -- ncmpcpp > next track in playlist
+  , ((0,            0x1008ff2c     ), safeSpawn "ncmpcpp" ["stop"])   -- ncmpcpp > stop
+-- ((0,            0x1008ff81     ), safeSpawn "mocp" ["-p"])   -- moc > start playlist (moc running)
+-- ((0,            0x1008ff16     ), safeSpawn "mocp" ["-r"])   -- moc > previous track in playlist
+--, ((0,            0x1008ff14     ), safeSpawn "mocp" ["-G"])   -- moc > toggle play/pause
+--, ((0,            0x1008ff17     ), safeSpawn "mocp" ["-f"])   -- moc > next track in playlist
 --, ((0,            0x1008ff2c     ), safeSpawn "mocp" ["-s"])   -- moc > stop
   , ((0,            0x1008ff2c     ), do                                                 
-                                        withTaggedGlobalP "mocp" (W.shiftWin (myWorkspaces !! 6))
+                                        withTaggedGlobalP "ncmpcpp" (W.shiftWin (myWorkspaces !! 6))
                                         windows $ W.greedyView (myWorkspaces !! 6)
-                                        runInTerm "" "mocp") -- XF86AudioPlay
+                                        runInTerm "" "ncmpcpp") -- XF86AudioPlay
   ]
   ++
 

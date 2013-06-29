@@ -1,6 +1,24 @@
 !~/.xresources > imrahil@triceratops
 ! <xfontsel> for selection
 
+! Applications without fontconfig support
+Xft.antialias: 1
+Xft.autohint: 0
+Xft.hinting: 1
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcddefault
+Xft.rgba: rgb
+
+! DZEN2
+dzen2.font:       xft:Bitstream Vera Sans Mono:size=12
+!dzen2.foreground:white
+dzen2.background: black
+
+! Emacs
+Emacs.FontBackend: xft
+!Emacs.font: Bitstream Vera Sans Mono-12
+!Emacs.font: xft:Bitstream Vera Sans Mono:size=12:antialise:true
+Emacs.font: -unknown-DejaVu Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1
 
 xterm*font: -*-fixed-medium-r-*-*-13-*-*-*-*-*-iso8859-*
 xterm*font1: -*-*-*-*-*-*-2-*-*-*-*-*-*-*
@@ -27,11 +45,12 @@ urxvt*fading: 20
 urxvt*scrollBar: false
 urxvt*saveLines: 10000
 urxvt*pointerblank: true
-!urxvt*.font: -misc-fixed-*-*-*-*-13-*-*-*-*-*-*-*
-urxvt*.font: xft:andalemo:size=10
-!urxvt*.font: -*-fixed-medium-r-*-*-13-*-*-*-*-*-iso8859-*
 urxvt*letterSpace: 0
-
+!urxvt*.font: -misc-fixed-*-*-*-*-13-*-*-*-*-*-*-*
+!urxvt*.font: xft:andalemo:size=10
+!urxvt*.font: -*-fixed-medium-r-*-*-13-*-*-*-*-*-iso8859-*
+urxvt*font: xft:Bitstream Vera Sans Mono:size=12
+urxvt*boldFont: xft:Bitstream Vera Sans Mono:size=12:style=Bold
 !urxvt*foreground:       #bbbbbb
 !urxvt*background:       #000000
 

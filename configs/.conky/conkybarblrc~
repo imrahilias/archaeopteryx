@@ -9,7 +9,7 @@ total_run_times 0
 use_spacer none
 
 TEXT
-^fg()  DOWN \
+^pa(+10)^fg() DOWN \
 ^fg(\#3955c4) ${downspeed eth0} \
 ^fg() UP \
 ^fg(\#3955c4)${upspeed eth0}   \
