@@ -16,7 +16,7 @@ bar="${HOME}/.conky/conkyzenbar"
 
 #colors & style
 bg="#241e1e"
-style="-bg $bg -e ''"
+style="-fg $fg -bg $bg -e ''"
 
 
 #output

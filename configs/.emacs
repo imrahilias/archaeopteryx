@@ -72,12 +72,16 @@
 ;; line numbers
 (global-linum-mode 1)
 
-;; make it easy on eyes ...
-(set-foreground-color "grey")
-(set-background-color "black")
+;; make it easy on eyes ... > .xresources works better...
+;(set-foreground-color "#6a6464")
+;(set-background-color "#241e1e")
+;(set-face-foreground 'default "#6a6464")
+;(set-face-background 'default "#241e1e")
+;(add-to-list 'default-frame-alist '(foreground-color . "white"))
+;(add-to-list 'default-frame-alist '(background-color . "#241e1e"))
+;(add-to-list 'default-frame-alist '(cursor-color . "white"))
 
-(set-face-foreground 'default "gray")
-(set-face-background 'default "black")
+(set-mouse-color "white")
 
 ; window modifications
 (global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)

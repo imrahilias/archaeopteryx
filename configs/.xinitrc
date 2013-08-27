@@ -6,6 +6,7 @@ xrdb -merge ~/.xresources
 
 # Start deamons
 /usr/bin/urxvtd -q -f -o
+/usr/bin/mpd ~/.mpdconf
 
 # Set wallpaper
 /usr/bin/feh --bg-scale ~/.background.jpg
@@ -13,7 +14,6 @@ xrdb -merge ~/.xresources
 # Fire up Conky | dzen
 ~/scripts/conkyzen
 conky -c ~/.conky/conkybg &
-#conky -c ~/.conky/conkybr & # > many conkys > own windows! (c notes)
 conky -c ~/.conky/conkyrings # drawing the lua rings (descrition of them as well, if wanted)
 
 # remove dbus session, maybe it helps?!

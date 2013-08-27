@@ -57,7 +57,7 @@ To call this script in Conky, use the following (assuming that you save this scr
   fs2_x=1650
   fs2_y=950
 
--- optienal: battery, wireless (analog eth), link, mpd (mpd_percent/bar dont work)?
+-- optienal: battery, wireless (analog eth), link
 
 
 ------------ functions -----------

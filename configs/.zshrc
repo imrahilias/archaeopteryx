@@ -87,8 +87,8 @@ fi
 # prompt_char
 # changes the prompt char to ± if the current dir is a git repo
 function prompt_char {
-    git branch >/dev/null 2>/dev/null && echo '±' && return 
-    echo '»'
+    git branch >/dev/null 2>/dev/null && echo ' ± ' && return 
+    echo ' '
 }
 
 # git_branch
@@ -193,9 +193,10 @@ BCYAN="%{"$'\033[01;36m'"%}"
 WHITE="%{"$'\033[00;37m'"%}"
 BWHITE="%{"$'\033[01;37m'"%}"
 NORM="%{"$'\033[00m'"%}"
-PROMPT="${BBLACK}%n${YELLOW}@${BBLACK}%M ${WHITE}%~ ${BBLUE}"'$(prompt_char)'" ${WHITE}" # Vote Jungle;)
+PROMPT="${BWHITE}%~${CYAN} ❂${BWHITE}"'$(prompt_char)'"${WHITE}" # Vote Jungle;)
 RPROMPT='$(cmd_fail)$(git_branch)%T'
 
+#PROMPT="${BBLACK}%n${YELLOW}@${BBLACK}%M ${WHITE}%~ ${BBLUE}"'$(prompt_char)'" ${WHITE}" # Vote Jungle;)
 #PROMPT='[%{$fg[blue]%}%n$white@$cyan%m$reset:%~]$(prompt_char) ' # @jinn
 #RPROMPT='$(cmd_fail)$(git_branch)%T' 
 
@@ -290,6 +291,7 @@ alias pp='ping 8.8.8.8'
 alias oe1='mplayer http://mp3stream3.apasf.apa.at:8000/listen.pls'
 alias countf='find . -type f | wc -l' # number of all files in dir
 alias countd='find . -type d | wc -l' # number of all subdirs in dir
+alias clr='clear'
 
 # network aliases
 alias syns='setxkbmap de & synergys --config ~/.synergy' # setxkbmap cause otherwise keys are qwerty... reported bug.

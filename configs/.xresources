@@ -10,68 +10,48 @@ Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
 
 ! DZEN2
-dzen2.font:       xft:Bitstream Vera Sans Mono:size=12
-!dzen2.foreground:white
-dzen2.background: black
+dzen2.font:       xft:Bitstream Vera Sans Mono:size=14:style=Bold
+dzen2.foreground: #6a6464
+dzen2.background: #241e1e
 
 ! Emacs
 Emacs.FontBackend: xft
 !Emacs.font: Bitstream Vera Sans Mono-12
 !Emacs.font: xft:Bitstream Vera Sans Mono:size=12:antialise:true
 Emacs.font: -unknown-DejaVu Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1
-
-xterm*font: -*-fixed-medium-r-*-*-13-*-*-*-*-*-iso8859-*
-xterm*font1: -*-*-*-*-*-*-2-*-*-*-*-*-*-*
-xterm*font2: -misc-fixed-*-r-normal-*-8-*-*-*-*-*-iso8859-*
-xterm*font3: -b&h-lucidatypewriter-bold-*-*-*-12-*-*-*-*-*-*-*
-xterm*font4: -*-screen-bold-r-normal-*-16-*-*-*-*-*-iso8859-*
-xterm*font5: -*-lucidatypewriter-medium-*-*-*-18-*-*-*-*-*-*-*
-xterm*font6: -*-lucidatypewriter-medium-*-*-*-20-*-*-*-*-*-*-*
-xterm*font7: -dec-terminal-bold-r-normal-*-14-*-*-*-*-*-iso8859-*
-
-xterm*foreground:  grey
-xterm*background:  #080808
-xterm*metaSendsEscape: true
-xterm*eightBitInput: false
+Emacs*foreground:   #A89C8C
+Emacs*background:   #241e1e
+Emacs*cursorColor:  white
+Emacs*pointerColor: white
 
 !URXVT
 urxvt*termname:  consolicus
 urxvt*title: consolicus
-urxvt*.depth: 32
 urxvt*loginshell: true ! > ttps://wiki.archlinux.org/index.php/Rxvt-unicode
-urxvt*transparent: true
-urxvt*shading: 15
-urxvt*fading: 20
 urxvt*scrollBar: false
 urxvt*saveLines: 10000
 urxvt*pointerblank: true
 urxvt*letterSpace: 0
-!urxvt*.font: -misc-fixed-*-*-*-*-13-*-*-*-*-*-*-*
-!urxvt*.font: xft:andalemo:size=10
-!urxvt*.font: -*-fixed-medium-r-*-*-13-*-*-*-*-*-iso8859-*
 urxvt*font: xft:Bitstream Vera Sans Mono:size=12
 urxvt*boldFont: xft:Bitstream Vera Sans Mono:size=12:style=Bold
-!urxvt*foreground:       #bbbbbb
-!urxvt*background:       #000000
+urxvt*foreground:       #A89C8C
+urxvt*background:       #241e1e
+urxvt*fading: 30	!Fade the text by the given percentage when focus is lost.
 
-!transparency
-!urxvt*.depth: 32
-!urxvt*.background: [95]#000000
+!native transparency
+urxvt*transparent: true
+urxvt*shading: 50	! 0 to 99 darkens, 101 to 200 lightens
+.
+!real transparency > needs xcompmgr
+urxvt.depth: 32
+urxvt.background: [95]#000000
 
-! Colors --------------------------------------------------------------
-! black 0-8; red 1-9; green 2-10; yellow 3-11; blue 4-12; magenta 5-13; cyan 6-14; white 7-15
-*background: #020202
-*foreground: #999999
 
 !neuromouse
 *color0:  #282a2b
 *color8:  #2c2f30
-!*color1:  #ac357e
-!*color9:  #df45a4
 *color1:  #AD513E
 *color9:  #E0671B
-!*color2:  #65ac35
-!*color10: #83df45
 *color2:  #4C7D58
 *color10: #31DE96
 *color3:  #a8ac35

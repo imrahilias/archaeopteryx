@@ -1,0 +1,12 @@
+#!/bin/bash
+# cal popup 4 dzen2
+
+fnt='size:12' # doesnt really work, but otherwise ist size 14... 'style:Bold' works though Oo
+today=$(expr `date +'%d'` + 0)
+
+(
+echo ''
+
+cal -h | sed -n '2,8 p' | sed -r -e "1 s/.*/^fg(#A89C8C)&^fg()/" -e 's/ /  /g' -e "s/(^| )($today)($| )/\1^fg(#ddaa00)\2^fg(#A89C8C)\3/" | sed 's/\(.*\)/  \1/'
+)\
+| dzen2 -p 60 -fn $fnt -x 1700 -y 24 -w 180 -l 7 -ta l -e 'onstart=uncollapse;button3=exit'

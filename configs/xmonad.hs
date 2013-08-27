@@ -91,31 +91,33 @@ main = do
 --------------------------------------------------------------------------------------------
 
 -- Colors and fonts
---myFont = "xft:Bitstream Vera Sans Mono:pixelsize=10"       
---myFont               ="xft:Bitstream Vera Sans Mono:pixelsize=12" -- # "-*-fixed-medium-r-*-*-13-*-*-*-*-*-iso8859-*"
---dzenFont             = 'myFont'
-colorBlack           = "#020202" --Background (Dzen_BG)
+--myFont = "xft:Bitstream Vera Sans Mono:pixelsize=12"       
+--myFont               = "xft:Bitstream Vera Sans Mono:pixelsize=14" -- # "-*-fixed-medium-r-*-*-13-*-*-*-*-*-iso8859-*"
+--dzenFont             = "xft:Bitstream Vera Sans Mono:pixelsize=17"
+colorBlack           = "#020202" --Background
 colorBlackAlt        = "#1c1c1c" --Black Xdefaults
-colorGray            = "#444444" --Gray       (Dzen_FG2)
-colorGrayAlt         = "#161616" --Gray dark
-colorWhite           = "#a9a6af" --Foreground (Shell_FG)
-colorWhiteAlt        = "#9d9d9d" --White dark (Dzen_FG)
+colorGray            = "#6a6464" --Gray (dzen2_fg)
+colorGrayAlt         = "#241e1e" --Gray dark (dzen2_bg)
+colorWhite           = "#a9a6af"
+colorWhiteAlt        = "#9d9d9d"
 colorMagenta         = "#8e82a2"
-colorBlue            = "#3955c4"
+colorBlue            = "#39aaff" --darker: "#0778ec"
 colorRed             = "#d74b73"
 colorGreen           = "#99cc66"
-colorOrange          = "#bd5500"
-myNormalBorderColor  = colorBlackAlt
+colorOrange          = "#ddaa00" --alt: "#bd5500"
+myNormalBorderColor  = colorGray
 myFocusedBorderColor = colorBlue
-
 
 --------------------------------------------------------------------------------------------
 -- WORKSPACES                                                                             --
 --------------------------------------------------------------------------------------------
+-- http://unicode-table.com/ » privat use zone
+-- functioning cool symbols: ⚇♚⚉⚙⛃⛁⌨☣☢☮☯☭♾⇝⇜➤✆⚡⚛⚜⚔≣☠☄☎☏❍☺☻◌◉◎◍⊚⊙♬₪↯⇵⚶✉①➀➊②➁➋③➂➌④➃➍⑤➄➎☼☀◯◻◼☉★☆◈◇◆▢▣●○☷⌇‖❖⠶▦✯✭✭✫✶❂
 
 -- Workspaces
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = ["NULL", "WEB", "CODE", "FILE", "DOC", "CHAT", "AUDIO", "VIDEO", "LOAD", "Α", "Β", "Γ", "Δ", "Ε"] --never, NEVER name Workspaces identically!
+myWorkspaces = ["∅", "@", "$", "⛁", "≣", "☻", "♬", "◎", "↯", "➊", "➋", "➌", "➍", "➎"] 
+--myWorkspaces = ["NULL", "WEB", "CODE", "FILE", "DOC", "CHAT", "AUDIO", "VIDEO", "LOAD", "Α", "Β", "Γ", "Δ", "Ε"] --never, NEVER name Workspaces identically!
 
 
 --------------------------------------------------------------------------------------------
@@ -148,7 +150,7 @@ myManageHook = (composeAll . concat $
 		doShiftAndGo ws = doF (W.greedyView ws) <+> doShift ws
 		role            = stringProperty "WM_WINDOW_ROLE"
 		name            = stringProperty "WM_NAME"
-		myWeb           = ["Iceweasel", "Firefox", "Opera"]
+		myWeb           = ["Iceweasel", "Firefox", "Opera", "Chromium"]
                 myCode          = ["Emacs", "Emacs"]
                 myFile          = ["Thunar", "Gentoo"]
                 myDoc           = ["xpdf", "Xpdf", "evince", "Evince", "libreoffice-startcenter", "libreoffice-writer", "libreoffice-calc"]
@@ -164,11 +166,11 @@ myManageHook = (composeAll . concat $
 
 -- UrgencyHook
 myUrgencyHook = withUrgencyHook dzenUrgencyHook
-	{ args = ["-bg", colorBlack, "-fg", colorGreen] } -- "-fn", dzenFont
+	{ args = ["-bg", colorGrayAlt, "-fg", colorGreen] }
 
 -- StatusBars
 myWorkspaceBar :: String
-myWorkspaceBar    = "dzen2 -x '5' -y '0' -h '16' -w '1420' -ta 'l' -p -e '' -bg #000000"
+myWorkspaceBar    = "dzen2 -x '5' -y '0' -h '24' -w '1020' -ta 'l' -p -e '' -bg #ff0000"
 
 -- myWorkspaceBar config
 myLogHook :: Handle -> X ()
@@ -177,18 +179,16 @@ myLogHook h = dynamicLogWithPP $ defaultPP
 	, ppSort            = fmap (namedScratchpadFilterOutWorkspace .) (ppSort defaultPP) -- hide "NSP" from workspace list
 	, ppOrder           = orderText
 	, ppExtras          = []
-	, ppSep             = "^fg(" ++ colorGray ++ ")|"
-	, ppWsSep           = ""
---	, ppCurrent         = dzenColor colorBlue     colorBlack . pad
-	, ppCurrent         = dzenColor colorOrange   colorBlack . pad
-	, ppUrgent          = dzenColor colorGreen    colorBlack . pad 
-	, ppVisible         = dzenColor colorGray     colorBlack . pad
-	, ppHidden          = dzenColor colorWhiteAlt colorBlack . pad
-	, ppHiddenNoWindows = dzenColor colorGray     colorBlack . pad
-        , ppLayout          = dzenColor colorBlue     colorBlack . pad
-	, ppTitle           = dzenColor colorWhiteAlt colorBlack . pad
-	}
-	where
+	, ppSep             = "^fg(" ++ colorWhite ++ ") ⌇ "
+	, ppWsSep           = " "
+	, ppCurrent         = dzenColor colorOrange   colorGrayAlt . pad
+	, ppUrgent          = dzenColor colorGreen    colorGrayAlt . pad
+	, ppVisible         = dzenColor colorGray     colorGrayAlt . pad
+	, ppHidden          = dzenColor colorWhite    colorGrayAlt . pad
+	, ppHiddenNoWindows = dzenColor colorGray     colorGrayAlt . pad
+        , ppLayout          = dzenColor colorBlue     colorGrayAlt . pad
+	, ppTitle           = dzenColor colorWhiteAlt colorGrayAlt . pad
+	}	where
 		orderText (ws:l:t:_) = [ws,l,t] --display config
 
 
@@ -221,17 +221,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   , ((modm              , xK_KP_Subtract  ), spawn "unclutter -idle 1") -- mouse pointer invisible (defaults: /etc/default/unclutter)
   , ((modm              , xK_KP_Add  ), spawn "killall unclutter") -- fetch back mouse pointer:D
   , ((modm              , xK_e     ), spawn "emacsclient -c -a ''") -- Spawn Emacs (kinda runANDraise:) > emacsclient --help or ~/scripts/emc
---, ((modm              , xK_e     ), spawn "emc") -- Spawn Emacs (kinda runANDraise:)
---, ((modm              , xK_e     ), runOrRaise "emc" (className =? "Emacs"))    -- Find or Spawn Emacs
-  , ((modm              , xK_i     ), runOrRaise "opera" (className =? "Opera"))    -- Find or Spawn Opera (i = internet)
+  , ((modm              , xK_i     ), runOrRaise "chromium" (className =? "Chromium"))    -- Find or Spawn Chromium (i = internet)
   , ((modm              , xK_o     ), spawn "libreoffice")    -- Spawn libreoffice selection menu (o = office)
 --, ((modm              , xK_w     ), runOrRaise "lowriter" (className =? "libreoffice-writer"))    -- Find or Spawn Writer
   , ((modm              , xK_f     ), spawn "thunar") -- Spawn Thunar (f = file)
   , ((modm .|. shiftMask, xK_f     ), spawn "sudo thunar") -- Spawn SUPERThunar (f = file)
   , ((modm              , xK_g     ), spawn "gentoo --root-ok") -- Spawn Gentoo as root (g = gentoo, file manager #2)
 -- multimedia
---, ((modm              , xK_z     ), raiseMaybe (runInTerm "-class mocp" "mocp") (title =? "mocp"))
---, ((modm              , xK_z     ), raiseMaybe (runInTerm "-title mutt" "mutt") (title =? "mutt"))
   , ((0,            0x1008ff13     ), safeSpawn "amixer" ["-q", "set", "Master", "1+"])
   , ((0,            0x1008ff11     ), safeSpawn "amixer" ["-q", "set", "Master", "1-"])
   , ((0,            0x1008ff12     ), safeSpawn "amixer" ["-q", "set", "Master", "toggle"])
@@ -240,11 +236,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   , ((0,            0x1008ff14     ), safeSpawn "ncmpcpp" ["toggle"])   -- ncmpcpp > toggle play/pause
   , ((0,            0x1008ff17     ), safeSpawn "ncmpcpp" ["next"])   -- ncmpcpp > next track in playlist
   , ((0,            0x1008ff2c     ), safeSpawn "ncmpcpp" ["stop"])   -- ncmpcpp > stop
--- ((0,            0x1008ff81     ), safeSpawn "mocp" ["-p"])   -- moc > start playlist (moc running)
--- ((0,            0x1008ff16     ), safeSpawn "mocp" ["-r"])   -- moc > previous track in playlist
---, ((0,            0x1008ff14     ), safeSpawn "mocp" ["-G"])   -- moc > toggle play/pause
---, ((0,            0x1008ff17     ), safeSpawn "mocp" ["-f"])   -- moc > next track in playlist
---, ((0,            0x1008ff2c     ), safeSpawn "mocp" ["-s"])   -- moc > stop
   , ((0,            0x1008ff2c     ), do                                                 
                                         withTaggedGlobalP "ncmpcpp" (W.shiftWin (myWorkspaces !! 6))
                                         windows $ W.greedyView (myWorkspaces !! 6)

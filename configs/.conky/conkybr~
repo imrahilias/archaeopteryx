@@ -2,15 +2,6 @@
 # use with 'conky -c ~/.conky/conkybg'
 # conky configuration > M
 
-# Shortens units to a single character (kiB->k, GiB->G, etc.). Default is off.
-short_units yes
-
-# Draws own window (prevent flickering with more than one conky running)
-own_window yes
-own_window_type override
-own_window_transparent yes
-own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
-
 # set to yes if you want Conky to be forked in the background
 background yes
 
@@ -94,6 +85,11 @@ override_utf8_locale yes
 use_spacer left
 
 
+# generating rings (edit there)
+  lua_load ~/.conky/rings.lua
+  lua_draw_hook_pre clock_rings
+
+
 #Email:
 #${pop3_unseen  **SERVER NAME**  **USERNAME**  **PASSWORD**} new messages
 #${color 9ACD32}${font}Email:${color a4a4a4}${alignr}${execi 300 perl ~/scripts/gmail.pl n} new
@@ -117,18 +113,12 @@ ${execpi 60 DJS=`date +%_d`; cal -h | sed -n '3,8 p' | sed 's/^/${alignr} /' | s
 ${color}${cpugraph cpu0 30,300 A89C8C ddaa00}${color}
 
 #cpu temp:	$acpitemp°C
-gpus:$color          +${execi 3 nvidia-settings -q [GPU:0]/GPUCoreTemp | grep Attribute | cut -d ' ' -f 6 | cut -c 1-2}.0°C${color}\
- / +${execi 3 nvidia-settings -q [GPU:1]/GPUCoreTemp | grep Attribute | cut -d ' ' -f 6 | cut -c 1-2}.0°C${color}
-freqs: #${execi 3 nvidia-settings -q [GPU:1]/GPUCurrentPerfLevel | grep Attribute | cut -d ' ' -f 6 | cut -c 1}${color}\
-#/${execi 3 nvidia-settings -q [GPU:1]/GPUCurrentPerfLevel | grep Attribute | cut -d ' ' -f 6 | cut -c 1}${color}
-        ${execi 3 nvidia-settings -q [GPU:0]/GPUCurrentClockFreqs | grep Attribute | cut -d ' ' -f 6 | sed 's/\.//'}${color}\
- / ${execi 3 nvidia-settings -q [GPU:0]/GPUCurrentClockFreqs | grep Attribute | cut -d ' ' -f 6 | sed 's/\.//'}${color}
-cpu:$color           ${execi 3 sensors | grep 'Core 0' | awk '{print $3}'}
+vga:$color           +${execi 3 nvidia-settings -q [GPU:0]/GPUCoreTemp | grep Attribute | cut -d ' ' -f 6 | cut -c 1-2}.0°C${color}
 freq:$color          $freq
 load:$color	   $loadavg
-proc:$color       $running_processes /$processes
-disk:$color          +${execi 60 hddtemp /dev/sdb | awk '{print $4}'}
-	   
+processes:$color    $processes  
+running:$color    $running_processes
+
 cpu top five
 ${hr 1}${color #ddaa00}
 ${top cpu 1}	${top pid 1}	${top name 1}$color
@@ -147,11 +137,11 @@ ${top_mem mem 5}	${top_mem pid 5}	${top_mem name 5}
 
 disk io
 ${diskiograph 30,300 000000 A89C8C}
- / ${diskio sda}  |  zero ${diskio sdc}  |  0k3 ${diskio sdb}
+/ ${diskio sda} | zero ${diskio sdc} | 0k3 ${diskio sdb}
 
 net
 ${upspeedgraph eth0 30,150 000000 ffffff}${downspeedgraph eth0 30,150 000000 ffffff}
-  Up: ${upspeed eth0} k/s      Down: ${downspeed eth0}k/s
+Up: ${upspeed eth0} k/s    Down: ${downspeed eth0}k/s
 #
 #
 #mem
@@ -168,37 +158,11 @@ ${upspeedgraph eth0 30,150 000000 ffffff}${downspeedgraph eth0 30,150 000000 fff
 #
 #exil
 #${fs_bar 10,150 /media/exil} ${fs_free /media/exil}/${fs_size /media/exil}
-#
-#
-#log
-#${hr 1}
-#${execi 60 sudo tail -n3 /var/log/messages | awk '{print " ",$5,$9,$10}'}
-#${execi 60 blkid | awk '{print "",$1,$2}' | sed -e 's/LABEL=//g' -e 's/UUID=//g' -e  's/"//g'}
-#${execi 60 mount | grep media | awk '{print "",$1,$2,$3}' | sed 's/ on / > /g'}
 
-mount
+
+log
 ${hr 1}
- /     ${exec blkid | grep wheezyssd | awk '{print "",$1}' | sed 's/://g'}     ${fs_bar 5,45 /}$alignr${fs_free /}
-#
-${if_mounted /media/zero} zero  \
-${exec mount | grep zero | awk '{print "",$1}'}     \
-${fs_bar 5,45 /media/zero}$alignr${fs_free /media/zero}$endif
-#
-${if_mounted /media/exil} exil  \
-${exec mount | grep exil | awk '{print "",$1}'}     \
-${fs_bar 5,45 /media/exil}$alignr${fs_free /media/exil}$endif
-#
-${if_mounted /media/0k3} 0k3   \
-${exec mount | grep 0k3 | awk '{print "",$1}'}     \
-${fs_bar 5,45 /media/0k3}$alignr${fs_free /media/0k3}$endif
-#
-${if_mounted /media/vee} vee   \
-${exec mount | grep vee | awk '{print "",$1}'}     \
-${fs_bar 5,45 /media/vee}$alignr${fs_free /media/vee}$endif
-#
-#${if_match "${mpd_status}" != "Stopped"}${mpd_status}$endif
-$if_mpd_playing}${color #ddaa00}${mpd_smart 32} $alignr$color$mpd_bitrate}k
-${mpd_album 32} $alignr${mpd_date 4}
-${mpd_bar 5,300}
-$mpd_elapsed $alignc random $mpd_random $alignr$mpd_length
-$endif
+#${execi 60 sudo tail -n3 /var/log/messages | awk '{print " ",$5,$9,$10}'}
+${execi 60 blkid | awk '{print "",$1,$2}' | sed -e 's/LABEL=//g' -e 's/UUID=//g' -e  's/"//g'}
+${execi 60 mount | grep media | awk '{print "",$1,$2,$3}' | sed 's/ on / > /g'}
+

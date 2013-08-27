@@ -196,7 +196,7 @@ ${if_mounted /media/vee} vee   \
 ${exec mount | grep vee | awk '{print "",$1}'}     \
 ${fs_bar 5,45 /media/vee}$alignr${fs_free /media/vee}$endif
 #
-#${if_match "${mpd_status}" != "Stopped"}${mpd_status}$endif
+${if_match "${mpd_status}" != "Stopped"}${mpd_status}$endif
 $if_mpd_playing}${color #ddaa00}${mpd_smart 32} $alignr$color$mpd_bitrate}k
 ${mpd_album 32} $alignr${mpd_date 4}
 ${mpd_bar 5,300}
