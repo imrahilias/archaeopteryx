@@ -14,10 +14,10 @@ yu=0
 
 bar="${HOME}/.conky/conkyzenbar"
 
-#colors & style
-bg="#241e1e"
-style="-bg $bg -e ''"
+#colors & style :: look in .xresources
+#bg="#303030" #241e1e
+#style="-bg $bg -e ''"
 
 
 #output
-conky -c $bar | dzen2 -x $xr -y $yu -h $hu -w $wr -ta 'r' $style & #top right bar
+conky -c $bar | dzen2 -x $xr -y $yu -h $hu -w $wr -ta 'r' -e '' & #top right bar

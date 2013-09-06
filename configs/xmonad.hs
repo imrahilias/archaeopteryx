@@ -97,14 +97,14 @@ main = do
 colorBlack           = "#020202" --Background
 colorBlackAlt        = "#1c1c1c" --Black Xdefaults
 colorGray            = "#6a6464" --Gray (dzen2_fg)
-colorGrayAlt         = "#241e1e" --Gray dark (dzen2_bg)
+colorGrayAlt         = "#303030" --Gray dark (dzen2_bg) alt: "#241e1e"
 colorWhite           = "#a9a6af"
 colorWhiteAlt        = "#9d9d9d"
 colorMagenta         = "#8e82a2"
 colorBlue            = "#39aaff" --darker: "#0778ec"
 colorRed             = "#d74b73"
 colorGreen           = "#99cc66"
-colorOrange          = "#ddaa00" --alt: "#bd5500"
+colorOrange          = "#FF8E38" --"#ddaa00" --alt: "#bd5500"
 myNormalBorderColor  = colorGray
 myFocusedBorderColor = colorBlue
 
@@ -116,7 +116,7 @@ myFocusedBorderColor = colorBlue
 
 -- Workspaces
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = ["∅", "@", "$", "⛁", "≣", "☻", "♬", "◎", "↯", "➊", "➋", "➌", "➍", "➎"] 
+myWorkspaces = [" ∅", "@", "$", "⛁", "≣", "☻", "♬", "◎", "↯", "➊", "➋", "➌", "➍", "➎"] 
 --myWorkspaces = ["NULL", "WEB", "CODE", "FILE", "DOC", "CHAT", "AUDIO", "VIDEO", "LOAD", "Α", "Β", "Γ", "Δ", "Ε"] --never, NEVER name Workspaces identically!
 
 
@@ -170,7 +170,7 @@ myUrgencyHook = withUrgencyHook dzenUrgencyHook
 
 -- StatusBars
 myWorkspaceBar :: String
-myWorkspaceBar    = "dzen2 -x '5' -y '0' -h '24' -w '1020' -ta 'l' -p -e '' -bg #ff0000"
+myWorkspaceBar    = "dzen2 -x '0' -y '0' -h '24' -w '1020' -ta 'l' -p -e '' -bg #ff0000"
 
 -- myWorkspaceBar config
 myLogHook :: Handle -> X ()

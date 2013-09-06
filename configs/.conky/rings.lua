@@ -12,6 +12,8 @@ To call this script in Conky, use the following (assuming that you save this scr
 ]]
 
 ------------ var -----------
+orange=0xFF8E38
+blue=0x39aaff
 
 ----- clock ------
 --Use these settings to define the origin and extent of your clock.
@@ -26,36 +28,36 @@ To call this script in Conky, use the following (assuming that you save this scr
 
 --Coordinates of the centre of the clock (hands+rings) , in pixels, from the top left of the Conky window.
   clock_x=1780
-  clock_y=130
+  clock_y=150
 
 ------ cpu% ------
   cpu_x=450
-  cpu_y=276
-  cpu_color=0xddaa00
+  cpu_y=270
+  cpu_color=orange
 
 ------ mem% ------
-  mem_x=500
-  mem_y=860
+  mem_x=602
+  mem_y=948
 
 ------ downspeed/KiB  ------
-  down_x=400
-  down_y=770
+  down_x=452
+  down_y=858
 
 ------ uppeed/KiB  ------
-  up_x=400
-  up_y=770
+  up_x=452
+  up_y=858
 
 ------ /% ------
   fs0_x=1820
-  fs0_y=750
+  fs0_y=752
 
 ------ zero% ------
-  fs1_x=1780
-  fs1_y=960
+  fs1_x=1784
+  fs1_y=962
 
 ------ exil% ------
   fs2_x=1650
-  fs2_y=950
+  fs2_y=948
 
 -- optienal: battery, wireless (analog eth), link, mpd (mpd_percent/bar dont work)?
 
@@ -83,7 +85,7 @@ settings_table = {
     max=60,
     bg_colour=0xffffff,
     bg_alpha=0.1,
-    fg_colour=0x0778ec,
+    fg_colour=orange,
     fg_alpha=0.6,
     x=clock_x, y=clock_y,
     radius=64,
@@ -97,7 +99,7 @@ settings_table = {
     max=12,
     bg_colour=0xffffff,
     bg_alpha=0.1,
-    fg_colour=cpu_color,
+    fg_colour=blue,
     fg_alpha=0.6,
     x=clock_x, y=clock_y,
     radius=54,
@@ -209,7 +211,7 @@ settings_table = {
     max=100,
     bg_colour=0xffffff,
     bg_alpha=0.1,
-    fg_colour=0x0778ec,
+    fg_colour=blue,
     fg_alpha=0.3,
     x=fs0_x, y=fs0_y,
     radius=50,
@@ -223,7 +225,7 @@ settings_table = {
     max=100,
     bg_colour=0xffffff,
     bg_alpha=0.1,
-    fg_colour=0x0778ec,
+    fg_colour=blue,
     fg_alpha=0.6,
     x=fs1_x, y=fs1_y,
     radius=60,
@@ -237,7 +239,7 @@ settings_table = {
     max=100,
     bg_colour=0xffffff,
     bg_alpha=0.1,
-    fg_colour=0x0778ec,
+    fg_colour=blue,
     fg_alpha=0.6,
     x=fs2_x, y=fs2_y,
     radius=30,
@@ -251,7 +253,7 @@ settings_table = {
     max=100,
     bg_colour=0xffffff,
     bg_alpha=0.1,
-    fg_colour=0x0778ec,
+    fg_colour=blue,
     fg_alpha=0.6,
     x=50, y=83,
     radius=55,
@@ -265,7 +267,7 @@ settings_table = {
     max=100,
     bg_colour=0xffffff,
     bg_alpha=0.1,
-    fg_colour=0x0778ec,
+    fg_colour=blue,
     fg_alpha=0.6,
     x=305, y=83,
     radius=45,
@@ -279,7 +281,7 @@ settings_table = {
     max=100,
     bg_colour=0xffffff,
     bg_alpha=0.1,
-    fg_colour=0x0778ec,
+    fg_colour=blue,
     fg_alpha=0.6,
     x=105, y=239,
     radius=35,

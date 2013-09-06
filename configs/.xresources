@@ -9,10 +9,11 @@ Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
 
-! DZEN2
+! DZEN2 :: look for conkyzen/xmonad.hs as well
+!fg:#6a6464 
 dzen2.font:       xft:Bitstream Vera Sans Mono:size=14:style=Bold
-dzen2.foreground: #6a6464
-dzen2.background: #241e1e
+dzen2.foreground: #A89C8C
+dzen2.background: #303030
 
 ! Emacs
 Emacs.FontBackend: xft
@@ -20,7 +21,7 @@ Emacs.FontBackend: xft
 !Emacs.font: xft:Bitstream Vera Sans Mono:size=12:antialise:true
 Emacs.font: -unknown-DejaVu Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1
 Emacs*foreground:   #A89C8C
-Emacs*background:   #241e1e
+Emacs*background:   #303030
 Emacs*cursorColor:  white
 Emacs*pointerColor: white
 
