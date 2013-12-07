@@ -1,0 +1,16 @@
+#!/bin/bash
+# @jinn
+
+# set default interface
+if='wlan0'
+
+# determine interface
+if [ "$1" != "" ]; then
+    if="$1"
+fi
+
+# get essids
+out=`iwlist $if scan | grep -i -e essid -e qual`
+
+# print
+echo $out | sed 's/" /"\n/g' | sed 's/Signal.*dBm//'

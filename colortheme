@@ -1,17 +1,19 @@
 #!/bin/bash
-#   @ Nnoell
-#   This file echoes a bunch of color codes to the
-#   terminal to demonstrate what's available.  Each
-#   line is the color code of one forground color,
-#   out of 17 (default + 16 escapes), followed by a
-#   test use of that color on all nine background
-#   colors (default + 8 escapes).
-#
+# @ Nnoell
+# This file echoes a bunch of color codes to the
+# terminal to demonstrate what's available.  Each
+# line is the color code of one forground color,
+# out of 17 (default + 16 escapes), followed by a
+# test use of that color on all nine background
+# colors (default + 8 escapes).
+# @m
+# names & color text below added > ~/.xresources
 
 T='▆ ▆'   # The test text
 
-echo -e "\n                 40m     41m     42m     43m\
+echo -e "\n       null/38m  40m     41m     42m     43m\
      44m     45m     46m     47m";
+echo -e "\n       default  black    red    green   yellow   blue  magenta   cyan   white";
 
 for FGs in '    m' '   1m' '  30m' '1;30m' '  31m' '1;31m' '  32m' \
            '1;32m' '  33m' '1;33m' '  34m' '1;34m' '  35m' '1;35m' \
@@ -23,4 +25,24 @@ for FGs in '    m' '   1m' '  30m' '1;30m' '  31m' '1;31m' '  32m' \
   done
   echo;
 done
+echo "
+foreground:
+color0: 30, black
+color1: 31, red
+color2: 32, green
+color3: 33, yellow
+color4: 34, blue
+color5: 35, magenta
+color6: 36, cyan
+color7: 37, white
+
+background:
+color8: 40, black
+color9: 41, red
+color10: 42, green
+color11: 43, yellow
+color12: 44, blue
+color13: 45, magenta
+color14: 46, cyan
+color15: 47, white"
 echo

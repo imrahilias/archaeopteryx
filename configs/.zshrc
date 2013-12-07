@@ -240,6 +240,7 @@ alias öö='ls -1ABh --group-directories-first' # 'A' 4 almost all
 alias l='ls -Bhno --group-directories-first' # 'n' 4 numeric uid/gid, 'o' like 'l' without group 
 alias ll='ls -ABhno --group-directories-first'
 alias d='dirs -v' # lists zsh directory stack (enter <cd +- tab>, plus & minus (reverse) literally, with completion!'
+alias blk='blkid -o list'
 
 # edit aliases
 alias emc='emacsclient -c -a ""' # > emacsclient --help or ~/scripts/emc
@@ -253,6 +254,7 @@ alias editxm='emc $HOME/.xmonad/xmonad.hs'
 alias mnta='sudo mount -a; echo -e $red"mounted:"$default; mount' # echo 4 color, semicolon 4 1. command, if ok, than 2. com
 alias uma='sudo umount -a; echo -e $red"mounted:"$default;mount'
 alias mntz='sudo mount /media/zero; echo -e $red"mounted:"$default; mount | grep zero'
+alias mnt3='sudo mount /media/thr33; echo -e $red"mounted:"$default; mount | grep thr33'
 alias mnte='sudo mount /media/exil; echo -e $red"mounted:"$default; mount | grep exil'
 alias mnt0='sudo mount /media/0k3; echo -e $red"mounted:"$default; mount | grep 0k3'
 alias mntwinssd='sudo mount /media/win7ssd; echo -e $red"mounted:"$default; mount | grep win'

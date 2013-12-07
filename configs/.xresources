@@ -1,5 +1,5 @@
 !~/.xresources > imrahil@triceratops
-! <xfontsel> for selection
+! > $xfontsel for selection
 
 ! Applications without fontconfig support
 Xft.antialias: 1
@@ -9,8 +9,7 @@ Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
 
-! DZEN2 :: look for conkyzen/xmonad.hs as well
-!fg:#6a6464 
+! DZEN2 > look for conkyzen/xmonad.hs as well
 dzen2.font:       xft:Bitstream Vera Sans Mono:size=14:style=Bold
 dzen2.foreground: #A89C8C
 dzen2.background: #303030
@@ -42,30 +41,28 @@ urxvt*fading: 30	!Fade the text by the given percentage when focus is lost.
 !native transparency
 urxvt*transparent: true
 urxvt*shading: 50	! 0 to 99 darkens, 101 to 200 lightens
-.
+
 !real transparency > needs xcompmgr
-urxvt.depth: 32
-urxvt.background: [95]#000000
+!urxvt.depth: 32
+!urxvt.background: [95]#000000
 
-
-!neuromouse
+!colors > $colortheme 4 demo
 *color0:  #282a2b
-*color8:  #2c2f30
 *color1:  #AD513E
-*color9:  #E0671B
 *color2:  #4C7D58
-*color10: #31DE96
 *color3:  #a8ac35
-*color11: #dadf45
 *color4:  #273a87
-*color12: #3955c4
 *color5:  #666699
-*color13: #8888cc
 *color6:  #8caff0
-*color14: #9bbaf1
 *color7:  #a8a8a8
+*color8:  #2c2f30
+*color9:  #E0671B
+*color10: #31DE96
+*color11: #dadf45
+*color12: #3955c4
+*color13: #8888cc
+*color14: #9bbaf1
 *color15: #f0f0f0
-
 
 ! Xcalc ----------------------------------------------------------------------
 xcalc*ti.button1.vertDistance: 4

@@ -1,0 +1,30 @@
+#~/scripts/conkybattoprrc
+# > conky.sourceforge.net/variables.html
+
+background no
+out_to_console yes
+out_to_x no
+update_interval 1.0
+total_run_times 0
+use_spacer none
+
+TEXT
+
+^fg()\
+$if_mpd_playing\
+^ca(1,ncmpcpp toggle)^ca(3,ncmpcpp next)^ca(4,ncmpcpp volume +10)^ca(5,ncmpcpp volume -10)^ca(8,ncmpcpp prev)^ca(9,ncmpcpp next)\
+➤ ${mpd_smart 40} ^ca()^ca()^ca()^ca()^ca()^ca()$endif\
+^fg(\#39aaff)\
+ ${cpu cpu1}\
+ ${cpu cpu2}\
+ ${cpu cpu3}\
+ ${cpu cpu4} \
+ ^fg()▦\
+ ^fg(\#39aaff)\
+ ${freq_g}\
+^fg() \
+ ☭ \
+^fg(\#39aaff)\
+#${membar}
+ ${mem} \
+${time ^ca(1,dzencal) ^fg()%A %d %b ^ca()^fg(#FF8E38) %H:%M} 

@@ -1,0 +1,44 @@
+#!/bin/bash
+# @jinn
+# colors
+
+red="\e[31m"
+blue="\e[34m"
+default="\e[0m"
+bred="\e[01;31m"
+
+# check root
+if [ $UID -ne 0 ]; then
+    echo "don't try to run this without superuser powers"
+    exit 1
+fi
+
+echo -e $blue"available:"$default
+avail=`iwlist wlan0 scan | grep -i -e essid | sed 's/.*:"\(.*\)".*/\1/'`
+echo `iwlist wlan0 scan | grep -i -e essid -e qual` | sed -e 's/" /"\n/g'
+
+aps=`cat /home/imrahil/.wifisec | sed 's/.*,\(.*\),.*/\1/'`
+echo -e $blue"stored:"$default
+echo $aps
+
+br=0
+ap=""
+
+echo "search one to connect"
+for i in $avail; do
+    for j in $aps; do
+        if [ "$i" == "$j" ]; then
+            echo "found ap $i"
+            ap=`cat /home/imrahil/.wifisec | grep $i | sed 's/\(.*\),.*,.*/\1'/`
+            br=1
+            break
+        fi
+    done
+    if [ $br -eq 1 ]; then
+        break
+    fi
+done
+
+if [ "$ap" != "" ]; then
+    /home/imrahil/scripts/wpa_connect -n $ap
+fi

@@ -8,8 +8,13 @@ start iceweasel (install addblock plus)
 run site (oe1.orf.at > 7tage) & click play on the flash plugin
 iceweasel > tools > addblock plus > open blockable items
 find loopstream adress (http://loopstream01.apa.at/*') in the list of blockable content
-console > $ mplayer -dumpstream -dumpfile /path/to/dir/foobar.mp3 'streamadress'
-DONT forget the votes, i'll crash (giving you that message;-)
+vlc open media > convert/save (ctr+r) > network > paste addr, select mp3 (or flac), etc.
+convert/save.
+
+#old, doesnt work anymore/temporary:
+#console > $ mplayer -dumpstream -dumpfile /path/to/dir/foobar.mp3 'streamadress'
+#DONT forget the votes, i'll crash (giving you that message;-)
+
 
 
 bsp
