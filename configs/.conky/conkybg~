@@ -140,7 +140,7 @@ ${top_mem mem 5}	${top_mem pid 5}	${top_mem name 5}
 
 disk io
 ${diskiograph 30,300 000000 A89C8C}
- / ${diskio sda}           zero ${diskio sdc}
+ / ${diskio sda}  |  zero ${diskio sdc}  |  0k3 ${diskio sdb}
 
 net
 ${upspeedgraph eth0 30,150 000000 ffffff}${downspeedgraph eth0 30,150 000000 ffffff}

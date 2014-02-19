@@ -243,7 +243,7 @@ alias d='dirs -v' # lists zsh directory stack (enter <cd +- tab>, plus & minus (
 alias blk='blkid -o list'
 
 # edit aliases
-alias emc='emacsclient -c -a ""' # > emacsclient --help or ~/scripts/emc
+#alias emc='emacsclient -c -a ""' # > emacsclient --help or ~/scripts/emc
 alias editf='sudo emc /etc/fstab'
 alias editb='emc $HOME/.bashrc'
 alias editz='emc $HOME/.zshrc'
@@ -277,6 +277,7 @@ alias xxx='sudo halt'
 alias swapoffa='sudo swapoff -a'
 
 # misc aliases
+alias emc="emacsclient -c -a ''"
 alias psm='ps au'
 alias scan='scanimage --format=tiff --mode=Color' #>http://lists.alioth.debian.org/pipermail/sane-devel/2001-December/001177.html
 alias am='alsamixer'
@@ -294,6 +295,7 @@ alias oe1='mplayer http://mp3stream3.apasf.apa.at:8000/listen.pls'
 alias countf='find . -type f | wc -l' # number of all files in dir
 alias countd='find . -type d | wc -l' # number of all subdirs in dir
 alias clr='clear'
+alias evince='dbus-launch evince'
 
 # network aliases
 alias syns='setxkbmap de & synergys --config ~/.synergy' # setxkbmap cause otherwise keys are qwerty... reported bug.

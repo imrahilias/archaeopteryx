@@ -25,9 +25,6 @@ $if_mpd_playing\
 ^fg() \
  ☭ \
 ^fg(\#39aaff)\
- ${mem}\
-^fg() \
- ♬ \
-^fg(\#39aaff)\
- ${execi 2 conky_vol}\
- ${time ^ca(1,dzencal) ^fg()%A %d %b ^ca()^fg(#FF8E38) %H:%M} 
+#${membar}
+ ${mem} \
+${time ^ca(1,dzencal) ^fg()%A %d %b ^ca()^fg(#FF8E38) %H:%M} 
