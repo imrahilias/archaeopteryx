@@ -2,5 +2,4 @@
 
 killall conky &&
 ~/scripts/conkyzen
-conky -c ~/.conky/conkybg &
-conky -c ~/.conky/conkyrings
+conky -c ~/.conky/background.conky &

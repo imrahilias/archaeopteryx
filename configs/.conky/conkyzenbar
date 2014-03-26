@@ -8,13 +8,20 @@ update_interval 1.0
 total_run_times 0
 use_spacer none
 
+#notes: ♪♫♬
+
 TEXT
 
 ^fg()\
 $if_mpd_playing\
 ^ca(1,ncmpcpp toggle)^ca(3,ncmpcpp next)^ca(4,ncmpcpp volume +10)^ca(5,ncmpcpp volume -10)^ca(8,ncmpcpp prev)^ca(9,ncmpcpp next)\
-➤ ${mpd_smart 35} ^ca()^ca()^ca()^ca()^ca()^ca()$endif\
-^fg(\#39aaff)\
+^fg(\#39aaff)➤^fg() ${mpd_smart 35}\
+ ^ca()^ca()^ca()^ca()^ca()^ca()$endif\
+^ca(1,exec amixer -q set Master toggle)^ca(4,exec amixer -q set Master 1+)^ca(5,exec amixer -q set Master 1-)\
+ ^fg(\#39aaff)${exec conkyvol}\
+  ^fg()♪\
+^ca()^ca()^ca()\
+ ^fg(\#39aaff)\
  ${cpu cpu1}\
  ${cpu cpu2}\
  ${cpu cpu3}\
@@ -22,12 +29,14 @@ $if_mpd_playing\
  ^fg()▦\
  ^fg(\#39aaff)\
  ${freq_g}\
-^fg() \
- ☭ \
+^fg()\
+  ☭ \
 ^fg(\#39aaff)\
  ${mem}\
-^fg() \
- ♬ \
+^ca(1,exec switchxkbmap)\
+^fg()\
+  ⌨\
 ^fg(\#39aaff)\
- ${execi 2 conky_vol}\
- ${time ^ca(1,dzencal) ^fg()%A %d %b ^ca()^fg(#FF8E38) %H:%M} 
+  ${exec setxkbmap -print | awk -F"+" '/xkb_symbols/ {print $2}'}^ca()\
+# ${time ^ca(1,dzencalkiller && dzencal) ^fg()%A %d %b ^ca()^fg(#FF8E38) %H:%M} 
+  ${time ^fg()%A %d %b ^ca()^fg(#FF8E38) %H:%M} 

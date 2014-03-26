@@ -112,7 +112,7 @@ myFocusedBorderColor = colorBlue
 -- WORKSPACES                                                                             --
 --------------------------------------------------------------------------------------------
 -- http://unicode-table.com/ » privat use zone
--- functioning cool symbols: ⚇♚⚉⚙⛃⛁⌨☣☢☮☯☭♾⇝⇜➤✆⚡⚛⚜⚔≣☠☄☎☏❍☺☻◌◉◎◍⊚⊙♬₪↯⇵⚶✉①➀➊②➁➋③➂➌④➃➍⑤➄➎☼☀◯◻◼☉★☆◈◇◆▢▣●○☷⌇‖❖⠶▦✯✭✭✫✶❂
+-- functioning cool symbols: ⚇♚⚉⚙⛃⛁⌨☣☢☮☯☭♾⇝⇜➤✆⚡⚛⚜⚔≣☠☄☎☏❍☺☻◌◉◎◍⊚⊙♬₪↯⇵⚶✉①➀➊②➁➋③➂➌④➃➍⑤➄➎☼☀◯◻◼☉★☆◈◇◆▢▣●○☷⌇‖❖⠶▦✯✭✭✫✶❂♪
 
 -- Workspaces
 myWorkspaces :: [WorkspaceId]
@@ -153,7 +153,7 @@ myManageHook = (composeAll . concat $
 		myWeb           = ["Iceweasel", "Firefox", "Opera", "Chromium"]
                 myCode          = ["Emacs", "Emacs"]
                 myFile          = ["Thunar", "Gentoo"]
-                myDoc           = ["xpdf", "Xpdf", "evince", "Evince", "libreoffice-startcenter", "libreoffice-writer", "libreoffice-calc"]
+                myDoc           = ["xpdf", "Xpdf", "Evince", "Evince-previewer", "libreoffice-startcenter", "libreoffice-writer", "libreoffice-calc"]
 		myChat          = ["psi", "Pidgin", "Skype", "Ts3client_linux_amd64"]
                 myVideo         = ["Vlc", "MPlayer"]
                 myLoad          = ["jd-Main"]
@@ -199,7 +199,8 @@ myLogHook h = dynamicLogWithPP $ defaultPP
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $ 
   [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf) -- launch a terminal
-  , ((modm,               xK_p     ), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"") -- launch dmenu
+  , ((modm,               xK_p     ), spawn "`dmenu_run -nf '#A89C8C' -nb '#303030' -sf '#FF8E38' -sb '#5C5449' -fn '-*-fixed-*-*-*-*-20-*-*-*-*-*-iso8859-*'`") -- launch dmenu 4.5
+  , ((modm .|. shiftMask, xK_p     ), spawn "`sudo dmenu_run -nf '#A89C8C' -nb '#303030' -sf '#FF8E38' -sb '#5C5449' -fn '-*-fixed-*-*-*-*-20-*-*-*-*-*-iso8859-*'`") -- launch dmenu 4.5
   , ((modm .|. shiftMask, xK_c     ), kill) -- close focused window
   , ((modm,               xK_space ), sendMessage NextLayout)     -- Rotate through the available layout algorithms
   , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)    --  Reset the layouts on the current workspace to default
@@ -217,7 +218,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   , ((modm              , xK_comma ), sendMessage (IncMasterN 1))    -- Increment the number of windows in the master area
   , ((modm              , xK_period), sendMessage (IncMasterN (-1)))    -- Deincrement the number of windows in the master area
   , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))   -- Quit xmonad
-  , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart") --   
+  , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart; conkykiller") --   
   , ((modm              , xK_KP_Subtract  ), spawn "unclutter -idle 1") -- mouse pointer invisible (defaults: /etc/default/unclutter)
   , ((modm              , xK_KP_Add  ), spawn "killall unclutter") -- fetch back mouse pointer:D
   , ((modm              , xK_e     ), spawn "emacsclient -c -a ''") -- Spawn Emacs (kinda runANDraise:) > emacsclient --help or ~/scripts/emc
@@ -226,7 +227,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 --, ((modm              , xK_w     ), runOrRaise "lowriter" (className =? "libreoffice-writer"))    -- Find or Spawn Writer
   , ((modm              , xK_f     ), spawn "thunar") -- Spawn Thunar (f = file)
   , ((modm .|. shiftMask, xK_f     ), spawn "sudo thunar") -- Spawn SUPERThunar (f = file)
-  , ((modm              , xK_g     ), spawn "gentoo --root-ok") -- Spawn Gentoo as root (g = gentoo, file manager #2)
 -- multimedia
   , ((0,            0x1008ff13     ), safeSpawn "amixer" ["-q", "set", "Master", "1+"])
   , ((0,            0x1008ff11     ), safeSpawn "amixer" ["-q", "set", "Master", "1-"])

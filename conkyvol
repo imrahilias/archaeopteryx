@@ -3,8 +3,8 @@
 mute=`amixer get Master | grep "Mono:" | awk '{print $6}'`
 if [ $mute == "[on]" ]
 then
-    vol=` amixer get Master | grep -oE "[[:digit:]]*%"`
-    if [ $vol == "0%" ]
+    vol=`amixer get Master | grep -oE "[[:digit:]]*%" | sed 's/%//'`
+    if [ $vol == "0" ]
     then
         echo "Mute"
     else

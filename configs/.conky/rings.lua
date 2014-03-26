@@ -12,6 +12,8 @@ To call this script in Conky, use the following (assuming that you save this scr
 ]]
 
 ------------ var -----------
+default=0x5C5449
+white=0xffffff
 orange=0xFF8E38
 blue=0x39aaff
 
@@ -20,8 +22,8 @@ blue=0x39aaff
   clock_r=70
 
 --Colour & alpha of the clock hands
-  clock_colour=0xffffff
-  clock_alpha=0.6
+  clock_colour=white
+  clock_alpha=0
 
 --Show the seconds hand ?
   show_seconds=true
@@ -48,16 +50,16 @@ blue=0x39aaff
   up_y=858
 
 ------ /% ------
-  fs0_x=1820
-  fs0_y=752
-
+  fs0_x=1850
+  fs0_y=800
+ 
 ------ zero% ------
-  fs1_x=1784
-  fs1_y=962
+  fs1_x=1750
+  fs1_y=950
 
------- exil% ------
-  fs2_x=1650
-  fs2_y=948
+------ thr33% ------
+  fs2_x=1550
+  fs2_y=1000
 
 -- optienal: battery, wireless (analog eth), link, mpd (mpd_percent/bar dont work)?
 
@@ -65,14 +67,14 @@ blue=0x39aaff
 ------------ functions -----------
 
 settings_table = {
-  {
+{
     name='time',
     arg='%S',
     max=60,
-    bg_colour=0xffffff,
+    bg_colour=default,
     bg_alpha=0.1,
-    fg_colour=0xffffff,
-    fg_alpha=0.5,
+    fg_colour=default,
+    fg_alpha=0.3,
     x=clock_x, y=clock_y,
     radius=75,
     thickness=3,
@@ -83,7 +85,7 @@ settings_table = {
     name='time',
     arg='%M.%S',
     max=60,
-    bg_colour=0xffffff,
+    bg_colour=orange,
     bg_alpha=0.1,
     fg_colour=orange,
     fg_alpha=0.6,
@@ -97,7 +99,7 @@ settings_table = {
     name='time',
     arg='%I.%M',
     max=12,
-    bg_colour=0xffffff,
+    bg_colour=blue,
     bg_alpha=0.1,
     fg_colour=blue,
     fg_alpha=0.6,
@@ -209,13 +211,41 @@ settings_table = {
     name='fs_used_perc',
     arg='/',
     max=100,
-    bg_colour=0xffffff,
-    bg_alpha=0.1,
-    fg_colour=blue,
+    bg_colour=white,
+    bg_alpha=0,
+    fg_colour=white,
     fg_alpha=0.3,
     x=fs0_x, y=fs0_y,
     radius=50,
-    thickness=5,
+    thickness=10,
+    start_angle=270,
+    end_angle=640
+  },
+{
+    name='fs_used_perc',
+    arg='/',
+    max=100,
+    bg_colour=white,
+    bg_alpha=0.1,
+    fg_colour=orange,
+    fg_alpha=0.3,
+    x=fs0_x, y=fs0_y,
+    radius=20,
+    thickness=30,
+    start_angle=270,
+    end_angle=640
+  },
+{
+    name="fs_used_perc",
+    arg="/media/zero",
+    max=100,
+    bg_colour=white,
+    bg_alpha=0,
+    fg_colour=white,
+    fg_alpha=0.2,
+    x=fs1_x, y=fs1_y,
+    radius=80,
+    thickness=10,
     start_angle=0,
     end_angle=360
   },
@@ -223,27 +253,41 @@ settings_table = {
     name="fs_used_perc",
     arg="/media/zero",
     max=100,
-    bg_colour=0xffffff,
-    bg_alpha=0.1,
-    fg_colour=blue,
-    fg_alpha=0.6,
+    bg_colour=white,
+    bg_alpha=0,
+    fg_colour=white,
+    fg_alpha=0.2,
     x=fs1_x, y=fs1_y,
-    radius=60,
-    thickness=3,
+    radius=40,
+    thickness=10,
     start_angle=0,
     end_angle=360
   },
 {
     name="fs_used_perc",
-    arg="/media/exil",
+    arg="/media/thr33",
     max=100,
-    bg_colour=0xffffff,
-    bg_alpha=0.1,
-    fg_colour=blue,
-    fg_alpha=0.6,
+    bg_colour=white,
+    bg_alpha=0,
+    fg_colour=white,
+    fg_alpha=0.3,
     x=fs2_x, y=fs2_y,
-    radius=30,
-    thickness=6,
+    radius=60,
+    thickness=10,
+    start_angle=0,
+    end_angle=360
+  },
+{
+    name="fs_used_perc",
+    arg="/media/thr33",
+    max=100,
+    bg_colour=white,
+    bg_alpha=0,
+    fg_colour=blue,
+    fg_alpha=0.4,
+    x=fs2_x, y=fs2_y,
+    radius=20,
+    thickness=40,
     start_angle=0,
     end_angle=360
   },
@@ -395,6 +439,9 @@ function conky_clock_rings()
 end
 
 --Check that Conky has been running for at least 5s
+--removed because everything is up in a split-second...
+--otherwise just increase the number after 'if update_num>0 then' ten lines below.
+
   if conky_window==nil then return end
   local cs=cairo_xlib_surface_create(conky_window.display,conky_window.drawable,conky_window.visual, conky_window.width,conky_window.height)
 
@@ -403,7 +450,7 @@ end
   local updates=conky_parse('${updates}')
   update_num=tonumber(updates)
 
-  if update_num>5 then
+  if update_num>0 then
     for i in pairs(settings_table) do
       setup_rings(cr,settings_table[i])
     end

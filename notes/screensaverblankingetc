@@ -1,0 +1,2 @@
+# turn off powersaver/screensaver/blanking/bell
+xset -dpms s off s noblank -b

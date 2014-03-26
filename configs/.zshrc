@@ -1,4 +1,4 @@
-# ~/.zshrc 4 imrahil@triceratops
+# ~/.zshrc 4 imrahil@archaeopteryx
 
 #=========================================
 # Auto-completions
@@ -236,9 +236,9 @@ fi
 
 # list aliasas
 alias ö='ls -1Bh --group-directories-first' # '1' 4 one entry/line, 'B' ignores backups (~), 'h' 4 human readable (kiB, MiB, ...)
-alias öö='ls -1ABh --group-directories-first' # 'A' 4 almost all
+alias öö='ls -1Ah --group-directories-first' # 'A' 4 almost all
 alias l='ls -Bhno --group-directories-first' # 'n' 4 numeric uid/gid, 'o' like 'l' without group 
-alias ll='ls -ABhno --group-directories-first'
+alias ll='ls -Ahl --group-directories-first'
 alias d='dirs -v' # lists zsh directory stack (enter <cd +- tab>, plus & minus (reverse) literally, with completion!'
 alias blk='blkid -o list'
 
@@ -273,11 +273,10 @@ alias arm='sudo apt-get remove'
 # non root aliases
 alias s='sudo su -' #--> zum einfacher zu root zu kommen... siehe /etc/sudoers für details
 alias sudo='sudo '
-alias xxx='sudo halt'
 alias swapoffa='sudo swapoff -a'
 
 # misc aliases
-alias emc="emacsclient -c -a ''"
+alias emc="emacsclient -ca ''"
 alias psm='ps au'
 alias scan='scanimage --format=tiff --mode=Color' #>http://lists.alioth.debian.org/pipermail/sane-devel/2001-December/001177.html
 alias am='alsamixer'
@@ -295,7 +294,15 @@ alias oe1='mplayer http://mp3stream3.apasf.apa.at:8000/listen.pls'
 alias countf='find . -type f | wc -l' # number of all files in dir
 alias countd='find . -type d | wc -l' # number of all subdirs in dir
 alias clr='clear'
-alias evince='dbus-launch evince'
+#alias evince='dbus-launch evince'
+alias rmtmp='rm *\#; rm *~; rm .*~'
+alias proc="ps aux | grep "
+
+# mouse aliases
+alias razerlow='razercfg -d mouse -r 1:1800'
+alias razerhigh='razercfg -d mouse -r 1:3500'
+alias razerlight='razercfg -d mouse -l Scrollwheel:on & razercfg -d mouse -l GlowingLogo:on'
+alias razerdark='razercfg -d mouse -l Scrollwheel:off & razercfg -d mouse -l GlowingLogo:off'
 
 # network aliases
 alias syns='setxkbmap de & synergys --config ~/.synergy' # setxkbmap cause otherwise keys are qwerty... reported bug.
@@ -312,6 +319,9 @@ alias vnc0='killall x11vnc'
 # turn off XOFF/XON
 stty -ixon
 
+# turn off powersaver/screensaver/blanking/bell
+xset -dpms s off s noblank -b
+
 #key setups
 bindkey -e # emacs key bindings: yeeha:D
-#bindkey ' ' magic-space # also do history expansion on space ... doesnt work
+bindkey ' ' magic-space # also do history expansion on space, type '!!', then hit enter, watch

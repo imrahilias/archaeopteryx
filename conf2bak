@@ -62,7 +62,7 @@ esac
 echo "--- setting up location ---"
 mkdir $loc
 echo "backup location: $loc"
-
+mkdir $loc/configs
 # copy scripts
 echo "--- copy scripts ---"
 cp -R $HOME/scripts/* $loc; echo "scripts/"
@@ -70,14 +70,12 @@ echo "{"; echo "$(ls $HOME/scripts)"; echo "}"
 
 # copy rcs
 echo "--- copy rcs ---"
-mkdir $loc/configs
+mkdir $loc/configs; echo "configs/"
 cp -R $HOME/.conky         $loc/configs;          echo ".conky/"
 cp $HOME/.emacs            $loc/configs;          echo ".emacs"
-cp $HOME/.moc/config       $loc/configs/.moc;     echo ".moc/config > .moc"
 cp $HOME/.mpdconf          $loc/configs;          echo ".mpdconf"
 cp $HOME/.ncmpcpp/config   $loc/configs/.ncmpcpp; echo ".ncmpcpp/config > .ncmpcpp"
 cp $HOME/.ripit/config     $loc/configs/.ripit;   echo ".ripit/config > .ripit"
-cp $HOME/.synergy          $loc/configs;          echo ".synergy"
 cp $HOME/.xinitrc          $loc/configs;          echo ".xinitrc"
 cp $HOME/.xmonad/xmonad.hs $loc/configs;          echo ".xmonad/xonad.hs"
 cp $HOME/.xresources       $loc/configs;          echo ".xresources"
@@ -87,7 +85,3 @@ cp $HOME/.zshrc            $loc/configs;          echo ".zshrc"
 echo "--- copy notes ---"
 cp -R $HOME/notes $loc; echo "notes/"
 echo "{"; echo "$(ls $HOME/notes)"; echo "}"
-
-# cleaning up: remove backups, maybe exclude somehow bevor cp?
-rm "$loc/*~"; rm "$loc/*#"
-rm "$loc/.*~"; rm "$loc/.*#"
