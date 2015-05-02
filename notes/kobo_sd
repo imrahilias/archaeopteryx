@@ -1,0 +1,24 @@
+# kobo aura hd sd card config
+
+16GB MMC partitions table:
+** head: 30MiB(RAW)
+** part1: 4096MiB /FAT32 (Books)
+** part2: 1536MiB(Android Data)
+** part3: 512MIB(Android System)
+** part4: extension
+**** part5: 64MiB/FAT32
+**** part6: 8192MiB (Linux Rootfs)
+**** part7: 512MiB (Linux swap)
+
+
+** The first 30MiB head contains partiton table(first 1KB),uboot cmdline and something important, use "dd cmd" to make backups(skip first 1KB)
+** part1 contains books, user fonts, dictionaries, backup these
+** part2, part3 are for android, not used in Debian
+** part4, extension
+**** part5: kernel uImage files, boot config files, backup these
+**** part6: Debian rootfs, backup these
+**** part7: Linux swap partition
+
+Part5 is fat32 format, and the sequence number(mmcblk1p5) is directly written in uboot, not configurable;
+Part1 and Part7 are mounted in Debian;
+Part6 sequence number(mmcblk1p6) is written in uboot cmdline area(extenal mmc:768KB ~ 768KB+128KB), so is configurable;
