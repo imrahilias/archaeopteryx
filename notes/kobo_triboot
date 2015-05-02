@@ -24,6 +24,13 @@ Part6 sequence number(mmcblk1p6) is written in uboot cmdline area(extenal mmc:76
 
 --------------------------------------------------------------------------------------------------------------------------------
 
+UPDATE: I have a question: is it safe to clone this whole environment into a larger size card (e.g. 64GB or 128GB)
+by duplicating all the layout except making a larger sixth partition which would result in the same system but bigger rootfs? I hope so, I'll try it now. It is a shame to waste 64GB or 128GB cards by using only 16GB out of them.
+
+UPDATE: Yes, cloning works fine! So you can use this system with a lot more free storage than is provided in the 16GB image...
+
+--------------------------------------------------------------------------------------------------------------------------------
+
 Here are a few optimizations I suggest for your next release:
 
 1. Edit /etc/inittab to disable all gettys on tty1-tty6 and serial getty as well.
