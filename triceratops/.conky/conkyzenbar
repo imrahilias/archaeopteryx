@@ -1,4 +1,4 @@
-#~/scripts/conkybattoprrc
+#~/scripts/conkyzenbar
 # > conky.sourceforge.net/variables.html
 
 background no
@@ -9,13 +9,14 @@ total_run_times 0
 use_spacer none
 
 #notes: ♪♫♬
+# ${time ^ca(1,dzencalkiller && dzencal) ^fg()%A %d %b ^ca()^fg(#FF8E38) %H:%M}
 
 TEXT
 
 ^fg()\
 $if_mpd_playing\
 ^ca(1,ncmpcpp toggle)^ca(3,ncmpcpp next)^ca(4,ncmpcpp volume +10)^ca(5,ncmpcpp volume -10)^ca(8,ncmpcpp prev)^ca(9,ncmpcpp next)\
-^fg(\#39aaff)➤^fg() ${mpd_smart 35}\
+^fg(\#39aaff)➤^fg() ${mpd_smart 25}\
  ^ca()^ca()^ca()^ca()^ca()^ca()$endif\
 ^ca(1,exec amixer -q set Master toggle)^ca(4,exec amixer -q set Master 1+)^ca(5,exec amixer -q set Master 1-)\
  ^fg(\#39aaff)${exec conkyvol}\
@@ -33,10 +34,9 @@ $if_mpd_playing\
   ☭ \
 ^fg(\#39aaff)\
  ${mem}\
-^ca(1,exec switchxkbmap)\
+^ca(1,exec swxkbmap)\
 ^fg()\
   ⌨\
 ^fg(\#39aaff)\
-  ${exec setxkbmap -print | awk -F"+" '/xkb_symbols/ {print $2}'}^ca()\
-# ${time ^ca(1,dzencalkiller && dzencal) ^fg()%A %d %b ^ca()^fg(#FF8E38) %H:%M} 
-  ${time ^fg()%A %d %b ^ca()^fg(#FF8E38) %H:%M} 
+  ${exec setxkbmap -print | awk -F"+" '/xkb_symbols/ {print $2}' | sed 's/(nodeadkeys)//'}^ca()\
+  ${time ^fg()%a %d %b ^fg(#FF8E38) %H:%M} 

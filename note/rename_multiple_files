@@ -1,0 +1,1 @@
+for i in *.pdf; do mv "$i" "${i/oldname/newname}"; done

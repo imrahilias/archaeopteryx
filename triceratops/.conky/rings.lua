@@ -39,76 +39,78 @@ blue=0x39aaff
 
 ------ mem% ------
   mem_x=602
-  mem_y=948
+  mem_y=1000
 
 ------ downspeed/KiB  ------
-  down_x=452
-  down_y=858
+  down_x=415
+  down_y=900
 
 ------ uppeed/KiB  ------
-  up_x=452
-  up_y=858
+  up_x=415
+  up_y=900
 
 ------ /% ------
-  fs0_x=1850
-  fs0_y=800
+  fs0_x=1780
+  fs0_y=300
  
 ------ zero% ------
-  fs1_x=1750
-  fs1_y=950
+  fs1_x=fs0_x
+  fs1_y=fs0_y
 
 ------ thr33% ------
-  fs2_x=1550
-  fs2_y=1000
+  fs2_x=fs0_x
+  fs2_y=fs0_y
 
 -- optienal: battery, wireless (analog eth), link, mpd (mpd_percent/bar dont work)?
 
+------------------------------ CLOCK ------------------------------
+
+--{
+--    name='time',
+--    arg='%S',
+--    max=60,
+--    bg_colour=default,
+--    bg_alpha=0.1,
+--    fg_colour=default,
+--    fg_alpha=0.3,
+--    x=clock_x, y=clock_y,
+--    radius=75,
+--    thickness=3,
+--    start_angle=0,
+--    end_angle=360
+--  },
+--{
+--    name='time',
+--    arg='%M.%S',
+--    max=60,
+--    bg_colour=orange,
+--    bg_alpha=0.1,
+--    fg_colour=orange,
+--    fg_alpha=0.6,
+--    x=clock_x, y=clock_y,
+--    radius=64,
+--    thickness=10,
+--    start_angle=0,
+--    end_angle=360
+--  },
+--{
+--    name='time',
+--    arg='%I.%M',
+--    max=12,
+--    bg_colour=blue,
+--    bg_alpha=0.1,
+--    fg_colour=blue,
+--    fg_alpha=0.6,
+--    x=clock_x, y=clock_y,
+--    radius=54,
+--    thickness=5,
+--    start_angle=0,
+--    end_angle=360
+--  },
 
 ------------ functions -----------
 
 settings_table = {
-{
-    name='time',
-    arg='%S',
-    max=60,
-    bg_colour=default,
-    bg_alpha=0.1,
-    fg_colour=default,
-    fg_alpha=0.3,
-    x=clock_x, y=clock_y,
-    radius=75,
-    thickness=3,
-    start_angle=0,
-    end_angle=360
-  },
-{
-    name='time',
-    arg='%M.%S',
-    max=60,
-    bg_colour=orange,
-    bg_alpha=0.1,
-    fg_colour=orange,
-    fg_alpha=0.6,
-    x=clock_x, y=clock_y,
-    radius=64,
-    thickness=10,
-    start_angle=0,
-    end_angle=360
-  },
-{
-    name='time',
-    arg='%I.%M',
-    max=12,
-    bg_colour=blue,
-    bg_alpha=0.1,
-    fg_colour=blue,
-    fg_alpha=0.6,
-    x=clock_x, y=clock_y,
-    radius=54,
-    thickness=5,
-    start_angle=0,
-    end_angle=360
-  },
 {
     name='cpu',
     arg='cpu1',
@@ -213,39 +215,11 @@ settings_table = {
     max=100,
     bg_colour=white,
     bg_alpha=0,
-    fg_colour=white,
-    fg_alpha=0.3,
-    x=fs0_x, y=fs0_y,
-    radius=50,
-    thickness=10,
-    start_angle=270,
-    end_angle=640
-  },
-{
-    name='fs_used_perc',
-    arg='/',
-    max=100,
-    bg_colour=white,
-    bg_alpha=0.1,
     fg_colour=orange,
     fg_alpha=0.3,
     x=fs0_x, y=fs0_y,
-    radius=20,
-    thickness=30,
-    start_angle=270,
-    end_angle=640
-  },
-{
-    name="fs_used_perc",
-    arg="/media/zero",
-    max=100,
-    bg_colour=white,
-    bg_alpha=0,
-    fg_colour=white,
-    fg_alpha=0.2,
-    x=fs1_x, y=fs1_y,
-    radius=80,
-    thickness=10,
+    radius=30,
+    thickness=20,
     start_angle=0,
     end_angle=360
   },
@@ -258,20 +232,6 @@ settings_table = {
     fg_colour=white,
     fg_alpha=0.2,
     x=fs1_x, y=fs1_y,
-    radius=40,
-    thickness=10,
-    start_angle=0,
-    end_angle=360
-  },
-{
-    name="fs_used_perc",
-    arg="/media/thr33",
-    max=100,
-    bg_colour=white,
-    bg_alpha=0,
-    fg_colour=white,
-    fg_alpha=0.3,
-    x=fs2_x, y=fs2_y,
     radius=60,
     thickness=10,
     start_angle=0,
@@ -283,11 +243,11 @@ settings_table = {
     max=100,
     bg_colour=white,
     bg_alpha=0,
-    fg_colour=blue,
-    fg_alpha=0.4,
+    fg_colour=white,
+    fg_alpha=0.1,
     x=fs2_x, y=fs2_y,
-    radius=20,
-    thickness=40,
+    radius=80,
+    thickness=10,
     start_angle=0,
     end_angle=360
   },

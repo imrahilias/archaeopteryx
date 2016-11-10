@@ -17,7 +17,7 @@ follow orders
 
 $ scanimage -h
 $ scanimage -L
-§ scanimage > --format=tiff sadf.tiff
+$ scanimage > --format=tiff sadf.tiff
 
 > lists.alioth.debian.org/pipermail/sane-devel/2001-December/001177.html
 
