@@ -13,31 +13,13 @@
 -- for browsers, or the file name for emacs).
 
 table5={
-   ["i"]={"firefox", "Firefox", "class"},
-   ["d"]={"nemo", "Nemo", "class"},
-   ["e"]={"emacsclient -ca ''","Emacs"}, 
-   -- ["e"]={"emacsclient -a emacs -n -c","Emacs"}, 
-   -- ["Control-z"]={"google-chrome --app=http://www.rdio.com","www.rdio.com", "instance"},
-   -- ["w"]={"firefox","Firefox"}, 
-   -- ["v"]={"firefox -new-window 'http://www.evernote.com/Home.action?login=true#v=l&so=mn'","Evernote", "name"}, 
-   -- ["g"]={"firefox -new-window 'http://mail.google.com/mail/'","Gmail","name"}, 
-   --["t"]={"xterm","xterm", "instance"}, 
-   -- ["f"]={"xterm -name mcTerm -e mc -d","mcTerm", "instance"}, 
-   -- ["Shift-s"]={"xterm -name rootTerm -cr red -title rootTerm -e su","rootTerm", "instance"}, 
-   -- ["t"]={"xterm -name htopTerm -e htop","htopTerm","instance"}, 
-   --["Shift-b"]={"xterm -title rtorrentTerm -e rtorrent","rtorrentTerm","name"}, 
-   -- ["z"]={"xterm -name mocpTerm -e mocp","mocpTerm", "instance"} 
-   --["i"]={"luakit", "luakit", "class"},
-   --["o"]={"emacsclient -ca ''", "Emacs", "class"},
-   --["Shift-o"]={"xterm -title emacsTerm -e emacsclient -c -nw", "emacsTerm", "name"},
-   --["Control-o"]={"sudo xterm -title emacsRootTerm -e emacs -nw", "emacsRootTerm", "name"},
-   --['\\']={"sudo xterm -title rootTerm -class rootTerm", "rootTerm", "class"},
-   --["g"]={'gimp', 'gimp', "class"},
-   --["y"]={"evince", "Evince", "class"},
-   --["s"]={"xterm -title Sup -e sup", "Sup", "name"},
-   --["["]={"xterm -title irssi -e irssi", "irssi", "name"},
-   --["q"]={"xterm -title raspberrypi -e ssh pi@pi", "raspberrypi", "name"},
-   --["a"]={"xterm -title pavi -e ssh jinn@pavianpredator", "pavi", "name"},
-   --["z"]={"xterm -title vivian -e ssh nemo@vivian", "vivian", "name"},
-   --["Control-j"]={"xterm -title jabber -e mcabber", "jabber", "name"}
+   ["i"]={"chromium", "Chromium"},
+   ["d"]={"nemo --no-desktop ", "Nemo"},   
+   ["o"]={"libreoffice ", "libreoffice"},
+--["e"]={"emacsclient -ca ''","Emacs"}, 
+   ["t"]={"xterm -title rtorrentTerm -e rtorrent","rtorrentTerm","name"},
+   ["g"]={'gimp', 'gimp'},
+   ["u"]={'spotify', 'Spotify'}
+--["u"]={'startdict', 'Startdict'}
+--["y"]={"evince", "Evince"},
 }

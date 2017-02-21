@@ -30,19 +30,20 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
+twm &
+xclock -geometry 50x50-1+1 &
+xterm -geometry 80x50+494+51 &
+xterm -geometry 80x20+494-0 &
+# exec xterm -geometry 80x66+0+0 -name login
 
 # start deamons
 /usr/bin/urxvtd -q -f -o
 
-# fire up conky
+# fire up conky | dzen
+#~/scripts/conkyzen
 conky -c ~/.conky/left.conky &
+conky -c ~/.conky/middle.conky &
 conky -c ~/.conky/right.conky &
-
-# switch to custom keyboard layout
-$setxkbmap us -variant umlaut
-
-# enable compose keycodes *e.g. ralt+"+a = adiaeresis, Kills the variant (see above)!
-#setxkbmap -option compose:ralt
 
 # start awesome
 exec awesome

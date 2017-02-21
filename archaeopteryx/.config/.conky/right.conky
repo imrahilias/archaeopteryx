@@ -1,0 +1,125 @@
+# ~/.conky/rightpanel.conky
+# use with 'conky -c ~/.conky/rightpanel.conky'
+
+########## window options ##########
+own_window yes        	# Draws own window (prevent flickering with more than one conky running)
+own_window_type override
+own_window_transparent yes  # can be sued to set opacity to 0.
+#own_window_colour
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+#opacity
+# own_window_argb_value: this option fucks up the colors, own_window_transparent 
+
+double_buffer yes	# double buffering (reduces flicker, may not work for everyone)
+out_to_console no
+out_to_stderr no
+update_interval 1
+total_run_times 0	# This is the number of times Conky will update before quitting. Set to zero to run forever.
+background yes
+
+########## window position, settings ##########
+gap_x 1590  		# Gap between borders of screen and text, same thing as passing -x at command line
+gap_y 450
+minimum_size 300 600
+maximum_width 300
+background yes
+border_width 1
+draw_borders no
+draw_outline no
+draw_shades no
+stippled_borders 0
+
+########## text ##########
+alignment top_left	# alignment top_right/alignment bottom_left/alignment bottom_right
+use_xft yes
+xftfont Bitstream Vera Sans Mono:size=12
+xftalpha 0.8
+extra_newline no
+uppercase no
+override_utf8_locale yes  # Force UTF8? note that UTF8 support required XFT
+use_spacer left	     	#This only affects certain objects.  use_spacer should have an argument of left, right, or none.  'yes' seems to be some form of 'true', so defaulting to right.
+
+########## graph ##########
+draw_graph_borders yes
+show_graph_scale no
+show_graph_range no
+
+########## values ##########
+short_units yes	        # Shortens units to a single character (kiB->k, GiB->G, etc.). Default is off.
+no_buffers yes		# Subtract file system buffers from used memory?
+cpu_avg_samples 2	# set to 1 to disable averaging
+net_avg_samples 2 	# set to 1 to disable averaging
+
+########## colors ##########
+default_color A89C8C 	# light grey
+#default_color 5C5449  	# even lighter grey
+#default_shade_color white
+#default_outline_color white
+#own_window_colour 262524
+color1 A89C8C 	# light grey
+color2 FF8E38   # orange
+#default_color 383229  	# lighter grey
+#default_color 303030 	# dark grey
+#default_color 12100D 	# darkest grey
+
+####################################################################################################
+TEXT
+#
+#${font xft:Bitstream Vera Sans Mono:bold}$nodename${font}
+#${sysname} ${kernel} on ${machine}
+#${scroll 40 $nodename - $sysname $kernel on $machine | }
+#
+#$color1${hr 2}$color
+#
+#
+#music
+${if_match "${mpd_status}" != "Stopped"}$alignr${mpd_status}
+$color1$hr$endif
+$if_mpd_playing}$color$mpd_artist $alignr$color$mpd_bitrate}k
+${color #FF8E38}$mpd_title$color $alignr$mpd_track
+${mpd_album 32} $alignr${mpd_date 4}
+$color1$mpd_file$color
+$color1${mpd_bar 5,300}$color
+$mpd_elapsed  ${alignc}random $mpd_random $alignr$mpd_length $endif
+
+
+$alignr mount
+$color1$hr$color
+ /     ${exec blkid | grep 5db150b4-add4-41ab-9763-0a197341c9fb | awk '{print "",$1}' | sed 's/://g'}     $color1${fs_bar 5,45 /}$color$alignr${fs_free /}
+#
+${if_mounted /media/zero} zero  \
+${exec mount | grep zero | awk '{print "",$1}'}     \
+$color1${fs_bar 5,45 /media/zero}$color$alignr${fs_free /media/zero}$endif
+#
+${if_mounted /media/thr33} thr33 \
+${exec mount | grep thr33 | awk '{print "",$1}'}     \
+$color1${fs_bar 5,45 /media/thr33}$color$alignr${fs_free /media/thr33}$endif
+#
+${if_mounted /media/exil} exil  \
+${exec mount | grep exil | awk '{print "",$1}'}     \
+$color1${fs_bar 5,45 /media/exil}$color$alignr${fs_free /media/exil}$endif
+
+$alignr devices
+$color1${hr 1}$color
+${execpi 1 blkid -o list | sed -e '1,2d' -e 's/(not mounted)/ [] /' |  awk '{print "",$1,$2,$3,"$alignr",$4}'}
+
+$alignr messages
+$color1$hr
+${exec sudo tail /var/log/messages | sed 's/archaeopteryx //g'}
+#
+#${exec sudo tail -10 /var/log/messages | cut -d' ' -f6-100}
+#${exec sudo tail -1 /var/log/messages | cut -d' ' -f9-100}
+#${exec sudo tail -n 10 /var/log/messages | cut -d' ' -f6-100} | perl -lpe's/\b(.{30,50})\b/\1\n/g'}
+#${exec sudo tail -n 10 /var/log/messages | fmt -s -w 30 -g 50} 
+#
+#${exec sudo tail -n 5 /var/log/messages | awk -v WIDTH=35 '
+#{
+#    while (length>WIDTH) {
+#        print substr($0,1,WIDTH);
+#        $0=substr($0,WIDTH+1);
+#    }
+#    print;
+#}'
+#}
+#
+#${exec sudo tail -n 10 /var/log/messages | awk '{print "${color ff0000}" $5 "${color 000000}"; for(i=6;i<=NF;++i) print $i;}'} #color doesnt get interpreted...

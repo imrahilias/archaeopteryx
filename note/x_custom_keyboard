@@ -1,0 +1,18 @@
+# to enable umlauts as keys like AltGr+O, add the fallowing to /usr/share/X11/xkb/symbols/us
+
+partial alphanumeric_keys
+	xkb_symbols "umlaut" {
+	include "us(basic)"
+	name[Group1]= "English (US, jinns umlaute)";
+	key <AD11> { [ bracketleft, braceleft,     udiaeresis,          Udiaeresis ] };
+	key <AC10> { [ semicolon,       colon,     odiaeresis,          Odiaeresis ] };
+	key <AC11> { [ apostrophe,   quotedbl,     adiaeresis,          Adiaeresis ] };
+	key <AE11> { [ minus,      underscore,     ssharp                          ] };
+	key <AD03> { [         e,           E,       EuroSign,            EuroSign ] };
+	include "level3(ralt_switch)"
+};
+
+# enable with:
+$setxkbmap us -variant umlaut
+
+# add this line to .xinitrc, as it resets on boot

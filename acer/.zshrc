@@ -283,6 +283,7 @@ alias countd='find . -type d | wc -l' # number of all subdirs in dir
 alias rmtmp='rm *\#; rm *~; rm .*~'
 
 # network alias
+alias www='sudo wifi-menu'
 alias pp='ping 8.8.8.8'
 alias oe1='mplayer http://mp3stream3.apasf.apa.at:8000/listen.pls'
 
@@ -303,7 +304,7 @@ alias mm='udisksctl mount -b'
 stty -ixon
 
 # turn off powersaver/screensaver/blanking/bell
-#xset -dpms s off s noblank -b
+xset -dpms s off s noblank -b
 
 #key setups
 bindkey -e # emacs key bindings: yeeha:D
