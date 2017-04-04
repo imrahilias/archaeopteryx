@@ -13,13 +13,14 @@
 -- for browsers, or the file name for emacs).
 
 table5={
-   ["i"]={"chromium", "Chromium"},
-   ["d"]={"nemo --no-desktop ", "Nemo"},   
-   ["o"]={"libreoffice ", "libreoffice"},
+  ["s"]={"chromium", "Chromium"},
+--["d"]={"nemo --no-desktop ", "Nemo"},   
+  ["o"]={"libreoffice ", "libreoffice"},
 --["e"]={"emacsclient -ca ''","Emacs"}, 
-   ["t"]={"xterm -title rtorrentTerm -e rtorrent","rtorrentTerm","name"},
-   ["g"]={'gimp', 'gimp'},
-   ["u"]={'spotify', 'Spotify'}
---["u"]={'startdict', 'Startdict'}
+  ["t"]={"urxvtc -title Torronator -e rtorrent","Torronator","name"},
+  ["g"]={'gimp', 'gimp'},
+  ["a"]={'spotify', 'Spotify'},
+  ["j"]={'jdownloader','Jdownloader'}
+--["u"]={'startdict', 'Startdict'},
 --["y"]={"evince", "Evince"},
 }

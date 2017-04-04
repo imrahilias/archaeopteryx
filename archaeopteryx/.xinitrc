@@ -35,14 +35,18 @@ fi
 /usr/bin/urxvtd -q -f -o
 
 # fire up conky
-conky -c ~/.conky/left.conky &
-conky -c ~/.conky/right.conky &
+conky -c ~/.config/conky/left.lua
+conky -c ~/.config/conky/right.lua
+conky -c ~/.config/conky/middle.lua
 
 # switch to custom keyboard layout
-$setxkbmap us -variant umlaut
+setxkbmap us -variant umlaut
 
 # enable compose keycodes *e.g. ralt+"+a = adiaeresis, Kills the variant (see above)!
 #setxkbmap -option compose:ralt
+
+# disable screen blanking and powersaving mode
+xset s off -dpms
 
 # start awesome
 exec awesome

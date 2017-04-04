@@ -90,6 +90,7 @@ end
 -- }}}
 
 -- {{{ Menu
+--[[
 -- Create a launcher widget and a main menu
 myawesomemenu = {
    { "hotkeys", function() return false, hotkeys_popup.show_help end},
@@ -97,6 +98,7 @@ myawesomemenu = {
    { "restart", awesome.restart },
    { "quit", function() awesome.quit() end}
 }
+--]]
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
 --                                    { "open terminal", terminal }
@@ -115,7 +117,8 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+--mytextclock = wibox.widget.textclock()
+mytextclock = wibox.widget.textclock('%a %e %b <span color="#FF8E38"> %_H:%M </span> ', 5)  -- blue: #1793D1
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = awful.util.table.join(
@@ -200,7 +203,7 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, taglist_buttons)
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = 40 })
+    s.mywibox = awful.wibar({ position = "top", screen = s, height = 30 })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -217,7 +220,7 @@ awful.screen.connect_for_each_screen(function(s)
             mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
-            s.mylayoutbox,
+         --   s.mylayoutbox,
         },
     }
 end)
@@ -242,11 +245,11 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "p", function() menubar.show() end, {description = "show the menubar", group = "launcher"}),
 
    -- Navigation
-    awful.key({ modkey }, "s", hotkeys_popup.show_help, {description="show help", group="awesome"}),
+--    awful.key({ modkey }, "s", hotkeys_popup.show_help, {description="show help", group="awesome"}),
     awful.key({ modkey }, "Left",  awful.tag.viewprev, {description = "view previous", group = "tag"}),
     awful.key({ modkey }, "Right",  awful.tag.viewnext, {description = "view next", group = "tag"}),
     awful.key({ modkey }, "Escape", awful.tag.history.restore, {description = "go back", group = "tag"}),
-    awful.key({ modkey }, "w", function () mymainmenu:show() end, {description = "show main menu", group = "awesome"}),
+--    awful.key({ modkey }, "w", function () mymainmenu:show() end, {description = "show main menu", group = "awesome"}),
     awful.key({ modkey }, "u", awful.client.urgent.jumpto,  {description = "jump to urgent client", group = "client"}),
 	      
     -- Layout manipulation
@@ -289,8 +292,10 @@ globalkeys = awful.util.table.join(
     -- Launch
     awful.key({ modkey }, "Return", function () awful.util.spawn(terminal) end, {description = "terminate", group = "launcher"}),
     awful.key({ modkey }, "e", function () awful.util.spawn("emacsclient -c -a ''", false) end, {description = "emacs", group = "launcher"}),
+    awful.key({ modkey }, "d", function () awful.util.spawn("nemo --no-desktop", false) end, {description = "nemo --no-desktop", group = "launcher"}),
     awful.key({ modkey,"Shift" }, "d", function () awful.util.spawn("sudo nemo --no-desktop", false) end, {description = "sudo nemo --no-desktop", group = "launcher"}),
-    awful.key({ modkey }, "z", function () awful.util.spawn_with_shell("feh -F ~/.config/awesome/us_keyboard_layout.png") end, {description = "show querty", group = "launcher"}),
+--    awful.key({ modkey }, "z", function () awful.util.spawn_with_shell("feh -F ~/.config/awesome/us_keyboard_layout.png") end, {description = "show querty", group = "launcher"}),
+    awful.key({ modkey, "Shift" }, "s", function () awful.util.spawn_with_shell("open_primary_selection_in_browser.sh") end, {description = "open primary selection in browser", group = "launcher"}),
 
     -- Audio
     awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 5%+", false) end),
@@ -304,7 +309,10 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86AudioNext", function () awful.util.spawn("playerctl next", false) end, {description = "next", group = "audio"}),
 
     -- Screenshot
-    awful.key({ }, "Print", function () awful.util.spawn("scrot -e 'mv $f ~/screens/ 2>/dev/null'") end,  {description = "screenshot", group = "launcher"})
+    awful.key({ }, "Print", function () awful.util.spawn("scrot -e 'mv $f ~/screens/ 2>/dev/null'") end,  {description = "screenshot", group = "launcher"}),
+
+    -- Killer
+    awful.key({ modkey, "Shift" }, "k", function () awful.util.spawn("xkill", false) end, {description = "xkill", group = "awesome"})
 
 )
 
@@ -485,6 +493,10 @@ awful.rules.rules = {
         class = {
           "spotify",
           "Spotify",
+                   },
+        name = {
+          "spotify",
+          "Spotify",
 	  }},
        properties = { tag =   "♬", switchtotag = true }},
 
@@ -499,9 +511,12 @@ awful.rules.rules = {
        properties = { tag = "◎", switchtotag = true }},
 
     { rule_any = {   	    -- DOWNLOAD
-        instance = {
-          "rtorrent",
-	  }},
+        name = {
+          "Torronator",
+        },
+        class = {
+          "JDownloader",
+    }},
        properties = { tag = "↯", switchtotag = true }},
 
     { rule_any = {    	    -- COMMUNICATION

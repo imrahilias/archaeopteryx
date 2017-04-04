@@ -21,7 +21,7 @@
 ;; inital scratch text
 (setq initial-scratch-message "..oo00OO Scratchpad OO00oo..")
 
-(add-to-list 'load-path "~/.emacs.d/plugins")
+(add-to-list 'load-path "~/.emacs.d/el-get/")
 
 ;; syntax highlighting
 (global-font-lock-mode 't)
@@ -95,22 +95,22 @@
 (ido-mode t)
 
 ;; fill column indicator
-(add-to-list 'load-path "~/.emacs.d/fill-column-indicator.el")
-(require 'fill-column-indicator)
-(define-globalized-minor-mode
-  global-fci-mode fci-mode (lambda() (fci-mode 0)))
-(setq fci-rule-width 1)
-(setq fci-rule-color "darkgrey")
-(setq-default fci-rule-column 80)
+;(add-to-list 'load-path "~/.emacs.d/fill-column-indicator.el")
+;(require 'fill-column-indicator)
+;(define-globalized-minor-mode
+;  global-fci-mode fci-mode (lambda() (fci-mode 0)))
+;(setq fci-rule-width 1)
+;(setq fci-rule-color "darkgrey")
+;(setq-default fci-rule-column 80)
 
 ;; fci-mode sux in the terminal, i want it just in graphical mode
-(if (display-graphic-p)
-    (progn
-      ;; if graphic
-      (global-fci-mode 1))
-      ;; else
-  (global-fci-mode 0)
-)
+;(if (display-graphic-p)
+;    (progn
+;      ;; if graphic
+;      (global-fci-mode 1))
+;      ;; else
+;  (global-fci-mode 0)
+;)
 
 ;; highlight the current line
 ;;(setq hl-line-face 'hl-line)
@@ -187,9 +187,22 @@
 ;; refresh buffers on change
 (global-auto-revert-mode t)
 
+;; el-get
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+(el-get 'sync)
+
 ;; This snippet enables lua-mode
 ;; This line is not necessary, if lua-mode.el is already on your load-path
-(add-to-list 'load-path "~/.emacs.d/lua-mode")
+(add-to-list 'load-path "~/.emacs.d/el-get/lua-mode")
 
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))

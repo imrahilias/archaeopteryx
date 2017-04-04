@@ -254,10 +254,10 @@ alias blk='sudo blkid -o list'
 # edit aliases
 #alias editf='sudo emc /etc/fstab'
 alias editf='sudo cp /etc/fstab /etc/fstab.$(date +%y%m%d%H%S) && sudo emc /etc/fstab'
-alias editb='emc $HOME/.bashrc'
-alias editz='emc $HOME/.zshrc'
-alias editx='emc $HOME/.xinitrc'
-alias edita='emc $HOME/.config/awesome/rc.lua'
+alias editb='emacsclient -c $HOME/.bashrc'
+alias editz='emacsclient -c $HOME/.zshrc'
+alias editx='emacsclient -c $HOME/.xinitrc'
+alias edita='emacsclient -c $HOME/.config/awesome/rc.lua'
 
 # mount aliases
 alias mnta='sudo mount -a; echo -e $red"mounted:"$default; mount' # echo 4 color, semicolon 4 1. command, if ok, than 2. com

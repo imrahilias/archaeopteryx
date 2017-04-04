@@ -27,8 +27,8 @@ urxvt*scrollBar: false
 urxvt*saveLines: 10000
 urxvt*pointerblank: true
 urxvt*letterSpace: 0
-urxvt*font: xft:Bitstream Vera Sans:size=12
-urxvt*boldFont: xft:Bitstream Vera Sans:size=12:style=Bold
+urxvt*font: xft: Bitstream Vera Sans Mono:size=12
+urxvt*boldFont: xft: Bitstream Vera Sans Mono:size=12:style=Bold
 urxvt*foreground:       #A89C8C
 urxvt*background:       #241e1e
 !urxvt*foreground: white
