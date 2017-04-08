@@ -111,7 +111,7 @@ ${execpi 60 today=`date +%_d`; cal | sed -n '3,8 p' | sed 's/^/${alignr} /' | se
   prc            $color1 $running_processes ${color} $alignr $processes 
   upt            $color1 $uptime ${color} 
 \
-${cpugraph cpu0 30,3000 A89C8C A89C8C}
+${cpugraph cpu1 30,300 A89C8C A89C8C}
 ${color1}${top cpu 1}	  ${top pid 1}	   ${top name 1}${color}
 ${top cpu 2}	  ${top pid 2}	   ${top name 2}
 ${top cpu 3}	  ${top pid 3}	   ${top name 3}

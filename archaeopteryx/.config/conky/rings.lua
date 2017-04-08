@@ -286,7 +286,7 @@ settings_table = {
 {
     name='downspeedf',
     arg='eno1',
-    max=8000,
+    max=12000,
     bg_colour=white,
     bg_alpha=0.1,
     fg_colour=white,
@@ -300,7 +300,7 @@ settings_table = {
 {
     name='upspeedf',
     arg='eno1',
-    max=800,
+    max=1200,
     bg_colour=white,
     bg_alpha=0.1,
     fg_colour=white,

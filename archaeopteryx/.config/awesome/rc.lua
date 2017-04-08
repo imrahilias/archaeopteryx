@@ -183,7 +183,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "∅", "@", "$", "⛁", "≣", "♬", "◎", "↯", "✆","➊", "➋", "➌", "➍", "➎" }, s, awful.layout.layouts[1])
+    awful.tag({ "∅", "@", "$", "⛁", "≣", "♬", "◎", "↯", "✆","♞", "♠", "♥", "♦", "♣" }, s, awful.layout.layouts[1]) -- 𝄞♫ ♞♟ "♤", "♡", "♢", "♧"
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -238,14 +238,14 @@ root.buttons(awful.util.table.join(
 globalkeys = awful.util.table.join(
    
     -- Awesome program
-    awful.key({ modkey }, "q", awesome.restart, {description = "reload awesome", group = "awesome"}),
-    awful.key({ modkey, "Shift"   }, "q", awesome.quit, {description = "quit awesome", group = "awesome"}),
+    awful.key({ modkey, "Shift" }, "q", awesome.restart, {description = "reload awesome", group = "awesome"}),
+    awful.key({ modkey, "Shift", "Control" }, "q", awesome.quit, {description = "quit awesome", group = "awesome"}),
 
    -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end, {description = "show the menubar", group = "launcher"}),
+    awful.key({ modkey }, "q", function() menubar.show() end, {description = "show the menubar", group = "launcher"}),
 
    -- Navigation
---    awful.key({ modkey }, "s", hotkeys_popup.show_help, {description="show help", group="awesome"}),
+--    awful.key({ modkey }, "z", hotkeys_popup.show_help, {description="show help", group="awesome"}),
     awful.key({ modkey }, "Left",  awful.tag.viewprev, {description = "view previous", group = "tag"}),
     awful.key({ modkey }, "Right",  awful.tag.viewnext, {description = "view next", group = "tag"}),
     awful.key({ modkey }, "Escape", awful.tag.history.restore, {description = "go back", group = "tag"}),
@@ -309,7 +309,7 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86AudioNext", function () awful.util.spawn("playerctl next", false) end, {description = "next", group = "audio"}),
 
     -- Screenshot
-    awful.key({ }, "Print", function () awful.util.spawn("scrot -e 'mv $f ~/screens/ 2>/dev/null'") end,  {description = "screenshot", group = "launcher"}),
+    awful.key({ }, "Print", function () awful.util.spawn("scrot -e 'mv $f ~/screens/ 2>/dev/null'") end),
 
     -- Killer
     awful.key({ modkey, "Shift" }, "k", function () awful.util.spawn("xkill", false) end, {description = "xkill", group = "awesome"})
@@ -498,7 +498,7 @@ awful.rules.rules = {
           "spotify",
           "Spotify",
 	  }},
-       properties = { tag =   "♬", switchtotag = true }},
+       properties = { tag = "♬", switchtotag = true }},
 
     { rule_any = {   	    -- VIDEO
         class = {
@@ -528,6 +528,12 @@ awful.rules.rules = {
 	  }},
        properties = { tag = "✆", switchtotag = true }},
        
+    { rule_any = {    	    -- GAMES
+        class = {
+          "steam",
+          "Steam",
+	  }},
+       properties = { tag = "♞", switchtotag = true }},
 }
 
 -- }}}
