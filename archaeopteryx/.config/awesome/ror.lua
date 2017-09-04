@@ -14,7 +14,6 @@
 
 table5={
   ["s"]={"chromium", "Chromium"},
---["d"]={"nemo --no-desktop ", "Nemo"},   
   ["o"]={"libreoffice ", "libreoffice"},
 --["e"]={"emacsclient -ca ''","Emacs"}, 
   ["t"]={"urxvtc -title Torronator -e rtorrent","Torronator","name"},

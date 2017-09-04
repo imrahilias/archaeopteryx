@@ -183,7 +183,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "∅", "@", "$", "⛁", "≣", "♬", "◎", "↯", "✆","♞", "♠", "♥", "♦", "♣" }, s, awful.layout.layouts[1]) -- 𝄞♫ ♞♟ "♤", "♡", "♢", "♧"
+    awful.tag({ "∅", "@", "$", "⛁", "≣", "♬", "♻", "⚡", "✆","♞", "♠", "♥", "♦", "♣" }, s, awful.layout.layouts[1]) -- ↯ 𝄞♫ ♞♟ "♤", "♡", "♢", "♧" ⚛
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -242,7 +242,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift", "Control" }, "q", awesome.quit, {description = "quit awesome", group = "awesome"}),
 
    -- Menubar
-    awful.key({ modkey }, "q", function() menubar.show() end, {description = "show the menubar", group = "launcher"}),
+    awful.key({ modkey }, "p", function() menubar.show() end, {description = "show the menubar", group = "launcher"}),
 
    -- Navigation
 --    awful.key({ modkey }, "z", hotkeys_popup.show_help, {description="show help", group="awesome"}),
@@ -292,7 +292,7 @@ globalkeys = awful.util.table.join(
     -- Launch
     awful.key({ modkey }, "Return", function () awful.util.spawn(terminal) end, {description = "terminate", group = "launcher"}),
     awful.key({ modkey }, "e", function () awful.util.spawn("emacsclient -c -a ''", false) end, {description = "emacs", group = "launcher"}),
-    awful.key({ modkey }, "d", function () awful.util.spawn("nemo --no-desktop", false) end, {description = "nemo --no-desktop", group = "launcher"}),
+    awful.key({ modkey }, "d", function () awful.util.spawn("nemo", false) end, {description = "nemo --no-desktop", group = "launcher"}),
     awful.key({ modkey,"Shift" }, "d", function () awful.util.spawn("sudo nemo --no-desktop", false) end, {description = "sudo nemo --no-desktop", group = "launcher"}),
 --    awful.key({ modkey }, "z", function () awful.util.spawn_with_shell("feh -F ~/.config/awesome/us_keyboard_layout.png") end, {description = "show querty", group = "launcher"}),
     awful.key({ modkey, "Shift" }, "s", function () awful.util.spawn_with_shell("open_primary_selection_in_browser.sh") end, {description = "open primary selection in browser", group = "launcher"}),
