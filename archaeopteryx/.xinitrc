@@ -40,7 +40,7 @@ conky -c ~/.config/conky/right.lua
 conky -c ~/.config/conky/middle.lua
 
 # switch to custom keyboard layout
-setxkbmap us -variant umlaut
+#setxkbmap us -variant umlaut
 
 # enable compose keycodes *e.g. ralt+"+a = adiaeresis, Kills the variant (see above)!
 #setxkbmap -option compose:ralt

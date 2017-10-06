@@ -203,7 +203,7 @@ BCYAN="%{"$'\033[01;36m'"%}"
 WHITE="%{"$'\033[00;37m'"%}"
 BWHITE="%{"$'\033[01;37m'"%}"
 NORM="%{"$'\033[00m'"%}"
-PROMPT="${BWHITE}%~${BCYAN} @${BWHITE}"'$(prompt_char)'"${WHITE}" # Vote Jungle;)   ☢
+PROMPT="${BWHITE}%~${BCYAN} @${BWHITE}"'$(prompt_char)'"${WHITE}" # Vote Jungle;)
 RPROMPT='$(cmd_fail)$(git_branch)%T'
 
 #PROMPT="${BBLACK}%n${YELLOW}@${BBLACK}%M ${WHITE}%~ ${BBLUE}"'$(prompt_char)'" ${WHITE}" # Vote Jungle;)

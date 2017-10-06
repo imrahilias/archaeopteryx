@@ -4,8 +4,8 @@
 
 theme = {}
 
-theme.font          = "Bitstream Vera Sans 12"
-theme.taglist_font         = "Bitstream Vera Sans 18"
+theme.font          = "Bitstream Vera Sans 14"
+theme.taglist_font         = "Bitstream Vera Sans 20"
 
 theme.bg_normal     = "#303030"
 theme.bg_focus      = theme.bg_normal
