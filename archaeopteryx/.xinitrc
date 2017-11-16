@@ -50,3 +50,6 @@ xset s off -dpms
 
 # start awesome
 exec awesome
+
+# composite manager to avoid screen tearing
+compton # --config /dev/null --backend glx --paint-on-overlay --glx-no-stencil --glx-no-rebind-pixmap --glx-swap-method buffer-age --xrender-sync-fence --xrender-sync

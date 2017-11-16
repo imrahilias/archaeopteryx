@@ -312,8 +312,12 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "Print", function () awful.util.spawn("scrot -e 'mv $f ~/screens/ 2>/dev/null'") end),
 
     -- Killer
-    awful.key({ modkey, "Shift" }, "k", function () awful.util.spawn("xkill", false) end, {description = "xkill", group = "awesome"})
+    awful.key({ modkey, "Shift" }, "k", function () awful.util.spawn("sudo xkill", false) end, {description = "xkill", group = "awesome"}),
 
+    -- Razer
+    awful.key({ modkey }, "#86", function () awful.util.spawn("razercfg -l GlowingLogo:off -l Scrollwheel:on", false) end, {description = "xkill", group = "awesome"}),
+    awful.key({ modkey }, "#82", function () awful.util.spawn("razercfg -l all:off", false) end, {description = "xkill", group = "awesome"})
+    
 )
 
 clientkeys = awful.util.table.join(
@@ -525,6 +529,7 @@ awful.rules.rules = {
 	  "Pidgin",
 	  "Skype",
 	  "Ts3client_linux_amd64",
+          "TelegramDesktop",
 	  }},
        properties = { tag = "✆", switchtotag = true }},
        

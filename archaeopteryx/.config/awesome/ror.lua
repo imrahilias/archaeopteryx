@@ -19,6 +19,7 @@ table5={
   ["t"]={"urxvtc -title Torronator -e rtorrent","Torronator","name"},
   ["g"]={'gimp', 'gimp'},
   ["a"]={'spotify', 'Spotify'},
+  ["x"]={'telegram-desktop', 'Telegram'},
   ["j"]={'jdownloader','Jdownloader'}
 --["u"]={'startdict', 'Startdict'},
 --["y"]={"evince", "Evince"},

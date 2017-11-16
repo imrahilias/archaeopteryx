@@ -289,11 +289,19 @@ alias oe1='mplayer http://mp3stream3.apasf.apa.at:8000/listen.pls'
 # launch alias
 alias x='startx'
 #alias evince='dbus-launch evince'
-alias emc="emacsclient -ca \'\'" # > emacsclient --help or ~/scripts/emc
+alias ee="emacs"
+#alias emc="emacsclient -ca \'\'" # > service moved to systemd
 alias scan='scanimage --format=tiff --mode=Color' #>http://lists.alioth.debian.org/pipermail/sane-devel/2001-December/001177.html
 alias am='alsamixer'
 alias halt='systemctl poweroff'
 alias mm='udisksctl mount -b'
+
+# misc
+alias dark='razercfg -l all:off'
+alias light='razercfg -l GlowingLogo:off -l Scrollwheel:on'
+alias fast='razercfg -r 1:3'
+alias slow='razercfg -r 1:2'
+alias rename='perl-rename'
 
 #=========================================
 # MISC

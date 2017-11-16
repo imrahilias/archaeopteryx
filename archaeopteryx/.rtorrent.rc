@@ -29,13 +29,13 @@ directory.default.set = /prime/downloads
 # of rtorrent using the same session directory. Perhaps using a
 # relative path?
 #
-#session.path.set = /prime/downloads/session
+session.path.set = /prime/downloads/session
 
 # Watch a directory for new torrents, and stop those that have been
 # deleted.
 #
 schedule2 = watch_directory,5,5,load.start=/prime/downloads/watch/*.torrent
-schedule2 = untied_directory,5,5,stop_untied=
+#schedule2 = untied_directory,5,5,stop_untied=/prime/downloads/watch/*.torrent
 
 # Close torrents when diskspace is low.
 #
@@ -77,8 +77,6 @@ schedule2 = low_diskspace,5,60,close_low_diskspace=100M
 # Encryption options, set to none (default) or any combination of the following:
 # allow_incoming, try_outgoing, require, require_RC4, enable_retry, prefer_plaintext
 #
-allow_incoming, try_outgoing, enable_retry, prefer_plaintext
-
 # The example value allows incoming encrypted connections, starts unencrypted
 # outgoing connections but retries with encryption if they fail, preferring
 # plaintext to RC4 encryption after the encrypted handshake
