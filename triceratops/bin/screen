@@ -1,6 +1,0 @@
-#!/bin/zsh
-# screen.sh
-# screen saving algorithm
-# arguments: [jpg|png]
-
-/bin/zsh & scrot 'screen_%y%m%d.'"$1" -e 'mv $f ~/screens'

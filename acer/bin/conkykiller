@@ -1,5 +1,0 @@
-#!/bin/bash
-
-killall conky &&
-~/scripts/conkyzen
-conky -c ~/.conky/background.conky &

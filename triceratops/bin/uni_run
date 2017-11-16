@@ -1,5 +1,0 @@
-#!/bin/bash
-
-chromium &
-evince /media/zero/uni/current/molecular_solid_state/skriptum_2011.pdf &
-$(emacsclient -c -a '' /media/zero/uni/current/molecular_solid_state/lectures_old_vs_new) &
