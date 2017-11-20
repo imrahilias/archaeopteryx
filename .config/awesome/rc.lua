@@ -278,8 +278,8 @@ globalkeys = awful.util.table.join(
                   end
               end,
               {description = "restore minimized", group = "client"}),
-	      
-   awful.key({ modkey }, "f",
+
+   awful.key({ modkey, "Shift" }, "f",
           function ()
               myscreen = awful.screen.focused()
               myscreen.mywibox.visible = not myscreen.mywibox.visible
@@ -293,7 +293,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "Return", function () awful.util.spawn(terminal) end, {description = "terminate", group = "launcher"}),
     awful.key({ modkey }, "e", function () awful.util.spawn("emacsclient -c -a ''", false) end, {description = "emacs", group = "launcher"}),
     awful.key({ modkey }, "d", function () awful.util.spawn("nemo", false) end, {description = "nemo --no-desktop", group = "launcher"}),
-    awful.key({ modkey,"Shift" }, "d", function () awful.util.spawn("sudo nemo --no-desktop", false) end, {description = "sudo nemo --no-desktop", group = "launcher"}),
+    awful.key({ modkey, "Shift" }, "d", function () awful.util.spawn("sudo nemo --no-desktop", false) end, {description = "sudo nemo --no-desktop", group = "launcher"}),
 --    awful.key({ modkey }, "z", function () awful.util.spawn_with_shell("feh -F ~/.config/awesome/us_keyboard_layout.png") end, {description = "show querty", group = "launcher"}),
     awful.key({ modkey, "Shift" }, "s", function () awful.util.spawn_with_shell("open_primary_selection_in_browser.sh") end, {description = "open primary selection in browser", group = "launcher"}),
 
@@ -331,14 +331,35 @@ clientkeys = awful.util.table.join(
             -- minimized, since minimized clients can't have the focus.
             c.minimized = true
         end ,
-        {description = "minimize", group = "client"})
+        {description = "minimize", group = "client"}),
 
---    awful.key({ modkey,           }, "m",
---        function (c)
---            c.maximized = not c.maximized
---            c:raise()
---        end ,
---        {description = "maximize", group = "client"})
+    awful.key({ modkey,           }, "m",
+        function (c)
+            c.maximized = not c.maximized
+            c:raise()
+        end ,
+        {description = "maximize", group = "client"}),
+
+    awful.key({ modkey, "Control" }, "m",
+       function (c)
+          c.maximized_vertical = not c.maximized_vertical
+          c:raise()
+       end ,
+       {description = "(un)maximize vertically", group = "client"}),
+    awful.key({ modkey, "Shift"   }, "m",
+       function (c)
+          c.maximized_horizontal = not c.maximized_horizontal
+          c:raise()
+       end ,
+       {description = "(un)maximize horizontally", group = "client"}),
+    
+    awful.key({ modkey }, "f",
+       function (c)
+          c.fullscreen = not c.fullscreen
+          c:raise()
+       end,
+       {description = "toggle fullscreen", group = "client"})
+
 )
 
 -- {{{ run or raise
