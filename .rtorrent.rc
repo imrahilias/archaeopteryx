@@ -18,8 +18,8 @@
 
 # Global upload and download rate in KiB. "0" for unlimited.
 #
-#throttle.global_down.max_rate.set_kb = 0
-#throttle.global_up.max_rate.set_kb = 0
+throttle.global_down.max_rate.set_kb = 0
+throttle.global_up.max_rate.set_kb = 0
 
 # Default directory to save the downloaded torrents.
 #

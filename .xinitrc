@@ -48,8 +48,8 @@ conky -c ~/.config/conky/middle.lua
 # disable screen blanking and powersaving mode
 xset s off -dpms
 
+# composite manager to avoid screen tearing
+compton -CGb #--config /dev/null --backend glx --paint-on-overlay --glx-no-stencil --glx-no-rebind-pixmap --glx-swap-method buffer-age --xrender-sync-fence --xrender-sync
+
 # start awesome
 exec awesome
-
-# composite manager to avoid screen tearing
-compton # --config /dev/null --backend glx --paint-on-overlay --glx-no-stencil --glx-no-rebind-pixmap --glx-swap-method buffer-age --xrender-sync-fence --xrender-sync
