@@ -40,10 +40,9 @@ conky -c ~/.config/conky/right.lua
 conky -c ~/.config/conky/middle.lua
 
 # switch to custom keyboard layout
-#setxkbmap us -variant umlaut
-
-# enable compose keycodes *e.g. ralt+"+a = adiaeresis, Kills the variant (see above)!
-#setxkbmap -option compose:ralt
+#setxkbmap us -variant m # same as "us(m)"
+#setxkbmap -option compose:ralt #enable compose keycodes *e.g. ralt+"+a = adiaeresis, kills the variant (see above)!
+setxkbmap -layout "us(m),de" # enables multiple layouts, switch via awesome, us(m) is custom (see notes)
 
 # disable screen blanking and powersaving mode
 xset s off -dpms
