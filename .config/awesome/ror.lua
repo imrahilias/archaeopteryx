@@ -16,11 +16,11 @@ table5={
   ["s"]={"chromium", "Chromium"},
   ["o"]={"libreoffice ", "libreoffice"},
 --["e"]={"emacsclient -ca ''","Emacs"}, 
-  ["t"]={"urxvtc -title Torronator -e rtorrent","Torronator","name"},
+  ["t"]={"urxvtc -title Torronator -e rtorrent","rtorrent", "instance"},
   ["g"]={'gimp', 'gimp'},
   ["a"]={'spotify', 'Spotify'},
   ["x"]={'telegram-desktop', 'Telegram'},
-  ["j"]={'jdownloader','Jdownloader'}
+  ["j"]={'jdownloader','Jdownloader'},
 --["u"]={'startdict', 'Startdict'},
 --["y"]={"evince", "Evince"},
 }

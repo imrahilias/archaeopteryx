@@ -264,8 +264,7 @@ alias mnta='sudo mount -a; echo -e $red"mounted:"$default; mount' # echo 4 color
 alias uma='sudo umount -a; echo -e $red"mounted:"$default; mount'
 
 # pacman aliases
-alias pi='sudo pacman -Sy'
-alias pu='sudo pacman -Su'
+alias pi='sudo pacman -Syyu'
 alias pq='sudo pacman -Q'
 alias px='sudo pacman -R'
 

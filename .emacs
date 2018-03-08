@@ -8,7 +8,16 @@
 ;;fun
 ;;(global-set-key (kbd "C-x C-s") 'spook)
 
-;; no welcome message please
+(require 'package)
+
+;; MELPA
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (url (concat (if no-ssl "http" "https") "://melpa.org/packages/")))
+  (add-to-list 'package-archives (cons "melpa" url) t))
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
@@ -16,10 +25,11 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
+;; no welcome message please
 (setq inhibit-startup-message t)
 
 ;; inital scratch text
-(setq initial-scratch-message "..oo00OO Scratchpad OO00oo..")
+(setq initial-scratch-message "")
 
 (add-to-list 'load-path "~/.emacs.d/el-get/")
 
@@ -150,7 +160,11 @@
  (other-window -1)))
 
 ;; auto break lines in paragraphs
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
+;;(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+;; auto-complete-mode
+(add-hook 'text-mode-hook 'turn-on-auto-complete-mode')
+
 
 ;; _
 ;;| | __ _ _ __   __ _ _   _  __ _  __ _  ___  ___

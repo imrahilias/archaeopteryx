@@ -302,8 +302,8 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 5%-", false) end),
 --    awful.key({ }, "XF86AudioMute", function () awful.util.spawn('for x in {"Master","Headphone","Front","Surround","Center","LFE","Side"} ; do amixer -c 0 set "${x}" toggle; done', false) end),
     awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer set Master toggle", false) end),
---    awful.key({ }, "XF86Tools", function () awful.util.spawn(terminal .. " -e ncmpcpp", false) end),
-    awful.key({ }, "XF86Tools", function () awful.util.spawn("spotify", false) end, {description = "spotify", group = "launcher"}),
+    awful.key({ }, "XF86Tools", function () awful.util.spawn(terminal .. " -e ncmpcpp", false) end),
+--    awful.key({ }, "XF86Tools", function () awful.util.spawn("spotify", false) end, {description = "spotify", group = "launcher"}),
     awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("playerctl previous", false) end, {description = "previous", group = "audio"}),
     awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("playerctl play-pause", false) end, {description = "play-pause", group = "audio"}),
     awful.key({ }, "XF86AudioNext", function () awful.util.spawn("playerctl next", false) end, {description = "next", group = "audio"}),
@@ -448,39 +448,39 @@ awful.rules.rules = {
      }
     },
 
-    -- Floating clients.
-    { rule_any = {
-        instance = {
-          "DTA",  -- Firefox addon DownThemAll.
-          "copyq",  -- Includes session name in class.
-        },
-        class = {
-	   "Vlc",
-	  "mplayer",
-	  "Mplayer",
-	  "mplayer2",
-	  "Main","mplayer2",
-	  "XFontSel",
-          "Arandr",
-          "Gpick",
-          "Kruler",
-          "MessageWin",  -- kalarm.
-          "Sxiv",
-          "Wpa_gui",
-          "pinentry",
-          "veromix",
-          "xtightvncviewer"},
-
-        name = {
-          "Event Tester",  -- xev.
-        },
-        role = {
-          "AlarmWindow",  -- Thunderbird's calendar.
-          "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
-        }
-      }, properties = { floating = true }},
-
-    -- Add titlebars to normal clients and dialogs SERIOUSELY?
+--    -- Floating clients.
+--    { rule_any = {
+--        instance = {
+--          "DTA",  -- Firefox addon DownThemAll.
+--          "copyq",  -- Includes session name in class.
+--        },
+--        class = {
+--	   "Vlc",
+--	  "mplayer",
+--	  "Mplayer",
+--	  "mplayer2",
+--	  "Main","mplayer2",
+--	  "XFontSel",
+--          "Arandr",
+--          "Gpick",
+--          "Kruler",
+--          "MessageWin",  -- kalarm.
+--          "Sxiv",
+--          "Wpa_gui",
+--          "pinentry",
+--          "veromix",
+--          "xtightvncviewer"},
+--
+--        name = {
+--          "Event Tester",  -- xev.
+--        },
+--        role = {
+--          "AlarmWindow",  -- Thunderbird's calendar.
+--          "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
+--        }
+--      }, properties = { floating = true }},
+--
+--    -- Add titlebars to normal clients and dialogs SERIOUSELY?
 --    { rule_any = {type = { "normal", "dialog" }
 --      }, properties = { titlebars_enabled = true },
 --    },
@@ -507,6 +507,7 @@ awful.rules.rules = {
     { rule_any = {   	    -- DOC
         class = {
           "Evince",
+          "libreoffice",
 	  "libreoffice-startcenter",
 	  "libreoffice-writer",
 	  "libreoffice-calc",
@@ -528,21 +529,19 @@ awful.rules.rules = {
     { rule_any = {   	    -- VIDEO
         class = {
           "Vlc",
-	  "mplayer",
-	  "Mplayer",
-	  "mplayer2",
-	  "Main","mplayer2",
+          "MPlayer",
 	  }},
-       properties = { tag = "◎", switchtotag = true }},
+       properties = { tag = "♻", switchtotag = true }},
 
     { rule_any = {   	    -- DOWNLOAD
-        name = {
-          "Torronator",
+        wm_name = {
+           "htops",
+           "JDownloader 2",
         },
         class = {
           "JDownloader",
     }},
-       properties = { tag = "↯", switchtotag = true }},
+       properties = { tag = "⚡", switchtotag = true }},
 
     { rule_any = {    	    -- COMMUNICATION
         class = {

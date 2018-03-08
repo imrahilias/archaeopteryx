@@ -328,7 +328,7 @@ settings_table = {
   },
 {
     name="fs_used_perc",
-    arg="/media/prime",
+    arg="/prime",
     max=100,
     bg_colour=white,
     bg_alpha=0.1,
@@ -342,7 +342,7 @@ settings_table = {
   },
 {
     name="fs_used_perc",
-    arg="/media/troika",
+    arg="/run/media/m/troika",
     max=100,
     bg_colour=white,
     bg_alpha=0.1,

@@ -18,8 +18,10 @@
 
 # Global upload and download rate in KiB. "0" for unlimited.
 #
-throttle.global_down.max_rate.set_kb = 0
-throttle.global_up.max_rate.set_kb = 0
+#throttle.global_down.max_rate.set_kb = 0
+#throttle.global_up.max_rate.set_kb = 0
+upload_rate = 0 
+download_rate = 0
 
 # Default directory to save the downloaded torrents.
 #
@@ -67,7 +69,7 @@ schedule2 = low_diskspace,5,60,close_low_diskspace=100M
 
 # Set whether the client should try to connect to UDP trackers.
 #
-#trackers.use_udp.set = yes
+trackers.use_udp.set = yes
 
 # Alternative calls to bind and ip that should handle dynamic ip's.
 #
