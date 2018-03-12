@@ -1,7 +1,9 @@
 # to enable umlauts as keys like AltGr+O, add the fallowing to /usr/share/X11/xkb/symbols/us
 
+----------------------------------------------------------------------------------------------------
+
 partial alphanumeric_keys
-	xkb_symbols "umlaut" {
+	xkb_symbols "m" {
 	include "us(basic)"
 	name[Group1]= "English (US, umlaute)";
 	key <AD11> { [ bracketleft, braceleft,     udiaeresis,          Udiaeresis ] };
@@ -12,7 +14,11 @@ partial alphanumeric_keys
 	include "level3(ralt_switch)"
 };
 
-# enable with:
-$setxkbmap us -variant umlaut
+----------------------------------------------------------------------------------------------------
+
+# switch to custom keyboard layout
+# setxkbmap us -variant m # same as "us(m)"
+# setxkbmap -option compose:ralt #enable compose keycodes *e.g. ralt+"+a = adiaeresis, kills the variant (see above)!
+setxkbmap -layout "us(m),de" # enables multiple layouts, switch via awesome, us(m) is custom
 
 # add this line to .xinitrc, as it resets on boot
