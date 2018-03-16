@@ -1,0 +1,23 @@
+# how to rsnapshot
+
+# /etc/rsnapshot.conf
+# https://wiki.archlinux.org/index.php/System_maintenance
+# https://wiki.archlinux.org/index.php/Rsync
+# https://wiki.archlinux.org/index.php/Rsnapshot
+# https://linux.die.net/man/1/rsync
+# https://wiki.archlinux.org/index.php/Cron
+
+# When you have made all your changes, you should verify that the config file is syntactically valid, and that all the supporting programs are where you think they are. To do this, run rsnapshot with the configtest argument:
+# If all is well, it should say Syntax OK. If there's a problem, it should tell you exactly what it is. Make sure your config file is using tabs and not spaces, etc.
+
+ rsnapshot configtest
+
+# The final step to test your configuration is to run rsnapshot in test mode. This will print out a verbose list of the things it will do, without actually doing them. To do a test run, run this command:
+
+$ rsnapshot -t hourly
+
+# perform manually once
+ systemctl start rsnapshot@hourly
+
+# automate and start immediately
+ systemctl enable --now rsnapshot-hourly.timer

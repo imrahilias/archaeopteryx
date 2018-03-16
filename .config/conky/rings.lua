@@ -321,21 +321,21 @@ settings_table = {
     fg_colour=orange,
     fg_alpha=1,
     x=fs0_x, y=fs0_y,
-    radius=100,
-    thickness=84,
-    start_angle=260,
-    end_angle=270
+    radius=90,
+    thickness=10,
+    start_angle=270,
+    end_angle=300
   },
 {
     name="fs_used_perc",
-    arg="/prime",
+    arg="/mnt/prime",
     max=100,
     bg_colour=white,
     bg_alpha=0.1,
     fg_colour=white,
     fg_alpha=.4,
     x=fs1_x, y=fs1_y,
-    radius=63,
+    radius=70,
     thickness=10,
     start_angle=270,
     end_angle=360
@@ -352,7 +352,7 @@ settings_table = {
     radius=140,
     thickness=2,
     start_angle=0,
-    end_angle=260
+    end_angle=270
   },
 }
 

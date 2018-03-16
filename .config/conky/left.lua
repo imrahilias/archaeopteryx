@@ -136,6 +136,5 @@ ${downspeedgraph eno1 35,300 A89C8C A89C8C}
 ${upspeedgraph eno1 30,300 A89C8C A89C8C}
   up $alignr ${upspeed eno1} 
 
-
-${execpi 1 blkid -o list | sed -e '1,2d' -e 's/(not mounted)/ [] /' -e 's./dev/..' |  awk '{print " ",$1,$2,"$color1",$3,"$color","$alignr",$4,""}'}
+${execpi 1 sudo blkid -o list | sed -e '1,2d' -e 's/(not mounted)/ [] /' -e 's./dev/..' |  awk '{print " ",$1,$2,"$color1",$3,"$color","$alignr",$4,""}'}
 ]]

@@ -84,12 +84,14 @@
 (defun scroll-down-keep-cursor ()
    ;; Scroll the text one line down while keeping the cursor
    (interactive)
-   (scroll-down 1))
+   (scroll-down 1)
+)
 
 (defun scroll-up-keep-cursor ()
    ;; Scroll the text one line up while keeping the cursor
    (interactive)
-   (scroll-up 1))
+   (scroll-up 1)
+)
 
 (global-set-key (kbd "C-,") 'scroll-down-keep-cursor)
 (global-set-key (kbd "C-.") 'scroll-up-keep-cursor)
@@ -135,7 +137,8 @@
 
 ;; current date
 (defun insert-current-date() (interactive)
-  (insert (shell-command-to-string "echo -n $(date '+%Y-%m-%d %k:%M')")))
+       (insert (shell-command-to-string "echo -n $(date '+%Y-%m-%d %k:%M')"))
+)
 (global-set-key (kbd "C-c d") 'insert-current-date)
 
 ;; convenience
@@ -157,13 +160,9 @@
 (global-set-key [C-C-tab]
  (lambda ()
  (interactive)
- (other-window -1)))
-
-;; auto break lines in paragraphs
-;;(add-hook 'text-mode-hook 'turn-on-auto-fill)
-
-;; auto-complete-mode
-(add-hook 'text-mode-hook 'turn-on-auto-complete-mode')
+ (other-window -1)
+ )
+)
 
 
 ;; _
@@ -177,7 +176,6 @@
 (require 'paren)
 (show-paren-mode t)
 
-
 ;; c mode customizations
 (cwarn-mode t)
 (setq c-default-style "linux")
@@ -189,8 +187,6 @@
 ;;(add-to-list 'load-path "~/.emacs.d/auto-complete-installation")
 ;;(require 'auto-complete-config)
 ;;(ac-config-default)
-
-;;(global-auto-complete-mode t)
 
 ;; subword mode (camelcase mode)
 (global-subword-mode 1)
@@ -206,10 +202,11 @@
 
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+      (url-retrieve-synchronously "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
     (goto-char (point-max))
-    (eval-print-last-sexp)))
+    (eval-print-last-sexp)
+  )
+)
 
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 (el-get 'sync)
@@ -221,4 +218,7 @@
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
+
+;; auto break lines in paragraphs
+;add-hook 'text-mode-hook 'turn-on-auto-fill)
 
