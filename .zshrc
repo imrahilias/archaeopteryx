@@ -264,9 +264,12 @@ alias mnta='sudo mount -a; echo -e $red"mounted:"$default; mount' # echo 4 color
 alias uma='sudo umount -a; echo -e $red"mounted:"$default; mount'
 
 # pacman aliases
-alias pi='sudo pacman -Syyu'
-alias pq='sudo pacman -Q'
-alias px='sudo pacman -R'
+alias pi='sudo pacman -Syyu' # Do a full system upgrade
+alias pq='bauerbill -Ss --aur' # Search for all repo and AUR packages
+alias pp='sudo powerpill -Syyu' # Do a full system upgrade using pauerpill with rsync 
+alias pa='sudo bb-wrapper -Syyu --aur' # Do a full system upgrade with AUR support using bauerbill with rsync
+alias px='sudo pacman -R' # Remove package
+alias pc='sudo pacman -Scc && sudo pacman-optimize' # remove all cached pkg! and defragment.
 
 # non root aliases
 alias s='sudo su -' #--> zum einfacher zu root zu kommen... siehe /etc/sudoers für details
@@ -282,7 +285,6 @@ alias countd='find . -type d | wc -l' # number of all subdirs in dir
 alias rmtmp='rm *\#; rm *~; rm .*~'
 
 # network alias
-alias pp='ping 8.8.8.8'
 alias oe1='mplayer http://mp3stream3.apasf.apa.at:8000/listen.pls'
 
 # launch alias
@@ -293,7 +295,7 @@ alias ee="emacs"
 alias scan='scanimage --format=tiff --mode=Color' #>http://lists.alioth.debian.org/pipermail/sane-devel/2001-December/001177.html
 alias am='alsamixer'
 alias halt='systemctl poweroff'
-alias mm='udisksctl mount -b'
+#alias mm='udisksctl mount -b' # nemo mounts on click
 
 # misc
 alias dark='razercfg -l all:off'

@@ -1,0 +1,30 @@
+# on system maintenance and stuff
+# https://wiki.archlinux.org/index.php/System_maintenance
+# https://wiki.archlinux.org/index.php/Pacman/Tips_and_tricks
+
+# The following command can be used to back up the local pacman database:
+$ tar -cjf pacman_database.tar.bz2 /var/lib/pacman/local
+
+# Keeping a list of explicitly installed packages can be useful to speed up installation on a new system:
+$ pacman -Qqe > pkglist.txt
+
+# remove unused cached pkg, and defragment:
+$ pacman -Sc && pacman-optimize
+
+# alternatively remove all cached pkg, even if they are installed:
+$ pacman -Scc
+
+# delete orphans and dropped packages:
+$ pacman -Rns $(pacman -Qtdq)
+
+# Script that identifies files not owned by any package:
+$ lostfiles strict
+
+# To quickly list all the broken symlinks of your system, use:
+$ find -xtype l -print
+
+# filter the 10 newest and fastest rsync compatible mirrors:
+$ reflector -p rsync -f 10 -l 10 > /etc/pacman.d/mirrorlist
+
+# add the 10 newest http  mirrors:
+$ rankmirrors -n 10 /etc/pacman.d/mirrorlist.backup >> /etc/pacman.d/mirrorlist

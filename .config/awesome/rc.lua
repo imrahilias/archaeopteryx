@@ -291,7 +291,7 @@ globalkeys = awful.util.table.join(
     
     -- Launch
     awful.key({ modkey }, "Return", function () awful.util.spawn(terminal) end, {description = "terminate", group = "launcher"}),
-    awful.key({ modkey }, "e", function () awful.util.spawn("emacsclient -c -a ''", false) end, {description = "emacs", group = "launcher"}),
+    awful.key({ modkey }, "e", function () awful.util.spawn("emacsclient -cn", false) end, {description = "emacs", group = "launcher"}),
     awful.key({ modkey }, "d", function () awful.util.spawn("nemo", false) end, {description = "nemo --no-desktop", group = "launcher"}),
     awful.key({ modkey, "Shift" }, "d", function () awful.util.spawn("sudo nemo --no-desktop", false) end, {description = "sudo nemo --no-desktop", group = "launcher"}),
 --    awful.key({ modkey }, "z", function () awful.util.spawn_with_shell("feh -F ~/.config/awesome/us_keyboard_layout.png") end, {description = "show querty", group = "launcher"}),
