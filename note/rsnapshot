@@ -1,4 +1,5 @@
 # how to rsnapshot
+# do NOT enter comments after elements in rsnapshot.conf, it kills rsync!
 
 # /etc/rsnapshot.conf
 # https://wiki.archlinux.org/index.php/System_maintenance
