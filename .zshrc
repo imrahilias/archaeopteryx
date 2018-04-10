@@ -1,4 +1,4 @@
-# ~/.zshrc 4 imrahil@archaeopteryx
+# ~/.zshrc > m@archaeopteryx
 
 #=========================================
 # Auto-completions
@@ -217,7 +217,6 @@ RPROMPT='$(cmd_fail)$(git_branch)%T'
 #export HS='alsa_output.usb-047f_c001-00-U0x47f0xc001.analog-stereo'
 #export SP='alsa_output.pci-0000_00_1b.0.analog-stereo'
 export EDITOR='emacsclient -c -a ""'
-#export EDITOR='emacsclient -c -a ""'
 export PATH='/bin:/usr/bin:/usr/local/bin:/home/m/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/games:/usr/local/games'
 #path+=/scripts #hängt zur $path eben was an...
 
@@ -282,7 +281,7 @@ alias df='df -h'
 alias dfa='df -ah'
 alias countf='find . -type f | wc -l' # number of all files in dir
 alias countd='find . -type d | wc -l' # number of all subdirs in dir
-alias rmtmp='rm *\#; rm *~; rm .*~'
+#alias rmtmp='rm *\#; rm *~; rm .*~' # moved to script
 
 # network alias
 alias oe1='mplayer http://mp3stream3.apasf.apa.at:8000/listen.pls'

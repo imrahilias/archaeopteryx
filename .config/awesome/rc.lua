@@ -292,10 +292,10 @@ globalkeys = awful.util.table.join(
     -- Launch
     awful.key({ modkey }, "Return", function () awful.util.spawn(terminal) end, {description = "terminate", group = "launcher"}),
     awful.key({ modkey }, "e", function () awful.util.spawn("emacsclient -cn", false) end, {description = "emacs", group = "launcher"}),
-    awful.key({ modkey }, "d", function () awful.util.spawn("nemo", false) end, {description = "nemo --no-desktop", group = "launcher"}),
-    awful.key({ modkey, "Shift" }, "d", function () awful.util.spawn("sudo nemo --no-desktop", false) end, {description = "sudo nemo --no-desktop", group = "launcher"}),
+    awful.key({ modkey }, "d", function () awful.util.spawn("thunar", false) end, {description = "thunar", group = "launcher"}),
+    awful.key({ modkey, "Shift" }, "d", function () awful.util.spawn("sudo thunar", false) end, {description = "sudo thunar", group = "launcher"}),
 --    awful.key({ modkey }, "z", function () awful.util.spawn_with_shell("feh -F ~/.config/awesome/us_keyboard_layout.png") end, {description = "show querty", group = "launcher"}),
-    awful.key({ modkey, "Shift" }, "s", function () awful.util.spawn_with_shell("open_primary_selection_in_browser.sh") end, {description = "open primary selection in browser", group = "launcher"}),
+    awful.key({ modkey, "Shift" }, "s", function () awful.util.spawn_with_shell("open_primary_selection_in_cromium") end, {description = "open primary selection in browser", group = "launcher"}),
 
     -- Audio
     awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 5%+", false) end),
@@ -500,7 +500,8 @@ awful.rules.rules = {
 
     { rule_any = {   	    -- FILE
         class = {
-          "Nemo",
+           "Nemo",
+           "Thunar",
 	  }},
        properties = { tag = "⛁", switchtotag = true }},
 

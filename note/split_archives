@@ -1,3 +1,7 @@
+##################
+# split archives #
+##################
+
 # create archives
 $ tar cz my_large_file_1 my_large_file_2 | split -b 1024MiB - myfiles_split.tgz_
 
@@ -12,6 +16,5 @@ $ gzip -c my_large_file | split -b 1024MiB - myfile_split.gz_
 # uncompress
 $ cat myfile_split.gz_* | gunzip -c > my_large_file
 
-
-# It can be reassembled on a Windows machine using @Joshua's answer.
+# It can be reassembled on a Windows machine using:
 $ copy /b file1 + file2 + file3 + file4 filetogether

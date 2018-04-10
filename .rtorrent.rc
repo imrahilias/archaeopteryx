@@ -25,13 +25,13 @@ download_rate = 0
 
 # Default directory to save the downloaded torrents.
 #
-directory.default.set = /prime/downloads
+directory.default.set = ~/downloads
 
 # Default session directory. Make sure you don't run multiple instance
 # of rtorrent using the same session directory. Perhaps using a
 # relative path?
 #
-session.path.set = /prime/downloads/session
+session.path.set = ~/downloads/session
 
 # Watch a directory for new torrents, and stop those that have been
 # deleted.
@@ -104,8 +104,8 @@ trackers.use_udp.set = yes
 #
 #ui.torrent_list.layout.set = "full"
 
-# copy & paste
-method.insert = d.get_finished_dir, simple, "cat=~/troika/movies/new/,$d.custom1="
-method.insert = d.get_data_full_path, simple, "branch=((d.is_multi_file)),((cat,(d.directory))),((cat,(d.directory),/,(d.name)))"
-method.insert = d.move_to_complete, simple, "d.directory.set=$argument.1=; execute=mkdir,-p,$argument.1=; execute=mv,-u,$argument.0=,$argument.1=; d.save_full_session="
-method.set_key = event.download.finished,move_complete,"d.move_to_complete=$d.get_data_full_path=,$d.get_finished_dir="
+# copy & paste, uncomment all
+#method.insert = d.get_finished_dir, simple, "cat=~/troika/movies/new/,$d.custom1="
+#method.insert = d.get_data_full_path, simple, "branch=((d.is_multi_file)),((cat,(d.directory))),((cat,(d.directory),/,(d.name)))"
+#method.insert = d.move_to_complete, simple, "d.directory.set=$argument.1=; execute=mkdir,-p,$argument.1=; execute=mv,-u,$argument.0=,$argument.1=; d.save_full_session="
+#method.set_key = event.download.finished,move_complete,"d.move_to_complete=$d.get_data_full_path=,$d.get_finished_dir="
