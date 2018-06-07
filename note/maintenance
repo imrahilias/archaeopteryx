@@ -6,7 +6,10 @@
 $ tar -cjf pacman_database.tar.bz2 /var/lib/pacman/local
 
 # Keeping a list of explicitly installed packages can be useful to speed up installation on a new system:
-$ pacman -Qqe > pkglist.txt
+$ pacman -Qqe > installed_packages_$(date +%y%m%d)
+
+# Keeping a list of manually installed packages (AUR):
+$ pacman -Qm > manually_installed_packages_$(date +%y%m%d)
 
 # remove unused cached pkg, and defragment:
 $ pacman -Sc && pacman-optimize
@@ -24,7 +27,7 @@ $ lostfiles strict
 $ find -xtype l -print
 
 # filter the 10 newest and fastest rsync compatible mirrors:
-$ reflector -p rsync -f 10 -l 10 > /etc/pacman.d/mirrorlist
+$ reflector -p rsync -f 10 -l 10 --sort rate
 
-# add the 10 newest http  mirrors:
-$ rankmirrors -n 10 /etc/pacman.d/mirrorlist.backup >> /etc/pacman.d/mirrorlist
+# now add the 10 newest htts mirrors:
+$ reflector -p https -f 10 -l 10 --sort rate --save /etc/pacman.d/mirrorlist
