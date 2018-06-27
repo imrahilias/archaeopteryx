@@ -1,4 +1,0 @@
-# vpn tu wien
-# 1
-sudo openconnect --user e0913499@student.tuwien.ac.at vpn.tuwien.ac.at
-
