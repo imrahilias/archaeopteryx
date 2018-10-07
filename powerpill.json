@@ -1,41 +1,45 @@
 {
-  "aria2": {
-    "args": [
-      "--allow-overwrite=true",
-      "--always-resume=false",
-      "--auto-file-renaming=false",
-      "--check-integrity=true",
-      "--conditional-get=true",
-      "--continue=true",
-      "--file-allocation=none",
-      "--log-level=error",
-      "--max-concurrent-downloads=100",
-      "--max-connection-per-server=5",
-      "--min-split-size=5M",
-      "--remote-time=true",
-      "--show-console-readout=true"
-    ],
-    "path": "/usr/bin/aria2c"
-  },
-  "pacman": {
-    "config": "/etc/pacman.conf",
-    "path": "/usr/bin/pacman"
-  },
-  "pacserve": {
+    "aria2": {
+	"args": [
+	    "--allow-overwrite=true",
+	    "--always-resume=false",
+	    "--auto-file-renaming=false",
+	    "--check-integrity=true",
+	    "--conditional-get=true",
+	    "--continue=true",
+	    "--file-allocation=none",
+	    "--log-level=error",
+	    "--max-concurrent-downloads=100",
+	    "--max-connection-per-server=5",
+	    "--min-split-size=5M",
+	    "--remote-time=true",
+	    "--show-console-readout=true"
+	],
+	"path": "/usr/bin/aria2c"
+    },
+    "pacman": {
+	"config": "/etc/pacman.conf",
+	"path": "/usr/bin/pacman"
+    },
+    "pacserve": {
     "server": null
-  },
-  "powerpill": {
-    "select": true,
-    "reflect databases": false
-  },
-  "reflector": {
-    "args.unused": [
-      "--protocol",
-      "http",
-      "--latest",
-      "50"
-    ]
-  },
+    },
+    "powerpill": {
+	"select": true,
+	"reflect databases": false
+    },
+    "reflector": {
+	"args.unused": [
+	    "--protocol",
+	    "https",
+	    "--latest",
+	    "10",
+	    "--fastest",
+	    "10",
+	    "--sort",
+	    "rate"
+	]
+    },
   "rsync": {
     "args": [
       "--no-motd",
@@ -43,17 +47,17 @@
     ],
     "db only": true,
     "path": "/usr/bin/rsync",
-      "servers": ["rsync://mirrors.uni-plovdiv.net/archlinux/$repo/os/$arch",
-		  "rsync://mirror.f4st.host/archlinux/$repo/os/$arch",
-		  "rsync://mirrors.uni-plovdiv.net/archlinux/$repo/os/$arch",
-		  "rsync://rsync.osbeck.com/archlinux/$repo/os/$arch",
-		  "rsync://mirror.wdc1.us.leaseweb.net/archlinux/$repo/os/$arch",
-		  "rsync://arch.mirror.square-r00t.net/arch/$repo/os/$arch",
-		  "rsync://aur.rocks/archlinux/$repo/os/$arch",
-		  "rsync://mex.mirror.pkgbuild.com/packages/$repo/os/$arch",
-		  "rsync://jpn.mirror.pkgbuild.com/packages/$repo/os/$arch",
-		  "rsync://mirrors.neusoft.edu.cn/archlinux/$repo/os/$arch",
-		  "rsync://mirror.fra10.de.leaseweb.net/archlinux/$repo/os/$arch"
-		 ]
+      "servers": [
+	  "rsync://mirrors.atviras.lt/archlinux/$repo/os/$arch",
+	  "rsync://arch.mirror.square-r00t.net/arch/$repo/os/$arch",
+	  "rsync://mirrors.uni-plovdiv.net/archlinux/$repo/os/$arch",
+	  "rsync://arch.mirror.constant.com/archlinux/$repo/os/$arch",
+	  "rsync://aur.rocks/archlinux/$repo/os/$arch",
+	  "rsync://mex.mirror.pkgbuild.com/packages/$repo/os/$arch",
+	  "rsync://jpn.mirror.pkgbuild.com/packages/$repo/os/$arch",
+	  "rsync://ind.mirror.pkgbuild.com/packages/$repo/os/$arch",
+	  "rsync://sgp.mirror.pkgbuild.com/packages/$repo/os/$arch",
+	  "rsync://mirrors.neusoft.edu.cn/archlinux/$repo/os/$arch"
+      ]
   }
 }
