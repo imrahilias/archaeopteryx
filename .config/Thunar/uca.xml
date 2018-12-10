@@ -1,0 +1,95 @@
+<?xml encoding="UTF-8" version="1.0"?>
+<actions>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>terminate</name>
+	<unique-id>1523547675435614-4</unique-id>
+	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
+	<description>terminate here</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon></icon>
+	<name>beautify files</name>
+	<unique-id>1523384959889193-6</unique-id>
+	<command>dotit %F</command>
+	<description></description>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon></icon>
+	<name>beautify folder</name>
+	<unique-id>1523384915922809-5</unique-id>
+	<command>dotit %F/*</command>
+	<description></description>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon></icon>
+	<name>baobab</name>
+	<unique-id>1523548480171081-10</unique-id>
+	<command>baobab %d</command>
+	<description>baobab</description>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon></icon>
+	<name>svg&gt;png</name>
+	<unique-id>1538731575407221-1</unique-id>
+	<command>inkscape --export-area-drawing --export-png=%N.png --export-dpi=300 %f</command>
+	<description></description>
+	<patterns>*.svg</patterns>
+	<image-files/>
+</action>
+<action>
+	<icon></icon>
+	<name>search</name>
+	<unique-id>1544483400200926-1</unique-id>
+	<command>catfish --path=%d</command>
+	<description></description>
+	<patterns>*</patterns>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon></icon>
+	<name>search</name>
+	<unique-id>1544483948649437-3</unique-id>
+	<command>catfish --path=%f</command>
+	<description></description>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon></icon>
+	<name>go find virus</name>
+	<unique-id>1544483455001606-2</unique-id>
+	<command>clamtk %F</command>
+	<description></description>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+</actions>
