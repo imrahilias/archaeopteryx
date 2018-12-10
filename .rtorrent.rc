@@ -31,7 +31,7 @@ directory.default.set = ~/downloads
 # of rtorrent using the same session directory. Perhaps using a
 # relative path?
 #
-session.path.set = ~/downloads/session
+session.path.set = ~/downloads/.session
 
 # Watch a directory for new torrents, and stop those that have been
 # deleted.
