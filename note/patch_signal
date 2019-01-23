@@ -1,0 +1,29 @@
+~/build/signal @ + l                                                                                                                                                                              git:master* 23:41
+signal-git-repo
+src
+openssl-sqlcipher.patch
+PKGBUILD
+README.md
+signal.desktop
+signal.sh
+signal-tray.desktop
+
+
+~/build/signal @ + makepkg
+
+
+~/build/signal @ + l                                                                                                                                                                              git:master* 23:41
+build
+pkg
+signal-git-repo
+src
+openssl-sqlcipher.patch
+PKGBUILD
+README.md
+signal-1.20.0-1-x86_64.pkg.tar.xz
+signal.desktop
+signal.sh
+signal-tray.desktop
+
+
+~/build/signal @ + sudo pacman -U signal-1.20.0-1-x86_64.pkg.tar.xz      
