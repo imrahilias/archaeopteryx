@@ -551,6 +551,7 @@ awful.rules.rules = {
 	  "Skype",
 	  "Ts3client_linux_amd64",
           "TelegramDesktop",
+          "Signal",
 	  }},
        properties = { tag = "✆", switchtotag = true }},
        
