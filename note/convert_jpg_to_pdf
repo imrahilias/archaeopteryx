@@ -1,1 +1,1 @@
-convert -quality 92 *.jpg output.pdf
+gm convert -quality 92 *.jpg output.pdf

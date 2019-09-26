@@ -110,31 +110,24 @@ ${execpi 60 today=`date +%_d`; cal | sed -n '3,8 p' | sed 's/^/${alignr} /' | se
   dsk            $color1 $diskio ${color} ${alignr} ${execi 60 sudo hddtemp /dev/sdc | awk '{print $4}'} 
   prc            $color1 $running_processes ${color} $alignr $processes 
   upt            $color1 $uptime ${color} 
-\
-${cpugraph cpu1 30,300 A89C8C A89C8C}
+  net            $color1 ${downspeed eno1} ${color} $alignr ${color} ${upspeed eno1}
+  arc            $color1 ${diskio_read /dev/sda} $alignr ${color} ${diskio_write /dev/sda}
+  pri            $color1 ${diskio_read /dev/sdc} $alignr ${color} ${diskio_write /dev/sdc}
+  tro            $color1 ${diskio_read /dev/sdd} $alignr ${color} ${diskio_write /dev/sdd}
+
 ${color1}${top cpu 1}	  ${top pid 1}	   ${top name 1}${color}
 ${top cpu 2}	  ${top pid 2}	   ${top name 2}
 ${top cpu 3}	  ${top pid 3}	   ${top name 3}
 ${top cpu 4}	  ${top pid 4}	   ${top name 4}
 ${top cpu 5}	  ${top pid 5}	   ${top name 5}
-\
-${memgraph 30,300 A89C8C A89C8C}
+
 ${color1}${top_mem mem 1}	  ${top_mem pid 1}	   ${top_mem name 1}${color}
 ${top_mem mem 2}	  ${top_mem pid 2}	   ${top_mem name 2}
 ${top_mem mem 3}	  ${top_mem pid 3}	   ${top_mem name 3}
 ${top_mem mem 4}	  ${top_mem pid 4}	   ${top_mem name 4}
 ${top_mem mem 5}	  ${top_mem pid 5}	   ${top_mem name 5}
 
-${diskiograph 30,300 A89C8C A89C8C}
-  / $alignr ${diskio_read /dev/sda} $color1${diskio_write /dev/sda}${color} 
-  prime $alignr ${diskio_read /dev/sdc} ${diskio_write /dev/sdc} 
-  troika $alignr ${diskio_read /dev/sdd} ${diskio_write /dev/sdd} 
-
-${downspeedgraph eno1 35,300 A89C8C A89C8C}
-  down $color1 $alignr ${downspeed eno1} ${color}
-
-${upspeedgraph eno1 30,300 A89C8C A89C8C}
-  up $alignr ${upspeed eno1} 
-
 ${execpi 1 sudo blkid -o list | sed -e '1,2d' -e 's/(not mounted)/ [] /' -e 's./dev/..' |  awk '{print " ",$1,$2,"$color1",$3,"$color","$alignr",$4,""}'}
 ]]
+
+
