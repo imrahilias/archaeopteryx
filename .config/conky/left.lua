@@ -103,17 +103,18 @@ conky.text = [[
 $alignr}su mo tu we th fr sa 
 ${execpi 60 today=`date +%_d`; cal | sed -n '3,8 p' | sed 's/^/${alignr} /' | sed s/"\(^\|[^0-9]\)$today"'\b'/'\1${color1}'"$today"'${color}'/}
 
-  cpu            $color1 $freq ${color} ${alignr} ${execi 60 sensors | grep Physical | sed -e 's/+//' -e 's/\.0//' | awk '{print "",$4}'} 
-  gpu            $color1 ${nvidia gpufreq}, ${nvidia memfreq} ${color} ${alignr} ${nvidia temp} 
-  avg            $color1 $loadavg ${color} ${alignr} ${acpitemp} 
-  mem            $color1 $memperc ${color} ${alignr} $mem / $memmax 
-  dsk            $color1 $diskio ${color} ${alignr} ${execi 60 sudo hddtemp /dev/sdc | awk '{print $4}'} 
-  prc            $color1 $running_processes ${color} $alignr $processes 
-  upt            $color1 $uptime ${color} 
-  net            $color1 ${downspeed eno1} ${color} $alignr ${color} ${upspeed eno1}
-  arc            $color1 ${diskio_read /dev/sda} $alignr ${color} ${diskio_write /dev/sda}
-  pri            $color1 ${diskio_read /dev/sdc} $alignr ${color} ${diskio_write /dev/sdc}
-  tro            $color1 ${diskio_read /dev/sdd} $alignr ${color} ${diskio_write /dev/sdd}
+  cpu           $color1 $freq ${color} 
+  tmp           $color1 ${hwmon 2 temp 5} ${alignr} ${color} ${hwmon 2 temp 1}/${hwmon 2 temp 2}/${hwmon 2 temp 3}/${hwmon 2 temp 4}
+  gpu           $color1 ${nvidia gpufreq} / ${nvidia memfreq} ${color} ${alignr} ${nvidia temp}
+  mem           $color1 $memperc ${color} ${alignr} $mem
+  avg           $color1 $loadavg ${color} ${alignr} ${acpitemp}   
+  prc           $color1 $running_processes ${color} $alignr $processes 
+  upt           $color1 $uptime ${color} 
+  dsk           $color1 $diskio ${color} ${alignr} ${execi 60 sudo hddtemp /dev/sdc | awk '{print $4}' | sed 's/°C//g'}/${execi 60 sudo hddtemp /dev/sdd | awk '{print $4}' | sed 's/°C//g'}
+  net           $color1 ${downspeed eno1}d ${color} $alignr ${color} ${upspeed eno1}u
+  arc           $color1 ${diskio_read /dev/sda}r $alignr ${color} ${diskio_write /dev/sda}w
+  pri           $color1 ${diskio_read /dev/sdc}r $alignr ${color} ${diskio_write /dev/sdc}w
+  tro           $color1 ${diskio_read /dev/sdd}r $alignr ${color} ${diskio_write /dev/sdd}w
 
 ${color1}${top cpu 1}	  ${top pid 1}	   ${top name 1}${color}
 ${top cpu 2}	  ${top pid 2}	   ${top name 2}
@@ -127,7 +128,7 @@ ${top_mem mem 3}	  ${top_mem pid 3}	   ${top_mem name 3}
 ${top_mem mem 4}	  ${top_mem pid 4}	   ${top_mem name 4}
 ${top_mem mem 5}	  ${top_mem pid 5}	   ${top_mem name 5}
 
-${execpi 1 sudo blkid -o list | sed -e '1,2d' -e 's/(not mounted)/ [] /' -e 's./dev/..' |  awk '{print " ",$1,$2,"$color1",$3,"$color","$alignr",$4,""}'}
+${execpi 1 blkid -o list | sed -e '1,2d' -e 's/(not mounted)/ [] /' -e 's./dev/..' |  awk '{print " ",$1,$2,"$color1",$3,"$color","$alignr",$4,""}'}
 ]]
 
 
