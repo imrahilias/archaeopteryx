@@ -103,9 +103,11 @@ conky.text = [[
 $alignr}su mo tu we th fr sa 
 ${execpi 60 today=`date +%_d`; cal | sed -n '3,8 p' | sed 's/^/${alignr} /' | sed s/"\(^\|[^0-9]\)$today"'\b'/'\1${color1}'"$today"'${color}'/}
 
-  cpu           $color1 $freq ${color} 
+  cpu           $color1 $cpu ${alignr} ${color} ${cpu cpu1}/${cpu cpu2}/${cpu cpu3}/${cpu cpu4}
+  fre           $color1 $freq ${color} 
   tmp           $color1 ${hwmon 2 temp 5} ${alignr} ${color} ${hwmon 2 temp 1}/${hwmon 2 temp 2}/${hwmon 2 temp 3}/${hwmon 2 temp 4}
-  gpu           $color1 ${nvidia gpufreq} / ${nvidia memfreq} ${color} ${alignr} ${nvidia temp}
+  gpu           $color1 ${nvidia gpuutil} / ${nvidia memutil} ${color} ${alignr} ${nvidia videoutil} / ${nvidia pcieutil}${color}
+  f/t           $color1 ${nvidia gpufreq} / ${nvidia memfreq} ${color} ${alignr} ${nvidia temp}
   mem           $color1 $memperc ${color} ${alignr} $mem
   avg           $color1 $loadavg ${color} ${alignr} ${acpitemp}   
   prc           $color1 $running_processes ${color} $alignr $processes 
@@ -128,7 +130,8 @@ ${top_mem mem 3}	  ${top_mem pid 3}	   ${top_mem name 3}
 ${top_mem mem 4}	  ${top_mem pid 4}	   ${top_mem name 4}
 ${top_mem mem 5}	  ${top_mem pid 5}	   ${top_mem name 5}
 
-${execpi 1 blkid -o list | sed -e '1,2d' -e 's/(not mounted)/ [] /' -e 's./dev/..' |  awk '{print " ",$1,$2,"$color1",$3,"$color","$alignr",$4,""}'}
+${execpi 1 sudo blkid -o list | sed -e '1,2d' -e 's/(not mounted)/ [] /' -e 's./dev/..' |  awk '{print " ",$1,$2,"$color1",$3,"$color","$alignr",$4,""}'}
+
 ]]
 
 
