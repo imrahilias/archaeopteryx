@@ -1,0 +1,6 @@
+#!/bin/zsh
+# fortify
+
+touch $1.f95
+touch $1.gp
+cat "time gfortran -o $1 $1.f95 && time ./$1 && time gnuplot $1.gp"

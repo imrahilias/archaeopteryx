@@ -109,7 +109,7 @@ alias light='razercfg -l GlowingLogo:off -l Scrollwheel:on'
 alias fast='razercfg -r 1:3'
 alias slow='razercfg -r 1:2'
 alias rename='perl-rename'
-
+alias zephyr='/usr/bin/git --git-dir=$HOME/.configs --work-tree=$HOME'
 
 #=========================================
 # Options

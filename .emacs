@@ -77,6 +77,8 @@ There are two things you can do about this warning:
 (global-linum-mode 1)
 
 ;; fonts
+;;(set-frame-font "Bitstream Vera Sans Mono Roman" nil t)
+;;(set-frame-font "Inconsolata 12" nil t)
 (set-face-attribute 'default nil :height 120)
 
 ;; make it easy on eyes ...

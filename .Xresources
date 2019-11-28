@@ -11,9 +11,9 @@ Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
 
 
-! Emacs
+! Emacs > moved somwhere else?
 !Emacs.FontBackend: xft
-!Emacs.font: Bitstream Vera Sans Mono-12
+!Emacs.font: Bitstream Vera Sans -18
 !Emacs.font: xft:Bitstream Vera Sans Mono:size=12:antialise:true
 !Emacs.font: -unknown-DejaVu Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1
 !Emacs*foreground:   #A89C8C
@@ -23,7 +23,7 @@ Xft.rgba: rgb
 
 
 ! urxvt (case sensitive) > ttps://wiki.archlinux.org/index.php/Rxvt-unicode
-urxvt*termname:  consolicus
+urxvt*termname: consolicus
 urxvt*title: consolicus
 urxvt*loginshell: true 
 urxvt*scrollBar: false
@@ -36,7 +36,7 @@ urxvt*scrollTtyKeypress: true
 urxvt*saveLines: 10000
 urxvt*pointerblank: true
 urxvt*letterSpace: 0
-urxvt*font: xft:DejaVu Sans Mono:size=12
+urxvt*font: xft: Bitstream Vera Sans Mono:size=12
 urxvt*boldFont: xft: Bitstream Vera Sans Mono:size=12:style=Bold
 !Xterm escapes, word by word movement
 urxvt.keysym.Control-Left:    \033[1;5D

@@ -1,4 +1,4 @@
-<?xml encoding="UTF-8" version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <actions>
 <action>
 	<icon>utilities-terminal</icon>
@@ -14,7 +14,7 @@
 	<icon></icon>
 	<name>beautify files</name>
 	<unique-id>1523384959889193-6</unique-id>
-	<command>dotit %F</command>
+	<command>beautify %F</command>
 	<description></description>
 	<patterns>*</patterns>
 	<directories/>
@@ -26,9 +26,9 @@
 </action>
 <action>
 	<icon></icon>
-	<name>beautify folder</name>
+	<name>beautify dir</name>
 	<unique-id>1523384915922809-5</unique-id>
-	<command>dotit %F/*</command>
+	<command>beautify %F/*</command>
 	<description></description>
 	<patterns>*</patterns>
 	<directories/>
@@ -58,7 +58,7 @@
 </action>
 <action>
 	<icon></icon>
-	<name>search</name>
+	<name>search dir</name>
 	<unique-id>1544483400200926-1</unique-id>
 	<command>catfish --path=%d</command>
 	<description></description>
@@ -71,7 +71,7 @@
 </action>
 <action>
 	<icon></icon>
-	<name>search</name>
+	<name>search files</name>
 	<unique-id>1544483948649437-3</unique-id>
 	<command>catfish --path=%f</command>
 	<description></description>
