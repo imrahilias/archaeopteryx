@@ -32,11 +32,11 @@ fi
 
 # start deamons
 urxvtd -q -f -o
-thunar --daemon
+# thunar --daemon # bugs around!
 
 # fire up conky
 conky -c ~/.config/conky/left.lua
-conky -c ~/.config/conky/right.lua
+#conky -c ~/.config/conky/right.lua
 conky -c ~/.config/conky/middle.lua
 
 # switch to custom keyboard layout
@@ -49,4 +49,5 @@ xset s off -dpms
 compton -CGb #--config /dev/null --backend glx --paint-on-overlay --glx-no-stencil --glx-no-rebind-pixmap --glx-swap-method buffer-age --xrender-sync-fence --xrender-sync
 
 # start awesome
-exec dbus-launch --exit-with-session awesome
+#exec dbus-launch --exit-with-session awesome
+exec awesome

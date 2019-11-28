@@ -41,7 +41,7 @@ conky.config = {
     draw_shades = false,
     extra_newline = false,
     font = 'Bitstream Vera Sans Mono:size=13',
-    gap_x = 1400,
+    gap_x = 0,
     gap_y = 0,
     lua_load = '~/.config/conky/rings.lua',
     lua_draw_hook_pre = 'conky_clock_rings',

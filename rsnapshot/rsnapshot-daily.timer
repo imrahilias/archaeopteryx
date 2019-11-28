@@ -4,10 +4,9 @@
 Description=rsnapshot daily backup
 
 [Timer]
-# 05:30 is the clock time when to start it
-OnCalendar=12:00
-# Time to wait after booting before we run first time
-OnBootSec=15m
+#  clock time when to start it, hopefully after weekly & monthly backups finished 
+OnCalendar=14:00
+OnBootSec=30m
 Persistent=true
 Unit=rsnapshot@daily.service
 

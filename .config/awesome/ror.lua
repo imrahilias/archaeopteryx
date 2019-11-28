@@ -17,6 +17,7 @@ table5={
   ["o"]={"libreoffice ", "libreoffice"},
 --["e"]={"emacsclient -ca ''","Emacs"}, 
   ["t"]={"urxvtc -title Torronator -e rtorrent","rtorrent", "instance"},
+  ["d"]={"urxvtc -title Ranger -e ranger","Ranger", "name"},
   ["g"]={'gimp', 'gimp'},
   ["a"]={'spotify', 'Spotify'},
   ["x"]={'telegram-desktop', 'Telegram'},

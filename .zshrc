@@ -10,13 +10,15 @@ default="\e[0m"
 # systemd alias
 user_commands=(
   list-units is-active status show help list-unit-files
-  is-enabled list-jobs show-environment cat list-timers)
+  is-enabled list-jobs show-environment cat list-timers
+)
 
 sudo_commands=(
   start stop reload restart try-restart isolate kill
   reset-failed enable disable reenable preset mask unmask
   link load cancel set-environment unset-environment
-  edit)
+  edit
+)
 
 for c in $user_commands; do; alias sc-$c="systemctl $c"; done
 for c in $sudo_commands; do; alias sc-$c="sudo systemctl $c"; done
@@ -114,7 +116,7 @@ alias rename='perl-rename'
 #=========================================
 
 setopt correct                  #correct mistakes
-#setopt auto_list                # list choice on ambiguous command
+setopt auto_list                # list choice on ambiguous command
 setopt listtypes                # %1 killed. will show up exactly when it is killed.
 setopt auto_cd                  # change dir by just typing its name wo cd
 setopt auto_pushd               # automatically adds dirs to stack
@@ -332,6 +334,21 @@ bindkey -M vicmd '\e\e' sudo-command-line
 bindkey -M viins '\e\e' sudo-command-line
 
 
+# colors, a lot of colors!
+function clicolors() {
+    i=1
+    for color in {000..255}; do;
+        c=$c"$FG[$color]$color✔$reset_color  ";
+        if [ `expr $i % 8` -eq 0 ]; then
+            c=$c"\n"
+        fi
+        i=`expr $i + 1`
+    done;
+    echo $c | sed 's/%//g' | sed 's/{//g' | sed 's/}//g' | sed '$s/..$//';
+    c=''
+}
+
+
 #=========================================
 # Prompt
 #=========================================
@@ -392,7 +409,6 @@ bindkey ' ' magic-space # also do history expansion on space, type '!!', then hi
 
 # auto suggestion
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=6,bg=grey"
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion) # will first try to find a suggestion from your history, but, if it can't find a match, will find a suggestion from the completion engine (experimental).
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
@@ -404,4 +420,37 @@ source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring
 # syntax highlighning has to be last
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+
+
+#=========================================
+# Auto-completions
+#=========================================
+autoload -Uz compinit; compinit
+autoload -U colors && colors
+zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*' completions 1
+zstyle ':completion:*' file-sort name
+zstyle ':completion:*' glob 1
+zstyle ':completion:*' insert-unambiguous true
+zstyle ':completion:*' max-errors 2
+zstyle ':completion:*' original true
+zstyle ':completion:*' substitute 1
+zstyle ':completion:*' special-dirs true # tab-completion for .. and others
+zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
+zstyle ':completion:*' menu select
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' squeeze-slashes true
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.config/shell/zsh_cache
+zstyle ':completion:*' completer _complete _match
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*' verbose true
+zstyle ':completion:*:*:kill:*' menu yes select
+zstyle ':completion:*:*:kill:*:processes' command 'ps haxopid:5,user:4,%cpu:4,ni:2,stat:3,etime:8,args'
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:kill:*' force-list always
+zstyle ':completion:*:processes' command "ps -au${USER}"
+#zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin
+zstyle ':completion:*:sudo:*' command-path /bin /usr/bin /usr/local/bin /home/m/bin /sbin /usr/sbin /usr/local/sbin /usr/games /usr/local/games
 
