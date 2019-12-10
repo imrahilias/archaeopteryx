@@ -109,7 +109,8 @@ alias light='razercfg -l GlowingLogo:off -l Scrollwheel:on'
 alias fast='razercfg -r 1:3'
 alias slow='razercfg -r 1:2'
 alias rename='perl-rename'
-alias zephyr='/usr/bin/git --git-dir=$HOME/.configs --work-tree=$HOME'
+alias zephyr='/usr/bin/git --git-dir=$HOME/.zephyr --work-tree=$HOME'
+alias rainbow='for (( i = 30; i < 38; i++ )); do echo -e "\033[0;"$i"m Normal: (0;$i); \033[1;"$i"m Light: (1;$i)"; done'
 
 #=========================================
 # Options

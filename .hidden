@@ -3,24 +3,8 @@ $RECYCLE.BIN
 RECYCLER
 System Volume Information
 Samsung Software
-Desktop
 Downloads
-system.reg
-user.reg
-userdef.reg
-drive_c
-dosdevices
 R
 Arduino
-client_state.xml
-coproc_info.xml
-gui_rpc_auth.cfg
-lockfile
-stderrgpudetect.txt
-stdoutgpudetect.txt
-time_stats_log
-userdef.reg
-user.reg
-system.reg
 BOINC Manager-m
-notices
+package-lock.json
