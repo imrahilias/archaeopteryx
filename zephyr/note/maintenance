@@ -6,10 +6,10 @@
 $ tar -cjf pacman_database_$(date +%y%m%d).tar.bz2 /var/lib/pacman/local
 
 # Keeping a list of explicitly installed packages can be useful to speed up installation on a new system:
-$ pacman -Qqe > installed_packages_$(date +%y%m%d)
+$ pacman -Qqe > installed_packages
 
 # Keeping a list of manually installed packages (AUR):
-$ pacman -Qm > installed_packages_manually_$(date +%y%m%d)
+$ pacman -Qm > installed_packages_manually
 
 # The paccache script, provided within the pacman-contrib package, deletes all cached versions of installed and uninstalled packages, except for the most recent 3, by default:
 $ paccache -r
