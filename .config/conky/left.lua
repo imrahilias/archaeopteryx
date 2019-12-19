@@ -103,20 +103,20 @@ conky.text = [[
 $alignr}su mo tu we th fr sa 
 ${execpi 60 today=`date +%_d`; cal | sed -n '3,8 p' | sed 's/^/${alignr} /' | sed s/"\(^\|[^0-9]\)$today"'\b'/'\1${color1}'"$today"'${color}'/}
 
-  cpu           $color1 $cpu ${alignr} ${color} ${cpu cpu1}/${cpu cpu2}/${cpu cpu3}/${cpu cpu4}
-  fre           $color1 $freq ${color} 
-  tmp           $color1 ${hwmon 2 temp 5} ${alignr} ${color} ${hwmon 2 temp 1}/${hwmon 2 temp 2}/${hwmon 2 temp 3}/${hwmon 2 temp 4}
-  gpu           $color1 ${nvidia gpuutil} / ${nvidia memutil} ${color} ${alignr} ${nvidia videoutil} / ${nvidia pcieutil}${color}
-  f/t           $color1 ${nvidia gpufreq} / ${nvidia memfreq} ${color} ${alignr} ${nvidia temp}
-  mem           $color1 $memperc ${color} ${alignr} $mem
-  avg           $color1 $loadavg ${color} ${alignr} ${acpitemp}   
-  prc           $color1 $running_processes ${color} $alignr $processes 
-  upt           $color1 $uptime ${color} 
-  dsk           $color1 $diskio ${color} ${alignr} ${execi 60 sudo hddtemp /dev/sdc | awk '{print $4}' | sed 's/°C//g'}/${execi 60 sudo hddtemp /dev/sdd | awk '{print $4}' | sed 's/°C//g'}
-  net           $color1 ${downspeed eno1}d ${color} $alignr ${color} ${upspeed eno1}u
-  arc           $color1 ${diskio_read /dev/sda}r $alignr ${color} ${diskio_write /dev/sda}w
-  pri           $color1 ${diskio_read /dev/sdc}r $alignr ${color} ${diskio_write /dev/sdc}w
-  tro           $color1 ${diskio_read /dev/sdd}r $alignr ${color} ${diskio_write /dev/sdd}w
+  cpu   $color1 ${cpu cpu0} ${alignr} ${color} ${cpu cpu1}/${cpu cpu2}/${cpu cpu3}/${cpu cpu4}
+  fre   $color1 $freq ${color} 
+  tmp   $color1 ${hwmon 2 temp 5} ${alignr} ${color} ${hwmon 2 temp 1}/${hwmon 2 temp 2}/${hwmon 2 temp 3}/${hwmon 2 temp 4}
+  gpu   $color1 ${nvidia gpuutil} / ${nvidia memutil} ${color} ${alignr} ${nvidia videoutil} / ${nvidia pcieutil}${color}
+  f/t   $color1 ${nvidia gpufreq} / ${nvidia memfreq} ${color} ${alignr} ${nvidia temp}
+  mem   $color1 $memperc ${color} ${alignr} $mem
+  avg   $color1 $loadavg ${color} ${alignr} ${acpitemp}   
+  prc   $color1 $running_processes ${color} $alignr $processes 
+  upt   $color1 $uptime ${color} 
+  dsk   $color1 $diskio ${color} ${alignr} ${execi 60 sudo hddtemp /dev/sdc | awk '{print $4}' | sed 's/°C//g'}/${execi 60 sudo hddtemp /dev/sdd | awk '{print $4}' | sed 's/°C//g'}
+  net   $color1 ${downspeed eno1}d ${color} $alignr ${color} ${upspeed eno1}u
+  arc   $color1 ${diskio_read /dev/sda}r $alignr ${color} ${diskio_write /dev/sda}w
+  pri   $color1 ${diskio_read /dev/sdc}r $alignr ${color} ${diskio_write /dev/sdc}w
+  tro   $color1 ${diskio_read /dev/sdd}r $alignr ${color} ${diskio_write /dev/sdd}w
 
 ${color1}${top cpu 1}	  ${top pid 1}	   ${top name 1}${color}
 ${top cpu 2}	  ${top pid 2}	   ${top name 2}

@@ -32,6 +32,7 @@ fi
 
 # start deamons
 urxvtd -q -f -o
+udiskie & # dont forget the &
 # thunar --daemon # bugs around!
 
 # fire up conky

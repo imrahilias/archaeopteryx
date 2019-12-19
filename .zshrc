@@ -71,7 +71,8 @@ alias uma='sudo umount -a; echo -e $red"mounted:"$default; mount'
 alias pi='sudo pacman -Syyu' # Do a full system upgrade
 alias pq='bauerbill -Ss --aur' # Search for all repo and AUR packages
 alias pp='sudo powerpill -Syyu' # Do a full system upgrade using pauerpill with rsync 
-alias pa='sudo bb-wrapper -Syyu --aur' # Do a full system upgrade with AUR support using bauerbill with rsync
+alias ppa='sudo bb-wrapper -Syyu --aur' # Do a full system upgrade with AUR support using bauerbill with rsync
+alias pa='sudo bb-wrapper -Su --aur' # install from AUR using bauerbill with rsync
 alias px='sudo pacman -R' # Remove package
 alias pc='sudo pacman -Scc && sudo pacman-optimize' # remove all cached pkg! and defragment
 alias reflect='sudo reflector -p https -f 10 -l 10 --sort rate --save /etc/pacman.d/mirrorlist' # save 10 fastest of the 10 recent mirrors using https
@@ -104,6 +105,7 @@ alias halt='systemctl poweroff'
 #alias mm='udisksctl mount -b' # nemo mounts on click
 
 # misc
+alias u='urxvtc'
 alias dark='razercfg -l all:off'
 alias light='razercfg -l GlowingLogo:off -l Scrollwheel:on'
 alias fast='razercfg -r 1:3'

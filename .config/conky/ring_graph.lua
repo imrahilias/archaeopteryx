@@ -41,17 +41,14 @@ function circlewriting(inum, text, ival, font, fsize, radi, barw, barh, horiz, v
    cairo_select_font_face (cr, font, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL);
    cairo_set_font_size (cr, 22);
    cairo_set_source_rgba (cr, tred, tgreen, tblue, talp); 
-   
+  
    cairo_translate (cr, txs+horiz, tys+verti)
-
    cairo_rotate (cr, (deg*(ival+var2)*(math.pi/180)))
 
-   --cairo_rectangle (cr, 0, 0, 10, (text*-1))
-   cairo_rectangle (cr, 0, 0, barw, (text*-1))
+   cairo_rectangle (cr, 0, 0, barw, -text)
    cairo_fill (cr)
 
-   cairo_rotate (cr, ((deg*(ival+var2)*(math.pi/180)*-1)))
-
+   cairo_rotate (cr, -1*(deg*(ival+var2)*(math.pi/180)))
    cairo_translate (cr, -1*(txs+horiz), -1*(tys+verti))
 
    --you can reinstate these lines to get a text output around the circle
@@ -60,6 +57,33 @@ function circlewriting(inum, text, ival, font, fsize, radi, barw, barh, horiz, v
    --cairo_show_text (cr, (text))
    --cairo_show_text (cr, (addzero100(text)))
    --cairo_rotate (cr, ((deg*(ival+var2)*(math.pi/180)*-1)))
+end
+
+function dotwriting(inum, text, ival, font, fsize, radi, barw, barh, horiz, verti, tred, tgreen, tblue, talp, var1, var2)
+
+   if text == 0 then
+      return
+   end  
+   
+   deg = 360/inum
+   
+   text_arc = ((2*math.pi/inum)*ival+var1)
+   txs = 0 + radi*(math.sin(text_arc))
+   tys = 0 - radi*(math.cos(text_arc))
+
+   cairo_select_font_face (cr, font, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL);
+   cairo_set_font_size (cr, 22);
+   cairo_set_source_rgba (cr, tred, tgreen, tblue, talp); 
+  
+   cairo_translate (cr, txs+horiz, tys+verti)
+   cairo_rotate (cr, (deg*(ival+var2)*(math.pi/180)))
+
+   cairo_rectangle (cr, 0, -text, barw, barh)
+   cairo_fill (cr)
+
+   cairo_rotate (cr, -1*(deg*(ival+var2)*(math.pi/180)))
+   cairo_translate (cr, -1*(txs+horiz), -1*(tys+verti))
+
 end
 
 function conky_ring_graph()
@@ -105,7 +129,7 @@ function conky_ring_graph()
 
    cursec = tonumber( os.date("%S") + os.date("%M")*60 ) --cursec = updates % slots
       
-   cpu0[cursec]       = tonumber(conky_parse('${cpu}'))
+   cpu0[cursec]       = tonumber(conky_parse('${cpu cpu0}'))
    cpu1[cursec]       = tonumber(conky_parse('${cpu cpu1}'))
    cpu2[cursec]       = tonumber(conky_parse('${cpu cpu2}'))
    cpu3[cursec]       = tonumber(conky_parse('${cpu cpu3}'))
@@ -123,25 +147,26 @@ function conky_ring_graph()
 
       -- fading from 100 to 30 perc
       if i < cursec then
-         fade = (30 + slots - cursec + i)/slots
+         fade = (30 - cursec + i + slots )/slots
       else
          fade = (30 + i - cursec)/slots
       end
                
       --circlewriting (inum, text, ival, font, fsize, radi, horiz, verti, tred, tgreen, tblue, var1, var2)
-      circlewriting(slots, gpumemfreq[i], i, "Mono", 12,   0, 1, 10,  960, 550, 255, 255, 255, .3*fade, 0, 0)     
-      circlewriting(slots, gpufreq[i],    i, "Mono", 12,   0, 1, 10,  960, 550, 255, 255, 255, .3*fade, 0, 0)
-      circlewriting(slots, gpu[i],        i, "Mono", 12, 110, 1, 10,  960, 550, 255, 255, 255, .5*fade, 0, 0)
-      circlewriting(slots, cpufreq[i],    i, "Mono", 12, 220, 1, 10,  960, 550, 255, 255, 255, .5*fade, 0, 0)
-      --circlewriting(slots, cpu0[i],       i, "Mono", 12, 400, 1, 10,  960, 550, 255, 255, 255, .4*fade, 0, 0)
-      circlewriting(slots, cpu1[i],       i, "Mono", 12, 330, 1, 10,  960, 550, 255, 255, 255, .2*fade, 0, 0)
-      circlewriting(slots, cpu2[i],       i, "Mono", 12, 330, 1, 10,  960, 550, 255, 255, 255, .2*fade, 0, 0)
-      circlewriting(slots, cpu3[i],       i, "Mono", 12, 330, 1, 10,  960, 550, 255, 255, 255, .2*fade, 0, 0)
-      circlewriting(slots, cpu4[i],       i, "Mono", 12, 330, 1, 10,  960, 550, 255, 255, 255, .2*fade, 0, 0)
-      circlewriting(slots, down[i],       i, "Mono", 12, 100, 1, 10, 1700, 850, 255, 255, 255,    fade, 0, 0)
-      circlewriting(slots, up[i],         i, "Mono", 12,   0, 1, 10, 1700, 850, 255, 255, 255,    fade, 0, 0)
-      circlewriting(slots, gpumem[i],     i, "Mono", 12,   0, 1, 10, 1700, 280, 255, 255, 255, .5*fade, 0, 0)
-      circlewriting(slots, mem[i],        i, "Mono", 12, 100, 1, 10, 1700, 280, 255, 255, 255, .3*fade, 0, 0)
+      circlewriting( slots, gpu[i],        i, "Mono", 12, 110, 1, 10,  960, 550, 255, 255, 255, .5*fade, 0, 0 )
+      circlewriting( slots, cpu1[i],       i, "Mono", 12, 330, 1, 10,  960, 550, 255,   0,   0,    fade, 0, 0 )
+      circlewriting( slots, cpu2[i],       i, "Mono", 12, 330, 1, 10,  960, 550, 255, 255, 255,    fade, 0, 0 )
+      circlewriting( slots, cpu3[i],       i, "Mono", 12, 330, 1, 10,  960, 550, 255, 255, 255,    fade, 0, 0 )
+      circlewriting( slots, cpu4[i],       i, "Mono", 12, 330, 1, 10,  960, 550, 255, 255, 255,    fade, 0, 0 )
+      circlewriting( slots, down[i],       i, "Mono", 12, 100, 1, 10, 1700, 850, 255, 255, 255,    fade, 0, 0 )
+      circlewriting( slots, up[i],         i, "Mono", 12,   0, 1, 10, 1700, 850, 255, 255, 255,    fade, 0, 0 )
+      circlewriting( slots, gpumem[i],     i, "Mono", 12,   0, 1, 10, 1700, 280, 255, 255, 255, .5*fade, 0, 0 )
+      circlewriting( slots, mem[i],        i, "Mono", 12, 100, 1, 10, 1700, 280, 255, 255, 255, .3*fade, 0, 0 )
+
+      dotwriting(   slots, gpumemfreq[i], i, "Mono", 12,   0, 2,  2,  960, 550, 255, 255, 255,    fade, 0, 0 )
+      dotwriting(   slots, gpufreq[i],    i, "Mono", 12,   0, 2,  2,  960, 550, 255, 255, 255,    fade, 0, 0 )
+      dotwriting(   slots, cpufreq[i],    i, "Mono", 12, 220, 2,  2,  960, 550, 255, 255, 255,    fade, 0, 0 )
+      dotwriting(   slots, cpu0[i],       i, "Mono", 12, 440, 2,  2,  960, 550, 255,   0,   0,    fade, 0, 0 )
       
    end
    
