@@ -93,7 +93,7 @@ function linewriting( texts, radi, lwd, horiz, verti,   r,   g,   b, talp, falph
    cairo_set_source_rgba (cr, r, g, b, talp);
    
    for k = 1, tonumber(slots) do
-
+      
       if texts[k] == 0 then -- dont print zero circle
          goto ende
       end
@@ -103,14 +103,19 @@ function linewriting( texts, radi, lwd, horiz, verti,   r,   g,   b, talp, falph
       y = verti - (radi+texts[k]) * (math.cos(angel))
 
       cairo_line_to(cr, x, y)
-
+      
+      if texts[k-1] == 0 and texts[k-2]  == 0 and texts[k-3] == 0 then -- dont print connection over initial gap
+         cairo_move_to(cr, x, y)
+      else
+         cairo_line_to(cr, x, y)
+      end
+      
       ::ende::
    end
-  
-   -- now remove the inside of the circle
+
+   -- would get filled later anyway, so set to transparent & fill now
    cairo_stroke_preserve(cr);
    cairo_set_source_rgba (cr, r, g, b, falph);
-   cairo_arc(cr, horiz, verti, radi, math.pi, 3*math.pi)
    cairo_fill(cr);
    
 end
@@ -123,7 +128,7 @@ function conky_ring_graph()
    local cs = cairo_xlib_surface_create(conky_window.display, conky_window.drawable, conky_window.visual, conky_window.width, conky_window.height)
    cr = cairo_create(cs)
    
-   local updates = tonumber(conky_parse('${updates}'))
+   updates = tonumber(conky_parse('${updates}'))
    if updates == 1 then
 
       -- init vars
@@ -179,8 +184,8 @@ function conky_ring_graph()
    up[cursec]         = tonumber(conky_parse('${upspeedf eno1}'))/ 120 -- in % of 1200 kib
 
    --linewriting( texts, radi, lwd, horiz, verti,   r,   g,   b, talp, falph, var1, var2 )
+   linewriting( cpu0,     400,   1,   960,   550, 255, 0, 0,    1,     0,    0,    0 )
    linewriting( cpufreq,  330,   1,   960,   550, 255, 255, 255,    1,     0,    0,    0 )
-   linewriting( cpu0   ,  330,   1,   960,   550, 255,   0,   0,    1,     0,    0,    0 )
    
    for i = 1, tonumber(slots) do
 
