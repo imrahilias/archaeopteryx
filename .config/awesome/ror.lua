@@ -21,7 +21,7 @@ table5={
   ["g"]={'gimp', 'gimp'},
   ["a"]={'spotify', 'Spotify'},
   ["x"]={'telegram-desktop', 'Telegram'},
-  ["j"]={'jdownloader','Jdownloader'},
+--["j"]={'jdownloader','Jdownloader'},
 --["u"]={'startdict', 'Startdict'},
 --["y"]={"evince", "Evince"},
 }

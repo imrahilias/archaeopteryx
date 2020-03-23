@@ -84,7 +84,6 @@ There are two things you can do about this warning:
 ;; make it easy on eyes ...
 (set-foreground-color "#A89C8C")
 (set-background-color "#303030")
-
 (set-face-foreground 'default "#A89C8C")
 (set-face-background 'default "#303030")
 
@@ -254,7 +253,9 @@ There are two things you can do about this warning:
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
- '(package-selected-packages (quote (ess auto-correct))))
+ '(package-selected-packages
+   (quote
+    (matlab-mode live-py-mode rainbow-identifiers rainbow-mode ess auto-correct))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

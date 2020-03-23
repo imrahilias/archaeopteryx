@@ -248,7 +248,7 @@ man() {
 magic-enter () {
 
   # If commands are not already set, use the defaults
-  [ -z "$MAGIC_ENTER_GIT_COMMAND" ] && MAGIC_ENTER_GIT_COMMAND="git status -u ."
+  [ -z "$MAGIC_ENTER_GIT_COMMAND" ] && MAGIC_ENTER_GIT_COMMAND="git status ."
   [ -z "$MAGIC_ENTER_OTHER_COMMAND" ] && MAGIC_ENTER_OTHER_COMMAND="ls -1Bhl --group-directories-first ."
 
   if [[ -z $BUFFER ]]; then
@@ -419,6 +419,9 @@ ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 # history-substring-search
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+# autojump
+source /etc/profile.d//autojump.zsh
 
 # syntax highlighning has to be last
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

@@ -71,6 +71,7 @@ awful.layout.layouts = {
    -- awful.layout.suit.corner.ne,
    -- awful.layout.suit.corner.sw,
    -- awful.layout.suit.corner.se,
+   awful.layout.suit.floating,
 }
 -- }}}
 
@@ -248,7 +249,6 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey }, "Left",  awful.tag.viewprev),
    awful.key({ modkey }, "Right",  awful.tag.viewnext),
    awful.key({ modkey }, "Escape", awful.tag.history.restore),
-   --    awful.key({ modkey }, "w", function () mymainmenu:show() end),
    awful.key({ modkey }, "u", awful.client.urgent.jumpto),
    
    -- Layout manipulation
@@ -265,6 +265,7 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey }, "space", function () awful.layout.inc( 1) end),
    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1) end),
    awful.key({ modkey }, m, awful.layout.suit.max.fullscreen),
+   --awful.key({ modkey }, i, awful.layout.suit.floating),
    
    awful.key({ modkey, "Shift" }, "n",
       function ()
@@ -274,15 +275,13 @@ globalkeys = awful.util.table.join(
             client.focus = c
             c:raise()
          end
-      end,
-      {description = "restore minimized", group = "client"}),
+   end),
    
    awful.key({ modkey, "Shift" }, "f",
       function ()
          myscreen = awful.screen.focused()
          myscreen.mywibox.visible = not myscreen.mywibox.visible
-      end,
-      {description = "toggle statusbar"}),
+   end),
    
    -- Prompt
    awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end),
@@ -324,7 +323,7 @@ globalkeys = awful.util.table.join(
 )
 
 clientkeys = awful.util.table.join(
-   awful.key({ modkey, "Shift"   }, "c", function (c) c:kill() end),
+   awful.key({ modkey }, "q", function (c) c:kill() end),
    awful.key({ modkey, "Shift" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle),
    
@@ -333,8 +332,7 @@ clientkeys = awful.util.table.join(
          -- The client currently has the input focus, so it cannot be
          -- minimized, since minimized clients can't have the focus.
          c.minimized = true
-      end ,
-      {description = "minimize", group = "client"}),
+   end),
    
    awful.key({ modkey,           }, "m",
       function (c)
@@ -347,6 +345,7 @@ clientkeys = awful.util.table.join(
          c.maximized_vertical = not c.maximized_vertical
          c:raise()
    end),
+   
    awful.key({ modkey, "Shift"   }, "m",
       function (c)
          c.maximized_horizontal = not c.maximized_horizontal
@@ -443,42 +442,23 @@ awful.rules.rules = {
      }
    },
    
-   --    -- Floating clients.
-   --    { rule_any = {
-   --        instance = {
-   --          "DTA",  -- Firefox addon DownThemAll.
-   --          "copyq",  -- Includes session name in class.
-   --        },
-   --        class = {
-   --	   "Vlc",
-   --	  "mplayer",
-   --	  "Mplayer",
-   --	  "mplayer2",
-   --	  "Main","mplayer2",
-   --	  "XFontSel",
-   --          "Arandr",
-   --          "Gpick",
-   --          "Kruler",
-   --          "MessageWin",  -- kalarm.
-   --          "Sxiv",
-   --          "Wpa_gui",
-   --          "pinentry",
-   --          "veromix",
-   --          "xtightvncviewer"},
-   --
-   --        name = {
-   --          "Event Tester",  -- xev.
-   --        },
-   --        role = {
-   --          "AlarmWindow",  -- Thunderbird's calendar.
-   --          "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
-   --        }
-   --      }, properties = { floating = true }},
-   --
-   --    -- Add titlebars to normal clients and dialogs SERIOUSELY?
-   --    { rule_any = {type = { "normal", "dialog" }
-   --      }, properties = { titlebars_enabled = true },
-   --    },
+   -- -- Floating clients.
+   -- { rule_any = {
+   --      class = {
+   --         "scrcpy"},
+   --      name = {
+   --         "Event Tester",  -- xev.
+   --      },
+   --      role = {
+   --         "AlarmWindow",  -- Thunderbird's calendar.
+   --         "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
+   --      }
+   -- }, properties = { floating = true }},
+   
+   -- Add titlebars to normal clients and dialogs SERIOUSELY?
+   -- { rule_any = {type = { "normal", "dialog" }
+   --              }, properties = { titlebars_enabled = true },
+   -- },
    
    { rule_any = {   	    -- INTERNET
         class = {
@@ -553,6 +533,7 @@ awful.rules.rules = {
            "Ts3client_linux_amd64",
            "TelegramDesktop",
            "Signal",
+           "scrcpy",
    }},
      properties = { tag = "✆", switchtotag = true }},
    
