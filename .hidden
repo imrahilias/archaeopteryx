@@ -9,3 +9,5 @@ Arduino
 BOINC Manager-m
 package-lock.json
 gui_rpc_auth.cfg
+octave
+earth

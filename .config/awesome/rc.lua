@@ -491,6 +491,8 @@ awful.rules.rules = {
            "libreoffice-writer",
            "libreoffice-calc",
            "Qtiplot",
+           "calibre",
+           "calibre-gui",
    }},
      properties = { tag =  "≣", switchtotag = true }},
    
