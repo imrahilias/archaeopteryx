@@ -1,11 +1,6 @@
 adapta-gtk-theme
 alsa-tools
 alsa-utils
-anaconda
-anbox-bridge
-anbox-git
-anbox-image-gapps
-anbox-modules-dkms-git
 android-tools
 android-udev
 arc-gtk-theme
@@ -53,7 +48,6 @@ conky-lua-nv
 coreutils
 cpio
 cronie
-cryptomator
 cryptsetup
 cups
 cython
@@ -119,7 +113,7 @@ iputils
 jdk-openjdk
 jdownloader2
 jfsutils
-keepassx2
+keepassxc
 kernel-headers-musl
 kio-extras
 kitty
@@ -273,6 +267,7 @@ seahorse-nautilus
 sed
 shadow
 signal-desktop
+slurm-llnl
 smartmontools
 speedcrunch
 spotify
@@ -282,6 +277,7 @@ sudo
 sysfsutils
 systemd-sysvcompat
 tar
+teamspeak3
 telegram-desktop
 telegram-qt
 texinfo
@@ -331,7 +327,6 @@ xorg-fonts-75dpi
 xorg-iceauth
 xorg-luit
 xorg-server-devel
-xorg-server-xdmx
 xorg-server-xephyr
 xorg-server-xnest
 xorg-server-xvfb
