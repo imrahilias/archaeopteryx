@@ -316,10 +316,13 @@ globalkeys = awful.util.table.join(
 
     -- Boinc
     awful.key({ modkey }, "b", function () awful.util.spawn("boinccmd --set_run_mode never 3600", false) end), -- snooze whole boinc for 1h
-    awful.key({ modkey, "Control" }, "b", function () awful.util.spawn("boinccmd --set_run_mode auto", false) end), -- snooze whole boinc for 1h
-    awful.key({ modkey, "Shift" }, "b", function () awful.util.spawn("boinccmd --set_gpu_mode never 3600", false) end),  -- wake up boinc gpu
-    awful.key({ modkey, "Shift", "Control" }, "b", function () awful.util.spawn("boinccmd --set_gpu_mode auto", false) end)  -- wake up boinc gpu
-    
+    awful.key({ modkey, "Control" }, "b", function () awful.util.spawn("boinccmd --set_run_mode auto", false) end), -- wake up whole boinc
+    awful.key({ modkey, "Shift" }, "b", function () awful.util.spawn("boinccmd --set_gpu_mode never 3600", false) end),  -- snooze up boinc gpu
+    awful.key({ modkey, "Shift", "Control" }, "b", function () awful.util.spawn("boinccmd --set_gpu_mode auto", false) end),  -- wake up boinc gpu
+
+    -- Slurm
+    awful.key({ modkey }, "c", function () awful.util.spawn("schnegg -p", false) end), -- snooze whole (drain node + suspend all jobs) slurm for 1h
+    awful.key({ modkey, "Shift" }, "c", function () awful.util.spawn("schnegg -r", false) end) -- resume all
 )
 
 clientkeys = awful.util.table.join(
@@ -515,7 +518,7 @@ awful.rules.rules = {
            "MPlayer",
            "mpv",
    }},
-     properties = { tag = "♻", switchtotag = true }},
+     properties = { tag = "🌎♻", switchtotag = true }},
    
    { rule_any = {   	    -- DOWNLOAD
         name = {
