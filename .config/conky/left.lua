@@ -45,7 +45,7 @@ conky.config = {
     gap_y = 50,
     minimum_height = 5,
     minimum_width = 5,
-    maximum_width = 310,
+    maximum_width = 350,
     net_avg_samples = 2,
     no_buffers = true,
     net_avg_samples = 2,          -- set to 1 to disable averaging
@@ -69,54 +69,23 @@ conky.config = {
     xftalpha = 0.8,
 }
 
---[[ TEST
-${font xft:Bitstream Vera Sans Mono:size=40}${time %H:%M}${font}
-
-${color #5C5449} #calendar
-
-${color #A89C8C}${hr 2}${color}
-
-  ◈           $color1 ${nvidia gpufreq}, ${nvidia memfreq} ${color} ${alignr} ${nvidia temp} 
-  ▣           $color1 $freq ${color} ${alignr} ${execi 60 sensors | grep Physical | sed -e 's/+//' -e 's/\.0//' | awk '{print "",$4}'} 
-  λ           $color1 $loadavg ${color} ${alignr} ${acpitemp} 
-  ☭           $color1 $memperc ${color} ${alignr} $mem / $memmax 
-  ⊙           $color1 $diskio ${color} ${alignr} ${execi 60 sudo hddtemp /dev/sdc | awk '{print $4}'} 
-  ⇝           $color1 $running_processes ${color} $alignr $processes 
-  τ           $color1 $uptime ${color} 
-
-${cpugraph cpu0 30,310 FF8E38 FF8E38}
-
-${downspeedgraph eno1 35,290 ffaf73 A89C8C}
-  ▼ $color1 $alignr ${downspeed eno1}  ${color}
-
-${upspeedgraph eno1 30,290 ffaf73 A89C8C}
-  ▲ $alignr ${upspeed eno1}  
-
- prime $alignr ${diskio_read `blkid -o list | grep "prime" | awk "{print $1}"`} ${diskio_write `blkid -o list | grep "prime" | awk '{print $1}'`}  
-
-$color1  ${execpi 1 dmesg -t --level err | tail -n 10 | perl -lpe's/\b(.{30,30})\b/\1\n  /g'}
-
-]]
-
 conky.text = [[
 
 $alignr}su mo tu we th fr sa 
 ${execpi 60 today=`date +%_d`; cal | sed -n '3,8 p' | sed 's/^/${alignr} /' | sed s/"\(^\|[^0-9]\)$today"'\b'/'\1${color1}'"$today"'${color}'/}
 
-  cpu   $color1 ${cpu cpu0} ${alignr} ${color} ${cpu cpu1}/${cpu cpu2}/${cpu cpu3}/${cpu cpu4}
-  fre   $color1 $freq ${color} 
-  tmp   $color1 ${hwmon 2 temp 5} ${alignr} ${color} ${hwmon 2 temp 1}/${hwmon 2 temp 2}/${hwmon 2 temp 3}/${hwmon 2 temp 4}
-  gpu   $color1 ${nvidia gpuutil} / ${nvidia memutil} ${color} ${alignr} ${nvidia videoutil} / ${nvidia pcieutil}${color}
-  f/t   $color1 ${nvidia gpufreq} / ${nvidia memfreq} ${color} ${alignr} ${nvidia temp}
-  mem   $color1 $memperc ${color} ${alignr} $mem
-  avg   $color1 $loadavg ${color} ${alignr} ${acpitemp}   
-  prc   $color1 $running_processes ${color} $alignr $processes 
-  upt   $color1 $uptime ${color} 
-  dsk   $color1 $diskio ${color} ${alignr} ${execi 60 sudo hddtemp /dev/sdc | awk '{print $4}' | sed 's/°C//g'}/${execi 60 sudo hddtemp /dev/sdd | awk '{print $4}' | sed 's/°C//g'}
-  net   $color1 ${downspeed eno1}d ${color} $alignr ${color} ${upspeed eno1}u
-  arc   $color1 ${diskio_read /dev/sda}r $alignr ${color} ${diskio_write /dev/sda}w
-  pri   $color1 ${diskio_read /dev/sdc}r $alignr ${color} ${diskio_write /dev/sdc}w
-  tro   $color1 ${diskio_read /dev/sdd}r $alignr ${color} ${diskio_write /dev/sdd}w
+  cpu    $color1 ${cpu cpu0} ${alignr} ${color} ${cpu cpu1}/${cpu cpu2}/${cpu cpu3}/${cpu cpu4}
+  └ft    $color1 $freq ${color} ${alignr} ${hwmon 2 temp 1}/${hwmon 2 temp 2}/${hwmon 2 temp 3}/${hwmon 2 temp 4} / $color1${hwmon 2 temp 5}${color}
+  gpu    $color1 ${nvidia gpuutil} / ${nvidia memutil} ${color} ${alignr} ${nvidia videoutil} / ${nvidia pcieutil}${color}
+  └ft    $color1 ${nvidia gpufreq} / ${nvidia memfreq} ${color} ${alignr} ${nvidia temp}
+  ram    $color1 $memperc ${color} ${alignr} $mem
+  avg    $color1 $loadavg ${color} ${alignr}   ${acpitemp}   
+  prc    $color1 $running_processes ${color} / $processes ${alignr} $uptime
+  dsk    $color1 $diskio ${color} ${alignr} ${execpi 1 nc localhost 7634 | awk '{print $4,"/",$9}'}
+  ├─a    $color1 ${diskio_write /dev/sda} ▼ $alignr ${color} ${diskio_read /dev/sda} ▲
+  ├─p    $color1 ${diskio_write /dev/sdc} ▼ $alignr ${color} ${diskio_read /dev/sdc} ▲
+  └─t    $color1 ${diskio_write /dev/sdd} ▼ $alignr ${color} ${diskio_read /dev/sdd} ▲
+  net    $color1 ${downspeed eno1} ▼ ${color} $alignr ${color} ${upspeed eno1} ▲
 
 ${color1}${top cpu 1}	  ${top pid 1}	   ${top name 1}${color}
 ${top cpu 2}	  ${top pid 2}	   ${top name 2}
@@ -130,8 +99,6 @@ ${top_mem mem 3}	  ${top_mem pid 3}	   ${top_mem name 3}
 ${top_mem mem 4}	  ${top_mem pid 4}	   ${top_mem name 4}
 ${top_mem mem 5}	  ${top_mem pid 5}	   ${top_mem name 5}
 
-${execpi 1 sudo blkid -o list | sed -e '1,2d' -e 's/(not mounted)/ [] /' -e 's./dev/..' |  awk '{print " ",$1,$2,"$color1",$3,"$color","$alignr",$4,""}'}
+${execpi 1 lsblk -o NAME,FSAVAIL,LABEL,MOUNTPOINT | sed -e '1,1d' |  awk '{print " ",$1,$2,"$color1",$3,"$color","$alignr",$4,""}'}
 
 ]]
-
-
