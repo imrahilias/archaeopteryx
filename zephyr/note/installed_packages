@@ -89,6 +89,7 @@ gksu
 glibc
 gnome-calculator
 gnome-themes-extra
+gnu-netcat
 gnuplot
 google-earth-pro
 gparted
@@ -122,6 +123,7 @@ lapack
 less
 lhasa
 lib32-nvidia-390xx-utils
+lib32-opencl-nvidia-390xx
 libreoffice-fresh
 libtool
 libva-utils
@@ -143,6 +145,7 @@ m4
 make
 man-db
 man-pages
+mariadb
 mate-themes
 materia-gtk-theme
 mc
@@ -169,6 +172,7 @@ nemo-seahorse
 nemo-share
 nemo-terminal
 netctl
+nmap
 nodejs-less
 ntfs-3g-fuse
 ntp
@@ -179,7 +183,7 @@ nvm
 octave
 odt2txt
 openblas
-opencl-nvidia
+opencl-nvidia-390xx
 openconnect
 opencv
 opencv-samples
@@ -200,10 +204,12 @@ perl-rename
 picom
 pkgconf
 playerctl
+popcorntime
 powerpill
 powertop
 procps-ng
 psmisc
+pulse-secure
 pulseaudio
 pulseaudio-alsa
 python-gnuplot
@@ -256,7 +262,7 @@ rmlint
 rsnapshot
 rsync
 rtorrent
-rxvt-unicode-pixbuf
+rxvt-unicode
 s-nail
 samsung-unified-driver
 samsung_magician-consumer-ssd

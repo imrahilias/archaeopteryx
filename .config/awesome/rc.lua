@@ -287,42 +287,43 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end),
    
    -- Launch
-   awful.key({ modkey }, "Return", function () awful.util.spawn(terminal) end),
-   awful.key({ modkey }, "e", function () awful.util.spawn("emacsclient -cn", false) end),
-   awful.key({ modkey, "Shift" }, "d", function () awful.util.spawn("thunar", false) end),    
-   awful.key({ modkey, "Shift", "Control" }, "d", function () awful.util.spawn("sudo thunar", false) end),
-   awful.key({ modkey, "Shift" }, "s", function () awful.util.spawn_with_shell("open_primary_selection_in_cromium") end),
+   awful.key({ modkey }, "Return", function () awful.spawn(terminal) end),
+   awful.key({ modkey }, "e", function () awful.spawn("emacsclient -cn", false) end),
+   awful.key({ modkey, "Shift" }, "d", function () awful.spawn("thunar", false) end),    
+   awful.key({ modkey, "Shift", "Control" }, "d", function () awful.spawn("sudo thunar", false) end),
+   awful.key({ modkey, "Shift" }, "s", function () awful.spawn_with_shell("open_primary_selection_in_cromium") end),
+   awful.key({ modkey }, "o", function () awful.spawn("octave --gui") end),
    
    -- Audio
-   awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 5%+", false) end),
-   awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 5%-", false) end),
-   --    awful.key({ }, "XF86AudioMute", function () awful.util.spawn('for x in {"Master","Headphone","Front","Surround","Center","LFE","Side"} ; do amixer -c 0 set "${x}" toggle; done', false) end),
-    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer set Master toggle", false) end),
-    awful.key({ }, "XF86Tools", function () awful.util.spawn(terminal .. " -e ncmpcpp", false) end),
-    --    awful.key({ }, "XF86Tools", function () awful.util.spawn("spotify", false) end),
-    awful.key({ }, "XF86AudioPrev", function () awful.util.spawn("playerctl previous", false) end),
-    awful.key({ }, "XF86AudioPlay", function () awful.util.spawn("playerctl play-pause", false) end),
-    awful.key({ }, "XF86AudioNext", function () awful.util.spawn("playerctl next", false) end),
+   --awful.key({ }, "XF86AudioRaiseVolume", function () awful.spawn("amixer set Master 5%+", false) end),
+   --awful.key({ }, "XF86AudioLowerVolume", function () awful.spawn("amixer set Master 5%-", false) end),
+   --    awful.key({ }, "XF86AudioMute", function () awful.spawn('for x in {"Master","Headphone","Front","Surround","Center","LFE","Side"} ; do amixer -c 0 set "${x}" toggle; done', false) end),
+    --awful.key({ }, "XF86AudioMute", function () awful.spawn("amixer set Master toggle", false) end),
+    --awful.key({ }, "XF86Tools", function () awful.spawn(terminal .. " -e ncmpcpp", false) end),
+    --    awful.key({ }, "XF86Tools", function () awful.spawn("spotify", false) end),
+    --awful.key({ }, "XF86AudioPrev", function () awful.spawn("playerctl previous", false) end),
+    --awful.key({ }, "XF86AudioPlay", function () awful.spawn("playerctl play-pause", false) end),
+    --awful.key({ }, "XF86AudioNext", function () awful.spawn("playerctl next", false) end),
     
     -- Screenshot
-    awful.key({ }, "Print", function () awful.util.spawn("scrot -e 'mv $f ~/screens/ 2>/dev/null'") end),
+    awful.key({ }, "Print", function () awful.spawn("scrot -e 'mv $f ~/screens/ 2>/dev/null'") end),
     
     -- Killer
-    awful.key({ modkey, "Shift" }, "k", function () awful.util.spawn("sudo xkill", false) end),
+    awful.key({ modkey, "Shift" }, "k", function () awful.spawn("sudo xkill", false) end),
     
     -- Razer
-    awful.key({ modkey }, "#86", function () awful.util.spawn("razercfg -l GlowingLogo:off -l Scrollwheel:on", false) end),
-    awful.key({ modkey }, "#82", function () awful.util.spawn("razercfg -l all:off", false) end),
+    awful.key({ modkey }, "#86", function () awful.spawn("razercfg -l GlowingLogo:off -l Scrollwheel:on", false) end),
+    awful.key({ modkey }, "#82", function () awful.spawn("razercfg -l all:off", false) end),
 
     -- Boinc
-    awful.key({ modkey }, "b", function () awful.util.spawn("boinccmd --set_run_mode never 3600", false) end), -- snooze whole boinc for 1h
-    awful.key({ modkey, "Control" }, "b", function () awful.util.spawn("boinccmd --set_run_mode auto", false) end), -- wake up whole boinc
-    awful.key({ modkey, "Shift" }, "b", function () awful.util.spawn("boinccmd --set_gpu_mode never 3600", false) end),  -- snooze up boinc gpu
-    awful.key({ modkey, "Shift", "Control" }, "b", function () awful.util.spawn("boinccmd --set_gpu_mode auto", false) end),  -- wake up boinc gpu
+    awful.key({ modkey }, "b", function () awful.spawn("boinccmd --set_run_mode never 3600", false) end), -- snooze whole boinc for 1h
+    awful.key({ modkey, "Control" }, "b", function () awful.spawn("boinccmd --set_run_mode auto", false) end), -- wake up whole boinc
+    awful.key({ modkey, "Shift" }, "b", function () awful.spawn("boinccmd --set_gpu_mode never 3600", false) end),  -- snooze up boinc gpu
+    awful.key({ modkey, "Shift", "Control" }, "b", function () awful.spawn("boinccmd --set_gpu_mode auto", false) end),  -- wake up boinc gpu
 
     -- Slurm
-    awful.key({ modkey }, "c", function () awful.util.spawn("schnegg -p", false) end), -- snooze whole (drain node + suspend all jobs) slurm for 1h
-    awful.key({ modkey, "Shift" }, "c", function () awful.util.spawn("schnegg -r", false) end) -- resume all
+    awful.key({ modkey }, "c", function () awful.spawn("schnegg -p", false) end), -- snooze whole (drain node + suspend all jobs) slurm for 1h
+    awful.key({ modkey, "Shift" }, "c", function () awful.spawn("schnegg -r", false) end) -- resume all
 )
 
 clientkeys = awful.util.table.join(
@@ -482,7 +483,7 @@ awful.rules.rules = {
            "Thunar",
         },
         name = {
-           "Ranger",
+           "ranger",
    }},
      properties = { tag = "⛁", switchtotag = true }},
    

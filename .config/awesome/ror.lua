@@ -14,10 +14,10 @@
 
 table5={
   ["s"]={"chromium", "Chromium"},
-  ["o"]={"libreoffice ", "libreoffice"},
+  ["Shift-o"]={"libreoffice ", "libreoffice"},
 --["e"]={"emacsclient -ca ''","Emacs"}, 
   ["t"]={"urxvtc -title Torronator -e rtorrent","rtorrent", "instance"},
-  ["d"]={"urxvtc -title Ranger -e ranger","Ranger", "name"},
+  ["d"]={"urxvtc -title 'Ranger' -e ranger", "ranger", "name"},
   ["g"]={'gimp', 'gimp'},
   ["a"]={'spotify', 'Spotify'},
   ["x"]={'telegram-desktop', 'Telegram'},

@@ -104,13 +104,6 @@ alias am='alsamixer'
 alias halt='systemctl poweroff'
 #alias mm='udisksctl mount -b' # nemo mounts on click
 
-## slurm aliases
-alias ssa='squeue -ho %A -t R | xargs -n 1 sudo scontrol suspend' # suspend all running jobs for a user
-alias srs="squeue -o \"%.18A %.18t\" -u m | awk '{if (\$2 ==\"S\"){print \$1}}' | xargs -n 1 sudo scontrol resume" # resume all suspended jobs for a user sudo scontrol resume
-alias sls='squeue -ho %A -u $USER -t S | wc -l' # check if any are still suspended
-alias ssn='sudo scontrol update nodename=archaeopteryx state=drain reason=slow' # drain node
-alias srn='sudo scontrol update nodename=archaeopteryx state=resume' # resume node
-
 # misc
 alias u='urxvtc'
 alias dark='razercfg -l all:off'
@@ -430,7 +423,9 @@ RPROMPT='$(cmd_fail)$(git_branch)%T'
 export EDITOR='emacsclient -c -a ""'
 export PATH='/bin:/usr/bin:/usr/local/bin:/home/m/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/games:/usr/local/games'
 #path+=/scripts #hängt zur $path eben was an...
-
+#export QT_QPA_PLATFORMTHEME='qt5ct' # qt5 gtk blending
+export QT_QPA_PLATFORMTHEME='gtk2' # qt looks like current gtk theme 
+export QT_STYLE_OVERRIDE='gtk2'
 
 #=========================================
 # MISC

@@ -8,6 +8,19 @@
 ;;fun
 ;;(global-set-key (kbd "C-x C-s") 'spook)
 
+
+;; Latex section
+(with-eval-after-load "tex"
+  (add-to-list 'TeX-command-list
+        `("Arara" "arara --verbose %s" TeX-run-TeX nil t :help "Run Arara") t))
+
+(with-eval-after-load "latex"
+  (define-key LaTeX-mode-map (kbd "C-c C-a")
+     (lambda ()
+       (interactive)
+       (TeX-command-sequence '("Arara" "View") t))))
+
+
 (require 'package)
 
 ;; MELPA
@@ -255,7 +268,7 @@ There are two things you can do about this warning:
    ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
  '(package-selected-packages
    (quote
-    (matlab-mode live-py-mode rainbow-identifiers rainbow-mode ess auto-correct))))
+    (auctex matlab-mode live-py-mode rainbow-identifiers rainbow-mode ess auto-correct))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
