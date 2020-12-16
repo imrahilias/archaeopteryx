@@ -423,9 +423,10 @@ RPROMPT='$(cmd_fail)$(git_branch)%T'
 export EDITOR='emacsclient -c -a ""'
 export PATH='/bin:/usr/bin:/usr/local/bin:/home/m/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/games:/usr/local/games'
 #path+=/scripts #hängt zur $path eben was an...
-#export QT_QPA_PLATFORMTHEME='qt5ct' # qt5 gtk blending
-export QT_QPA_PLATFORMTHEME='gtk2' # qt looks like current gtk theme 
-export QT_STYLE_OVERRIDE='gtk2'
+export QT_QPA_PLATFORMTHEME='qt5ct' # qt5 gtk blending
+export QT_STYLE_OVERRIDE='qt5ct'
+#export QT_QPA_PLATFORMTHEME='gtk2' # qt looks like current gtk theme 
+#export QT_STYLE_OVERRIDE='gtk2'
 
 #=========================================
 # MISC

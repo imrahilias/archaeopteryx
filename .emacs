@@ -5,32 +5,10 @@
 ;; \__, |\___|_| |_|\___|_|  \__,_|_|
 ;; |___/
 
-;;fun
+;; fun
 ;;(global-set-key (kbd "C-x C-s") 'spook)
 
-
-;; Latex section
-(with-eval-after-load "tex"
-  (add-to-list 'TeX-command-list
-        `("Arara" "arara --verbose %s" TeX-run-TeX nil t :help "Run Arara") t))
-
-(with-eval-after-load "latex"
-  (define-key LaTeX-mode-map (kbd "C-c C-a")
-     (lambda ()
-       (interactive)
-       (TeX-command-sequence '("Arara" "View") t))))
-
-
 (require 'package)
-
-;; MELPA
-;; (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
-;;                     (not (gnutls-available-p))))
-;;        (url (concat (if no-ssl "http" "https") "://melpa.org/packages/")))
-;;   (add-to-list 'package-archives (cons "melpa" url) t))
-;; (when (< emacs-major-version 24)
-;;   ;; For important compatibility libraries like cl-lib
-;;   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 
 ;; MELPA
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
@@ -61,8 +39,6 @@ There are two things you can do about this warning:
 
 ;; inital scratch text
 (setq initial-scratch-message "")
-
-(add-to-list 'load-path "~/.emacs.d/el-get/")
 
 ;; syntax highlighting
 (global-font-lock-mode 't)
@@ -199,29 +175,25 @@ There are two things you can do about this warning:
  )
 )
 
-
-;; _
-;;| | __ _ _ __   __ _ _   _  __ _  __ _  ___  ___
-;;| |/ _` | '_ \ / _` | | | |/ _` |/ _` |/ _ \/ __|
-;;| | (_| | | | | (_| | |_| | (_| | (_| |  __/\__ \
-;;|_|\__,_|_| |_|\__, |\__,_|\__,_|\__, |\___||___/
-;;               |___/             |___/
-
-; highlight parentheses when the cursor is next to them
-(require 'paren)
-(show-paren-mode t)
-
-;; c mode customizations
-(cwarn-mode t)
-(setq c-default-style "linux")
-(which-function-mode t)
-(setq c-basic-offset 2)
-(global-set-key (kbd "C-c p") 'compile)
-
-;; auto complete
-;;(add-to-list 'load-path "~/.emacs.d/auto-complete-installation")
-;;(require 'auto-complete-config)
-;;(ac-config-default)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(ansi-color-names-vector
+   ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
+ '(package-selected-packages
+   '(auto-complete auctex matlab-mode live-py-mode rainbow-identifiers rainbow-mode ess auto-correct)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
 
 ;; subword mode (camelcase mode)
 (global-subword-mode 1)
@@ -233,6 +205,7 @@ There are two things you can do about this warning:
 (global-auto-revert-mode t)
 
 ;; el-get
+(add-to-list 'load-path "~/.emacs.d/el-get/")
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
 (unless (require 'el-get nil 'noerror)
@@ -246,34 +219,101 @@ There are two things you can do about this warning:
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 (el-get 'sync)
 
-;; This snippet enables lua-mode
-;; This line is not necessary, if lua-mode.el is already on your load-path
-(add-to-list 'load-path "~/.emacs.d/el-get/lua-mode")
+;; auto break lines in paragraphs
+;add-hook 'text-mode-hook 'turn-on-auto-fill)
 
+
+;; _
+;;| | __ _ _ __   __ _ _   _  __ _  __ _  ___  ___
+;;| |/ _` | '_ \ / _` | | | |/ _` |/ _` |/ _ \/ __|
+;;| | (_| | | | | (_| | |_| | (_| | (_| |  __/\__ \
+;;|_|\__,_|_| |_|\__, |\__,_|\__,_|\__, |\___||___/
+;;               |___/             |___/
+
+
+; start auto-complete-mode
+(dolist (hook '(text-mode-hook))
+  (add-hook hook (lambda () (auto-complete-mode 1))))
+
+
+; highlight parentheses when the cursor is next to them
+(require 'paren)
+(show-paren-mode t)
+
+
+;; c mode customizations
+(cwarn-mode t)
+(setq c-default-style "linux")
+(which-function-mode t)
+(setq c-basic-offset 2)
+(global-set-key (kbd "C-c p") 'compile)
+
+
+;; lua-mode
+;; This line is not necessary, if lua-mode.el is already on your load-path
+;(add-to-list 'load-path "~/.emacs.d/el-get/lua-mode")
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
 
-;; auto break lines in paragraphs
-;add-hook 'text-mode-hook 'turn-on-auto-fill)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(ansi-color-names-vector
-   ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
- '(package-selected-packages
-   (quote
-    (auctex matlab-mode live-py-mode rainbow-identifiers rainbow-mode ess auto-correct))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
+;; octave mode
+(global-set-key (kbd "C-c C-c") 'octave-send-region)
+
+
+;; Latex mode
+(with-eval-after-load "tex"
+  (add-to-list 'TeX-command-list
+        `("Arara" "arara --verbose %s" TeX-run-TeX nil t :help "Run Arara") t))
+
+(with-eval-after-load "tex"
+  (add-to-list 'TeX-command-list
+               `("Extex" "pdflatex --shell-escape %s" TeX-run-TeX nil t :help "Pdftex no halt-on-error") t))
+
+(with-eval-after-load "latex"
+  (define-key LaTeX-mode-map (kbd "C-c C-a")
+     (lambda ()
+       (interactive)
+       (TeX-command-sequence '("Arara" "Extex") t))))
+
+;; (with-eval-after-load "latex"
+;;   (define-key LaTeX-mode-map (kbd "C-c C-a")
+;;      (lambda ()
+;;        (interactive)
+;;        (TeX-command-sequence '("Arara" "View") t))))
+
+
+;; Aspell / Ispell / Flyspell
+
+;; Flyspell mode
+(dolist (hook '(text-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+
+(dolist (hook '(change-log-mode-hook log-edit-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode -1))))
+
+;; If you’re using a Mac, you may need to add the following Elisp code to your config file as well in order for Flyspell to pick up the two-finger clicks (right-clicks):
+(eval-after-load "flyspell"
+  '(progn
+     (define-key flyspell-mouse-map [mouse-3] #'flyspell-correct-word)))
+
+(with-eval-after-load "ispell"
+  ;; Configure `LANG`, otherwise ispell.el cannot find a 'default
+  ;; dictionary' even though multiple dictionaries will be configured
+  ;; in next line.
+  (setenv "LANG" "en_US")
+  (setq ispell-program-name "hunspell")
+  ;; Configure German, Swiss German, and two variants of English.
+  (setq ispell-dictionary "de_DE,en_GB,en_US")
+  ;; ispell-set-spellchecker-params has to be called
+  ;; before ispell-hunspell-add-multi-dic will work
+  (ispell-set-spellchecker-params)
+  (ispell-hunspell-add-multi-dic "de_DE,en_GB,en_US")
+  ;; For saving words to the personal dictionary, don't infer it from
+  ;; the locale, otherwise it would save to ~/.hunspell_de_DE.
+  (setq ispell-personal-dictionary "~/.hunspell_personal"))
+
+;; The personal dictionary file has to exist, otherwise hunspell will
+;; silently not use it.
+;;(unless (file-exists-p ispell-personal-dictionary)
+;;(write-region "" nil ispell-personal-dictionary nil 0))

@@ -249,7 +249,7 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey }, "Left",  awful.tag.viewprev),
    awful.key({ modkey }, "Right",  awful.tag.viewnext),
    awful.key({ modkey }, "Escape", awful.tag.history.restore),
-   awful.key({ modkey }, "u", awful.client.urgent.jumpto),
+   awful.key({ modkey }, "z", awful.client.urgent.jumpto),
    
    -- Layout manipulation
    awful.key({ modkey }, "Tab",
@@ -291,7 +291,9 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey }, "e", function () awful.spawn("emacsclient -cn", false) end),
    awful.key({ modkey, "Shift" }, "d", function () awful.spawn("thunar", false) end),    
    awful.key({ modkey, "Shift", "Control" }, "d", function () awful.spawn("sudo thunar", false) end),
-   awful.key({ modkey, "Shift" }, "s", function () awful.spawn_with_shell("open_primary_selection_in_cromium") end),
+   awful.key({ modkey, "Shift" }, "s", function () awful.spawn("open_primary_selection_in_cromium") end),
+   awful.key({ modkey, "Control" }, "s", function () awful.spawn("open_primary_selection_in_google_translate") end),
+   awful.key({ modkey, "Shift", "Control" }, "s", function () awful.spawn("open_primary_selection_in_thesaurus") end),
    awful.key({ modkey }, "o", function () awful.spawn("octave --gui") end),
    
    -- Audio
@@ -540,6 +542,7 @@ awful.rules.rules = {
            "TelegramDesktop",
            "Signal",
            "scrcpy",
+           "zoom",
    }},
      properties = { tag = "✆", switchtotag = true }},
    

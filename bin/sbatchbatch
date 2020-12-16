@@ -6,7 +6,7 @@ for file in *.m
 do
     filename=$(basename $file .m)
     jobname=$(echo "$filename" | sed 's/alignment_//')
-    echo -e "#!/bin/bash\n#SBATCH -p nest\n#SBATCH -N 1\n#SBATCH -n 1\n#SBATCH -J $jobname\nsrun octave-cli $PWD/$file" > "$filename.batch" # do stuff
+    echo -e "#!/bin/bash\n#SBATCH -p nest\n#SBATCH -N 1\n#SBATCH -n 1\n#SBATCH -J $jobname\nsrun octave $PWD/$file" > "$filename.batch" # do stuff
     sbatch "$filename.batch"
     rm "$filename.batch" # go home
 done

@@ -1,0 +1,18 @@
+#!/bin/bash
+## pause slurm for 1 h, then resume all
+## regardless if there were some jobs suspended for different reasons!
+
+## suspend all running jobs for a user
+squeue -ho %A -t R | xargs -n 1 sudo scontrol suspend &&
+
+## drain node
+sudo scontrol update nodename=archaeopteryx state=drain reason=coffeebreak &&
+
+## wait for 1h
+sleep 5s &&
+
+## resume all suspended jobs for a user, so those get activated first
+squeue -o "%.18A %.18t" -u m | awk '{if ($2 =="S"){print $1}}' | xargs -n 1 sudo scontrol resume
+
+## resume node for future 
+sudo scontrol update nodename=archaeopteryx state=resume &&
