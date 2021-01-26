@@ -1,6 +1,12 @@
-#=========================================
-# Aliases
-#=========================================
+#!/bin/false
+
+#                                           ___   ___ 
+#   .'|=|`.     .'|        .'|   .'|=|`.   |   |=|_.' 
+# .'  | |  `. .'  |      .'  | .'  | |  `. `.  |      
+# |   |=|   | |   |      |   | |   |=|   |   `.|=|`.  
+# |   | |   | |   |  ___ |   | |   | |   |  ___  |  `.
+# |___| |___| |___|=|_.' |___| |___| |___|  `._|=|___|
+#
 
 # colors
 red="\e[31m"
@@ -113,10 +119,15 @@ alias slow='razercfg -r 1:2'
 alias rename='perl-rename'
 alias zephyr='/usr/bin/git --git-dir=$HOME/.zephyr --work-tree=$HOME'
 alias rainbow='for (( i = 30; i < 38; i++ )); do echo -e "\033[0;"$i"m Normal: (0;$i); \033[1;"$i"m Light: (1;$i)"; done'
+alias fifi='figlet -f ~/bin/razor'
 
-#=========================================
-# Options
-#=========================================
+#                    __    ___  ___   ___                          ___   ___   ___ 
+#   .'|=|`.     .'|=|  |  `._|=|   |=|_.'   .'|   .'|=|`.     .'| |   | |   |=|_.' 
+# .'  | |  `. .'  | |  |       |   |      .'  | .'  | |  `. .'  |\|   | `.  |      
+# |   | |   | |   |=|.'        |   |      |   | |   | |   | |   | |   |   `.|=|`.  
+# `.  | |  .' |   |            `.  |      |   | `.  | |  .' |   | |  .'  ___  |  `.
+#   `.|=|.'   |___|              `.|      |___|   `.|=|.'   |___| |.'    `._|=|___|
+#
 
 setopt extendedglob             # inverted expansion like: ls *~*.txt
 setopt correct                  # correct mistakes
@@ -138,10 +149,13 @@ HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
 
-
-#=========================================
-# Functions
-#=========================================
+#        ___  ___               ___         ___  ___  ___   ___                          ___   ___   ___ 
+#   .'|=|_.' |   | |`.     .'| |   |   .'|=|_.' `._|=|   |=|_.'   .'|   .'|=|`.     .'| |   | |   |=|_.' 
+# .'  |  ___ |   | |  `. .'  |\|   | .'  |           |   |      .'  | .'  | |  `. .'  |\|   | `.  |      
+# |   |=|_.' |   | |   | |   | |   | |   |           |   |      |   | |   | |   | |   | |   |   `.|=|`.  
+# |   |      `.  | |   | |   | |  .' `.  |  ___      `.  |      |   | `.  | |  .' |   | |  .'  ___  |  `.
+# |___|        `.|=|___| |___| |.'     `.|=|_.'        `.|      |___|   `.|=|.'   |___| |.'    `._|=|___|
+#
 
 # archive extraction
 extract() {
@@ -352,43 +366,89 @@ function clicolors() {
     c=''
 }
 
+#        __                     ___         ___         ___        __  
+#   .'|=|  |   .'|=|`.     .'| |   |   .'|=|_.'    .'|=|_.'   .'|=|  | 
+# .'  | |  | .'  | |  `. .'  |\|   | .'  |___    .'  |  ___ .'  | |  | 
+# |   |=|.'  |   |=|   | |   | |   | |   |`._|=. |   |=|_.' |   |=|.'  
+# |   |  |`. |   | |   | |   | |  .' `.  |  __|| |   |  ___ |   |  |`. 
+# |___|  |_| |___| |___| |___| |.'     `.|=|_.'' |___|=|_.' |___|  |_| 
+#
+# This is based on: https://github.com/ranger/ranger/blob/master/examples/bash_automatic_cd.sh
+# Paste this into your .zshrc:
 
-#=========================================
-# Ranger
-#=========================================
-#This is based on: https://github.com/ranger/ranger/blob/master/examples/bash_automatic_cd.sh
-#Paste this into your .zshrc:
+# function ranger-cd {
+#     tempfile="$(mktemp -t tmp.XXXXXX)"
+#     /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
+#     test -f "$tempfile" &&
+#     if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
+#         cd -- "$(cat "$tempfile")"
+#     fi  
+#     rm -f -- "$tempfile"
+# }
 
-function ranger-cd {
-    tempfile="$(mktemp -t tmp.XXXXXX)"
-    /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
-    test -f "$tempfile" &&
-    if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
-        cd -- "$(cat "$tempfile")"
-    fi  
-    rm -f -- "$tempfile"
-}
+# ## ranger-cd will fire for Ctrl+D
+# bindkey -s '^D' 'ranger-cd\n'
 
-## ranger-cd will fire for Ctrl+D
-bindkey -s '^D' 'ranger-cd\n'
+# ## https://wiki.archlinux.org/index.php/Ranger
+# #$RANGERCD && unset RANGERCD && ranger-cd
 
-## https://wiki.archlinux.org/index.php/Ranger
-#$RANGERCD && unset RANGERCD && ranger-cd
+# ## Preventing nested ranger instances
+# ##You can start a shell in the current directory with S, when you exit the shell you get back to your ranger instance. When you however forget that you already are in a ranger shell and start ranger again you end up with ranger running a shell running ranger.
 
-## Preventing nested ranger instances
-##You can start a shell in the current directory with S, when you exit the shell you get back to your ranger instance. When you however forget that you already are in a ranger shell and start ranger again you end up with ranger running a shell running ranger.
+# ranger() {
+#     if [ -z "$RANGER_LEVEL" ]; then
+#         /usr/bin/ranger "$@"
+#     else
+#         exit
+#     fi
+# }
 
-ranger() {
-    if [ -z "$RANGER_LEVEL" ]; then
-        /usr/bin/ranger "$@"
+#  ___   ___         __                     ___         ___         ___        __  
+#  `._|=|   |   .'|=|  |   .'|=|`.     .'| |   |   .'|=|_.'    .'|=|_.'   .'|=|  | 
+#       |  .' .'  | |  | .'  | |  `. .'  |\|   | .'  |___    .'  |  ___ .'  | |  | 
+#   .'|=|.'   |   |=|.'  |   |=|   | |   | |   | |   |`._|=. |   |=|_.' |   |=|.'  
+# .'  |  ___  |   |  |`. |   | |   | |   | |  .' `.  |  __|| |   |  ___ |   |  |`. 
+# |___|=|_.'  |___|  |_| |___| |___| |___| |.'     `.|=|_.'' |___|=|_.' |___|  |_| 
+
+## based on https://github.com/Vifon/zranger
+## switching retains tabs!
+zranger() {
+    local RANGER_PID
+
+    if RANGER_PID=$(tmux list-panes -s -F '#{pane_pid}' -t ranger 2> /dev/null); then
+        # Leave the current cwd for ranger to read and cleanup.
+        pwd > /tmp/zranger-cwd-$UID
+        # Detach the other zranger instance...
+        tmux detach-client -s ranger
+        # ...and give it some time to read ranger's cwd before it changes.
+        sleep 0.05              # May need some tweaking.
+        # Tell ranger to read zsh's cwd from /tmp and cd to it.
+        kill -SIGUSR1 $RANGER_PID
+        # Attach to it.
+        TMUX='' tmux attach -t ranger
     else
-        exit
+        TMUX='' tmux new-session -s ranger 'exec ranger --cmd="set preview_images=false"'
+    fi
+
+    # A second check needed because the process could have been
+    # started or stopped in the meantime.
+    if RANGER_PID=$(tmux list-panes -s -F '#{pane_pid}' -t ranger 2> /dev/null); then
+        cd -P /proc/$RANGER_PID/cwd
     fi
 }
 
-#=========================================
-# Prompt
-#=========================================
+## ranger-cd will fire for Ctrl+D
+#autoload -U zranger # embedded in zshrc
+bindkey -s '^D' "\eq zranger\n"
+
+#        __          __                                  __    ___  ___   ___ 
+#   .'|=|  |    .'|=|  |   .'|=|`.     .'|\/|`.     .'|=|  |  `._|=|   |=|_.' 
+# .'  | |  |  .'  | |  | .'  | |  `. .'  |  |  `. .'  | |  |       |   |      
+# |   |=|.'   |   |=|.'  |   | |   | |   |  |   | |   |=|.'        |   |      
+# |   |       |   |  |`. `.  | |  .' |   |  |   | |   |            `.  |      
+# |___|       |___|  |_|   `.|=|.'   |___|  |___| |___|              `.|     
+#
+
 BLACK="%{"$'\033[00;30m'"%}"
 BBLACK="%{"$'\033[01;30m'"%}"
 RED="%{"$'\033[00;31m'"%}"
@@ -413,10 +473,13 @@ RPROMPT='$(cmd_fail)$(git_branch)%T'
 #PROMPT='[%{$fg[blue]%}%n$white@$cyan%m$reset:%~]$(prompt_char) ' # @jinn
 #RPROMPT='$(cmd_fail)$(git_branch)%T' 
 
-
-#=========================================
-# Evironment variables
-#=========================================
+#        ___        ___   ___   ___  
+#   .'|=|_.'   .'| |   | |   | |   | 
+# .'  |  ___ .'  |\|   | |   | |   | 
+# |   |=|_.' |   | |   | |   | |   | 
+# |   |  ___ |   | |  .' `.  | |  .' 
+# |___|=|_.' |___| |.'     `.|=|.'   
+#
 
 #export HS='alsa_output.usb-047f_c001-00-U0x47f0xc001.analog-stereo'
 #export SP='alsa_output.pci-0000_00_1b.0.analog-stereo'
@@ -428,9 +491,13 @@ export QT_STYLE_OVERRIDE='qt5ct'
 #export QT_QPA_PLATFORMTHEME='gtk2' # qt looks like current gtk theme 
 #export QT_STYLE_OVERRIDE='gtk2'
 
-#=========================================
-# MISC
-#=========================================
+#  ___   ___  ___  ___   ___  ___               ___        ___ 
+# |   |=|_.' `._|=|   |=|_.' |   | |`.     .'|=|_.'   .'|=|_.' 
+# `.  |           |   |      |   | |  `. .'  |  ___ .'  |  ___ 
+#   `.|=|`.       |   |      |   | |   | |   |=|_.' |   |=|_.' 
+#  ___  |  `.     `.  |      `.  | |   | |   |      |   |      
+#  `._|=|___|       `.|        `.|=|___| |___|      |___|      
+#
 
 # turn off XOFF/XON
 stty -ixon
@@ -442,10 +509,13 @@ stty -ixon
 bindkey -e # emacs key bindings: yeeha:D
 bindkey ' ' magic-space # also do history expansion on space, type '!!', then hit enter, watch
 
-
-#=========================================
-# PLUGINS
-#=========================================
+#        __               ___               ___               ___   ___   ___ 
+#   .'|=|  |    .'|      |   | |`.     .'|=|_.'    .'|   .'| |   | |   |=|_.' 
+# .'  | |  |  .'  |      |   | |  `. .'  |___    .'  | .'  |\|   | `.  |      
+# |   |=|.'   |   |      |   | |   | |   |`._|=. |   | |   | |   |   `.|=|`.  
+# |   |       |   |  ___ `.  | |   | `.  |  __|| |   | |   | |  .'  ___  |  `.
+# |___|       |___|=|_.'   `.|=|___|   `.|=|_.'' |___| |___| |.'    `._|=|___|
+#
 
 # auto suggestion
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -464,10 +534,13 @@ source /etc/profile.d//autojump.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
-
-#=========================================
-# Auto-completions
-#=========================================
+#              ___         ___  ___   ___             
+#   .'|=|`.   |   | |`.   `._|=|   |=|_.'   .'|=|`.   
+# .'  | |  `. |   | |  `.      |   |      .'  | |  `. 
+# |   |=|   | |   | |   |      |   |      |   | |   | 
+# |   | |   | `.  | |   |      `.  |      `.  | |  .' 
+# |___| |___|   `.|=|___|        `.|        `.|=|.'   
+#
 autoload -Uz compinit; compinit
 autoload -U colors && colors
 zstyle ':completion:*' completer _expand _complete _correct _approximate

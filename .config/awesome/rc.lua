@@ -325,7 +325,10 @@ globalkeys = awful.util.table.join(
 
     -- Slurm
     awful.key({ modkey }, "c", function () awful.spawn("schnegg -p", false) end), -- snooze whole (drain node + suspend all jobs) slurm for 1h
-    awful.key({ modkey, "Shift" }, "c", function () awful.spawn("schnegg -r", false) end) -- resume all
+    awful.key({ modkey, "Shift" }, "c", function () awful.spawn("schnegg -r", false) end), -- resume all
+       
+    -- Fun
+    awful.key({ modkey }, "z", function () awful.spawn.with_shell('notify-send "$(cowsay $(fortune))"', false) end)
 )
 
 clientkeys = awful.util.table.join(

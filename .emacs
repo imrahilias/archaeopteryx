@@ -1,9 +1,10 @@
-;;                                 _
-;;  __ _  ___ _ __   ___ _ __ __ _| |
-;; / _` |/ _ \ '_ \ / _ \ '__/ _` | |
-;;| (_| |  __/ | | |  __/ | | (_| | |
-;; \__, |\___|_| |_|\___|_|  \__,_|_|
-;; |___/
+;;  ___   ___  ___  ___   ___  ___               ___        ___ 
+;; |   |=|_.' `._|=|   |=|_.' |   | |`.     .'|=|_.'   .'|=|_.' 
+;; `.  |           |   |      |   | |  `. .'  |  ___ .'  |  ___ 
+;;   `.|=|`.       |   |      |   | |   | |   |=|_.' |   |=|_.' 
+;;  ___  |  `.     `.  |      `.  | |   | |   |      |   |      
+;;  `._|=|___|       `.|        `.|=|___| |___|      |___|      
+
 
 ;; fun
 ;;(global-set-key (kbd "C-x C-s") 'spook)
@@ -86,27 +87,27 @@ There are two things you can do about this warning:
 (setq
  scroll-margin 5 ;; when to start scrolling
  scroll-conservatively 0
-)
+ )
 (setq-default
  scroll-up-aggressively 0.01
  scroll-down-aggressively 0.01
-)
+ )
 
 (defun scroll-down-keep-cursor ()
-   ;; Scroll the text one line down while keeping the cursor
-   (interactive)
-   (scroll-down 1)
-)
+  ;; Scroll the text one line down while keeping the cursor
+  (interactive)
+  (scroll-down 1)
+  )
 
 (defun scroll-up-keep-cursor ()
-   ;; Scroll the text one line up while keeping the cursor
-   (interactive)
-   (scroll-up 1)
-)
+  ;; Scroll the text one line up while keeping the cursor
+  (interactive)
+  (scroll-up 1)
+  )
 
 (global-set-key (kbd "C-,") 'scroll-down-keep-cursor)
 (global-set-key (kbd "C-.") 'scroll-up-keep-cursor)
-;(global-set-key (kbd "C-c d") 'insert-current-date)
+                                        ;(global-set-key (kbd "C-c d") 'insert-current-date)
 
 ;; scrolling mouse
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 1))) ;; two lines at a time
@@ -118,22 +119,22 @@ There are two things you can do about this warning:
 (ido-mode t)
 
 ;; fill column indicator
-;(add-to-list 'load-path "~/.emacs.d/fill-column-indicator.el")
-;(require 'fill-column-indicator)
-;(define-globalized-minor-mode
-;  global-fci-mode fci-mode (lambda() (fci-mode 0)))
-;(setq fci-rule-width 1)
-;(setq fci-rule-color "darkgrey")
-;(setq-default fci-rule-column 80)
+;; (add-to-list 'load-path "~/.emacs.d/fill-column-indicator.el")
+;; (require 'fill-column-indicator)
+;; (define-globalized-minor-mode
+;;  global-fci-mode fci-mode (lambda() (fci-mode 0)))
+;; (setq fci-rule-width 1)
+;; (setq fci-rule-color "darkgrey")
+;; (setq-default fci-rule-column 80)
 
 ;; fci-mode sux in the terminal, i want it just in graphical mode
-;(if (display-graphic-p)
-;    (progn
-;      ;; if graphic
-;      (global-fci-mode 1))
-;      ;; else
-;  (global-fci-mode 0)
-;)
+;; (if (display-graphic-p)
+;;    (progn
+;;      ;; if graphic
+;;      (global-fci-mode 1))
+;;      ;; else
+;;  (global-fci-mode 0)
+;; )
 
 ;; highlight the current line
 ;;(setq hl-line-face 'hl-line)
@@ -149,15 +150,15 @@ There are two things you can do about this warning:
 ;; current date
 (defun insert-current-date() (interactive)
        (insert (shell-command-to-string "echo -n $(date '+%Y-%m-%d %k:%M')"))
-)
+       )
 (global-set-key (kbd "C-c d") 'insert-current-date)
 
 ;; convenience
 (global-set-key (kbd "C-c r") (lambda() (interactive) (load-file "~/.emacs")))
 (defun em ()
-   (interactive)
-   (find-file "~/.emacs")
-)
+  (interactive)
+  (find-file "~/.emacs")
+  )
 
 ;; emacs paste on line curser (not mouse)
 (setq mouse-yank-at-point t)
@@ -169,11 +170,11 @@ There are two things you can do about this warning:
 ;; switch window with tab
 (global-set-key [C-tab] 'other-window)
 (global-set-key [C-C-tab]
- (lambda ()
- (interactive)
- (other-window -1)
- )
-)
+                (lambda ()
+                  (interactive)
+                  (other-window -1)
+                  )
+                )
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -213,30 +214,30 @@ There are two things you can do about this warning:
       (url-retrieve-synchronously "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
     (goto-char (point-max))
     (eval-print-last-sexp)
+    )
   )
-)
 
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 (el-get 'sync)
 
 ;; auto break lines in paragraphs
-;add-hook 'text-mode-hook 'turn-on-auto-fill)
+;; add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 
-;; _
-;;| | __ _ _ __   __ _ _   _  __ _  __ _  ___  ___
-;;| |/ _` | '_ \ / _` | | | |/ _` |/ _` |/ _ \/ __|
-;;| | (_| | | | | (_| | |_| | (_| | (_| |  __/\__ \
-;;|_|\__,_|_| |_|\__, |\__,_|\__,_|\__, |\___||___/
-;;               |___/             |___/
+;;                               ___         ___   ___                           ___         ___  ___   ___ 
+;;   .'|        .'|=|`.     .'| |   |   .'|=|_.'  |   | |`.     .'|=|`.     .'|=|_.'    .'|=|_.' |   |=|_.' 
+;; .'  |      .'  | |  `. .'  |\|   | .'  |___    |   | |  `. .'  | |  `. .'  |___    .'  |  ___ `.  |      
+;; |   |      |   |=|   | |   | |   | |   |`._|=. |   | |   | |   |=|   | |   |`._|=. |   |=|_.'   `.|=|`.  
+;; |   |  ___ |   | |   | |   | |  .' `.  |  __|| `.  | |   | |   | |   | `.  |  __|| |   |  ___  ___  |  `.
+;; |___|=|_.' |___| |___| |___| |.'     `.|=|_.''   `.|=|___| |___| |___|   `.|=|_.'' |___|=|_.'  `._|=|___|
 
 
-; start auto-complete-mode
+;; start auto-complete-mode
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (auto-complete-mode 1))))
 
 
-; highlight parentheses when the cursor is next to them
+;; highlight parentheses when the cursor is next to them
 (require 'paren)
 (show-paren-mode t)
 
@@ -251,7 +252,7 @@ There are two things you can do about this warning:
 
 ;; lua-mode
 ;; This line is not necessary, if lua-mode.el is already on your load-path
-;(add-to-list 'load-path "~/.emacs.d/el-get/lua-mode")
+                                        ;(add-to-list 'load-path "~/.emacs.d/el-get/lua-mode")
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
@@ -264,7 +265,7 @@ There are two things you can do about this warning:
 ;; Latex mode
 (with-eval-after-load "tex"
   (add-to-list 'TeX-command-list
-        `("Arara" "arara --verbose %s" TeX-run-TeX nil t :help "Run Arara") t))
+               `("Arara" "arara --verbose %s" TeX-run-TeX nil t :help "Run Arara") t))
 
 (with-eval-after-load "tex"
   (add-to-list 'TeX-command-list
@@ -272,18 +273,19 @@ There are two things you can do about this warning:
 
 (with-eval-after-load "latex"
   (define-key LaTeX-mode-map (kbd "C-c C-a")
-     (lambda ()
-       (interactive)
-       (TeX-command-sequence '("Arara" "Extex") t))))
-
-;; (with-eval-after-load "latex"
-;;   (define-key LaTeX-mode-map (kbd "C-c C-a")
-;;      (lambda ()
-;;        (interactive)
+    (lambda ()
+      (interactive)
+      (TeX-command-sequence '("Arara" "Extex") t))))
 ;;        (TeX-command-sequence '("Arara" "View") t))))
 
 
-;; Aspell / Ispell / Flyspell
+;;  ___   ___        __          ___                        ___   ___ 
+;; |   |=|_.'   .'|=|  |    .'|=|_.'   .'|        .'|      |   |=|_.' 
+;; `.  |      .'  | |  |  .'  |  ___ .'  |      .'  |      `.  |      
+;;   `.|=|`.  |   |=|.'   |   |=|_.' |   |      |   |        `.|=|`.  
+;;  ___  |  `.|   |       |   |  ___ |   |  ___ |   |  ___  ___  |  `.
+;;  `._|=|___||___|       |___|=|_.' |___|=|_.' |___|=|_.'  `._|=|___|
+
 
 ;; Flyspell mode
 (dolist (hook '(text-mode-hook))
@@ -293,15 +295,17 @@ There are two things you can do about this warning:
   (add-hook hook (lambda () (flyspell-mode -1))))
 
 ;; If you’re using a Mac, you may need to add the following Elisp code to your config file as well in order for Flyspell to pick up the two-finger clicks (right-clicks):
-(eval-after-load "flyspell"
-  '(progn
-     (define-key flyspell-mouse-map [mouse-3] #'flyspell-correct-word)))
+;; (eval-after-load "flyspell"
+;;   '(progn
+;;      (define-key flyspell-mouse-map [mouse-3] #'flyspell-correct-word)))
 
+
+;; Ispell
 (with-eval-after-load "ispell"
   ;; Configure `LANG`, otherwise ispell.el cannot find a 'default
   ;; dictionary' even though multiple dictionaries will be configured
   ;; in next line.
-  (setenv "LANG" "en_US")
+  (setenv "LANG" "en_GB")
   (setq ispell-program-name "hunspell")
   ;; Configure German, Swiss German, and two variants of English.
   (setq ispell-dictionary "de_DE,en_GB,en_US")
