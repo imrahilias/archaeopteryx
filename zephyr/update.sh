@@ -14,3 +14,4 @@ sudo cp /etc/pacman.d/hooks/nvidia.hook ~/zephyr
 sudo cp /etc/pacman.conf ~/zephyr
 sudo cp /etc/powerpill/powerpill.json ~/zephyr
 sudo cp /etc/rsnapshot.conf ~/zephyr
+sudo cp /etc/fstab ~/zephyr

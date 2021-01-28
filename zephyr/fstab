@@ -1,0 +1,22 @@
+## 
+## /etc/fstab: static file system information
+##
+## <file system>	<dir>	<type>	<options>	<dump>	<pass>
+##
+## / > samsung 120 part 2
+UUID=ede305dc-3791-4e5b-8ba1-cafa2e0211e2   /		         ext4      rw,relatime,data=ordered,errors=remount-ro						          0   1
+
+## this is not a hat. it is a python digesting ram
+/swapf 					    none	         swap      defaults 										          0   0
+
+## efi system  > samsung 120 part 1
+UUID=F734-69F1				    /esp                 vfat      rw,relatime,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro     	          0   2
+
+## boot
+/esp/EFI/arch                               /boot                none      rw,relatime,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro,bind	          0   0
+
+## prime > hdd samsung 1000 part 1
+UUID=afc4c38f-20ff-4070-be2c-342fe250e235   /mnt/prime           ext4      rw,relatime,data=ordered,errors=remount-ro						          0   0
+#
+## troika > hdd toshiba 3000 part 1
+UUID=0711CCCB5F4AC2C3			    /mnt/troika          ntfs-3g   rw,relatime,users,exec,dev,suid,uid=1000,gid=1000,umask=0022,windows_names,errors=remount-ro   0   0
