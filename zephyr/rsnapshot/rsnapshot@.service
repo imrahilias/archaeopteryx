@@ -1,8 +1,9 @@
 [Unit]
-Description=rsnapshot (%I) backup
+Description=rsnapshot backup service
+OnFailure=/bin/notify-send -u critical "rsnapshotitself!"
 
 [Service]
 Type=oneshot
 Nice=19
 IOSchedulingClass=idle
-ExecStart=/usr/bin/rsnapshot %I
+ExecStart=/usr/bin/rsnapshot %I && /bin/notify-send -u normal "rsnapshotit!"
