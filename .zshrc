@@ -374,35 +374,39 @@ function clicolors() {
 # |   |  |`. |   | |   | |   | |  .' `.  |  __|| |   |  ___ |   |  |`. 
 # |___|  |_| |___| |___| |___| |.'     `.|=|_.'' |___|=|_.' |___|  |_| 
 #
-# This is based on: https://github.com/ranger/ranger/blob/master/examples/bash_automatic_cd.sh
-# Paste this into your .zshrc:
 
-# function ranger-cd {
-#     tempfile="$(mktemp -t tmp.XXXXXX)"
-#     /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
-#     test -f "$tempfile" &&
-#     if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
-#         cd -- "$(cat "$tempfile")"
-#     fi  
-#     rm -f -- "$tempfile"
-# }
+## This is based on: https://github.com/ranger/ranger/blob/master/examples/bash_automatic_cd.sh
+## Paste this into your .zshrc:
 
-# ## ranger-cd will fire for Ctrl+D
-# bindkey -s '^D' 'ranger-cd\n'
+function ranger-cd {
+    tempfile="$(mktemp -t tmp.XXXXXX)"
+    /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
+    test -f "$tempfile" &&
+    if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
+        cd -- "$(cat "$tempfile")"
+    fi  
+    rm -f -- "$tempfile"
+}
 
-# ## https://wiki.archlinux.org/index.php/Ranger
-# #$RANGERCD && unset RANGERCD && ranger-cd
+## ranger-cd will fire for Ctrl+D
+bindkey -s '^D' 'ranger-cd\n'
 
-# ## Preventing nested ranger instances
-# ##You can start a shell in the current directory with S, when you exit the shell you get back to your ranger instance. When you however forget that you already are in a ranger shell and start ranger again you end up with ranger running a shell running ranger.
+## https://wiki.archlinux.org/index.php/Ranger
+#$RANGERCD && unset RANGERCD && ranger-cd
 
-# ranger() {
-#     if [ -z "$RANGER_LEVEL" ]; then
-#         /usr/bin/ranger "$@"
-#     else
-#         exit
-#     fi
-# }
+## Preventing nested ranger instances You can start a shell in the
+##current directory with S, when you exit the shell you get back to
+##your ranger instance. When you however forget that you already are
+##in a ranger shell and start ranger again you end up with ranger
+##running a shell running ranger.
+
+ranger() {
+    if [ -z "$RANGER_LEVEL" ]; then
+        /usr/bin/ranger "$@"
+    else
+        exit
+    fi
+}
 
 #  ___   ___         __                     ___         ___         ___        __  
 #  `._|=|   |   .'|=|  |   .'|=|`.     .'| |   |   .'|=|_.'    .'|=|_.'   .'|=|  | 
@@ -413,34 +417,34 @@ function clicolors() {
 
 ## based on https://github.com/Vifon/zranger
 ## switching retains tabs!
-zranger() {
-    local RANGER_PID
+# zranger() {
+#     local RANGER_PID
 
-    if RANGER_PID=$(tmux list-panes -s -F '#{pane_pid}' -t ranger 2> /dev/null); then
-        # Leave the current cwd for ranger to read and cleanup.
-        pwd > /tmp/zranger-cwd-$UID
-        # Detach the other zranger instance...
-        tmux detach-client -s ranger
-        # ...and give it some time to read ranger's cwd before it changes.
-        sleep 0.05              # May need some tweaking.
-        # Tell ranger to read zsh's cwd from /tmp and cd to it.
-        kill -SIGUSR1 $RANGER_PID
-        # Attach to it.
-        TMUX='' tmux attach -t ranger
-    else
-        TMUX='' tmux new-session -s ranger 'exec ranger --cmd="set preview_images=false"'
-    fi
+#     if RANGER_PID=$(tmux list-panes -s -F '#{pane_pid}' -t ranger 2> /dev/null); then
+#         # Leave the current cwd for ranger to read and cleanup.
+#         pwd > /tmp/zranger-cwd-$UID
+#         # Detach the other zranger instance...
+#         tmux detach-client -s ranger
+#         # ...and give it some time to read ranger's cwd before it changes.
+#         sleep 0.05              # May need some tweaking.
+#         # Tell ranger to read zsh's cwd from /tmp and cd to it.
+#         kill -SIGUSR1 $RANGER_PID
+#         # Attach to it.
+#         TMUX='' tmux attach -t ranger
+#     else
+#         TMUX='' tmux new-session -s ranger 'exec ranger --cmd="set preview_images=false"'
+#     fi
 
-    # A second check needed because the process could have been
-    # started or stopped in the meantime.
-    if RANGER_PID=$(tmux list-panes -s -F '#{pane_pid}' -t ranger 2> /dev/null); then
-        cd -P /proc/$RANGER_PID/cwd
-    fi
-}
+#     # A second check needed because the process could have been
+#     # started or stopped in the meantime.
+#     if RANGER_PID=$(tmux list-panes -s -F '#{pane_pid}' -t ranger 2> /dev/null); then
+#         cd -P /proc/$RANGER_PID/cwd
+#     fi
+# }
 
-## ranger-cd will fire for Ctrl+D
-#autoload -U zranger # embedded in zshrc
-bindkey -s '^D' "\eq zranger\n"
+# ## ranger-cd will fire for Ctrl+D
+# #autoload -U zranger # embedded in zshrc
+# bindkey -s '^D' "\eq zranger\n"
 
 #        __          __                                  __    ___  ___   ___ 
 #   .'|=|  |    .'|=|  |   .'|=|`.     .'|\/|`.     .'|=|  |  `._|=|   |=|_.' 
