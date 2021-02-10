@@ -81,7 +81,8 @@ urxvt*pointerColor2: magenta
 *color0:  #282a2b
 *color1:  #AD513E
 *color2:  #4C7D58
-*color3:  #a8ac35
+*color3:  #FFB200
+!#a8ac35
 *color4:  #B8CBE6
 *color5:  #666699
 *color6:  #8caff0
@@ -94,6 +95,23 @@ urxvt*pointerColor2: magenta
 *color13: #6698D9
 *color14: #9bbaf1
 *color15: #f0f0f0
+
+! *color0: "#1d1f21" --> Default Background
+! *color1: "#282a2e" --> Lighter Background (Used for status bars)
+! *color2: "#373b41" --> Selection Background
+! *color3: "#969896" --> Comments, Invisibles, Line Highlighting
+! *color4: "#b4b7b4" --> Dark Foreground (Used for status bars)
+! *color5: "#c5c8c6" --> Default Foreground, Caret, Delimiters, Operators
+! *color6: "#e0e0e0" --> Light Foreground (Not often used)
+! *color7: "#ffffff" --> Light Background (Not often used)
+! *color8: "#CC342B" --> Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+! *color9: "#F96A38" --> Integers, Boolean, Constants, XML Attributes, Markup Link Url
+! *color10: "#FBA922" --> Classes, Markup Bold, Search Text Background
+! *color11: "#198844" --> Strings, Inherited Class, Markup Code, Diff Inserted
+! *color12: "#3971ED" --> Support, Regular Expressions, Escape Characters, Markup Quotes
+! *color13: "#3971ED" --> Functions, Methods, Attribute IDs, Headings
+! *color14: "#A36AC7" --> Keywords, Storage, Selector, Markup Italic, Diff Changed
+! *color15: "#3971ED" --> Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
 
 ! # foreground
 ! 0: 30, black

@@ -8,12 +8,12 @@
 # |___| |___| |___|=|_.' |___| |___| |___|  `._|=|___|
 #
 
-# colors
+## colors
 red="\e[31m"
 blue="\e[34m"
 default="\e[0m"
 
-# systemd alias
+## systemd alias
 user_commands=(
   list-units is-active status show help list-unit-files
   is-enabled list-jobs show-environment cat list-timers
@@ -39,7 +39,7 @@ alias scu-enable-now="scu-enable --now"
 alias scu-disable-now="scu-disable --now"
 alias scu-mask-now="scu-mask --now"
 
-# enable color support of ls and also add handy aliases
+## enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
@@ -51,7 +51,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# list aliasas
+## list aliasas
 #alias l='ls -1Bh --group-directories-first' # '1' 4 one entry/line, 'B' ignores backups (~), 'h' 4 human readable (kiB, MiB, ...)
 #alias ll='ls -1ABh --group-directories-first' # 'A' 4 almost all
 alias l='ls -1Bhl --group-directories-first' # 'n' 4 numeric uid/gid, 'o' like 'l' without group 
@@ -61,7 +61,7 @@ alias blk='sudo blkid -o list'
 alias hist='fc -El 0 | grep'
 alias lsa='lsarchives '
 
-# edit aliases
+## edit aliases
 #alias editf='sudo emc /etc/fstab'
 alias editf='sudo cp /etc/fstab /etc/fstab.$(date +%y%m%d%H%S) && sudo emc /etc/fstab'
 alias editb='emacsclient -c $HOME/.bashrc'
@@ -69,11 +69,12 @@ alias editz='emacsclient -c $HOME/.zshrc'
 alias editx='emacsclient -c $HOME/.xinitrc'
 alias edita='emacsclient -c $HOME/.config/awesome/rc.lua'
 
-# mount aliases
+## mount aliases
 alias mnta='sudo mount -a; echo -e $red"mounted:"$default; mount' # echo 4 color, semicolon 4 1. command, if ok, than 2. com
 alias uma='sudo umount -a; echo -e $red"mounted:"$default; mount'
 
-# pacman aliases
+## pacman aliases
+alias pii='sudo pacman -S' # install 1 pkg
 alias pi='sudo pacman -Syyu' # Do a full system upgrade
 alias pq='bauerbill -Ss --aur' # Search for all repo and AUR packages
 alias pp='sudo powerpill -Syyu' # Do a full system upgrade using pauerpill with rsync 
@@ -83,11 +84,11 @@ alias px='sudo pacman -R' # Remove package
 alias pc='sudo pacman -Scc && sudo pacman-optimize' # remove all cached pkg! and defragment
 alias reflect='sudo reflector -p https -f 10 -l 10 --sort rate --save /etc/pacman.d/mirrorlist' # save 10 fastest of the 10 recent mirrors using https
 
-# non root aliases
+## non root aliases
 alias s='sudo su -' #--> zum einfacher zu root zu kommen... siehe /etc/sudoers für details
 alias sudo='sudo '
 
-# file aliases
+## file aliases
 alias du='du -d 1 -h'
 alias dua='du -d 1 -ah' # Display the size of files at depth 1 in current location in human-readable form
 alias duf='du -sh' # Display the size of files in current location in human-readable form
@@ -98,19 +99,19 @@ alias countd='find . -type d | wc -l' # number of all subdirs in dir
 #alias rmtmp='rm *\#; rm *~; rm .*~' # moved to script
 alias x='extract '
 
-# network alias
+## network alias
 alias oe1='mplayer http://mp3stream3.apasf.apa.at:8000/listen.pls'
 
-# launch alias
+## launch alias
 alias x='startx'
 #alias evince='dbus-launch evince'
 alias ee="emacsclient -ca \'\'" # > service moved to systemd
 alias scan='scanimage --format=tiff --mode=Color' #>http://lists.alioth.debian.org/pipermail/sane-devel/2001-December/001177.html
 alias am='alsamixer'
 alias halt='systemctl poweroff'
-#alias mm='udisksctl mount -b' # nemo mounts on click
+#alias mm='udisksctl mount -b' ## nemo mounts on click
 
-# misc
+## misc
 alias u='urxvtc'
 alias dark='razercfg -l all:off'
 alias light='razercfg -l GlowingLogo:off -l Scrollwheel:on'
@@ -157,7 +158,7 @@ SAVEHIST=10000
 # |___|        `.|=|___| |___| |.'     `.|=|_.'        `.|      |___|   `.|=|.'   |___| |.'    `._|=|___|
 #
 
-# archive extraction
+## archive extraction
 extract() {
 	local remove_archive
 	local success
@@ -227,7 +228,7 @@ extract() {
 	done
 }
 
-# list archives
+## list archives
 lsarchive() {
     if [ -f $1 ]; then
         case $1 in
@@ -245,7 +246,7 @@ lsarchive() {
     fi
 }
 
-# man coloring
+## man coloring
 man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
     LESS_TERMCAP_md=$'\E[01;38;5;74m' \
@@ -258,11 +259,11 @@ man() {
 }
 
 
-# Pressing enter in a git directory runs `git status`
-# in other directories `ls`
+## Pressing enter in a git directory runs `git status`
+## in other directories `ls`
 magic-enter () {
 
-  # If commands are not already set, use the defaults
+  ## If commands are not already set, use the defaults
   [ -z "$MAGIC_ENTER_GIT_COMMAND" ] && MAGIC_ENTER_GIT_COMMAND="git status ."
   [ -z "$MAGIC_ENTER_OTHER_COMMAND" ] && MAGIC_ENTER_OTHER_COMMAND="ls -1Bhl --group-directories-first ."
 
@@ -282,18 +283,18 @@ zle -N magic-enter
 bindkey "^M" magic-enter
 
 
-# cd + ls
+## cd + ls
 function chpwd() {
     emulate -L zsh
     ls -1Bhl --group-directories-first --color=auto . # runs ls (...) after typing cd!
 }
 
 
-# anti tar-bomb
+## anti tar-bomb
 atb() { l=$(tar tf $1); if [ $(echo "$l" | wc -l) -eq $(echo "$l" | grep $(echo "$l" | head -n1) | wc -l) ]; then tar xf $1; else mkdir ${1%.t(ar.gz||ar.bz2||gz||bz||ar)} && tar xf $1 -C ${1%.t(ar.gz||ar.bz2||gz||bz||ar)}; fi ;}
 
 
-# quick dir change
+## quick dir change
 rationalize-dot() {
     if [[ $LBUFFER = *.. ]]; then
         LBUFFER+=/..
@@ -305,8 +306,8 @@ zle -N rationalize-dot
 bindkey . rationalize-dot
 
 
-# prompt_char
-# changes the prompt char to 'g' if the current dir is a git repo
+## prompt_char
+## changes the prompt char to 'g' if the current dir is a git repo
 function prompt_char {
     git branch >/dev/null 2>/dev/null && echo ' + ' && return 
     echo ' '
@@ -320,9 +321,9 @@ function cmd_fail {
 }
 
 
-# git_branch
-# if the current dir is a git repo, it prints the current branch and a * if there is
-# stuff to be commited.
+## git_branch
+## if the current dir is a git repo, it prints the current branch and a * if there is
+## stuff to be commited.
 function git_branch {
     git branch >/dev/null 2>/dev/null && echo -n "git:"$(git branch | grep "*" | sed 's/* //')
     git status >/dev/null 2>/dev/null | grep modified >/dev/null 2>/dev/null && echo "* " && return
@@ -330,7 +331,7 @@ function git_branch {
 }
 
 
-# sudo or sudoedit will be inserted before the command @ Dongweiming <ciici123@gmail.com>
+## sudo or sudoedit will be inserted before the command @ Dongweiming <ciici123@gmail.com>
 sudo-command-line() {
     [[ -z $BUFFER ]] && zle up-history
     if [[ $BUFFER == sudo\ * ]]; then
@@ -346,13 +347,13 @@ sudo-command-line() {
     fi
 }
 zle -N sudo-command-line
-# Defined shortcut keys: [Esc] [Esc]
+## Defined shortcut keys: [Esc] [Esc]
 bindkey -M emacs '\e\e' sudo-command-line
 bindkey -M vicmd '\e\e' sudo-command-line
 bindkey -M viins '\e\e' sudo-command-line
 
 
-# colors, a lot of colors!
+## colors, a lot of colors!
 function clicolors() {
     i=1
     for color in {000..255}; do;
@@ -466,7 +467,7 @@ BCYAN="%{"$'\033[01;36m'"%}"
 WHITE="%{"$'\033[00;37m'"%}"
 BWHITE="%{"$'\033[01;37m'"%}"
 NORM="%{"$'\033[00m'"%}"
-PROMPT="${BWHITE}%~${BCYAN} @${BWHITE}"'$(prompt_char)'"${WHITE}" # Vote Jungle;)
+PROMPT="${BWHITE}%~${BCYAN} @${BWHITE}"'$(prompt_char)'"${WHITE}" # Quote Jungle;)
 RPROMPT='$(cmd_fail)$(git_branch)%T'
 
 #PROMPT="${BBLACK}%n${YELLOW}@${BBLACK}%M ${WHITE}%~ ${BBLUE}"'$(prompt_char)'" ${WHITE}" # Vote Jungle;)
@@ -499,13 +500,13 @@ export QT_STYLE_OVERRIDE='qt5ct'
 #  `._|=|___|       `.|        `.|=|___| |___|      |___|      
 #
 
-# turn off XOFF/XON
+## turn off XOFF/XON
 stty -ixon
 
-# turn off powersaver/screensaver/blanking/bell
+## turn off powersaver/screensaver/blanking/bell
 #xset -dpms s off s noblank -b
 
-#key setups
+## key setups
 bindkey -e # emacs key bindings: yeeha:D
 bindkey ' ' magic-space # also do history expansion on space, type '!!', then hit enter, watch
 
@@ -517,22 +518,25 @@ bindkey ' ' magic-space # also do history expansion on space, type '!!', then hi
 # |___|       |___|=|_.'   `.|=|___|   `.|=|_.'' |___| |___| |.'    `._|=|___|
 #
 
-# auto suggestion
+## auto suggestion
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=6,bg=grey"
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion) # will first try to find a suggestion from your history, but, if it can't find a match, will find a suggestion from the completion engine (experimental).
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 
-# history-substring-search
+## history-substring-search
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
-# autojump
-source /etc/profile.d//autojump.zsh
+## autojump
+source /etc/profile.d/autojump.zsh
 
-# syntax highlighning has to be last
+## syntax highlighning has to be last
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+
+## more colors! > manually copied
+#source ~/.zsh/zsh-dircolors/zsh-dircolors.plugin.zsh 
 
 #              ___         ___  ___   ___             
 #   .'|=|`.   |   | |`.   `._|=|   |=|_.'   .'|=|`.   
