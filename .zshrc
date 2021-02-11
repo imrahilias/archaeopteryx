@@ -378,21 +378,21 @@ function clicolors() {
 ## This is based on: https://github.com/ranger/ranger/blob/master/examples/bash_automatic_cd.sh
 ## Paste this into your .zshrc:
 
-function ranger-cd {
-    tempfile="$(mktemp -t tmp.XXXXXX)"
-    /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
-    test -f "$tempfile" &&
-    if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
-        cd -- "$(cat "$tempfile")"
-    fi  
-    rm -f -- "$tempfile"
-}
-
-## ranger-cd will fire for Ctrl+D
-bindkey -s '^D' 'ranger-cd\n'
+# function zranger {
+#     tempfile="$(mktemp -t tmp.XXXXXX)"
+#     /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
+#     test -f "$tempfile" &&
+#     if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
+#         cd -- "$(cat "$tempfile")"
+#     fi  
+#     rm -f -- "$tempfile"
+# }
 
 ## https://wiki.archlinux.org/index.php/Ranger
 #$RANGERCD && unset RANGERCD && ranger-cd
+
+## ranger-cd will fire for Ctrl+D
+bindkey -s '^D' 'zranger\n'
 
 ## Preventing nested ranger instances You can start a shell in the
 ##current directory with S, when you exit the shell you get back to
@@ -400,9 +400,9 @@ bindkey -s '^D' 'ranger-cd\n'
 ##in a ranger shell and start ranger again you end up with ranger
 ##running a shell running ranger.
 
-ranger() {
+zranger() {
     if [ -z "$RANGER_LEVEL" ]; then
-        /usr/bin/ranger "$@"
+        . ranger # start in current dir
     else
         exit
     fi
