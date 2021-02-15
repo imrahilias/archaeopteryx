@@ -4,12 +4,12 @@ https://wiki.archlinux.org/index.php/Kernel_mode_setting
 https://wiki.archlinux.org/index.php/NVIDIA#DRM_kernel_mode_setting
 https://wiki.archlinux.org/index.php/Unified_Extensible_Firmware_Interface#UEFI_Shell
 
-# --------------- set up efistub ---------------
+# efistub
 
-efibootmgr --create --disk /dev/sda --part 1 --write-signature --label "Arch Linux KMS" --loader /EFI/arch/vmlinuz-linux --unicode 'root=UUID=ede305dc-3791-4e5b-8ba1-cafa2e0211e2 rw initrd=/EFI/arch/intel-ucode.img rw initrd=/EFI/arch/initramfs-linux.img rw nvidia-drm.modeset=1'
+## efibootmgr --create --disk /dev/sda --part 1 --write-signature --label "Arch Linux KMS" --loader /EFI/arch/vmlinuz-linux --unicode 'root=UUID=ede305dc-3791-4e5b-8ba1-cafa2e0211e2 rw initrd=/EFI/arch/intel-ucode.img rw initrd=/EFI/arch/initramfs-linux.img rw nvidia-drm.modeset=1'
 
 
-# --------------- working efistub setup ---------------
+# working efistub setup
 
 ~ @ efibootmgr                                                                                      14:49
 BootCurrent: 0000
@@ -29,31 +29,47 @@ Boot0004* Hard Drive 	BBS(HD,,0x0)AMGOAMNO........o.S.a.m.s.u.n.g. .S.S.D. .8.4.
 Boot0005* UEFI: TDKMediaTrans-It Drive PMAP	PciRoot(0x0)/Pci(0x1c,0x1)/Pci(0x0,0x0)/USB(4,0)/HD(1,GPT,ce54371f-31bd-4f2a-a842-acedb6a82bbc,0x800,0x4e2000)AMBO
 ~ @
 
-#---------- Using UEFI Shell ----------
-#
-# It is possible to launch an EFISTUB kernel from UEFI Shell as if it is a normal UEFI application. In this case the kernel parameters are passed as normal parameters to the launched EFISTUB kernel file.
-#
-# > fs0:
-# > \vmlinuz-linux  -u root=UUID=ede305dc-3791-4e5b-8ba1-cafa2e0211e2 rw initrd=/initramfs-linux.img
-#
-# To avoid needing to remember all of your kernel parameters every time, you can save the executable command to a shell script such as archlinux.nsh on your UEFI System Partition, then run it with:
-#
-# > fs0:
-# > archlinux
-#
+# uefi shell
 
-#---------- Using a startup.nsh script ----------
-#
-# The UEFI Shell Specification 2.0 establishes that a script called startup.nsh at the root of the ESP partition will always be interpreted and can contain arbitrary instructions; among those you can set a bootloading line.
-# Make sure you mount the ESP partition on /boot and create a startup.nsh script that contains a kernel bootloading line. For example:
-#
-#vmlinuz-linux rw root=/dev/sdX [rootfs=myfs] [rootflags=myrootflags] \
-# [kernel.flag=foo] [mymodule.flag=bar] \
-# [initrd=\intel-ucode.img] initrd=\initramfs-linux.img
-# 
-#This method will work with almost all UEFI firmware versions you may encounter in real hardware, you can use it as last resort. The script must be a single long line. Sections in brackets are optional and given only as a guide. Shell style linebreaks are for visual clarification only. FAT filesystems use the backslash as path separator and in this case, the backslash declares the initramfs is located in the root of the ESP partition. Only Intel microcode is loaded in the booting parameters line; AMD microcode is read from disk later during the boot process; this is done automatically by the kernel.
+it is possible to launch an efistub kernel from uefi shell as if it is
+a normal uefi application. in this case the kernel parameters are
+passed as normal parameters to the launched efistub kernel file.
+
+## fs0:
+## \vmlinuz-linux  -u root=UUID=ede305dc-3791-4e5b-8ba1-cafa2e0211e2 rw initrd=/initramfs-linux.img
+
+to avoid needing to remember all of your kernel parameters every time,
+you can save the executable command to a shell script such as
+archlinux.nsh on your uefi system partition, then run it with:
+
+## fs0:
+## archlinux
+
+# startup.nsh
+
+the uefi shell specification 2.0 establishes that a script called
+startup.nsh at the root of the esp partition will always be
+interpreted and can contain arbitrary instructions; among those you
+can set a bootloading line. make sure you mount the esp partition
+on /boot and create a startup.nsh script that contains a kernel
+bootloading line. for example:
+
+## vmlinuz-linux rw root=/dev/sdX [rootfs=myfs] [rootflags=myrootflags] \
+## [kernel.flag=foo] [mymodule.flag=bar] \
+## [initrd=\intel-ucode.img] initrd=\initramfs-linux.img
+ 
+this method will work with almost all uefi firmware versions you may
+encounter in real hardware, you can use it as last resort. the script
+must be a single long line. sections in brackets are optional and
+given only as a guide. shell style linebreaks are for visual
+clarification only. fat filesystems use the backslash as path
+separator and in this case, the backslash declares the initramfs is
+located in the root of the esp partition. only intel microcode is
+loaded in the booting parameters line; amd microcode is read from disk
+later during the boot process; this is done automatically by the
+kernel.
 
 
---------------- startup.nsh --------------
+# startup.nsh
 
-vmlinuz-linux -u root=UUID=ede305dc-3791-4e5b-8ba1-cafa2e0211e2 rw initrd=/EFI/arch/intel-ucode.img rw initrd=/EFI/arch/initramfs-linux.img rw nvidia-drm.modeset=1
+## vmlinuz-linux -u root=UUID=ede305dc-3791-4e5b-8ba1-cafa2e0211e2 rw initrd=/EFI/arch/intel-ucode.img rw initrd=/EFI/arch/initramfs-linux.img rw nvidia-drm.modeset=1

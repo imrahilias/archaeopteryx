@@ -488,7 +488,8 @@ awful.rules.rules = {
            "Thunar",
         },
         name = {
-           "ranger",
+           "ranger:",
+           "Waldläufer",
    }},
      properties = { tag = "⛁", switchtotag = true }},
    

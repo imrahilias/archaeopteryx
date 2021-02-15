@@ -1,10 +1,10 @@
-download via adobe.
+# download via adobe
 see readme 4 details
 
-extract tar.gt:
+# extract
 $ tar -zxvf data.tar.gz
 
-copy files:
+# copy files
 $ cp -r usr /usr
 $ sudo cp libflashplayer.so /usr/lib/flashplugin-nonfree
 
