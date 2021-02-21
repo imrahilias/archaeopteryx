@@ -73,11 +73,15 @@
 # |___|  |_| |___| |___| |___| |.'     `.|=|_.'' |___|=|_.' |___|  |_| 
 #                                                                     
 
-## mouse to map for left/right for ranger @ urxvtc
-"xdotool key 'ISO_Level3_Shift+Left'"
+## map mouse buttons to left/right for ranger @ urxvtc,
+## the terminal ignores the "alt gr" and "alt",
+## yet "alt" is shortcuts the back/forth action in chromium!
+## so two birds with one stone.'ISO_Level3_Shift+Left+alt'
+
+"xdotool key 'Alt_L+Left'"
 b:8
 
-"xdotool key 'ISO_Level3_Shift+Right'"
+"xdotool key 'Alt_L+Right'"
 b:9
   
 ##################################
