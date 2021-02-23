@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 cd $PWD # go where this is issued
 

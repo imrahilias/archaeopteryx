@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 # nameit
 # changes all files in all subdirs; space 2 underline, uppercase 2 lowercase,  removes dash,&,+,\,!,?, and other exotic symbols.
 # since rename uses sed syntax (most of it), it went down pretty easy:D

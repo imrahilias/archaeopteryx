@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 # Rename files by replacing Unix-unfriendly characters.
 
 usage () {

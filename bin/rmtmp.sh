@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 find . \( -name "#*#" -o -name "*~" \) -print
 echo -n "remove? [y/N] "

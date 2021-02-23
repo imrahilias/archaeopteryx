@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # get primary selection
 url=`xclip -out -selection primary`

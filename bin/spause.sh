@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 ## pause slurm for 1 h, then resume all
 ## regardless if there were some jobs suspended for different reasons!
 
