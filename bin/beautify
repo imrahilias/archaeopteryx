@@ -1,0 +1,151 @@
+#!/bin/sh
+# moritz siegel @ 210302
+
+usage () {
+    cat <<EOF
+usage: $0 [OPTIONS] [--] [FILE [FILE...]]
+rename files by replacing unix-unfriendly characters.
+WARNING: beautify DOES work with wildcard expansion via 'beautify *', 
+but might rename critical files (eg. '$RECYCLEBIN$').
+WARNING: note that for including dotted files, 'beautify .*' may be used,
+but might rename critical files (eg. '.Xresources').
+
+Options:
+ -f, --first     strip last dot in filename (default is to keep the dot, might be a file extension).
+ -h, --help      show this help and exit.
+ -l, --last      strip first dot in filename (default is to keep the dot, might be hidden file).
+ -t, --test      testing, print procedure, but do not rename files.
+EOF
+}
+
+error () {
+    printf "%s\n" "$1" 1>&2
+}
+
+## special characters to keep (eg: lost+found, tmp~, #tmp#), and
+## space-like characters to remain space-liek (underline)--except
+## dots, which are special, see below.
+keep='+~#' 
+spaces=' _,;-'
+
+
+## functions
+
+unixify () {
+    printf '%s\n' "$1" \
+        | tr -d "$delete" \
+        | tr -s "$spaces" _ \
+        | lower \
+        | umlaut \
+        | notalphanumerical \
+        | firstdot \
+        | lasttdot \
+        | underline
+}
+
+lower () {
+    sed 's/.*/\L&/'
+}
+
+umlaut () {
+    sed 's/ä/ae/g ; s/ö/oe/g ; s/ü/ue/g ; s/ß/sz/g;'
+}
+
+notalphanumerical () {
+    sed "s/[^A-Za-z0-9."$keep"]/_/g"
+}
+
+
+firstdot () {
+    if [[ $keep_first_dot == 1 ]]; then
+        sed 's/^\.\([^.]\+\)/?\1/'
+    else
+        sed 's/\./\./'
+    fi
+}
+
+lasttdot () {
+    if [[ $keep_last_dot == 1 ]]; then
+        sed 's/\(.\+\)\.\([a-z~#_]\+\)$/\1?\2/g'
+    else
+        sed 's/\./\./'
+    fi
+}
+
+underline () {
+    sed 's/\./_/g ; s/_*_/_/g ; s/?/\./g'
+}
+
+nameit () {
+    dir="$(dirname "$1")"
+    name="$(basename "$1")"
+    newname="$(unixify "$name")"
+    
+    ## check if filename would change at all
+    if [[ "$newname" = "$name" ]]; then
+        return;
+    fi
+
+    ## test if that new name is available
+    testname="$newname"
+    count=0
+    while [[ -e "$dir/$testname" ]]; do
+    testname="$newname"_"$count"
+    count=$(($count+1))
+done
+if [[ $count != 0 ]]; then
+    echo "warning: directory/file '$newname' exists, renaming '$name' to '$testname'"
+fi
+
+## finally rename
+if [[ $testing == 1 ]]; then
+    echo "dryrun: rename $dir/$name to $dir/$testname"
+else
+    mv -i "$dir/$name" "$dir/$testname"
+fi
+}
+
+ ## command line arguments
+ short_opts=fhlt
+ long_opts=first,help,last,test
+ args="$(LC_ALL=C getopt -n "$0" -s sh -o $short_opts -l $long_opts -- "$@")"
+ if [[ $? -eq 0 ]]; then
+     eval set -- "$args"
+ else
+     exit 1
+ fi
+
+ ## defaults
+ testing=
+ keep_first_dot=1
+ keep_last_dot=1
+
+ while [[ $# -gt 0 ]]; do
+     case "$1" in
+         -h|--help)
+             usage; exit 0 ;;
+         -f|--first)
+             keep_first_dot=0;;
+         -l|--last)
+             keep_last_dot=0;;
+         -t|--test)
+             testing=1;;
+         --)
+             shift; break ;;
+         -*)
+             error "$0: illegal option -- '$1'"
+             exit 1 ;;
+         *)
+             break
+     esac
+     shift
+ done
+
+ if [[ $# -lt 1 ]]; then
+     error "$0: required non-option argument missing"
+     exit 1
+ fi
+
+ for file in "$@"; do
+     nameit "$file"
+ done

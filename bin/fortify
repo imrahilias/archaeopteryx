@@ -1,0 +1,83 @@
+#!/bin/zsh
+## fortify @ moritz siegel 210222
+## generate fortran source file, gnuplot file, and convenient shell script
+
+## initialise fortran source file
+init () {
+    echo "
+    ! moritz siegel @ $(date "+%y%m%d%H%M")
+    
+    program $name
+    
+      implicit none
+      integer, parameter :: p=selected_real_kind( 16 )
+      integer ::
+      real( kind=p ) ::
+      real( kind=p ), dimension( , ) ::
+    
+    
+    
+    end program $name
+    " > $name.f90
+}
+
+## initialise gnuplot file
+plot () {
+    echo "
+    reset
+    set key
+    set size square
+    set term png size 1920,1080
+    set out $name.png
+    set title $name
+    #set cbr [1e-5:]
+    #set xrange [-10:10]
+    #set xrange [-10:10]
+    set xlabel 'x'
+    set ylabel 'y'
+    p $name.dat u 1:2
+    " > $name.gp
+}
+
+## compile & execute & plot
+compact () {
+    echo "time gfortran -o $name $name.f95 && time ./$name && time gnuplot $name.gp" > $name.sh
+}
+
+
+## format name
+delete_chars="()[]{}*?!^~%\\\<>&\$#|'\`\"@=+"
+replace_chars=" _.,:;-"
+
+unixify () (
+    printf '%s\n' "$1" \
+        | tr -d "$delete_chars" \
+        | tr -s "$replace_chars" _ \
+        | sed 's/.*/\L&/' \
+        | sed 's/^-\(.\)/\1/; s/\(.\)-$/\1/;' \
+        | sed 's/ä/ae/g; s/ö/oe/g; s/ü/ue/g; s/ß/sz/g;'
+)
+
+if [ $# -eq 0 ]; then
+    name="$(date "+%y%m%d")"
+else
+    name=$(unixify "'$*'")
+fi
+
+echo $name
+
+## check filename
+echo "$name.f90"
+count=0
+while [ -e "$name.f90" ]; do
+    echo "directory/file '$name' exists, renaming to '"$name"_"$count"'"
+    name="$name"_"$count"
+    count=$(($count+1))
+done
+echo "$count"
+echo "$name"
+init $name
+plot $name
+compact $name
+   
+

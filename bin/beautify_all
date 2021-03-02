@@ -20,13 +20,12 @@ case "$#" in # check if arguments are given
     2) sub=$1
        dir=$2
        echo "custom level of depth; go down $sub layer"
-       echo "custom dir : start with all files in $dir"
+       echo "custom dir: start with all files in $dir"
        ;;
 esac
 
 # do it
-for (( c=1; c<=$sub; c++ ))
-do
+for (( c=1; c<=$sub; c++ )); do
     echo "[$dir] depth of subdir: $c"
     beautify $dir
     dir=$(echo "$dir""/*") # move on to next layer of subdirs (and so forth...)

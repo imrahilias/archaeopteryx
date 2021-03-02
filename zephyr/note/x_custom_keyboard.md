@@ -2,6 +2,8 @@
 
 to enable umlauts as keys like AltGr+O, add the fallowing to /usr/share/X11/xkb/symbols/us
 
+sudo emacs /usr/share/X11/xkb/symbols/us
+
 --------------------------------------------------------------------------------
 
 partial alphanumeric_keys
