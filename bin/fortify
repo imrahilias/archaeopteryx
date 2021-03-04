@@ -41,30 +41,30 @@ plot () {
 
 ## compile & execute & plot
 compact () {
-    echo "time gfortran -o $name $name.f95 && time ./$name && time gnuplot $name.gp" > $name.sh
+    echo "
+    time gfortran -oG -Wall -fimplicit-none -fcheck=all -fbacktrace $name $name.f95
+    #time gfortran -o $name $name.f95
+    time ./$name
+    time gnuplot $name.gp
+    " > $name.sh
 }
 
-
 ## format name
-delete_chars="()[]{}*?!^~%\\\<>&\$#|'\`\"@=+"
-replace_chars=" _.,:;-"
-
+delete="()[]{}*?!^~%\\\<>&\$#|'\`\"@=+"
+spaces=" _.,:;-"
 unixify () (
     printf '%s\n' "$1" \
-        | tr -d "$delete_chars" \
-        | tr -s "$replace_chars" _ \
+        | tr -d "$delete" \
+        | tr -s "$spaces" _ \
         | sed 's/.*/\L&/' \
-        | sed 's/^-\(.\)/\1/; s/\(.\)-$/\1/;' \
         | sed 's/ä/ae/g; s/ö/oe/g; s/ü/ue/g; s/ß/sz/g;'
 )
 
 if [ $# -eq 0 ]; then
     name="$(date "+%y%m%d")"
 else
-    name=$(unixify "'$*'")
+    name=$(unixify "$1")
 fi
-
-echo $name
 
 ## check filename
 echo "$name.f90"
@@ -74,10 +74,8 @@ while [ -e "$name.f90" ]; do
     name="$name"_"$count"
     count=$(($count+1))
 done
-echo "$count"
-echo "$name"
+
+## create
 init $name
 plot $name
 compact $name
-   
-
