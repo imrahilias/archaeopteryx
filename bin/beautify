@@ -25,6 +25,7 @@ error () {
 ## special characters to keep (eg: lost+found, tmp~, #tmp#), and
 ## space-like characters to remain space-liek (underline)--except
 ## dots, which are special, see below.
+delete='$'
 keep='+~#' 
 spaces=' _,;-'
 
@@ -90,62 +91,71 @@ nameit () {
     testname="$newname"
     count=0
     while [[ -e "$dir/$testname" ]]; do
-    testname="$newname"_"$count"
-    count=$(($count+1))
-done
-if [[ $count != 0 ]]; then
-    echo "warning: directory/file '$newname' exists, renaming '$name' to '$testname'"
-fi
+        testname="$newname"_"$count"
+        count=$(($count+1))
+    done
+    if [[ $count != 0 ]]; then
+        echo "warning: directory/file '$newname' exists, renaming '$name' to '$testname'"
+    fi
 
-## finally rename
-if [[ $testing == 1 ]]; then
-    echo "dryrun: rename $dir/$name to $dir/$testname"
-else
-    mv -i "$dir/$name" "$dir/$testname"
-fi
+    ## finally rename
+    if [[ $testing == 1 ]]; then
+        echo "dryrun: rename $dir/$name to $dir/$testname"
+    else
+        if [[ $verbose == 1 ]]; then
+            mv -v "$dir/$name" "$dir/$testname"
+        else
+            mv "$dir/$name" "$dir/$testname"
+        fi
+    fi
 }
 
- ## command line arguments
- short_opts=fhlt
- long_opts=first,help,last,test
- args="$(LC_ALL=C getopt -n "$0" -s sh -o $short_opts -l $long_opts -- "$@")"
- if [[ $? -eq 0 ]]; then
-     eval set -- "$args"
- else
-     exit 1
- fi
+## command line arguments
+short_opts=fhltv
+long_opts=first,help,last,test,verbose
+args="$(LC_ALL=C getopt -n "$0" -s sh -o $short_opts -l $long_opts -- "$@")"
+if [[ $? -eq 0 ]]; then
+    eval set -- "$args"
+else
+    exit 1
+fi
 
- ## defaults
- testing=
- keep_first_dot=1
- keep_last_dot=1
+## defaults
+keep_first_dot=1
+keep_last_dot=1
+testing=0
+verbose=1
 
- while [[ $# -gt 0 ]]; do
-     case "$1" in
-         -h|--help)
-             usage; exit 0 ;;
-         -f|--first)
-             keep_first_dot=0;;
-         -l|--last)
-             keep_last_dot=0;;
-         -t|--test)
-             testing=1;;
-         --)
-             shift; break ;;
-         -*)
-             error "$0: illegal option -- '$1'"
-             exit 1 ;;
-         *)
-             break
-     esac
-     shift
- done
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -h|--help)
+            usage; exit 0 ;;
+        -f|--first)
+            keep_first_dot=0;;
+        -l|--last)
+            keep_last_dot=0;;
+        -s|--silent)
+            verbose=0;;
+        -t|--test)
+            testing=1;;
+        -v|--verbose)
+            verbose=1;;
+        --)
+            shift; break ;;
+        -*)
+            error "$0: illegal option -- '$1'"
+            exit 1 ;;
+        *)
+            break
+    esac
+    shift
+done
 
- if [[ $# -lt 1 ]]; then
-     error "$0: required non-option argument missing"
-     exit 1
- fi
+if [[ $# -lt 1 ]]; then
+    error "$0: required non-option argument missing"
+    exit 1
+fi
 
- for file in "$@"; do
-     nameit "$file"
- done
+for file in "$@"; do
+    nameit "$file"
+done

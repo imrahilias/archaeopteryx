@@ -121,6 +121,7 @@ alias rename='perl-rename'
 alias zephyr='/usr/bin/git --git-dir=$HOME/.zephyr --work-tree=$HOME'
 alias rainbow='for (( i = 30; i < 38; i++ )); do echo -e "\033[0;"$i"m Normal: (0;$i); \033[1;"$i"m Light: (1;$i)"; done'
 alias fifi='figlet -w 200 -f ~/bin/razor'
+alias cp='rsync -aP' # show percentage
 
 #                    __    ___  ___   ___                          ___   ___   ___ 
 #   .'|=|`.     .'|=|  |  `._|=|   |=|_.'   .'|   .'|=|`.     .'| |   | |   |=|_.' 

@@ -1,34 +1,74 @@
-#!/bin/zsh
-# nameit
-# changes all files in all subdirs; space 2 underline, uppercase 2 lowercase,  removes dash,&,+,\,!,?, and other exotic symbols.
-# since rename uses sed syntax (most of it), it went down pretty easy:D
+#!/bin/sh
+# changes all files in all subdirs; space 2 underline, uppercase 2 lowercase,  removes dash,&,+,\,!,?, and others.
+# moritz siegel @ 210304
 
-# defaults
+usage () {
+    cat <<EOF
+usage: $0 [OPTIONS] [--]
+rename all files in current dir by replacing unix-unfriendly characters.
+Given '-s NUMBER', it optionally recurses in its subdirs up to a depth of NUMBER.
+WARNING: beautify DOES work with wildcard expansion via 'beautify *',
+but might rename critical files (eg. '$RECYCLEBIN$').
+WARNING: note that for including dotted files, 'beautify .*' may be used,
+but might rename critical files (eg. '.Xresources').
+
+Options:
+ -f, --first     strip last dot in filename (default is to keep the dot, might be a file extension).
+ -h, --help      show this help and exit.
+ -l, --last      strip first dot in filename (default is to keep the dot, might be hidden file).
+ -s, --sub=SUB   level of SUB sub-dirs to comb (default '1').
+ -t, --test      testing, print procedure, but do not rename files.
+EOF
+}
+
+error () {
+    printf "%s\n" "$1" 1>&2
+}
+
+## command line arguments
+short_opts=fhlts:v
+long_opts=first,help,last,test,sub:,verbose
+args="$(LC_ALL=C getopt -n "$0" -s sh -o $short_opts -l $long_opts -- "$@")"
+if [[ $? -eq 0 ]]; then
+    eval set -- "$args"
+else
+    exit 1
+fi
+
+## defaults
+sub=1
 dir='*'
-sub='1'
 
-case "$#" in # check if arguments are given
-    0) echo "usage: nameit [level] [dir]"
-       echo "all options selected: space 2 underline, uppercase 2 lowercase, remove special chars, etc"
-       echo "default dir: start with all files in $dir"
-       echo "default level of depth; go down $sub layers"
-       ;;
-    1) sub=$1
-       echo "custom level of depth; go down $sub layer"
-       echo "default dir: start with all files in $dir"
-       ;;
-    2) sub=$1
-       dir=$2
-       echo "custom level of depth; go down $sub layer"
-       echo "custom dir: start with all files in $dir"
-       ;;
-esac
-
-# do it
-for (( c=1; c<=$sub; c++ )); do
-    echo "[$dir] depth of subdir: $c"
-    beautify $dir
-    dir=$(echo "$dir""/*") # move on to next layer of subdirs (and so forth...)
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -h|--help)
+            usage; exit 0 ;;
+        -f|--first)
+            beautify_args=$(echo "$beautify_args --first");;
+        -l|--last)
+            beautify_args=$(echo "$beautify_args --last");;
+        -s|--sub)
+            sub=$2
+            shift;
+            ;;
+        -t|--test)
+            beautify_args=$(echo "$beautify_args --test");;
+        -v|--verbose)
+            beautify_args=$(echo "$beautify_args --verbose");;
+        --)
+            shift; break ;;
+        -*)
+            error "$0: illegal option -- '$1'"
+            exit 1 ;;
+        *)
+            break
+    esac
+    shift
 done
 
-echo "done"
+## climb tree
+for (( c=1; c<=$sub; c++ )); do
+    echo "[$dir] depth of subdir: $c"
+    beautify $beautify_args $dir
+    dir=$(echo "$dir""/*") # move on to next layer of subdirs (and so forth...)
+done
