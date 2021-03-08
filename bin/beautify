@@ -67,7 +67,7 @@ firstdot () {
 
 lasttdot () {
     if [[ $keep_last_dot == 1 ]]; then
-        sed 's/\(.\+\)\.\([a-z~#_]\+\)$/\1?\2/g'
+        sed 's/\(.\+\)\.\([0-9a-z~#_]\+\)$/\1?\2/g'
     else
         sed 's/\./\./'
     fi
