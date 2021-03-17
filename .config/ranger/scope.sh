@@ -79,11 +79,11 @@ handle_extension() {
             exit 1;;
         
         ## XLSX
-        # xlsx)
-        #     ## Preview as csv conversion
-        #     ## Uses: https://github.com/dilshod/xlsx2csv
-        #     xlsx2csv -- "${FILE_PATH}" && exit 5
-        #     exit 1;;
+        xlsx)
+            ## Preview as csv conversion
+            ## Uses: https://github.com/dilshod/xlsx2csv
+            xlsx2csv -- "${FILE_PATH}" && exit 5
+            exit 1;;
         
         # Markdown
         md)

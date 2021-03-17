@@ -496,6 +496,8 @@ export QT_QPA_PLATFORMTHEME='qt5ct' # qt5 gtk blending
 export QT_STYLE_OVERRIDE='qt5ct'
 #export QT_QPA_PLATFORMTHEME='gtk2' # qt looks like current gtk theme 
 #export QT_STYLE_OVERRIDE='gtk2'
+export ALSA_CARD='PCH'
+export ALSA_CTL='PCH'
 
 #  ___   ___  ___  ___   ___  ___               ___        ___ 
 # |   |=|_.' `._|=|   |=|_.' |   | |`.     .'|=|_.'   .'|=|_.' 

@@ -111,7 +111,7 @@ There are two things you can do about this warning:
 
 ;; scrolling mouse
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 1))) ;; two lines at a time
-(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq Mouse-Wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 
 ;; Interactively Do Things mode
@@ -321,3 +321,13 @@ There are two things you can do about this warning:
 ;; silently not use it.
 ;;(unless (file-exists-p ispell-personal-dictionary)
 ;;(write-region "" nil ispell-personal-dictionary nil 0))
+
+
+;; (global-set-key (kbd "<C>-<mouse-8>") (kbd "C-v"))
+;; (global-set-key (kbd "<C>-<mouse-9>") (kbd "M-v"))
+
+;; (global-set-key (kbd "<M>-<left>") (kbd "C-v"))
+;; (global-set-key (kbd "<M>-<right>") (kbd "M-v"))
+
+;; (define-key (current-local-map) (kbd "mouse-8")
+;;   (lookup-key (current-local-map) (kbd "C-v")))
