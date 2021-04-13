@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+mkdir ./tutoren
+
+echo "moritz siegel @ $(date "+%y%m%d%H%M")" > ./tutoren/kommentare.txt
+
+cp -r * ./tutoren
+
+

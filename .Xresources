@@ -134,5 +134,5 @@ urxvt*pointerColor2: magenta
 ! 16: 47, white
 ! 17: 48, default
 
-
-
+! for otave via emacs 
+gnuplot*background: transparent truecolor
