@@ -6,4 +6,4 @@ OnFailure=/bin/notify-send -u critical "rsnapshotitself!"
 Type=oneshot
 Nice=19
 IOSchedulingClass=idle
-ExecStart=/usr/bin/rsnapshot %I && /bin/notify-send -u normal "rsnapshotit!"
+ExecStart=/usr/bin/rsnapshot %I

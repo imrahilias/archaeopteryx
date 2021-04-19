@@ -1,0 +1,5 @@
+#!/bin/sh
+## kommentar
+## moritz siegel @ 210419
+
+echo "# moritz siegel @ $(date "+%y%m%d%H%M")" > kommentare.txt

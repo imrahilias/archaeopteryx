@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 ## fortify: generate fortran source file, gnuplot file, and makefile.
 ## moritz siegel @ 210419
 

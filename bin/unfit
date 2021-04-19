@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 # extract .fit to csv &  gpx
 #
 for file in "$@"; do

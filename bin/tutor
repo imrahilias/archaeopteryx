@@ -1,8 +1,13 @@
-#!/bin/zsh
+#!/bin/sh
 
-mkdir ./tutoren
+## make new directory
+mkdir -p tutoren
 
-cp -r *[^tutoren]* ./tutoren
+## copy everything except the dir itself into 'tutoren'
+find * ! -regex "tutoren.*" -exec cp -rv {} tutoren \;
 
+## init kommentare
 echo "moritz siegel @ $(date "+%y%m%d%H%M")" > ./tutoren/kommentare.txt
 
+## lock everything in 'tutoren'
+chmod -R 744 tutoren

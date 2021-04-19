@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 ## "Slurm's control daemon's control daemon"
 
 helpfun()
