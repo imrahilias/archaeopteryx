@@ -4,10 +4,8 @@
 Description=rsnapshot hourly backup
 
 [Timer]
-# Time to wait after booting before we run first time, hopefully after daily & weekly & monthly backups finished 
-OnBootSec=1m
-# Time between running each consecutive time
-OnUnitActiveSec=1h
+OnCalendar=*-*-* *:00:00
+Persistent=true
 Unit=rsnapshot@hourly.service
 
 [Install]

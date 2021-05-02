@@ -1,6 +1,5 @@
 [Unit]
-Description=rsnapshot backup service
-OnFailure=/bin/notify-send -u critical "rsnapshotitself!"
+Description=rsnapshot (%I) backup
 
 [Service]
 Type=oneshot

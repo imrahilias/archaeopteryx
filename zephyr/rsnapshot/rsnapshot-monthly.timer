@@ -5,8 +5,7 @@ Description=rsnapshot monthly backup
 
 [Timer]
 # Run once per month at 12:00 UTC
-OnCalendar=*-*-01 12:00:00
-OnBootSec=10m
+OnCalendar=*-*-1 12:00:00
 Persistent=true
 Unit=rsnapshot@monthly.service
 
