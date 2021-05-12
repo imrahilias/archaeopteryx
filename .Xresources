@@ -1,8 +1,10 @@
-!~/.xresources > imrahil@triceratopsarchaeoteryx
-! > $xfontsel for selection
-! no inline comments
+!!~/.Xresources > imrahil@archaeoteryx
+!! no inline comments
 
-! Applications without fontconfig support
+
+!! FONTS
+
+!! Applications without fontconfig support
 Xft.antialias: 1
 Xft.autohint: 0
 Xft.hinting: 1
@@ -10,51 +12,70 @@ Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
 
-
-! Emacs > moved somwhere else?
-!Emacs.FontBackend: xft
-!Emacs.font: Bitstream Vera Sans -18
-!Emacs.font: xft:Bitstream Vera Sans Mono:size=12:antialise:true
-!Emacs.font: -unknown-DejaVu Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1
-!Emacs*foreground:   #A89C8C
-!Emacs*background:   #303030
-!Emacs*cursorColor:  white
-!Emacs*pointerColor: white
-
-
-! urxvt (case sensitive) > ttps://wiki.archlinux.org/index.php/Rxvt-unicode
+!! urxvt (case sensitive?)
+!! ttps://wiki.archlinux.org/index.php/Rxvt-unicode
 urxvt*termname: consolicus
 urxvt*title: consolicus
 urxvt*loginshell: true 
-urxvt*scrollBar: false
-! do not scroll with output
-!URxvt*scrollTtyOutput: false
-! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
-!URxvt*scrollWithBuffer: true
-! scroll back to the bottom on keypress
-urxvt*scrollTtyKeypress: true
 urxvt*saveLines: 10000
 urxvt*pointerblank: true
 urxvt*letterSpace: 0
-urxvt*font: xft: Bitstream Vera Sans Mono:size=12
-urxvt*boldFont: xft: Bitstream Vera Sans Mono:size=12:style=Bold
+urxvt*font: xft:DejaVuSansMono Nerd Font:size=12:antialias=true
+urxvt*boldFont: xft:DejaVuSansMono Nerd Font:size=12:antialias=true:style=Bold
+!urxvt*font: xft: Bitstream Vera Sans Mono:size=12
+!urxvt*boldFont: xft: Bitstream Vera Sans Mono:size=12:style=Bold
 !Xterm escapes, word by word movement
-!urxvt.keysym.Control-Left:    \033[1;5D
-!urxvt.keysym.Control-Right:    \033[1;5C
 urxvt.secondaryScreen: true
+
+
+!! SCROLLING
+
+urxvt*scrollTtyOutput: true
+!! scroll in relation to buffer (with mouse scroll or Shift+Page Up):
+urxvt*scrollWithBuffer: true
+!! scroll back to the bottom on keypress:
+urxvt*scrollTtyKeypress: true
 urxvt.secondaryScroll: false
 urxvt.secondaryWheel: true
-! If you do not use the Perl extension features, you can improve the security and speed by disabling Perl extensions completely.
-urxvt.perl-ext:
-urxvt.perl-ext-common:
+!urxvt*scrollStyle:rxvt
+urxvt*scrollBar: true
+urxvt*scrollBar_right: true
+urxvt*scrollBar_floating: true
+urxvt*scrollColor: darkgrey
+urxvt*scrollstyle: plain
+urxvt*scrollBar_align: centre
+urxvt*jumpScroll: true
+urxvt*mouseWheelScrollPage: true
+!! scroll up/down 10 lines
+urxvt.keysym.Shift-Up: command:\033]720;10\007
+urxvt.keysym.Shift-Down: command:\033]721;10\007
+!! scroll up/down 100 lines
+urxvt.keysym.Control-Up: command:\033]720;100\007
+urxvt.keysym.Control-Down: command:\033]721;100\007
+!! scroll up/down all the way (10000 lines)
+urxvt.keysym.Control-Shift-Up: command:\033]720;10000\007
+urxvt.keysym.Control-Shift-Down: command:\033]721;10000\007
 
-! graphics
+!! page up/page down/home/end conflicts with pager!
+! urxvt.keysym.Prior: command:\033]720;100\007
+! urxvt.keysym.Next: command:\033]721;100\007
+! urxvt.keysym.Home: command:\033]720;10000\007
+! urxvt.keysym.End: command:\033]721;10000\007
+
+!! if you do not use the perl extension features, you can improve the security and speed by disabling perl extensions completely.
+!urxvt.perl-ext:
+!urxvt.perl-ext-common:
+
+
+!! GRAPHICS
+
+urxvt*skipBuiltinGlyphs: true
 urxvt*iconFile: /usr/share/icons/Adwaita/scalable/apps/utilities-terminal-symbolic.svg
 ! borderless conflicts with something! awesome?
 !urxvt*borderLess: true
 urxvt*cursorBlink: false
 ! fake transparency
-! Fade the text by the given percentage when focus is lost.
+! fade the text by the given percentage when focus is lost.
 urxvt*fading: 30
 urxvt*transparent: true
 ! 0 to 99 darkens, 101 to 200 lightens
@@ -62,11 +83,14 @@ urxvt*shading: 30
 urxvt*buffered: true
 
 ! real transparency: much to annoying
-!urxvt.depth: 32
+urxvt.depth: 32
 !urxvt.background: [80]#000000
 !or urxvt*background: rgba:0000/0000/0000/c900
 
-! general colors > $colortheme 4 demo
+
+!! COLORS
+
+!! $colortheme 4 demo
 urxvt*foreground: #A89C8C
 urxvt*background: #241e1e
 !urxvt*underlineColor:
@@ -134,5 +158,8 @@ urxvt*pointerColor2: magenta
 ! 16: 47, white
 ! 17: 48, default
 
-! for otave via emacs 
+
+!! MISC
+
+!! for otave via emacs 
 gnuplot*background: transparent truecolor

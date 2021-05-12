@@ -353,7 +353,6 @@ bindkey -M emacs '\e\e' sudo-command-line
 bindkey -M vicmd '\e\e' sudo-command-line
 bindkey -M viins '\e\e' sudo-command-line
 
-
 ## colors, a lot of colors!
 function clicolors() {
     i=1
@@ -516,6 +515,14 @@ stty -ixon
 ## key setups
 bindkey -e # emacs key bindings: yeeha:D
 bindkey ' ' magic-space # also do history expansion on space, type '!!', then hit enter, watch
+
+## word jumping
+bindkey ";5C" forward-word
+bindkey ";5D" backward-word
+bindkey "[C" forward-word
+bindkey "[D" backward-word
+bindkey ";5A" up-line
+bindkey ";5B" down-line
 
 #        __               ___               ___               ___   ___   ___ 
 #   .'|=|  |    .'|      |   | |`.     .'|=|_.'    .'|   .'| |   | |   |=|_.' 
