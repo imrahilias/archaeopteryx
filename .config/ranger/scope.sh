@@ -64,7 +64,7 @@ handle_extension() {
             mutool draw -F txt -i -- "${FILE_PATH}" 1-10 | fmt -w ${PV_WIDTH} && exit 5
             exiftool "${FILE_PATH}" && exit 5
             exit 1;;
-
+        
         # BitTorrent
         torrent)
             transmission-show -- "${FILE_PATH}" && exit 5
