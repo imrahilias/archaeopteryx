@@ -4,9 +4,10 @@
 Description=rsnapshot weekly backup
 
 [Timer]
-# Run once per week on Monday at 13:00, hopefully after monthly backup finished 
+## Run once per week on Monday at 13:00, hopefully after monthly backup finished 
 OnCalendar=Monday  *-*-* 13:00:00
 Persistent=true
+OnBootSec=10min
 Unit=rsnapshot@weekly.service
 
 [Install]
