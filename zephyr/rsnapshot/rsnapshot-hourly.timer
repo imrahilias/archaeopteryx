@@ -5,7 +5,7 @@ Description=rsnapshot hourly backup
 
 [Timer]
 OnCalendar=*-*-* *:00:00
-OnBootSec=15min
+OnBootSec=30min
 Unit=rsnapshot@hourly.service
 
 [Install]
