@@ -326,9 +326,11 @@ globalkeys = awful.util.table.join(
     -- Slurm
     awful.key({ modkey }, "c", function () awful.spawn("schnegg -p", false) end), -- snooze whole (drain node + suspend all jobs) slurm for 1h
     awful.key({ modkey, "Shift" }, "c", function () awful.spawn("schnegg -r", false) end), -- resume all
-       
+    
     -- Fun
-    awful.key({ modkey }, "z", function () awful.spawn.with_shell('notify-send "$(cowsay $(fortune))"', false) end)
+    awful.key({ modkey }, "z", function () awful.spawn.with_shell('notify-send "$(cowsay $(fortune))"', false) end),
+    awful.key({ modkey }, "w", function () awful.spawn.with_shell("killall conky && feh --bg-fill ~/wind/canvas/wrld12.png & conky -c ~/wind/wind_blow.lua", false) end),
+    awful.key({ modkey , "Shift" }, "w", function () awful.spawn.with_shell("killall conky && feh --bg-fill ~/.config/awesome/themes/canyon.jpg & conky -c ~/.config/conky/left.lua & conky -c ~/.config/conky/middle.lua", false) end)
 )
 
 clientkeys = awful.util.table.join(

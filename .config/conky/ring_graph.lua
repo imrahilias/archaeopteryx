@@ -1,4 +1,3 @@
-#!/bin/lua
 -- http://thepeachyblog.blogspot.co.at/2010/02/here-is-another-lua-script.html
 
 require 'cairo'
