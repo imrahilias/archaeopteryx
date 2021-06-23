@@ -263,14 +263,14 @@ There are two things you can do about this warning:
 
 
 ;; Latex mode
-(with-eval-after-load "tex"
-  (add-to-list 'TeX-command-list
-               `("Arara" "arara --verbose %s" TeX-run-TeX nil t :help "Run Arara") t))
 
 (with-eval-after-load "tex"
   (add-to-list 'TeX-command-list
-               `("Extex" "pdflatex --shell-escape %s" TeX-run-TeX nil t :help "Pdftex no halt-on-error") t))
-
+               `("Arara" "arara --verbose %s" TeX-run-TeX nil t :help "Run Arara") t)
+  (add-to-list 'TeX-command-list
+               `("Extex" "lualatex -synctex=1 -interaction=nonstopmode --shell-escape %s" TeX-run-TeX nil t :help "LuaLatex + SyncTex + ShellEscape + NonstopMode (no halt-on-error)") t)
+  (tex-source-correlate-mode t) )
+  
 (with-eval-after-load "latex"
   (define-key LaTeX-mode-map (kbd "C-c C-a")
     (lambda ()
@@ -305,7 +305,7 @@ There are two things you can do about this warning:
   ;; Configure `LANG`, otherwise ispell.el cannot find a 'default
   ;; dictionary' even though multiple dictionaries will be configured
   ;; in next line.
-  (setenv "LANG" "en_GB")
+  ;;(setenv "LANG" "en_GB")
   (setq ispell-program-name "hunspell")
   ;; Configure German, Swiss German, and two variants of English.
   (setq ispell-dictionary "de_DE,en_GB,en_US")
@@ -331,3 +331,5 @@ There are two things you can do about this warning:
 
 ;; (define-key (current-local-map) (kbd "mouse-8")
 ;;   (lookup-key (current-local-map) (kbd "C-v")))
+
+(setenv "LANG" "en_US.UTF-8")
