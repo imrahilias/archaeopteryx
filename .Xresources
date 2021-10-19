@@ -163,3 +163,36 @@ urxvt*pointerColor2: magenta
 
 !! for otave via emacs 
 gnuplot*background: transparent truecolor
+
+
+!! XTERM
+XTerm.vt100.locale: false
+XTerm.vt100.utf8: true
+XTerm.vt100.metaSendsEscape: true
+XTerm.vt100.backarrowKey: false
+XTerm.ttyModes: erase ^?
+XTerm.vt100.saveLines: 4096
+XTerm.vt100.scrollBar: true
+XTerm.vt100.scrollbar.width: 8
+XTerm.vt100.font: xft:DejaVuSansMono Nerd Font:size=12:antialias=true
+XTerm.vt100.bolddFont: xft:DejaVuSansMono Nerd Font:size=12:antialias=true:style=Bold
+!XTerm.vt100.foreground: white
+XTerm.vt100.foreground: rgb:A8/9C/8C
+!XTerm.vt100.background: black
+XTerm.vt100.background: rgb:30/30/30
+XTerm.vt100.color0:  rgb:28/2a/2b
+XTerm.vt100.color1:  rgb:AD/51/3E
+XTerm.vt100.color2:  rgb:4C/7D/58
+XTerm.vt100.color3:  rgb:FF/B2/00
+XTerm.vt100.color4:  rgb:B8/CB/E6
+XTerm.vt100.color5:  rgb:66/66/99
+XTerm.vt100.color6:  rgb:8c/af/f0
+XTerm.vt100.color7:  rgb:a8/a8/a8
+XTerm.vt100.color8:  rgb:2c/2f/30
+XTerm.vt100.color9:  rgb:E0/67/1B
+XTerm.vt100.color10: rgb:31/DE/96
+XTerm.vt100.color11: rgb:da/df/45
+XTerm.vt100.color12: rgb:39/55/c4
+XTerm.vt100.color13: rgb:66/98/D9
+XTerm.vt100.color14: rgb:9b/ba/f1
+XTerm.vt100.color15: rgb:f0/f0/f0

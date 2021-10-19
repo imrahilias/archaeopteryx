@@ -92,12 +92,21 @@ ${top cpu 2}	  ${top pid 2}	   ${top name 2}
 ${top cpu 3}	  ${top pid 3}	   ${top name 3}
 ${top cpu 4}	  ${top pid 4}	   ${top name 4}
 ${top cpu 5}	  ${top pid 5}	   ${top name 5}
+${top cpu 7}	  ${top pid 7}	   ${top name 7}
+${top cpu 8}	  ${top pid 8}	   ${top name 8}
+${top cpu 9}	  ${top pid 9}	   ${top name 9}
+${top cpu 10}	  ${top pid 10}	   ${top name 10}
 
 ${color1}${top_mem mem 1}	  ${top_mem pid 1}	   ${top_mem name 1}${color}
 ${top_mem mem 2}	  ${top_mem pid 2}	   ${top_mem name 2}
 ${top_mem mem 3}	  ${top_mem pid 3}	   ${top_mem name 3}
 ${top_mem mem 4}	  ${top_mem pid 4}	   ${top_mem name 4}
 ${top_mem mem 5}	  ${top_mem pid 5}	   ${top_mem name 5}
+${top_mem mem 6}	  ${top_mem pid 6}	   ${top_mem name 6}
+${top_mem mem 7}	  ${top_mem pid 7}	   ${top_mem name 7}
+${top_mem mem 8}	  ${top_mem pid 8}	   ${top_mem name 8}
+${top_mem mem 9}	  ${top_mem pid 9}	   ${top_mem name 9}
+${top_mem mem 10}	  ${top_mem pid 10}	   ${top_mem name 10}
 
 ${execpi 1 lsblk -o NAME,FSAVAIL,LABEL,MOUNTPOINT | sed -e '1,1d' |  awk '{print " ",$1,$2,"$color1",$3,"$color","$alignr",$4,""}'}
 

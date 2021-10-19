@@ -23,5 +23,7 @@ table5={
   ["x"]={'telegram-desktop', 'Telegram'},
 --["j"]={'jdownloader','Jdownloader'},
 --["u"]={'startdict', 'Startdict'},
---["y"]={"evince", "Evince"},
+  --["y"]={"evince", "Evince"},
+  ["i"]={"signal-desktop", "Signal"},
+  ["Shift-i"]={"rocketchat-desktop", "Rocket.Chat"},
 }

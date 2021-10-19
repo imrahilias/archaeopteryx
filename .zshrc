@@ -315,11 +315,11 @@ function prompt_char {
 }
 
 
-function cmd_fail {
-    if [ "`echo $?`" -ne "0" ]; then
-	echo ":( "
-    fi
-}
+# function cmd_fail {
+#     if [ "`echo $?`" -ne "0" ]; then
+# 	echo ":( "
+#     fi
+# }
 
 
 ## git_branch
@@ -472,7 +472,8 @@ WHITE="%{"$'\033[00;37m'"%}"
 BWHITE="%{"$'\033[01;37m'"%}"
 NORM="%{"$'\033[00m'"%}"
 PROMPT="${BWHITE}%~${BCYAN} @${BWHITE}"'$(prompt_char)'"${WHITE}" # Quote Jungle;)
-RPROMPT='$(cmd_fail)$(git_branch)%T'
+RPROMPT='$(git_branch)%T'
+#RPROMPT='$(cmd_fail)$(git_branch)%T'
 
 #PROMPT="${BBLACK}%n${YELLOW}@${BBLACK}%M ${WHITE}%~ ${BBLUE}"'$(prompt_char)'" ${WHITE}" # Vote Jungle;)
 #PROMPT='[%{$fg[blue]%}%n$white@$cyan%m$reset:%~]$(prompt_char) ' # @jinn

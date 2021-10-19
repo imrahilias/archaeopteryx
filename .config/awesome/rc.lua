@@ -41,6 +41,9 @@ end
 --beautiful.init(".config/awesome/desert.lua")
 beautiful.init(awful.util.getdir("config") .. "/themes/canyon.lua")
 
+-- init network-manager applet
+awful.util.spawn("nm-applet")
+
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvtc"
 editor = os.getenv("EDITOR") or "nano"
@@ -288,6 +291,8 @@ globalkeys = awful.util.table.join(
    
    -- Launch
    awful.key({ modkey }, "Return", function () awful.spawn(terminal) end),
+   awful.key({ modkey, "Shift" }, "Return", function () awful.spawn("urxvtc -title admin2 -e admin2") end),
+   awful.key({ modkey, "Shift", "Control"}, "Return", function () awful.spawn("urxvtc -title master1 -e master1") end),
    awful.key({ modkey }, "e", function () awful.spawn("emacsclient -cn", false) end),
    awful.key({ modkey, "Shift" }, "d", function () awful.spawn("thunar", false) end),    
    awful.key({ modkey, "Shift", "Control" }, "d", function () awful.spawn("sudo thunar", false) end),
@@ -549,6 +554,8 @@ awful.rules.rules = {
            "Signal",
            "scrcpy",
            "zoom",
+           "rocket.chat",
+           "Rocket.Chat"
    }},
      properties = { tag = "✆", switchtotag = true }},
    
