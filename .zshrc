@@ -77,7 +77,7 @@ alias uma='sudo umount -a; echo -e $red"mounted:"$default; mount'
 alias pii='sudo pacman -S' # install 1 pkg
 alias pi='sudo pacman -Syyu' # Do a full system upgrade
 alias pq='bauerbill -Ss --aur' # Search for all repo and AUR packages
-alias pp='sudo powerpill -Syyu' # Do a full system upgrade using pauerpill with rsync 
+alias pp='sudo powerpill -Syyu' # Do a full system upgrade using pauerpill with rsync
 alias ppa='sudo bb-wrapper -Syyu --aur' # Do a full system upgrade with AUR support using bauerbill with rsync
 alias pa='sudo bb-wrapper -Su --aur' # install from AUR using bauerbill with rsync
 alias px='sudo pacman -R' # Remove package
@@ -122,6 +122,7 @@ alias zephyr='/usr/bin/git --git-dir=$HOME/.zephyr --work-tree=$HOME'
 alias rainbow='for (( i = 30; i < 38; i++ )); do echo -e "\033[0;"$i"m Normal: (0;$i); \033[1;"$i"m Light: (1;$i)"; done'
 alias fifi='figlet -w 200 -f ~/bin/razor'
 alias cp='rsync -aP' # show percentage
+alias ap='adb pull /sdcard/DCIM/Camera/ /mnt/troika/photos/2021/'
 
 #                    __    ___  ___   ___                          ___   ___   ___ 
 #   .'|=|`.     .'|=|  |  `._|=|   |=|_.'   .'|   .'|=|`.     .'| |   | |   |=|_.' 
@@ -490,7 +491,7 @@ RPROMPT='$(git_branch)%T'
 #export HS='alsa_output.usb-047f_c001-00-U0x47f0xc001.analog-stereo'
 #export SP='alsa_output.pci-0000_00_1b.0.analog-stereo'
 export EDITOR='emacsclient -c -a ""'
-export PATH='/bin:/usr/bin:/usr/local/bin:/home/m/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/games:/usr/local/games'
+export PATH='/bin:/usr/bin:/usr/local/bin:/home/m/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/games:/usr/local/games:/home/m/vsc/bin'
 #path+=/scripts #hängt zur $path eben was an...
 export QT_QPA_PLATFORMTHEME='qt5ct' # qt5 gtk blending
 export QT_STYLE_OVERRIDE='qt5ct'

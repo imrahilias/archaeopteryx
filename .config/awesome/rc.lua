@@ -105,9 +105,8 @@ end
 --]]
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                             --                                    { "open terminal", terminal }
-}
-                       })
+                             -- { "open terminal", terminal },
+                       }})
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
@@ -299,43 +298,43 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey, "Shift" }, "s", function () awful.spawn("open_primary_selection_in_cromium") end),
    awful.key({ modkey, "Control" }, "s", function () awful.spawn("open_primary_selection_in_google_translate") end),
    awful.key({ modkey, "Shift", "Control" }, "s", function () awful.spawn("open_primary_selection_in_thesaurus") end),
-   awful.key({ modkey }, "o", function () awful.spawn("octave --gui") end),
+   --awful.key({ modkey }, "o", function () awful.spawn("octave --gui") end),
    
    -- Audio
    --awful.key({ }, "XF86AudioRaiseVolume", function () awful.spawn("amixer set Master 5%+", false) end),
    --awful.key({ }, "XF86AudioLowerVolume", function () awful.spawn("amixer set Master 5%-", false) end),
    --    awful.key({ }, "XF86AudioMute", function () awful.spawn('for x in {"Master","Headphone","Front","Surround","Center","LFE","Side"} ; do amixer -c 0 set "${x}" toggle; done', false) end),
-    --awful.key({ }, "XF86AudioMute", function () awful.spawn("amixer set Master toggle", false) end),
-    --awful.key({ }, "XF86Tools", function () awful.spawn(terminal .. " -e ncmpcpp", false) end),
-    --    awful.key({ }, "XF86Tools", function () awful.spawn("spotify", false) end),
-    --awful.key({ }, "XF86AudioPrev", function () awful.spawn("playerctl previous", false) end),
-    --awful.key({ }, "XF86AudioPlay", function () awful.spawn("playerctl play-pause", false) end),
-    --awful.key({ }, "XF86AudioNext", function () awful.spawn("playerctl next", false) end),
-    
-    -- Screenshot
-    awful.key({ }, "Print", function () awful.spawn("scrot -e 'mv $f ~/screens/ 2>/dev/null'") end),
-    
-    -- Killer
-    awful.key({ modkey, "Shift" }, "k", function () awful.spawn("sudo xkill", false) end),
-    
-    -- Razer
-    awful.key({ modkey }, "#86", function () awful.spawn("razercfg -l GlowingLogo:off -l Scrollwheel:on", false) end),
-    awful.key({ modkey }, "#82", function () awful.spawn("razercfg -l all:off", false) end),
+   --awful.key({ }, "XF86AudioMute", function () awful.spawn("amixer set Master toggle", false) end),
+   --awful.key({ }, "XF86Tools", function () awful.spawn(terminal .. " -e ncmpcpp", false) end),
+   --    awful.key({ }, "XF86Tools", function () awful.spawn("spotify", false) end),
+   --awful.key({ }, "XF86AudioPrev", function () awful.spawn("playerctl previous", false) end),
+   --awful.key({ }, "XF86AudioPlay", function () awful.spawn("playerctl play-pause", false) end),
+   --awful.key({ }, "XF86AudioNext", function () awful.spawn("playerctl next", false) end),
+   
+   -- Screenshot
+   awful.key({ }, "Print", function () awful.spawn("scrot -e 'mv $f ~/screens/ 2>/dev/null'") end),
+   
+   -- Killer
+   awful.key({ modkey, "Shift" }, "k", function () awful.spawn("sudo xkill", false) end),
+   
+   -- Razer
+   awful.key({ modkey }, "#86", function () awful.spawn("razercfg -l GlowingLogo:off -l Scrollwheel:on", false) end),
+   awful.key({ modkey }, "#82", function () awful.spawn("razercfg -l all:off", false) end),
 
-    -- Boinc
-    awful.key({ modkey }, "b", function () awful.spawn("boinccmd --set_run_mode never 3600", false) end), -- snooze whole boinc for 1h
-    awful.key({ modkey, "Control" }, "b", function () awful.spawn("boinccmd --set_run_mode auto", false) end), -- wake up whole boinc
-    awful.key({ modkey, "Shift" }, "b", function () awful.spawn("boinccmd --set_gpu_mode never 3600", false) end),  -- snooze up boinc gpu
-    awful.key({ modkey, "Shift", "Control" }, "b", function () awful.spawn("boinccmd --set_gpu_mode auto", false) end),  -- wake up boinc gpu
+   -- Boinc
+   awful.key({ modkey }, "b", function () awful.spawn("boinccmd --set_run_mode never 3600", false) end), -- snooze whole boinc for 1h
+   awful.key({ modkey, "Control" }, "b", function () awful.spawn("boinccmd --set_run_mode auto", false) end), -- wake up whole boinc
+   awful.key({ modkey, "Shift" }, "b", function () awful.spawn("boinccmd --set_gpu_mode never 3600", false) end),  -- snooze up boinc gpu
+   awful.key({ modkey, "Shift", "Control" }, "b", function () awful.spawn("boinccmd --set_gpu_mode auto", false) end),  -- wake up boinc gpu
 
-    -- Slurm
-    awful.key({ modkey }, "c", function () awful.spawn("schnegg -p", false) end), -- snooze whole (drain node + suspend all jobs) slurm for 1h
-    awful.key({ modkey, "Shift" }, "c", function () awful.spawn("schnegg -r", false) end), -- resume all
-    
-    -- Fun
-    awful.key({ modkey }, "z", function () awful.spawn.with_shell('notify-send "$(cowsay $(fortune))"', false) end),
-    awful.key({ modkey }, "w", function () awful.spawn.with_shell("killall conky && feh --bg-fill ~/wind/canvas/wrld12.png & conky -c ~/wind/wind_blow.lua", false) end),
-    awful.key({ modkey , "Shift" }, "w", function () awful.spawn.with_shell("killall conky && feh --bg-fill ~/.config/awesome/themes/canyon.jpg && conky -c ~/.config/conky/left.lua && conky -c ~/.config/conky/middle.lua", false) end)
+   -- Slurm
+   awful.key({ modkey }, "c", function () awful.spawn("schnegg -p", false) end), -- snooze whole (drain node + suspend all jobs) slurm for 1h
+   awful.key({ modkey, "Shift" }, "c", function () awful.spawn("schnegg -r", false) end), -- resume all
+   
+   -- Fun
+   awful.key({ modkey }, "z", function () awful.spawn.with_shell('notify-send "$(cowsay $(fortune))"', false) end),
+   awful.key({ modkey }, "w", function () awful.spawn.with_shell("killall conky && feh --bg-fill ~/wind/canvas/wrld12.png & conky -c ~/wind/wind_blow.lua", false) end),
+   awful.key({ modkey , "Shift" }, "w", function () awful.spawn.with_shell("killall conky && feh --bg-fill ~/.config/awesome/themes/canyon.jpg && conky -c ~/.config/conky/left.lua && conky -c ~/.config/conky/middle.lua", false) end)
 )
 
 clientkeys = awful.util.table.join(
@@ -480,14 +479,12 @@ awful.rules.rules = {
         class = {
            "Chromium",
            "Firefox",
-   }},
-     properties = { tag = "@", switchtotag = true }},
+   }}, properties = { tag = "@", switchtotag = true }},
    
    { rule_any = {   	    -- CODE
         class = {
            "Emacs",
-   }},
-     properties = { tag = "$", switchtotag = true }},
+   }}, properties = { tag = "$", switchtotag = true }},
    
    { rule_any = {   	    -- FILE
         class = {
@@ -497,8 +494,7 @@ awful.rules.rules = {
         name = {
            "ranger:",
            "Waldläufer",
-   }},
-     properties = { tag = "⛁", switchtotag = true }},
+   }}, properties = { tag = "⛁", switchtotag = true }},
    
    { rule_any = {   	    -- DOC
         class = {
@@ -510,39 +506,32 @@ awful.rules.rules = {
            "Qtiplot",
            "calibre",
            "calibre-gui",
-   }},
-     properties = { tag =  "≣", switchtotag = true }},
+   }}, properties = { tag =  "≣", switchtotag = true }},
    
-   { rule_any = {   	    -- MUSIC
+   { rule_any = {   	    -- MUSIC/VIDEO
         class = {
            "spotify",
            "Spotify",
-        },
-        name = {
-           "Spotify Premium",
-           "ncmpcpp 0.8.2",
-           "ncmpcpp*",
-   }},
-     properties = { tag = "♬", switchtotag = true }},
-   
-   { rule_any = {   	    -- VIDEO
-        class = {
            "Vlc",
            "vlc",
            "MPlayer",
            "mpv",
-   }},
-     properties = { tag = "🌎♻", switchtotag = true }},
+        },
+        name = {
+           "ncmpcpp 0.8.2",
+           "ncmpcpp*",
+   }}, properties = { tag = "♬", switchtotag = true }},
+   
+   { rule_any = {   	    -- CALENDAR
+        class = {
+           "gnome-calendar",
+           "Gnome-calendar",
+   }}, properties = { tag = "♻", switchtotag = true }},
    
    { rule_any = {   	    -- DOWNLOAD
-        name = {
-           "JDownloader 2",
-           "Torronator",
-        },
         class = {
-           "JDownloader",
-   }},
-     properties = { tag = "⚡", switchtotag = true }},
+           "Evolution",
+   }}, properties = { tag = "⚡", switchtotag = true }},
    
    { rule_any = {    	    -- COMMUNICATION
         class = {
@@ -556,15 +545,31 @@ awful.rules.rules = {
            "zoom",
            "rocket.chat",
            "Rocket.Chat"
-   }},
-     properties = { tag = "✆", switchtotag = true }},
+   }}, properties = { tag = "✆", switchtotag = true }},
    
    { rule_any = {    	    -- GAMES
         class = {
            "steam",
            "Steam",
-   }},
-     properties = { tag = "♞", switchtotag = true }},
+   }}, properties = { tag = "♞", switchtotag = true }},
+   
+   { rule_any = {    	    -- CLUBS
+        name = {
+           "Grafana",
+           "Home - Grafana",
+   }}, properties = { tag = "♠", switchtotag = true }},
+   
+   { rule_any = {    	    -- HEARTS
+        class = {
+   }}, properties = { tag = "♥", switchtotag = true }},
+   
+   { rule_any = {    	    -- DIAMONDS
+        class = {
+   }}, properties = { tag = "♦", switchtotag = true }},
+   
+   { rule_any = {    	    -- SPADES
+        class = {
+   }}, properties = { tag = "♣", switchtotag = true }},
 }
 
 -- }}}
@@ -578,7 +583,7 @@ client.connect_signal("manage", function (c)
                          
                          if awesome.startup and
                             not c.size_hints.user_position
-                         and not c.size_hints.program_position then
+                            and not c.size_hints.program_position then
                             -- Prevent clients from being unreachable after screen count changes.
                             awful.placement.no_offscreen(c)
                          end
@@ -629,7 +634,7 @@ end)
 -- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal("mouse::enter", function(c)
                          if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-                         and awful.client.focus.filter(c) then
+                            and awful.client.focus.filter(c) then
                             client.focus = c
                          end
 end)

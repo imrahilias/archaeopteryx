@@ -73,9 +73,9 @@ There are two things you can do about this warning:
 
 ;; make it easy on eyes ...
 (set-foreground-color "#A89C8C")
-(set-background-color "#303030")
+(set-background-color "#202020")
 (set-face-foreground 'default "#A89C8C")
-(set-face-background 'default "#303030")
+(set-face-background 'default "#202020")
 
 ;; window modifications
 (global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)

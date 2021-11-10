@@ -1,4 +1,5 @@
 
+
 -- ror.lua
 -- This is the file goes in your ~/.config/awesome/ directory
 -- It contains your table of 'run or raise' key bindings for aweror.lua
@@ -11,19 +12,18 @@
 -- Use xprop to get this info from a window.  WM_CLASS(STRING) gives you "instance", "class".
 -- WM_NAME(STRING) gives you the name of the selected window (usually something like the web page title
 -- for browsers, or the file name for emacs).
-
 table5={
-  ["s"]={"chromium", "Chromium"},
-  ["Shift-o"]={"libreoffice ", "libreoffice"},
---["e"]={"emacsclient -ca ''","Emacs"}, 
-  ["t"]={"urxvtc -title Torronator -e rtorrent","rtorrent", "instance"},
+  ["a"]={"spotify", "Spotify"},
   ["d"]={"urxvtc -title Waldläufer -e ranger", "Waldläufer", "name"},
-  ["g"]={'gimp', 'gimp'},
-  ["a"]={'spotify', 'Spotify'},
-  ["x"]={'telegram-desktop', 'Telegram'},
---["j"]={'jdownloader','Jdownloader'},
---["u"]={'startdict', 'Startdict'},
-  --["y"]={"evince", "Evince"},
+--["e"]={"emacsclient -ca ""","Emacs"}, 
+  ["g"]={"gimp", "gimp"},
   ["i"]={"signal-desktop", "Signal"},
-  ["Shift-i"]={"rocketchat-desktop", "Rocket.Chat"},
+--["Shift-i"]={"rocketchat-desktop", "Rocket.Chat"},
+  ["o"]={"rocketchat-desktop", "Rocket.Chat"},
+  ["Shift-o"]={"libreoffice ", "libreoffice"},
+  ["s"]={"chromium", "Chromium"},
+  ["t"]={"urxvtc -title Torronator -e rtorrent", "rtorrent", "instance"},
+  ["u"]={"evolution", "Evolution"},
+  ["x"]={"telegram-desktop", "Telegram"},
+  ["y"]={"gnome-calendar", "Gnome-calendar"},
 }

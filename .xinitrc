@@ -32,26 +32,3 @@ fi
 urxvtd -q -f -o
 udiskie & # dont forget the &
 # thunar --daemon # bugs around!
-
-## fire up mouse button to key stroke binder
-xbindkeys
-
-## fire up conky
-conky -c ~/.config/conky/left.lua
-#conky -c ~/.config/conky/right.lua
-conky -c ~/.config/conky/middle.lua
-
-## switch to custom keyboard layout
-setxkbmap -layout "us(m),de" # enables multiple layouts, switch via awesome, us(m) is custom (see notes)
-
-## disable screen blanking and powersaving mode
-xset s off -dpms
-
-## composite manager to avoid screen tearing
-compton -CGb #--config /dev/null --backend glx --paint-on-overlay --glx-no-stencil --glx-no-rebind-pixmap --glx-swap-method buffer-age --xrender-sync-fence --xrender-sync
-
-## start network-manager
-#nm-applet
-
-## start awesome
-exec awesome

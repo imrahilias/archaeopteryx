@@ -2,6 +2,10 @@
 !! no inline comments
 
 
+!! ALL
+!*.background: rgb:10/10/10
+
+
 !! FONTS
 
 !! Applications without fontconfig support
@@ -14,8 +18,8 @@ Xft.rgba: rgb
 
 !! urxvt (case sensitive?)
 !! ttps://wiki.archlinux.org/index.php/Rxvt-unicode
-urxvt*termname: consolicus
-urxvt*title: consolicus
+!urxvt*termname: consolicus
+!urxvt*title: consolicus
 urxvt*loginshell: true 
 urxvt*saveLines: 10000
 urxvt*pointerblank: true
@@ -166,6 +170,7 @@ gnuplot*background: transparent truecolor
 
 
 !! XTERM
+XTerm.termName: xterm-256color
 XTerm.vt100.locale: false
 XTerm.vt100.utf8: true
 XTerm.vt100.metaSendsEscape: true
@@ -174,12 +179,15 @@ XTerm.ttyModes: erase ^?
 XTerm.vt100.saveLines: 4096
 XTerm.vt100.scrollBar: true
 XTerm.vt100.scrollbar.width: 8
-XTerm.vt100.font: xft:DejaVuSansMono Nerd Font:size=12:antialias=true
+XTerm.vt100.font: 7x13
+XTerm.vt100.faceName: xft:DejaVuSansMono Nerd Font:size=12:antialias=true
 XTerm.vt100.bolddFont: xft:DejaVuSansMono Nerd Font:size=12:antialias=true:style=Bold
+XTerm.vt100.transparent: true
 !XTerm.vt100.foreground: white
-XTerm.vt100.foreground: rgb:A8/9C/8C
+!XTerm.vt100.foreground: rgb:A8/9C/8C
 !XTerm.vt100.background: black
-XTerm.vt100.background: rgb:30/30/30
+XTerm.vt100.background: rgb:10/10/10
+XTerm.vt100.cursorColor: magenta
 XTerm.vt100.color0:  rgb:28/2a/2b
 XTerm.vt100.color1:  rgb:AD/51/3E
 XTerm.vt100.color2:  rgb:4C/7D/58
