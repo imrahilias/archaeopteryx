@@ -290,9 +290,9 @@ globalkeys = awful.util.table.join(
    
    -- Launch
    awful.key({ modkey }, "Return", function () awful.spawn(terminal) end),
-   awful.key({ modkey, "Shift" }, "Return", function () awful.spawn("urxvtc -title admin2 -e admin2") end),
-   awful.key({ modkey, "Shift", "Control"}, "Return", function () awful.spawn("urxvtc -title master1 -e master1") end),
-   awful.key({ modkey }, "e", function () awful.spawn("emacsclient -cn", false) end),
+   awful.key({ modkey, "Shift"}, "Return", function () awful.spawn("urxvtc -title master1 -e master1") end),
+   awful.key({ modkey, "Shift", "Control" }, "Return", function () awful.spawn("urxvtc -title admin2 -e admin2") end),
+   awful.key({ modkey }, "e", function () awful.spawn("emacsclient -ca ''", false) end),
    awful.key({ modkey, "Shift" }, "d", function () awful.spawn("thunar", false) end),    
    awful.key({ modkey, "Shift", "Control" }, "d", function () awful.spawn("sudo thunar", false) end),
    awful.key({ modkey, "Shift" }, "s", function () awful.spawn("open_primary_selection_in_cromium") end),
@@ -332,9 +332,9 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey, "Shift" }, "c", function () awful.spawn("schnegg -r", false) end), -- resume all
    
    -- Fun
-   awful.key({ modkey }, "z", function () awful.spawn.with_shell('notify-send "$(cowsay $(fortune))"', false) end),
-   awful.key({ modkey }, "w", function () awful.spawn.with_shell("killall conky && feh --bg-fill ~/wind/canvas/wrld12.png & conky -c ~/wind/wind_blow.lua", false) end),
-   awful.key({ modkey , "Shift" }, "w", function () awful.spawn.with_shell("killall conky && feh --bg-fill ~/.config/awesome/themes/canyon.jpg && conky -c ~/.config/conky/left.lua && conky -c ~/.config/conky/middle.lua", false) end)
+   awful.key({ modkey }, "z", function () awful.spawn.with_shell('notify-send "$(cowsay $(fortune))"', false) end)
+   --awful.key({ modkey }, "w", function () awful.spawn.with_shell("killall conky && feh --bg-fill ~/wind/canvas/wrld12.png & conky -c ~/wind/wind_blow.lua", false) end),
+   --awful.key({ modkey , "Shift" }, "w", function () awful.spawn.with_shell("killall conky && feh --bg-fill ~/.config/awesome/themes/canyon.jpg && conky -c ~/.config/conky/left.lua && conky -c ~/.config/conky/middle.lua", false) end)
 )
 
 clientkeys = awful.util.table.join(
@@ -457,18 +457,18 @@ awful.rules.rules = {
      }
    },
    
-   -- -- Floating clients.
-   -- { rule_any = {
-   --      class = {
-   --         "scrcpy"},
-   --      name = {
-   --         "Event Tester",  -- xev.
-   --      },
-   --      role = {
-   --         "AlarmWindow",  -- Thunderbird's calendar.
-   --         "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
-   --      }
-   -- }, properties = { floating = true }},
+   -- Floating clients.
+   { rule_any = {
+        class = {
+           "scrcpy"},
+        name = {
+           "Event Tester",  -- xev.
+        },
+        role = {
+           "AlarmWindow",  -- Thunderbird's calendar.
+           "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
+        }
+   }, properties = { floating = true }},
    
    -- Add titlebars to normal clients and dialogs SERIOUSELY?
    -- { rule_any = {type = { "normal", "dialog" }
@@ -477,6 +477,7 @@ awful.rules.rules = {
    
    { rule_any = {   	    -- INTERNET
         class = {
+	   "Google-chrome",
            "Chromium",
            "Firefox",
    }}, properties = { tag = "@", switchtotag = true }},

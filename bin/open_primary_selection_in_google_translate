@@ -6,4 +6,4 @@ url=`xclip -out -selection primary`
 echo $url
 
 # start in browser
-chromium "https://translate.google.com/#view=home&op=translate&sl=auto&tl=en&text=$url"
+google-chrome-stable "https://translate.google.com/#view=home&op=translate&sl=auto&tl=en&text=$url"

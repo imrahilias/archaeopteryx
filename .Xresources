@@ -183,7 +183,7 @@ XTerm.vt100.font: 7x13
 XTerm.vt100.faceName: xft:DejaVuSansMono Nerd Font:size=12:antialias=true
 XTerm.vt100.bolddFont: xft:DejaVuSansMono Nerd Font:size=12:antialias=true:style=Bold
 XTerm.vt100.transparent: true
-!XTerm.vt100.foreground: white
+XTerm.vt100.foreground: white
 !XTerm.vt100.foreground: rgb:A8/9C/8C
 !XTerm.vt100.background: black
 XTerm.vt100.background: rgb:10/10/10

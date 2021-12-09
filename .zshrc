@@ -105,7 +105,7 @@ alias oe1='mplayer http://mp3stream3.apasf.apa.at:8000/listen.pls'
 ## launch alias
 alias x='startx'
 #alias evince='dbus-launch evince'
-alias ee="emacsclient -ca \'\'" # > service moved to systemd
+alias e="emacsclient -ca \'\'" # > service moved to systemd
 alias scan='scanimage --format=tiff --mode=Color' #>http://lists.alioth.debian.org/pipermail/sane-devel/2001-December/001177.html
 alias am='alsamixer'
 alias halt='systemctl poweroff'
@@ -264,17 +264,12 @@ man() {
 ## Pressing enter in a git directory runs `git status`
 ## in other directories `ls`
 magic-enter () {
-
-  ## If commands are not already set, use the defaults
-  [ -z "$MAGIC_ENTER_GIT_COMMAND" ] && MAGIC_ENTER_GIT_COMMAND="git status ."
-  [ -z "$MAGIC_ENTER_OTHER_COMMAND" ] && MAGIC_ENTER_OTHER_COMMAND="ls -1Bhl --group-directories-first ."
-
   if [[ -z $BUFFER ]]; then
     echo ""
     if git rev-parse --is-inside-work-tree &>/dev/null; then
-      eval "$MAGIC_ENTER_GIT_COMMAND"
+      git status .
     else
-      eval "$MAGIC_ENTER_OTHER_COMMAND"
+      ls -1Bhl --group-directories-first .
     fi
     zle redisplay
   else
@@ -333,26 +328,26 @@ function git_branch {
 }
 
 
-## sudo or sudoedit will be inserted before the command @ Dongweiming <ciici123@gmail.com>
-sudo-command-line() {
-    [[ -z $BUFFER ]] && zle up-history
-    if [[ $BUFFER == sudo\ * ]]; then
-        LBUFFER="${LBUFFER#sudo }"
-    elif [[ $BUFFER == $EDITOR\ * ]]; then
-        LBUFFER="${LBUFFER#$EDITOR }"
-        LBUFFER="sudoedit $LBUFFER"
-    elif [[ $BUFFER == sudoedit\ * ]]; then
-        LBUFFER="${LBUFFER#sudoedit }"
-        LBUFFER="$EDITOR $LBUFFER"
-    else
-        LBUFFER="sudo $LBUFFER"
-    fi
-}
-zle -N sudo-command-line
-## Defined shortcut keys: [Esc] [Esc]
-bindkey -M emacs '\e\e' sudo-command-line
-bindkey -M vicmd '\e\e' sudo-command-line
-bindkey -M viins '\e\e' sudo-command-line
+# ## sudo or sudoedit will be inserted before the command @ Dongweiming <ciici123@gmail.com>
+# sudo-command-line() {
+#     [[ -z $BUFFER ]] && zle up-history
+#     if [[ $BUFFER == sudo\ * ]]; then
+#         LBUFFER="${LBUFFER#sudo }"
+#     elif [[ $BUFFER == $EDITOR\ * ]]; then
+#         LBUFFER="${LBUFFER#$EDITOR }"
+#         LBUFFER="sudoedit $LBUFFER"
+#     elif [[ $BUFFER == sudoedit\ * ]]; then
+#         LBUFFER="${LBUFFER#sudoedit }"
+#         LBUFFER="$EDITOR $LBUFFER"
+#     else
+#         LBUFFER="sudo $LBUFFER"
+#     fi
+# }
+# zle -N sudo-command-line
+# ## Defined shortcut keys: [Esc] [Esc]
+# bindkey -M emacs '\e\e' sudo-command-line
+# bindkey -M vicmd '\e\e' sudo-command-line
+# bindkey -M viins '\e\e' sudo-command-line
 
 ## colors, a lot of colors!
 function clicolors() {

@@ -1,5 +1,3 @@
-
-
 -- ror.lua
 -- This is the file goes in your ~/.config/awesome/ directory
 -- It contains your table of 'run or raise' key bindings for aweror.lua
@@ -15,13 +13,11 @@
 table5={
   ["a"]={"spotify", "Spotify"},
   ["d"]={"urxvtc -title Waldläufer -e ranger", "Waldläufer", "name"},
---["e"]={"emacsclient -ca ""","Emacs"}, 
   ["g"]={"gimp", "gimp"},
   ["i"]={"signal-desktop", "Signal"},
---["Shift-i"]={"rocketchat-desktop", "Rocket.Chat"},
   ["o"]={"rocketchat-desktop", "Rocket.Chat"},
   ["Shift-o"]={"libreoffice ", "libreoffice"},
-  ["s"]={"chromium", "Chromium"},
+  ["s"]={"google-chrome-stable", "Google-chrome"},
   ["t"]={"urxvtc -title Torronator -e rtorrent", "rtorrent", "instance"},
   ["u"]={"evolution", "Evolution"},
   ["x"]={"telegram-desktop", "Telegram"},
