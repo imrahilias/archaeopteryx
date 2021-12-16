@@ -33,6 +33,10 @@ urxvtd -q -f -o
 udiskie & # dont forget the &
 # thunar --daemon # bugs around!
 
+## start keyring
+eval $(gnome-keyring-daemon --start)
+export SSH_AUTH_SOCK
+
 ## fire up mouse button to key stroke binder
 xbindkeys
 ## fire up conky

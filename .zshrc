@@ -494,7 +494,6 @@ export QT_STYLE_OVERRIDE='qt5ct'
 #export QT_STYLE_OVERRIDE='gtk2'
 export ALSA_CARD='PCH'
 export ALSA_CTL='PCH'
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 #  ___   ___  ___  ___   ___  ___               ___        ___ 
 # |   |=|_.' `._|=|   |=|_.' |   | |`.     .'|=|_.'   .'|=|_.' 

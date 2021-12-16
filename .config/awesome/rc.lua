@@ -291,7 +291,7 @@ globalkeys = awful.util.table.join(
    -- Launch
    awful.key({ modkey }, "Return", function () awful.spawn(terminal) end),
    awful.key({ modkey, "Shift"}, "Return", function () awful.spawn("urxvtc -title master1 -e master1") end),
-   awful.key({ modkey, "Shift", "Control" }, "Return", function () awful.spawn("urxvtc -title admin2 -e admin2") end),
+   awful.key({ modkey, "Shift", "Control" }, "Return", function () awful.spawn("urxvtc -title vsc4 -e vsc4root") end),
    awful.key({ modkey }, "e", function () awful.spawn("emacsclient -ca ''", false) end),
    awful.key({ modkey, "Shift" }, "d", function () awful.spawn("thunar", false) end),    
    awful.key({ modkey, "Shift", "Control" }, "d", function () awful.spawn("sudo thunar", false) end),
