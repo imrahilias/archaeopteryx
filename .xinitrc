@@ -37,12 +37,17 @@ udiskie & # dont forget the &
 eval $(gnome-keyring-daemon --start)
 export SSH_AUTH_SOCK
 
+## start owncloud client
+export QT_QPA_PLATFORMTHEME=Adwaita-Dark # has to be called before owncloud, via zshrc is not enough!?
+export QT_STYLE_OVERRIDE=Adwaita-Dark
+owncloud &
+
 ## fire up mouse button to key stroke binder
 xbindkeys
 ## fire up conky
 conky -c ~/.config/conky/left.lua
-#conky -c ~/.config/conky/right.lua
 conky -c ~/.config/conky/middle.lua
+#conky -c ~/.config/conky/right.lua
 
 ## switch to custom keyboard layout
 setxkbmap -layout "us(m),de" # enables multiple layouts, switch via awesome, us(m) is custom (see notes)
@@ -50,11 +55,11 @@ setxkbmap -layout "us(m),de" # enables multiple layouts, switch via awesome, us(
 ## disable screen blanking and powersaving mode
 xset s off -dpms
 
+## sound on, pulseaudio mutes front out of no reason
+amixer -c 1 set Front 100% on
+
 ## composite manager to avoid screen tearing
 picom -b
-
-## start network-manager
-#nm-applet
 
 ## start awesome
 exec awesome

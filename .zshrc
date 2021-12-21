@@ -488,12 +488,16 @@ RPROMPT='$(git_branch)%T'
 export EDITOR='emacsclient -c -a ""'
 export PATH='/bin:/usr/bin:/usr/local/bin:/home/m/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/games:/usr/local/games:/home/m/vsc/bin'
 #path+=/scripts #hängt zur $path eben was an...
-export QT_QPA_PLATFORMTHEME='qt5ct' # qt5 gtk blending
-export QT_STYLE_OVERRIDE='qt5ct'
+#export QT_QPA_PLATFORMTHEME='qt5ct' # qt5 gtk blending
+#export QT_STYLE_OVERRIDE='qt5ct'
 #export QT_QPA_PLATFORMTHEME='gtk2' # qt looks like current gtk theme 
 #export QT_STYLE_OVERRIDE='gtk2'
+QT_QPA_PLATFORMTHEME='Adwaita-Dark'
+QT_STYLE_OVERRIDE='Adwaita-Dark'
 export ALSA_CARD='PCH'
 export ALSA_CTL='PCH'
+export CALIBRE_USE_DARK_PALETTE=1
+export XDG_CURRENT_DESKTOP='GNOME'
 
 #  ___   ___  ___  ___   ___  ___               ___        ___ 
 # |   |=|_.' `._|=|   |=|_.' |   | |`.     .'|=|_.'   .'|=|_.' 
