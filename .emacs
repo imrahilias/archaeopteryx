@@ -29,29 +29,25 @@ There are two things you can do about this warning:
     ;; For important compatibility libraries like cl-lib
     (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
 
-;; Added by Package.el.  This must come before configurations of installed packages.  Don't delete
-;; this line.  If you don't want it, just comment it out by adding a semicolon to the start of the
-;; line.  You may delete these explanatory comments.
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
 (package-initialize)
 
 ;; no welcome message please
-(setq inhibit-startup-message 't)
+(setq inhibit-startup-message t)
+
 ;; inital scratch text
 (setq initial-scratch-message "")
 
 ;; syntax highlighting
 (global-font-lock-mode 't)
 (setq font-lock-maximum-decoration 't)
-
-;; set fill paragraph size.
-(setq-default fill-column 100)
-
-;; highlight symbol under point.
-;(require 'symbol-overlay)
-(symbol-overlay-mode 't)
+(setq font-lock-maximum-size '262144)
 
 ;; show me line and column nos
-;;(line-number-mode 't)
+(line-number-mode 't)
 (column-number-mode 't)
 
 ;; none of these please
@@ -68,7 +64,7 @@ There are two things you can do about this warning:
 ;;(display-time)
 
 ;; line numbers
-(global-linum-mode 't)
+(global-linum-mode 1)
 
 ;; fonts
 ;;(set-frame-font "Bitstream Vera Sans Mono Roman" nil t)
@@ -111,6 +107,7 @@ There are two things you can do about this warning:
 
 (global-set-key (kbd "C-,") 'scroll-down-keep-cursor)
 (global-set-key (kbd "C-.") 'scroll-up-keep-cursor)
+                                        ;(global-set-key (kbd "C-c d") 'insert-current-date)
 
 ;; scrolling mouse
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 1))) ;; two lines at a time
@@ -121,7 +118,7 @@ There are two things you can do about this warning:
 (require 'ido)
 (ido-mode t)
 
-;; ;; fill column indicator
+;; fill column indicator
 ;; (add-to-list 'load-path "~/.emacs.d/fill-column-indicator.el")
 ;; (require 'fill-column-indicator)
 ;; (define-globalized-minor-mode
@@ -130,7 +127,7 @@ There are two things you can do about this warning:
 ;; (setq fci-rule-color "darkgrey")
 ;; (setq-default fci-rule-column 80)
 
-;; ;; fci-mode sux in the terminal, i want it just in graphical mode
+;; fci-mode sux in the terminal, i want it just in graphical mode
 ;; (if (display-graphic-p)
 ;;    (progn
 ;;      ;; if graphic
@@ -180,49 +177,52 @@ There are two things you can do about this warning:
                 )
 
 (custom-set-variables
- ;; custom-set-variables was added by Custom.  If you edit it by hand, you could mess it up, so be
- ;; careful.  Your init file should contain only one such instance.  If there is more than one, they
- ;; won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
  '(package-selected-packages
-   '(symbol-overlay lua-mode flycheck arduino-cli-mode arduino-mode markdown-mode company auto-complete auctex matlab-mode live-py-mode rainbow-identifiers rainbow-mode ess auto-correct)))
+   '(lua-mode flycheck arduino-cli-mode arduino-mode markdown-mode company auto-complete auctex matlab-mode live-py-mode rainbow-identifiers rainbow-mode ess auto-correct)))
 (custom-set-faces
- ;; custom-set-faces was added by Custom.  If you edit it by hand, you could mess it up, so be
- ;; careful.  Your init file should contain only one such instance.  If there is more than one, they
- ;; won't work right.
- '(symbol-overlay-default-face ((t (:inherit symbol-overlay-face-8)))))
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
 ;; subword mode (camelcase mode)
-(setq-default global-subword-mode 't)
+(global-subword-mode 1)
 
 ;; i hate tabs!
-;;(setq-default indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 
 ;; refresh buffers on change
-(setq-default global-auto-revert-mode 't)
+(global-auto-revert-mode t)
 
 ;; el-get
-;; (add-to-list 'load-path "~/.emacs.d/el-get/")
-;;  (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+(add-to-list 'load-path "~/.emacs.d/el-get/")
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
-;; (unless (require 'el-get nil 'noerror)
-;;   (with-current-buffer
-;;       (url-retrieve-synchronously "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
-;;     (goto-char (point-max))
-;;     (eval-print-last-sexp)
-;;     )
-;;   )
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)
+    )
+  )
 
-;; (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-;; (el-get 'sync)
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+(el-get 'sync)
 
 ;; auto break lines in paragraphs
 ;; add-hook 'text-mode-hook 'turn-on-auto-fill)
+
 
 ;;                               ___         ___   ___                           ___         ___  ___   ___ 
 ;;   .'|        .'|=|`.     .'| |   |   .'|=|_.'  |   | |`.     .'|=|`.     .'|=|_.'    .'|=|_.' |   |=|_.' 
@@ -236,9 +236,11 @@ There are two things you can do about this warning:
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (auto-complete-mode 1))))
 
+
 ;; highlight parentheses when the cursor is next to them
 (require 'paren)
 (show-paren-mode t)
+
 
 ;; c mode customizations
 (cwarn-mode t)
@@ -251,9 +253,9 @@ There are two things you can do about this warning:
 ;; lua-mode
 ;; This line is not necessary, if lua-mode.el is already on your load-path
                                         ;(add-to-list 'load-path "~/.emacs.d/el-get/lua-mode")
-;; (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
-;; (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
-;; (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
+(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+(add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
 
 
 ;; octave mode
@@ -285,10 +287,7 @@ There are two things you can do about this warning:
 ;;  `._|=|___||___|       |___|=|_.' |___|=|_.' |___|=|_.'  `._|=|___|
 
 
-
 ;; Flyspell mode
-;(global-flycheck-mode 't)
- 
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
 
@@ -318,7 +317,8 @@ There are two things you can do about this warning:
   ;; the locale, otherwise it would save to ~/.hunspell_de_DE.
   (setq ispell-personal-dictionary "~/.hunspell_personal"))
 
-;; The personal dictionary file has to exist, otherwise hunspell will silently not use it.
+;; The personal dictionary file has to exist, otherwise hunspell will
+;; silently not use it.
 ;;(unless (file-exists-p ispell-personal-dictionary)
 ;;(write-region "" nil ispell-personal-dictionary nil 0))
 

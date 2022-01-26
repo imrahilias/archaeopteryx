@@ -55,11 +55,17 @@ setxkbmap -layout "us(m),de" # enables multiple layouts, switch via awesome, us(
 ## disable screen blanking and powersaving mode
 xset s off -dpms
 
+## no beeping
+xset -b
+
 ## sound on, pulseaudio mutes front out of no reason
 amixer -c 1 set Front 100% on
 
 ## composite manager to avoid screen tearing
 picom -b
+
+## power tray icon
+cbatticon -r 10 -c 'notify-send Power on 10%' & # dont forget the &
 
 ## start awesome
 exec awesome

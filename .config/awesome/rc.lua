@@ -121,7 +121,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- {{{ Wibar
 -- Create a textclock widget
 --mytextclock = wibox.widget.textclock()
-mytextclock = wibox.widget.textclock('%a %e %b <span color="#FF8E38"> %_H:%M </span> ', 5)  -- blue: #1793D1
+mytextclock = wibox.widget.textclock(' %a %e %b <span color="#FF8E38"> %_H:%M </span> ', 5)  -- blue: #1793D1
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = awful.util.table.join(
@@ -220,14 +220,40 @@ awful.screen.connect_for_each_screen(function(s)
          s.mytasklist, -- Middle widget
          { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            -- mykeyboardlayout,
             wibox.widget.systray(),
+            --            mykeyboardlayout,
             mytextclock,
             --   s.mylayoutbox,
          },
       }
 end)
 -- }}}
+
+
+
+
+
+-- Create a shortcut function
+local function remind_prompt()
+    awful.prompt.run {
+        prompt       = '<span color="#FF8E38">Remind: </span>',
+--        text         = 'remind ',
+        bg_cursor    = '#FF8E38',
+        textbox      = mouse.screen.mypromptbox.widget,
+        exe_callback = function(input)
+           if not input or #input == 0 then
+              naughty.notify{ text = 'error: set reminder with \"remind $time $name\" eg \"remind 10s asdf\"'..input }
+              return
+           end
+           awful.spawn( 'remind '..input ) 
+           -- naughty.notify{ text = 'reminder set: '..input }
+        end
+    }
+end
+
+
+
+
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
@@ -287,11 +313,12 @@ globalkeys = awful.util.table.join(
    
    -- Prompt
    awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end),
-   
+   awful.key({ modkey }, "w", remind_prompt),
+  
    -- Launch
    awful.key({ modkey }, "Return", function () awful.spawn(terminal) end),
+   awful.key({ modkey, "Shift", "Control" }, "Return", function () awful.spawn("urxvtc -title admin2 -e admin2") end),
    awful.key({ modkey, "Shift"}, "Return", function () awful.spawn("urxvtc -title master1 -e master1") end),
-   awful.key({ modkey, "Shift", "Control" }, "Return", function () awful.spawn("urxvtc -title vsc4 -e vsc4root") end),
    awful.key({ modkey }, "e", function () awful.spawn("emacsclient -ca ''", false) end),
    awful.key({ modkey, "Shift" }, "d", function () awful.spawn("thunar", false) end),    
    awful.key({ modkey, "Shift", "Control" }, "d", function () awful.spawn("sudo thunar", false) end),
@@ -301,16 +328,22 @@ globalkeys = awful.util.table.join(
    --awful.key({ modkey }, "o", function () awful.spawn("octave --gui") end),
    
    -- Audio
-   --awful.key({ }, "XF86AudioRaiseVolume", function () awful.spawn("amixer set Master 5%+", false) end),
-   --awful.key({ }, "XF86AudioLowerVolume", function () awful.spawn("amixer set Master 5%-", false) end),
-   --    awful.key({ }, "XF86AudioMute", function () awful.spawn('for x in {"Master","Headphone","Front","Surround","Center","LFE","Side"} ; do amixer -c 0 set "${x}" toggle; done', false) end),
-   --awful.key({ }, "XF86AudioMute", function () awful.spawn("amixer set Master toggle", false) end),
+   awful.key({ }, "XF86AudioRaiseVolume", function () awful.spawn("amixer set Master 1%+", false) end),
+   awful.key({ }, "XF86AudioLowerVolume", function () awful.spawn("amixer set Master 1%-", false) end),
+   --awful.key({ }, "XF86AudioMute", function () awful.spawn('for x in {"Master","Headphone","Front","Surround","Center","LFE","Side"} ; do amixer -c 0 set "${x}" toggle; done', false) end),
+   awful.key({ }, "XF86AudioMute", function () awful.spawn("amixer set Master toggle", false) end),
+   awful.key({ }, "XF86AudioMicMute", function () awful.spawn("amixer set Capture toggle", false) end),
    --awful.key({ }, "XF86Tools", function () awful.spawn(terminal .. " -e ncmpcpp", false) end),
-   --    awful.key({ }, "XF86Tools", function () awful.spawn("spotify", false) end),
+   --awful.key({ }, "XF86Tools", function () awful.spawn("spotify", false) end),
    --awful.key({ }, "XF86AudioPrev", function () awful.spawn("playerctl previous", false) end),
    --awful.key({ }, "XF86AudioPlay", function () awful.spawn("playerctl play-pause", false) end),
    --awful.key({ }, "XF86AudioNext", function () awful.spawn("playerctl next", false) end),
-   
+
+   -- lights
+   awful.key({ }, "XF86MonBrightnessDown", function () awful.spawn("sudo light -U 30", false) end),    
+   awful.key({ }, "XF86MonBrightnessUp", function () awful.spawn("sudo light -A 30", false) end),    
+   awful.key({ }, "XF86Display", function () awful.spawn("xset dpms force off", false) end),    
+
    -- Screenshot
    awful.key({ }, "Print", function () awful.spawn("scrot -e 'mv $f ~/screens/ 2>/dev/null'") end),
    
@@ -322,14 +355,14 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey }, "#82", function () awful.spawn("razercfg -l all:off", false) end),
 
    -- Boinc
-   awful.key({ modkey }, "b", function () awful.spawn("boinccmd --set_run_mode never 3600", false) end), -- snooze whole boinc for 1h
-   awful.key({ modkey, "Control" }, "b", function () awful.spawn("boinccmd --set_run_mode auto", false) end), -- wake up whole boinc
-   awful.key({ modkey, "Shift" }, "b", function () awful.spawn("boinccmd --set_gpu_mode never 3600", false) end),  -- snooze up boinc gpu
-   awful.key({ modkey, "Shift", "Control" }, "b", function () awful.spawn("boinccmd --set_gpu_mode auto", false) end),  -- wake up boinc gpu
+   --awful.key({ modkey }, "b", function () awful.spawn("boinccmd --set_run_mode never 3600", false) end), -- snooze whole boinc for 1h
+   --awful.key({ modkey, "Control" }, "b", function () awful.spawn("boinccmd --set_run_mode auto", false) end), -- wake up whole boinc
+   --awful.key({ modkey, "Shift" }, "b", function () awful.spawn("boinccmd --set_gpu_mode never 3600", false) end),  -- snooze up boinc gpu
+   --awful.key({ modkey, "Shift", "Control" }, "b", function () awful.spawn("boinccmd --set_gpu_mode auto", false) end),  -- wake up boinc gpu
 
    -- Slurm
-   awful.key({ modkey }, "c", function () awful.spawn("schnegg -p", false) end), -- snooze whole (drain node + suspend all jobs) slurm for 1h
-   awful.key({ modkey, "Shift" }, "c", function () awful.spawn("schnegg -r", false) end), -- resume all
+   --awful.key({ modkey }, "c", function () awful.spawn("schnegg -p", false) end), -- snooze whole (drain node + suspend all jobs) slurm for 1h
+   --awful.key({ modkey, "Shift" }, "c", function () awful.spawn("schnegg -r", false) end), -- resume all
    
    -- Fun
    awful.key({ modkey }, "z", function () awful.spawn.with_shell('notify-send "$(cowsay $(fortune))"', false) end)
@@ -457,18 +490,18 @@ awful.rules.rules = {
      }
    },
    
-   -- Floating clients.
-   { rule_any = {
-        class = {
-           "scrcpy"},
-        name = {
-           "Event Tester",  -- xev.
-        },
-        role = {
-           "AlarmWindow",  -- Thunderbird's calendar.
-           "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
-        }
-   }, properties = { floating = true }},
+   -- -- Floating clients.
+   -- { rule_any = {
+   --      class = {
+   --         "scrcpy"},
+   --      name = {
+   --         "Event Tester",  -- xev.
+   --      },
+   --      role = {
+   --         "AlarmWindow",  -- Thunderbird's calendar.
+   --         "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
+   --      }
+   -- }, properties = { floating = true }},
    
    -- Add titlebars to normal clients and dialogs SERIOUSELY?
    -- { rule_any = {type = { "normal", "dialog" }
@@ -477,7 +510,7 @@ awful.rules.rules = {
    
    { rule_any = {   	    -- INTERNET
         class = {
-	   "Google-chrome",
+           "Google-chrome",
            "Chromium",
            "Firefox",
    }}, properties = { tag = "@", switchtotag = true }},
