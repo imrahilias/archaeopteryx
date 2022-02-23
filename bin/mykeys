@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 sudo echo '
 partial alphanumeric_keys

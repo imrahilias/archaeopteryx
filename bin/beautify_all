@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # changes all files in all subdirs; space 2 underline, uppercase 2 lowercase,  removes dash,&,+,\,!,?, and others.
 # moritz siegel @ 210304
 

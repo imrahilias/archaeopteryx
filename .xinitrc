@@ -47,7 +47,7 @@ xbindkeys
 ## fire up conky
 conky -c ~/.config/conky/left.lua
 conky -c ~/.config/conky/middle.lua
-#conky -c ~/.config/conky/right.lua
+conky -c ~/.config/conky/right.lua
 
 ## switch to custom keyboard layout
 setxkbmap -layout "us(m),de" # enables multiple layouts, switch via awesome, us(m) is custom (see notes)
@@ -65,7 +65,7 @@ amixer -c 1 set Front 100% on
 picom -b
 
 ## power tray icon
-cbatticon -r 10 -c 'notify-send Power on 10%' & # dont forget the &
+#cbatticon -r 10 -c 'notify-send Power on 10%' & # dont forget the &
 
 ## start awesome
 exec awesome

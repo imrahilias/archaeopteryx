@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # moritz siegel @ 210302
 
 usage () {

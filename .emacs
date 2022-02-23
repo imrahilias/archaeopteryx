@@ -11,7 +11,7 @@
 
 (require 'package)
 
-;; MELPA
+;; melpa
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
        (proto (if no-ssl "http" "https")))
@@ -42,9 +42,23 @@ There are two things you can do about this warning:
 (setq initial-scratch-message "")
 
 ;; syntax highlighting
+(global-color-identifiers-mode 't)
 (global-font-lock-mode 't)
 (setq font-lock-maximum-decoration 't)
 (setq font-lock-maximum-size '262144)
+(global-hi-lock-mode 't)
+(global-highlight-operators-mode 't)
+(global-highlight-parentheses-mode 't)
+(global-highlight-thing-mode 't)
+(global-hl-line-mode 't)
+(global-prettify-symbols-mode 't)
+;; highlight the current line
+;;(setq hl-line-face 'hl-line)
+(global-hl-line-mode '0)
+;;(setq highlight-current-line-globally t)
+;;(setq highlight-current-line-high-faces nil)
+;;(setq highlight-current-line-whole-line nil)
+;;(setq hl-line-face (quote highlight))
 
 ;; show me line and column nos
 (line-number-mode 't)
@@ -136,14 +150,6 @@ There are two things you can do about this warning:
 ;;  (global-fci-mode 0)
 ;; )
 
-;; highlight the current line
-;;(setq hl-line-face 'hl-line)
-(global-hl-line-mode '0)
-;;(setq highlight-current-line-globally t)
-;;(setq highlight-current-line-high-faces nil)
-;;(setq highlight-current-line-whole-line nil)
-;;(setq hl-line-face (quote highlight))
-
 ;; custom keyboard shortcuts
 (global-set-key (kbd "C-c m") 'compile)
 
@@ -186,7 +192,7 @@ There are two things you can do about this warning:
  '(ansi-color-names-vector
    ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
  '(package-selected-packages
-   '(lua-mode flycheck arduino-cli-mode arduino-mode markdown-mode company auto-complete auctex matlab-mode live-py-mode rainbow-identifiers rainbow-mode ess auto-correct)))
+   '(ample-regexps fuzzy auto-complete-auctex luarocks highlight-unique-symbol highlight-defined highlight-function-calls highlight-thing highlight-symbol highlight-parentheses highlight-operators highlight highlight-blocks highlight-escape-sequences highlight-quoted highlight-numbers color-identifiers-mode lua-mode flycheck arduino-cli-mode arduino-mode markdown-mode company auto-complete auctex matlab-mode live-py-mode rainbow-identifiers rainbow-mode ess auto-correct)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -206,19 +212,19 @@ There are two things you can do about this warning:
 (global-auto-revert-mode t)
 
 ;; el-get
-(add-to-list 'load-path "~/.emacs.d/el-get/")
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+;; (add-to-list 'load-path "~/.emacs.d/el-get/")
+;; (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)
-    )
-  )
+;; (unless (require 'el-get nil 'noerror)
+;;   (with-current-buffer
+;;       (url-retrieve-synchronously "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+;;     (goto-char (point-max))
+;;     (eval-print-last-sexp)
+;;     )
+;;   )
 
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-(el-get 'sync)
+;; (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+;; (el-get 'sync)
 
 ;; auto break lines in paragraphs
 ;; add-hook 'text-mode-hook 'turn-on-auto-fill)
@@ -253,13 +259,13 @@ There are two things you can do about this warning:
 ;; lua-mode
 ;; This line is not necessary, if lua-mode.el is already on your load-path
                                         ;(add-to-list 'load-path "~/.emacs.d/el-get/lua-mode")
-(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
-(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
-(add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
+;(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+;(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+;(add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
 
 
 ;; octave mode
-(global-set-key (kbd "C-c C-c") 'octave-send-region)
+;(global-set-key (kbd "C-c C-c") 'octave-send-region)
 
 
 ;; Latex mode
@@ -276,7 +282,7 @@ There are two things you can do about this warning:
     (lambda ()
       (interactive)
       (TeX-command-sequence '("Arara" "Extex") t))))
-;;        (TeX-command-sequence '("Arara" "View") t))))
+;        (TeX-command-sequence '("Arara" "View") t))))
 
 
 ;;  ___   ___        __          ___                        ___   ___ 

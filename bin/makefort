@@ -1,40 +1,6 @@
 #!/bin/bash
-## fortify: generate fortran source file, gnuplot file, and makefile.
-## moritz siegel @ 210419
-
-## initialise fortran source file
-init () {
-    echo "! moritz siegel @ $(date "+%y%m%d%H%M")
-
-program $name
-
-  implicit none
-  integer, parameter :: p=selected_real_kind( 16 )
-  integer ::
-  real( kind=p ) ::
-  real( kind=p ), dimension( , ) ::
-
-
-
-end program $name
-" > $name.f90
-}
-
-## initialise gnuplot file
-plot () {
-    echo "reset
-set key
-set size square
-set term png size 1920,1080
-set out '"$name.png"'
-set title '"$name"'
-#set cbr [1e-5:]
-#set xrange [-10:10]
-#set xrange [-10:10]
-set xlabel 'x'
-set ylabel 'y'
-p '"$name.dat"' u 1:2" > $name.gp
-}
+## makefort: generate makefile for fortran source code.
+## moritz siegel
 
 ## compile & execute & plot
 compact () {
@@ -79,6 +45,4 @@ while [ -e "$name.f90" ]; do
 done
 
 ## create
-init $name
-plot $name
 compact $name

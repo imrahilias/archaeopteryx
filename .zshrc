@@ -1,5 +1,17 @@
 #!/bin/false
 #blabla
+#              ___         ___  ___   ___ 
+#   .'|   .'| |   |   .'| `._|=|   |=|_.' 
+# .'  | .'  |\|   | .'  |      |   |      
+# |   | |   | |   | |   |      |   |      
+# |   | |   | |  .' |   |      `.  |      
+# |___| |___| |.'   |___|        `.|      
+#                                        
+
+autoload -U colors && colors
+autoload -Uz compinit; compinit
+
+
 #                                           ___   ___ 
 #   .'|=|`.     .'|        .'|   .'|=|`.   |   |=|_.' 
 # .'  | |  `. .'  |      .'  | .'  | |  `. `.  |      
@@ -7,11 +19,6 @@
 # |   | |   | |   |  ___ |   | |   | |   |  ___  |  `.
 # |___| |___| |___|=|_.' |___| |___| |___|  `._|=|___|
 #
-
-## colors
-red="\e[31m"
-blue="\e[34m"
-default="\e[0m"
 
 ## systemd alias
 user_commands=(
@@ -97,7 +104,7 @@ alias dfa='df -ah'
 alias countf='find . -type f | wc -l' # number of all files in dir
 alias countd='find . -type d | wc -l' # number of all subdirs in dir
 #alias rmtmp='rm *\#; rm *~; rm .*~' # moved to script
-alias x='extract '
+alias ex='extract '
 
 ## network alias
 alias oe1='mplayer http://mp3stream3.apasf.apa.at:8000/listen.pls'
@@ -303,28 +310,27 @@ zle -N rationalize-dot
 bindkey . rationalize-dot
 
 
-## prompt_char
-## changes the prompt char to 'g' if the current dir is a git repo
+## changes the prompt char to '+' if the current dir is a git repo
 function prompt_char {
-    git branch >/dev/null 2>/dev/null && echo ' + ' && return 
-    echo ' '
+    p='$'
+    git branch >/dev/null 2>&1 && p='+'
+    echo $p
 }
 
 
-# function cmd_fail {
-#     if [ "`echo $?`" -ne "0" ]; then
-# 	echo ":( "
-#     fi
-# }
+function cmd_fail {
+    if [ "`echo $?`" -ne "0" ]; then
+	echo ":("
+    fi
+}
 
 
-## git_branch
 ## if the current dir is a git repo, it prints the current branch and a * if there is
 ## stuff to be commited.
 function git_branch {
-    git branch >/dev/null 2>/dev/null && echo -n "git:"$(git branch | grep "*" | sed 's/* //')
-    git status >/dev/null 2>/dev/null | grep modified >/dev/null 2>/dev/null && echo "* " && return
-    echo " "
+    git branch >/dev/null 2>&1 && echo -n "git:"$(git branch | grep "*" | sed 's/* //')
+    git status >/dev/null 2>&1 | grep modified >/dev/null 2>&1 && echo "*" && return
+    #echo " "
 }
 
 
@@ -450,30 +456,10 @@ zranger() {
 # |___|       |___|  |_|   `.|=|.'   |___|  |___| |___|              `.|     
 #
 
-BLACK="%{"$'\033[00;30m'"%}"
-BBLACK="%{"$'\033[01;30m'"%}"
-RED="%{"$'\033[00;31m'"%}"
-BRED="%{"$'\033[01;31m'"%}"
-GREEN="%{"$'\033[00;32m'"%}"
-BGREEN="%{"$'\033[01;32m'"%}"
-YELLOW="%{"$'\033[00;33m'"%}"
-BYELLOW="%{"$'\033[01;33m'"%}"
-BLUE="%{"$'\033[00;34m'"%}"
-BBLUE="%{"$'\033[01;34m'"%}"
-MAGENTA="%{"$'\033[00;35m'"%}"
-BMAGENTA="%{"$'\033[01;35m'"%}"
-CYAN="%{"$'\033[00;36m'"%}"
-BCYAN="%{"$'\033[01;36m'"%}"
-WHITE="%{"$'\033[00;37m'"%}"
-BWHITE="%{"$'\033[01;37m'"%}"
-NORM="%{"$'\033[00m'"%}"
-PROMPT="${BWHITE}%~${BCYAN} @${BWHITE}"'$(prompt_char)'"${WHITE}" # Quote Jungle;)
-RPROMPT='$(git_branch)%T'
-#RPROMPT='$(cmd_fail)$(git_branch)%T'
+PROMPT='%{$fg_bold[white]%} %~ %{$fg_bold[cyan]%}$(prompt_char)%{$reset_color%} '
+RPROMPT='$(cmd_fail) $(git_branch) %T'
+#RPROMPT="%F{111}%K{000}[%D{%f/%m/%y}|%@]"
 
-#PROMPT="${BBLACK}%n${YELLOW}@${BBLACK}%M ${WHITE}%~ ${BBLUE}"'$(prompt_char)'" ${WHITE}" # Vote Jungle;)
-#PROMPT='[%{$fg[blue]%}%n$white@$cyan%m$reset:%~]$(prompt_char) ' # @jinn
-#RPROMPT='$(cmd_fail)$(git_branch)%T' 
 
 #        ___        ___   ___   ___  
 #   .'|=|_.'   .'| |   | |   | |   | 
@@ -486,7 +472,7 @@ RPROMPT='$(git_branch)%T'
 #export HS='alsa_output.usb-047f_c001-00-U0x47f0xc001.analog-stereo'
 #export SP='alsa_output.pci-0000_00_1b.0.analog-stereo'
 export EDITOR='emacsclient -c -a ""'
-export PATH='/bin:/usr/bin:/usr/local/bin:/home/m/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/games:/usr/local/games:/home/m/vsc/bin'
+export PATH='/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/games:/usr/local/games:/home/m/bin:/home/m/vscloud/bin'
 #path+=/scripts #hängt zur $path eben was an...
 #export QT_QPA_PLATFORMTHEME='qt5ct' # qt5 gtk blending
 #export QT_STYLE_OVERRIDE='qt5ct'
@@ -525,6 +511,9 @@ bindkey "[D" backward-word
 bindkey ";5A" up-line
 bindkey ";5B" down-line
 
+# silently (sic!) unmute front, pulseaudio/alsa fuckup
+amixer -c 0 set Front 100% on &> /dev/null
+
 #        __               ___               ___               ___   ___   ___ 
 #   .'|=|  |    .'|      |   | |`.     .'|=|_.'    .'|   .'| |   | |   |=|_.' 
 # .'  | |  |  .'  |      |   | |  `. .'  |___    .'  | .'  |\|   | `.  |      
@@ -560,8 +549,6 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 # |   | |   | `.  | |   |      `.  |      `.  | |  .' 
 # |___| |___|   `.|=|___|        `.|        `.|=|.'   
 #
-autoload -Uz compinit; compinit
-autoload -U colors && colors
 zstyle ':completion:*' completer _expand _complete _correct _approximate
 zstyle ':completion:*' completions 1
 zstyle ':completion:*' file-sort name

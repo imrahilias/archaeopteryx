@@ -242,7 +242,7 @@ local function remind_prompt()
         textbox      = mouse.screen.mypromptbox.widget,
         exe_callback = function(input)
            if not input or #input == 0 then
-              naughty.notify{ text = 'error: set reminder with \"remind $time $name\" eg \"remind 10s asdf\"'..input }
+              naughty.notify{ text = 'error: set reminder with "remind $time $name" eg "remind 10s asdf"'..input }
               return
            end
            awful.spawn( 'remind '..input ) 
@@ -355,14 +355,14 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey }, "#82", function () awful.spawn("razercfg -l all:off", false) end),
 
    -- Boinc
-   --awful.key({ modkey }, "b", function () awful.spawn("boinccmd --set_run_mode never 3600", false) end), -- snooze whole boinc for 1h
-   --awful.key({ modkey, "Control" }, "b", function () awful.spawn("boinccmd --set_run_mode auto", false) end), -- wake up whole boinc
-   --awful.key({ modkey, "Shift" }, "b", function () awful.spawn("boinccmd --set_gpu_mode never 3600", false) end),  -- snooze up boinc gpu
-   --awful.key({ modkey, "Shift", "Control" }, "b", function () awful.spawn("boinccmd --set_gpu_mode auto", false) end),  -- wake up boinc gpu
+   awful.key({ modkey }, "b", function () awful.spawn("boinccmd --set_run_mode never 3600", false) end), -- snooze whole boinc for 1h
+   awful.key({ modkey, "Control" }, "b", function () awful.spawn("boinccmd --set_run_mode auto", false) end), -- wake up whole boinc
+   awful.key({ modkey, "Shift" }, "b", function () awful.spawn("boinccmd --set_gpu_mode never 3600", false) end),  -- snooze up boinc gpu
+   awful.key({ modkey, "Shift", "Control" }, "b", function () awful.spawn("boinccmd --set_gpu_mode auto", false) end),  -- wake up boinc gpu
 
    -- Slurm
-   --awful.key({ modkey }, "c", function () awful.spawn("schnegg -p", false) end), -- snooze whole (drain node + suspend all jobs) slurm for 1h
-   --awful.key({ modkey, "Shift" }, "c", function () awful.spawn("schnegg -r", false) end), -- resume all
+   awful.key({ modkey }, "c", function () awful.spawn("schnegg -p", false) end), -- snooze whole (drain node + suspend all jobs) slurm for 1h
+   awful.key({ modkey, "Shift" }, "c", function () awful.spawn("schnegg -r", false) end), -- resume all
    
    -- Fun
    awful.key({ modkey }, "z", function () awful.spawn.with_shell('notify-send "$(cowsay $(fortune))"', false) end)
@@ -576,7 +576,6 @@ awful.rules.rules = {
            "TelegramDesktop",
            "Signal",
            "scrcpy",
-           "zoom",
            "rocket.chat",
            "Rocket.Chat"
    }}, properties = { tag = "✆", switchtotag = true }},
@@ -585,6 +584,7 @@ awful.rules.rules = {
         class = {
            "steam",
            "Steam",
+           "zoom",
    }}, properties = { tag = "♞", switchtotag = true }},
    
    { rule_any = {    	    -- CLUBS
