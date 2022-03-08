@@ -22,8 +22,8 @@ table5={
   ["o"]={"rocketchat-desktop", "Rocket.Chat"},
   ["Shift-o"]={"libreoffice ", "libreoffice"},
   ["s"]={"google-chrome-stable", "google-chrome"},
-  ["t"]={"urxvtc -title Torronator -e rtorrent", "rtorrent", "instance"},
+--["t"]={"urxvtc -title Torronator -e rtorrent", "rtorrent", "instance"},
   ["u"]={"evolution", "Evolution"},
-  ["x"]={"telegram-desktop", "Telegram"},
+  ["t"]={"telegram-desktop", "Telegram"},
   ["y"]={"gnome-calendar", "Gnome-calendar"},
 }
