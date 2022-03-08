@@ -177,7 +177,7 @@ XTerm.vt100.metaSendsEscape: true
 XTerm.vt100.backarrowKey: false
 XTerm.ttyModes: erase ^?
 XTerm.vt100.saveLines: 4096
-XTerm.vt100.scrollBar: true
+XTerm.vt100.scrollBar: false
 XTerm.vt100.scrollbar.width: 8
 XTerm.vt100.font: 7x13
 XTerm.vt100.faceName: xft:DejaVuSansMono Nerd Font:size=12:antialias=true
