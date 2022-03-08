@@ -67,7 +67,7 @@ awful.layout.layouts = {
    --awful.layout.suit.fair.horizontal,
    --awful.layout.suit.spiral,
    --awful.layout.suit.spiral.dwindle,
-   --awful.layout.suit.floating,
+   awful.layout.suit.floating,
    --awful.layout.suit.max.fullscreen,
    --awful.layout.suit.magnifier,
    --awful.layout.suit.corner.nw,
@@ -326,6 +326,7 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey, "Control" }, "s", function () awful.spawn("open_primary_selection_in_google_translate") end),
    awful.key({ modkey, "Shift", "Control" }, "s", function () awful.spawn("open_primary_selection_in_thesaurus") end),
    --awful.key({ modkey }, "o", function () awful.spawn("octave --gui") end),
+   awful.key({ modkey, "Shift" }, "x", function () awful.spawn("xterm -T 'vsconsole' -fa 'xft:DejaVuSansMono' -fs 24 -e 'bash'") end),
    
    -- Audio
    awful.key({ }, "XF86AudioRaiseVolume", function () awful.spawn("amixer set Master 1%+", false) end),

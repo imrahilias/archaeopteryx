@@ -130,6 +130,8 @@ alias rainbow='for (( i = 30; i < 38; i++ )); do echo -e "\033[0;"$i"m Normal: (
 alias fifi='figlet -w 200 -f ~/bin/razor'
 alias cp='rsync -aP' # show percentage
 alias ap='adb pull /sdcard/DCIM/Camera/ /mnt/troika/photos/2021/'
+alias xt='xterm -fa 'xft:DejaVuSansMono' -fs 24 -e 'bash''
+
 
 #                    __    ___  ___   ___                          ___   ___   ___ 
 #   .'|=|`.     .'|=|  |  `._|=|   |=|_.'   .'|   .'|=|`.     .'| |   | |   |=|_.' 

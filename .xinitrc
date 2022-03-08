@@ -32,6 +32,7 @@ fi
 urxvtd -q -f -o
 udiskie & # dont forget the &
 # thunar --daemon # bugs around!
+nextcloud &
 
 ## start keyring
 eval $(gnome-keyring-daemon --start)

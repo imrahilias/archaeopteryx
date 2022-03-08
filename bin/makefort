@@ -2,47 +2,15 @@
 ## makefort: generate makefile for fortran source code.
 ## moritz siegel
 
-## compile & execute & plot
-compact () {
-    echo ".PHONY: all clean
+echo ".PHONY: all clean
 
-all: $name
+all: $1
 
 clean: 
-	rm $name $name.png
+	rm $1 $1.png
 
-$name: $name.f90 $name.gp
-	gfortran -Og -Wall -fimplicit-none -fcheck=all -fbacktrace -o $name $name.f90
-	./$name
-	#./$name > $name.dat
-	gnuplot $name.gp" > makefile
-}
-
-## format name
-delete="()[]{}*?!^~%\\\<>&\$#|'\`\"@=+"
-spaces=" _.,:;-"
-unixify () (
-    printf '%s\n' "$1" \
-        | tr -d "$delete" \
-        | tr -s "$spaces" _ \
-        | sed 's/.*/\L&/' \
-        | sed 's/ä/ae/g; s/ö/oe/g; s/ü/ue/g; s/ß/sz/g;'
-)
-
-if [ $# -eq 0 ]; then
-    name="$(date "+%y%m%d")"
-else
-    name=$(unixify "$1")
-fi
-
-## check filename
-echo "$name.f90"
-count=0
-while [ -e "$name.f90" ]; do
-    echo "directory/file '$name' exists, renaming to '"$name"_"$count"'"
-    name="$name"_"$count"
-    count=$(($count+1))
-done
-
-## create
-compact $name
+$1: $1.f90 $1.gp
+	gfortran -Og -Wall -fimplicit-none -fcheck=all -fbacktrace -o $1 $1.f90
+	./$1
+	#./$1 > $1.dat
+	gnuplot $1.gp" > makefile
