@@ -1,0 +1,19 @@
+#!/bin/bash
+
+file=$(basename $1 .mp4)
+
+## write batch file
+echo "#!/bin/bash
+#SBATCH -p nest
+#SBATCH -N 1
+#SBATCH -n 1
+#SBATCH -J $1
+
+## do stuff
+srun ffmpeg -i $1 -c:v libx265 -crf 28 -preset superfast -c:a aac -b:a 128k $file_low.mp4" > $1.batch
+
+## submit it
+#sbatch "$1.batch"
+
+## remove batch file?
+#rm "$1.batch" # go home
