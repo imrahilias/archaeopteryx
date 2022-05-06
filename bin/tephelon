@@ -1,0 +1,22 @@
+#!/bin/bash
+
+## init
+adb devices -l &&
+
+echo -n "Please enable debugging access on android device, then proceed [Y/n] "
+read answer
+
+# everything except a string starting with "n" or "N" means "yes".
+if [ "$answer" != "${answer#[Nn]}" ] ;then
+    echo "stopping"
+    exit 1
+fi
+
+## photos
+adbsync --show-progress --pull --exclude-from=/mnt/troika/photos/exclude /mnt/troika/photos/camera/ /sdcard/DCIM/Camera/.
+
+## signal
+adbsync --show-progress --pull --exclude-from=/mnt/troika/projects/tephelon/op5/signal/exclude /mnt/troika/projects/tephelon/op5/signal/ /sdcard/Signal/Backups/.
+
+## exclude
+ls /mnt/troika/photos/camera/ >> /mnt/troika/photos/exclude
