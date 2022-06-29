@@ -168,4 +168,3 @@ def="\[\e[0m\]"   # default color
 
 # set prompt
 PS1="$b\u$w@$t\h$def:\w\$ "
-PS1="${PS1}\[\e]2;VSConsole\a\]"

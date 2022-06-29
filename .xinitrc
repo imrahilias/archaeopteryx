@@ -32,11 +32,15 @@ fi
 urxvtd -q -f -o
 udiskie & # dont forget the &
 # thunar --daemon # bugs around!
-nextcloud &
 
 ## start keyring
 eval $(gnome-keyring-daemon --start)
 export SSH_AUTH_SOCK
+
+## start nextcloud client
+#eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+#export SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+nextcloud &
 
 ## start owncloud client
 export QT_QPA_PLATFORMTHEME=Adwaita-Dark # has to be called before owncloud, via zshrc is not enough!?

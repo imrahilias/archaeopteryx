@@ -1,24 +1,16 @@
 #!/bin/false
 #blabla
-#              ___         ___  ___   ___ 
-#   .'|   .'| |   |   .'| `._|=|   |=|_.' 
-# .'  | .'  |\|   | .'  |      |   |      
-# |   | |   | |   | |   |      |   |      
-# |   | |   | |  .' |   |      `.  |      
-# |___| |___| |.'   |___|        `.|      
-#                                        
+                                         
+#       _/_/    _/        _/_/_/    _/_/      _/_/_/   
+#    _/    _/  _/          _/    _/    _/  _/          
+#   _/_/_/_/  _/          _/    _/_/_/_/    _/_/       
+#  _/    _/  _/          _/    _/    _/        _/      
+# _/    _/  _/_/_/_/  _/_/_/  _/    _/  _/_/_/         
 
-autoload -U colors && colors
-autoload -Uz compinit; compinit
-
-
-#                                           ___   ___ 
-#   .'|=|`.     .'|        .'|   .'|=|`.   |   |=|_.' 
-# .'  | |  `. .'  |      .'  | .'  | |  `. `.  |      
-# |   |=|   | |   |      |   | |   |=|   |   `.|=|`.  
-# |   | |   | |   |  ___ |   | |   | |   |  ___  |  `.
-# |___| |___| |___|=|_.' |___| |___| |___|  `._|=|___|
-#
+## colors
+red="\e[31m"
+blue="\e[34m"
+default="\e[0m"
 
 ## systemd alias
 user_commands=(
@@ -120,26 +112,22 @@ alias halt='systemctl poweroff'
 
 ## misc
 alias u='urxvtc'
-alias dark='razercfg -l all:off'
-alias light='razercfg -l GlowingLogo:off -l Scrollwheel:on'
-alias fast='razercfg -r 1:3'
-alias slow='razercfg -r 1:2'
+#alias dark='razercfg -l all:off'
+#alias light='razercfg -l GlowingLogo:off -l Scrollwheel:on'
+#alias fast='razercfg -r 1:3'
+#alias slow='razercfg -r 1:2'
 alias rename='perl-rename'
-alias zephyr='/usr/bin/git --git-dir=$HOME/.zephyr --work-tree=$HOME'
+#alias zephyr='/usr/bin/git --git-dir=$HOME/.zephyr --work-tree=$HOME'
 alias rainbow='for (( i = 30; i < 38; i++ )); do echo -e "\033[0;"$i"m Normal: (0;$i); \033[1;"$i"m Light: (1;$i)"; done'
-alias fifi='figlet -w 200 -f ~/bin/razor'
+alias fifi='figlet -w 200 -f lean'
 alias cp='rsync -aP' # show percentage
-alias ap='adb pull /sdcard/DCIM/Camera/ /mnt/troika/photos/2021/'
-alias xt='xterm -fa 'xft:DejaVuSansMono' -fs 24 -e 'bash''
+#alias ap='adb pull /sdcard/DCIM/Camera/ /mnt/troika/photos/2021/'
 
-
-#                    __    ___  ___   ___                          ___   ___   ___ 
-#   .'|=|`.     .'|=|  |  `._|=|   |=|_.'   .'|   .'|=|`.     .'| |   | |   |=|_.' 
-# .'  | |  `. .'  | |  |       |   |      .'  | .'  | |  `. .'  |\|   | `.  |      
-# |   | |   | |   |=|.'        |   |      |   | |   | |   | |   | |   |   `.|=|`.  
-# `.  | |  .' |   |            `.  |      |   | `.  | |  .' |   | |  .'  ___  |  `.
-#   `.|=|.'   |___|              `.|      |___|   `.|=|.'   |___| |.'    `._|=|___|
-#
+#      _/_/    _/_/_/    _/_/_/_/_/  _/_/_/    _/_/    _/      _/    _/_/_/   
+#   _/    _/  _/    _/      _/        _/    _/    _/  _/_/    _/  _/          
+#  _/    _/  _/_/_/        _/        _/    _/    _/  _/  _/  _/    _/_/       
+# _/    _/  _/            _/        _/    _/    _/  _/    _/_/        _/      
+#  _/_/    _/            _/      _/_/_/    _/_/    _/      _/  _/_/_/          
 
 setopt extendedglob             # inverted expansion like: ls *~*.txt
 setopt correct                  # correct mistakes
@@ -160,14 +148,12 @@ setopt hist_ignore_space        # do not remember commands starting with space
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
-
-#        ___  ___               ___         ___  ___  ___   ___                          ___   ___   ___ 
-#   .'|=|_.' |   | |`.     .'| |   |   .'|=|_.' `._|=|   |=|_.'   .'|   .'|=|`.     .'| |   | |   |=|_.' 
-# .'  |  ___ |   | |  `. .'  |\|   | .'  |           |   |      .'  | .'  | |  `. .'  |\|   | `.  |      
-# |   |=|_.' |   | |   | |   | |   | |   |           |   |      |   | |   | |   | |   | |   |   `.|=|`.  
-# |   |      `.  | |   | |   | |  .' `.  |  ___      `.  |      |   | `.  | |  .' |   | |  .'  ___  |  `.
-# |___|        `.|=|___| |___| |.'     `.|=|_.'        `.|      |___|   `.|=|.'   |___| |.'    `._|=|___|
-#
+                                                                                                   
+#     _/_/_/_/  _/    _/  _/      _/    _/_/_/  _/_/_/_/_/  _/_/_/    _/_/    _/      _/    _/_/_/   
+#    _/        _/    _/  _/_/    _/  _/            _/        _/    _/    _/  _/_/    _/  _/          
+#   _/_/_/    _/    _/  _/  _/  _/  _/            _/        _/    _/    _/  _/  _/  _/    _/_/       
+#  _/        _/    _/  _/    _/_/  _/            _/        _/    _/    _/  _/    _/_/        _/      
+# _/          _/_/    _/      _/    _/_/_/      _/      _/_/_/    _/_/    _/      _/  _/_/_/         
 
 ## archive extraction
 extract() {
@@ -273,12 +259,17 @@ man() {
 ## Pressing enter in a git directory runs `git status`
 ## in other directories `ls`
 magic-enter () {
+
+  ## If commands are not already set, use the defaults
+  [ -z "$MAGIC_ENTER_GIT_COMMAND" ] && MAGIC_ENTER_GIT_COMMAND="git status ."
+  [ -z "$MAGIC_ENTER_OTHER_COMMAND" ] && MAGIC_ENTER_OTHER_COMMAND="ls -1Bhl --group-directories-first ."
+
   if [[ -z $BUFFER ]]; then
     echo ""
     if git rev-parse --is-inside-work-tree &>/dev/null; then
-      git status .
+      eval "$MAGIC_ENTER_GIT_COMMAND"
     else
-      ls -1Bhl --group-directories-first .
+      eval "$MAGIC_ENTER_OTHER_COMMAND"
     fi
     zle redisplay
   else
@@ -312,27 +303,28 @@ zle -N rationalize-dot
 bindkey . rationalize-dot
 
 
-## changes the prompt char to '+' if the current dir is a git repo
+## prompt_char
+## changes the prompt char to 'g' if the current dir is a git repo
 function prompt_char {
-    p='$'
-    git branch >/dev/null 2>&1 && p='+'
-    echo $p
+    git branch >/dev/null 2>/dev/null && echo ' + ' && return 
+    echo ' '
 }
 
 
-function cmd_fail {
-    if [ "`echo $?`" -ne "0" ]; then
-	echo ":("
-    fi
-}
+# function cmd_fail {
+#     if [ "`echo $?`" -ne "0" ]; then
+# 	echo ":( "
+#     fi
+# }
 
 
+## git_branch
 ## if the current dir is a git repo, it prints the current branch and a * if there is
 ## stuff to be commited.
 function git_branch {
-    git branch >/dev/null 2>&1 && echo -n "git:"$(git branch | grep "*" | sed 's/* //')
-    git status >/dev/null 2>&1 | grep modified >/dev/null 2>&1 && echo "*" && return
-    #echo " "
+    git branch >/dev/null 2>/dev/null && echo -n "git:"$(git branch | grep "*" | sed 's/* //')
+    git status >/dev/null 2>/dev/null | grep modified >/dev/null 2>/dev/null && echo "* " && return
+    echo " "
 }
 
 
@@ -354,8 +346,8 @@ function git_branch {
 # zle -N sudo-command-line
 # ## Defined shortcut keys: [Esc] [Esc]
 # bindkey -M emacs '\e\e' sudo-command-line
-# bindkey -M vicmd '\e\e' sudo-command-line
-# bindkey -M viins '\e\e' sudo-command-line
+# #bindkey -M vicmd '\e\e' sudo-command-line
+# #bindkey -M viins '\e\e' sudo-command-line
 
 ## colors, a lot of colors!
 function clicolors() {
@@ -370,14 +362,12 @@ function clicolors() {
     echo $c | sed 's/%//g' | sed 's/{//g' | sed 's/}//g' | sed '$s/..$//';
     c=''
 }
-
-#        __                     ___         ___         ___        __  
-#   .'|=|  |   .'|=|`.     .'| |   |   .'|=|_.'    .'|=|_.'   .'|=|  | 
-# .'  | |  | .'  | |  `. .'  |\|   | .'  |___    .'  |  ___ .'  | |  | 
-# |   |=|.'  |   |=|   | |   | |   | |   |`._|=. |   |=|_.' |   |=|.'  
-# |   |  |`. |   | |   | |   | |  .' `.  |  __|| |   |  ___ |   |  |`. 
-# |___|  |_| |___| |___| |___| |.'     `.|=|_.'' |___|=|_.' |___|  |_| 
-#
+                                                                  
+#     _/_/_/      _/_/    _/      _/    _/_/_/  _/_/_/_/  _/_/_/    
+#    _/    _/  _/    _/  _/_/    _/  _/        _/        _/    _/   
+#   _/_/_/    _/_/_/_/  _/  _/  _/  _/  _/_/  _/_/_/    _/_/_/      
+#  _/    _/  _/    _/  _/    _/_/  _/    _/  _/        _/    _/     
+# _/    _/  _/    _/  _/      _/    _/_/_/  _/_/_/_/  _/    _/      
 
 ## This is based on: https://github.com/ranger/ranger/blob/master/examples/bash_automatic_cd.sh
 ## Paste this into your .zshrc:
@@ -412,12 +402,11 @@ zranger() {
     fi
 }
 
-#  ___   ___         __                     ___         ___         ___        __  
-#  `._|=|   |   .'|=|  |   .'|=|`.     .'| |   |   .'|=|_.'    .'|=|_.'   .'|=|  | 
-#       |  .' .'  | |  | .'  | |  `. .'  |\|   | .'  |___    .'  |  ___ .'  | |  | 
-#   .'|=|.'   |   |=|.'  |   |=|   | |   | |   | |   |`._|=. |   |=|_.' |   |=|.'  
-# .'  |  ___  |   |  |`. |   | |   | |   | |  .' `.  |  __|| |   |  ___ |   |  |`. 
-# |___|=|_.'  |___|  |_| |___| |___| |___| |.'     `.|=|_.'' |___|=|_.' |___|  |_| 
+#     _/_/_/_/_/  _/_/_/      _/_/    _/      _/    _/_/_/  _/_/_/_/  _/_/_/    
+#          _/    _/    _/  _/    _/  _/_/    _/  _/        _/        _/    _/   
+#       _/      _/_/_/    _/_/_/_/  _/  _/  _/  _/  _/_/  _/_/_/    _/_/_/      
+#    _/        _/    _/  _/    _/  _/    _/_/  _/    _/  _/        _/    _/     
+# _/_/_/_/_/  _/    _/  _/    _/  _/      _/    _/_/_/  _/_/_/_/  _/    _/      
 
 ## based on https://github.com/Vifon/zranger
 ## switching retains tabs!
@@ -450,31 +439,48 @@ zranger() {
 # #autoload -U zranger # embedded in zshrc
 # bindkey -s '^D' "\eq zranger\n"
 
-#        __          __                                  __    ___  ___   ___ 
-#   .'|=|  |    .'|=|  |   .'|=|`.     .'|\/|`.     .'|=|  |  `._|=|   |=|_.' 
-# .'  | |  |  .'  | |  | .'  | |  `. .'  |  |  `. .'  | |  |       |   |      
-# |   |=|.'   |   |=|.'  |   | |   | |   |  |   | |   |=|.'        |   |      
-# |   |       |   |  |`. `.  | |  .' |   |  |   | |   |            `.  |      
-# |___|       |___|  |_|   `.|=|.'   |___|  |___| |___|              `.|     
-#
+#     _/_/_/    _/_/_/      _/_/    _/      _/  _/_/_/    _/_/_/_/_/   
+#    _/    _/  _/    _/  _/    _/  _/_/  _/_/  _/    _/      _/        
+#   _/_/_/    _/_/_/    _/    _/  _/  _/  _/  _/_/_/        _/         
+#  _/        _/    _/  _/    _/  _/      _/  _/            _/          
+# _/        _/    _/    _/_/    _/      _/  _/            _/           
 
-PROMPT='%{$fg_bold[white]%} %~ %{$fg_bold[cyan]%}$(prompt_char)%{$reset_color%} '
-RPROMPT='$(cmd_fail) $(git_branch) %T'
-#RPROMPT="%F{111}%K{000}[%D{%f/%m/%y}|%@]"
+BLACK="%{"$'\033[00;30m'"%}"
+BBLACK="%{"$'\033[01;30m'"%}"
+RED="%{"$'\033[00;31m'"%}"
+BRED="%{"$'\033[01;31m'"%}"
+GREEN="%{"$'\033[00;32m'"%}"
+BGREEN="%{"$'\033[01;32m'"%}"
+YELLOW="%{"$'\033[00;33m'"%}"
+BYELLOW="%{"$'\033[01;33m'"%}"
+BLUE="%{"$'\033[00;34m'"%}"
+BBLUE="%{"$'\033[01;34m'"%}"
+MAGENTA="%{"$'\033[00;35m'"%}"
+BMAGENTA="%{"$'\033[01;35m'"%}"
+CYAN="%{"$'\033[00;36m'"%}"
+BCYAN="%{"$'\033[01;36m'"%}"
+WHITE="%{"$'\033[00;37m'"%}"
+BWHITE="%{"$'\033[01;37m'"%}"
+NORM="%{"$'\033[00m'"%}"
+PROMPT="${BWHITE}%~${BCYAN} @${BWHITE}"'$(prompt_char)'"${WHITE}" # Quote Jungle;)
+RPROMPT='$(git_branch)%T'
+#RPROMPT='$(cmd_fail)$(git_branch)%T'
 
+#PROMPT="${BBLACK}%n${YELLOW}@${BBLACK}%M ${WHITE}%~ ${BBLUE}"'$(prompt_char)'" ${WHITE}" # Vote Jungle;)
+#PROMPT='[%{$fg[blue]%}%n$white@$cyan%m$reset:%~]$(prompt_char) ' # @jinn
+#RPROMPT='$(cmd_fail)$(git_branch)%T' 
 
-#        ___        ___   ___   ___  
-#   .'|=|_.'   .'| |   | |   | |   | 
-# .'  |  ___ .'  |\|   | |   | |   | 
-# |   |=|_.' |   | |   | |   | |   | 
-# |   |  ___ |   | |  .' `.  | |  .' 
-# |___|=|_.' |___| |.'     `.|=|.'   
-#
+#     _/_/_/_/  _/      _/  _/      _/   
+#    _/        _/_/    _/  _/      _/    
+#   _/_/_/    _/  _/  _/  _/      _/     
+#  _/        _/    _/_/    _/  _/        
+# _/_/_/_/  _/      _/      _/           
+
 
 #export HS='alsa_output.usb-047f_c001-00-U0x47f0xc001.analog-stereo'
 #export SP='alsa_output.pci-0000_00_1b.0.analog-stereo'
 export EDITOR='emacsclient -c -a ""'
-export PATH='/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/games:/usr/local/games:/home/m/bin:/home/m/vscloud/bin'
+export PATH='/bin:/usr/bin:/usr/local/bin:/home/m/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/games:/usr/local/games:/home/m/vscloud/bin'
 #path+=/scripts #hängt zur $path eben was an...
 #export QT_QPA_PLATFORMTHEME='qt5ct' # qt5 gtk blending
 #export QT_STYLE_OVERRIDE='qt5ct'
@@ -487,13 +493,11 @@ export ALSA_CTL='PCH'
 export CALIBRE_USE_DARK_PALETTE=1
 export XDG_CURRENT_DESKTOP='GNOME'
 
-#  ___   ___  ___  ___   ___  ___               ___        ___ 
-# |   |=|_.' `._|=|   |=|_.' |   | |`.     .'|=|_.'   .'|=|_.' 
-# `.  |           |   |      |   | |  `. .'  |  ___ .'  |  ___ 
-#   `.|=|`.       |   |      |   | |   | |   |=|_.' |   |=|_.' 
-#  ___  |  `.     `.  |      `.  | |   | |   |      |   |      
-#  `._|=|___|       `.|        `.|=|___| |___|      |___|      
-#
+#       _/_/_/  _/_/_/_/_/  _/    _/  _/_/_/_/  _/_/_/_/   
+#    _/            _/      _/    _/  _/        _/          
+#     _/_/        _/      _/    _/  _/_/_/    _/_/_/       
+#        _/      _/      _/    _/  _/        _/            
+# _/_/_/        _/        _/_/    _/        _/             
 
 ## turn off XOFF/XON
 stty -ixon
@@ -513,16 +517,12 @@ bindkey "[D" backward-word
 bindkey ";5A" up-line
 bindkey ";5B" down-line
 
-# silently (sic!) unmute front, pulseaudio/alsa fuckup
-amixer -c 0 set Front 100% on &> /dev/null
+#     _/_/_/    _/        _/    _/    _/_/_/  _/_/_/  _/      _/    _/_/_/   
+#    _/    _/  _/        _/    _/  _/          _/    _/_/    _/  _/          
+#   _/_/_/    _/        _/    _/  _/  _/_/    _/    _/  _/  _/    _/_/       
+#  _/        _/        _/    _/  _/    _/    _/    _/    _/_/        _/      
+# _/        _/_/_/_/    _/_/      _/_/_/  _/_/_/  _/      _/  _/_/_/         
 
-#        __               ___               ___               ___   ___   ___ 
-#   .'|=|  |    .'|      |   | |`.     .'|=|_.'    .'|   .'| |   | |   |=|_.' 
-# .'  | |  |  .'  |      |   | |  `. .'  |___    .'  | .'  |\|   | `.  |      
-# |   |=|.'   |   |      |   | |   | |   |`._|=. |   | |   | |   |   `.|=|`.  
-# |   |       |   |  ___ `.  | |   | `.  |  __|| |   | |   | |  .'  ___  |  `.
-# |___|       |___|=|_.'   `.|=|___|   `.|=|_.'' |___| |___| |.'    `._|=|___|
-#
 
 ## auto suggestion
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -535,7 +535,7 @@ ZSH_AUTOSUGGEST_USE_ASYNC=1
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 ## autojump
-source /etc/profile.d/autojump.zsh
+#source /etc/profile.d/autojump.zsh
 
 ## syntax highlighning has to be last
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -544,13 +544,14 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 ## more colors! > manually copied
 #source ~/.zsh/zsh-dircolors/zsh-dircolors.plugin.zsh 
 
-#              ___         ___  ___   ___             
-#   .'|=|`.   |   | |`.   `._|=|   |=|_.'   .'|=|`.   
-# .'  | |  `. |   | |  `.      |   |      .'  | |  `. 
-# |   |=|   | |   | |   |      |   |      |   | |   | 
-# |   | |   | `.  | |   |      `.  |      `.  | |  .' 
-# |___| |___|   `.|=|___|        `.|        `.|=|.'   
-#
+#       _/_/    _/    _/  _/_/_/_/_/    _/_/    
+#    _/    _/  _/    _/      _/      _/    _/   
+#   _/_/_/_/  _/    _/      _/      _/    _/    
+#  _/    _/  _/    _/      _/      _/    _/     
+# _/    _/    _/_/        _/        _/_/        
+
+autoload -Uz compinit; compinit
+autoload -U colors && colors
 zstyle ':completion:*' completer _expand _complete _correct _approximate
 zstyle ':completion:*' completions 1
 zstyle ':completion:*' file-sort name

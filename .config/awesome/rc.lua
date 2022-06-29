@@ -595,6 +595,10 @@ awful.rules.rules = {
            "steam",
            "Steam",
            "zoom",
+        },
+        name = {
+              "Zoom Meeting",
+              "Zoom Cloud Meetings",
    }}, properties = { tag = "♞", switchtotag = true }},
    
    { rule_any = {    	    -- CLUBS

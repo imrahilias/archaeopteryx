@@ -41,6 +41,21 @@ There are two things you can do about this warning:
 ;; inital scratch text
 (setq initial-scratch-message "")
 
+;; UI and base colors
+(setq theme-color-accent  "#ff6000")
+(setq theme-color-level-1 "#1D1F21")
+(setq theme-color-level-2 "#373B41")
+(setq theme-color-level-3 "#C5C8C6")
+
+;; common colors
+(setq theme-color-red     "#A54242")
+(setq theme-color-green   "#8C9440")
+(setq theme-color-yellow  "#DE935F")
+(setq theme-color-blue    "#5F819D")
+(setq theme-color-magenta "#85678F")
+(setq theme-color-cyan    "#5E8D87")
+(setq theme-color-gray    "#707880")
+
 ;; syntax highlighting
 (global-color-identifiers-mode 't)
 (global-font-lock-mode 't)
@@ -51,18 +66,32 @@ There are two things you can do about this warning:
 (global-highlight-parentheses-mode 't)
 (global-highlight-thing-mode 't)
 (global-hl-line-mode 't)
-(global-prettify-symbols-mode 't)
+;; makes ugly glyphs from greek letters!
+;;(global-prettify-symbols-mode 't)
 ;; highlight the current line
 ;;(setq hl-line-face 'hl-line)
 (global-hl-line-mode '0)
-;;(setq highlight-current-line-globally t)
-;;(setq highlight-current-line-high-faces nil)
-;;(setq highlight-current-line-whole-line nil)
-;;(setq hl-line-face (quote highlight))
+(setq highlight-current-line-globally t)
+(setq highlight-current-line-high-faces nil)
+(setq highlight-current-line-whole-line nil)
+(setq hl-line-face (quote highlight))
+
+;; highlighting lock
+(custom-set-faces
+ `(hi-black-b  ((t (:inherit (bold) :foreground ,theme-color-level-1 :background ,theme-color-gray))))
+ `(hi-black-hb ((t (:inherit (bold) :foreground ,theme-color-level-3 :background ,theme-color-gray))))
+ `(hi-blue     ((t (:foreground ,theme-color-level-1 :background ,theme-color-blue))))
+ `(hi-blue-b   ((t (:inherit (hi-blue bold) :inverse-video t))))
+ `(hi-green    ((t (:foreground ,theme-color-level-1 :background ,theme-color-green))))
+ `(hi-green-b  ((t (:inherit (hi-green bold) :inverse-video t))))
+ `(hi-pink     ((t (:foreground ,theme-color-level-1 :background ,theme-color-magenta))))
+ `(hi-red-b    ((t (:inherit (bold) :foreground ,theme-color-red))))
+ `(hi-yellow   ((t (:foreground ,theme-color-level-1 :background ,theme-color-yellow)))))
 
 ;; show me line and column nos
 (line-number-mode 't)
 (column-number-mode 't)
+(global-linum-mode 't)
 
 ;; none of these please
 (scroll-bar-mode '0)
@@ -76,9 +105,6 @@ There are two things you can do about this warning:
 ;;(setq display-time-day-and-date t )
 ;;(setq display-time-24hr-format t)
 ;;(display-time)
-
-;; line numbers
-(global-linum-mode 1)
 
 ;; fonts
 ;;(set-frame-font "Bitstream Vera Sans Mono Roman" nil t)
@@ -192,7 +218,7 @@ There are two things you can do about this warning:
  '(ansi-color-names-vector
    ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
  '(package-selected-packages
-   '(docker-compose-mode ample-regexps fuzzy auto-complete-auctex luarocks highlight-unique-symbol highlight-defined highlight-function-calls highlight-thing highlight-symbol highlight-parentheses highlight-operators highlight highlight-blocks highlight-escape-sequences highlight-quoted highlight-numbers color-identifiers-mode lua-mode flycheck arduino-cli-mode arduino-mode markdown-mode company auto-complete auctex matlab-mode live-py-mode rainbow-identifiers rainbow-mode ess auto-correct)))
+   '(ample-regexps fuzzy auto-complete-auctex luarocks highlight-unique-symbol highlight-defined highlight-function-calls highlight-thing highlight-symbol highlight-parentheses highlight-operators highlight highlight-blocks highlight-escape-sequences highlight-quoted highlight-numbers color-identifiers-mode lua-mode flycheck arduino-cli-mode arduino-mode markdown-mode company auto-complete auctex matlab-mode live-py-mode rainbow-identifiers rainbow-mode ess auto-correct)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -228,6 +254,43 @@ There are two things you can do about this warning:
 
 ;; auto break lines in paragraphs
 ;; add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+;; un/compact block
+(defun fill-or-unfill ()
+  "Reformat current paragraph or region to `fill-column', like `fill-paragraph' or “unfill”.
+When there is a text selection, act on the selection, else, act on a text block separated by blank lines.
+URL `http://xahlee.info/emacs/emacs/modernization_fill-paragraph.html'
+Version 2017-01-08"
+  (interactive)
+  ;; This command symbol has a property “'compact-p”, the possible values are t and nil. This property is used to easily determine whether to compact or uncompact, when this command is called again
+  (let ( ($compact-p
+          (if (eq last-command this-command)
+              (get this-command 'compact-p)
+            (> (- (line-end-position) (line-beginning-position)) fill-column)))
+         (deactivate-mark nil)
+         ($blanks-regex "\n[ \t]*\n")
+         $p1 $p2
+         )
+    (if (use-region-p)
+        (progn (setq $p1 (region-beginning))
+               (setq $p2 (region-end)))
+      (save-excursion
+        (if (re-search-backward $blanks-regex nil "NOERROR")
+            (progn (re-search-forward $blanks-regex)
+                   (setq $p1 (point)))
+          (setq $p1 (point)))
+        (if (re-search-forward $blanks-regex nil "NOERROR")
+            (progn (re-search-backward $blanks-regex)
+                   (setq $p2 (point)))
+          (setq $p2 (point)))))
+    (if $compact-p
+        (fill-region $p1 $p2)
+      (let ((fill-column most-positive-fixnum ))
+        (fill-region $p1 $p2)))
+    (put this-command 'compact-p (not $compact-p))))
+
+;; now set it as default un/compact block function:
+(global-set-key (kbd "M-q") 'fill-or-unfill)
 
 
 ;;                               ___         ___   ___                           ___         ___  ___   ___ 
@@ -269,7 +332,6 @@ There are two things you can do about this warning:
 
 
 ;; Latex mode
-
 (with-eval-after-load "tex"
   (add-to-list 'TeX-command-list
                `("Arara" "arara --verbose %s" TeX-run-TeX nil t :help "Run Arara") t)
