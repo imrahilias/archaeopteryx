@@ -1,0 +1,42 @@
+#!/bin/bash
+# revert a pacman update as a whole.
+
+# suppose you didnt use your machine for a few weeks. casually you'd
+# update everything via `sudo pacman -Syyu`, reboot and: nothing
+# works. the update upgraded say 256 packages, at least one of them
+# causing somethin to break. The easiest thing would be to revert the
+# whole last update,and thats exactly what this script does.
+
+pacdir="/tmp/pacdown_$(date +%N)"
+mkdir $pacdir
+pushd $pacdir
+
+echo "recent updates and number of upgraded packages:"
+grep -a upgraded /var/log/pacman.log | cut -c -11 | sed 's/\[//g' | sort | uniq -c > dates
+cat dates
+echo
+
+echo -n "which update should be reverted? [yyyy-mm-dd] "
+read date
+
+if ! grep -q $date dates
+then 
+    echo "no updates on this day!"
+    exit 1
+fi
+echo
+
+grep -a upgraded /var/log/pacman.log| grep $date > updates
+
+awk '{print $4}' updates > names
+
+awk '{print $5}' updates | sed 's/(/-/g' > versions
+
+paste names versions | tr -d "[:blank:]" > list
+
+for i in $(cat list)
+do
+    find '/var/cache/pacman/pkg/' -name "$i*.zst" -o -name "$i*.xz" >> packages
+done
+
+sudo pacman -U - < packages
