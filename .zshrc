@@ -1,16 +1,20 @@
 #!/bin/false
 #blabla
-                                         
+
+## colors
+red="\e[31m"
+blue="\e[34m"
+default="\e[0m"
+
 #       _/_/    _/        _/_/_/    _/_/      _/_/_/   
 #    _/    _/  _/          _/    _/    _/  _/          
 #   _/_/_/_/  _/          _/    _/_/_/_/    _/_/       
 #  _/    _/  _/          _/    _/    _/        _/      
 # _/    _/  _/_/_/_/  _/_/_/  _/    _/  _/_/_/         
 
-## colors
-red="\e[31m"
-blue="\e[34m"
-default="\e[0m"
+if [ -e $HOME/.vsc ]; then
+    source $HOME/.vsc
+fi
 
 ## systemd alias
 user_commands=(
@@ -579,3 +583,11 @@ zstyle ':completion:*:processes' command "ps -au${USER}"
 #zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin
 zstyle ':completion:*:sudo:*' command-path /bin /usr/bin /usr/local/bin /home/m/bin /sbin /usr/sbin /usr/local/sbin /usr/games /usr/local/games
 
+#     _/      _/  _/_/_/    _/_/_/    _/_/_/   
+#    _/_/  _/_/    _/    _/        _/          
+#   _/  _/  _/    _/      _/_/    _/           
+#  _/      _/    _/          _/  _/            
+# _/      _/  _/_/_/  _/_/_/      _/_/_/    
+
+## sound on, pulseaudio mutes front out of no reason
+amixer -c 0 set Front 100% on 1&>/dev/null

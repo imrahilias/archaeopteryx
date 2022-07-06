@@ -1,15 +1,17 @@
-;;  ___   ___  ___  ___   ___  ___               ___        ___ 
-;; |   |=|_.' `._|=|   |=|_.' |   | |`.     .'|=|_.'   .'|=|_.' 
-;; `.  |           |   |      |   | |  `. .'  |  ___ .'  |  ___ 
-;;   `.|=|`.       |   |      |   | |   | |   |=|_.' |   |=|_.' 
-;;  ___  |  `.     `.  |      `.  | |   | |   |      |   |      
-;;  `._|=|___|       `.|        `.|=|___| |___|      |___|      
-
-
 ;; fun
 ;;(global-set-key (kbd "C-x C-s") 'spook)
 
+;;     _/_/_/    _/    _/    _/_/_/   
+;;    _/    _/  _/  _/    _/          
+;;   _/_/_/    _/_/      _/  _/_/     
+;;  _/        _/  _/    _/    _/      
+;; _/        _/    _/    _/_/_/       
+
+
 (require 'package)
+
+;; by hand
+ (load "~/.emacs.d/dokuwiki-mode")
 
 ;; melpa
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
@@ -34,6 +36,48 @@ There are two things you can do about this warning:
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 (package-initialize)
+
+;; someone?
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(ansi-color-names-vector
+   ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
+ '(package-selected-packages
+   '(outline-magic ample-regexps fuzzy auto-complete-auctex luarocks highlight-unique-symbol highlight-defined highlight-function-calls highlight-thing highlight-symbol highlight-parentheses highlight-operators highlight highlight-blocks highlight-escape-sequences highlight-quoted highlight-numbers color-identifiers-mode lua-mode flycheck arduino-cli-mode arduino-mode markdown-mode company auto-complete auctex matlab-mode live-py-mode rainbow-identifiers rainbow-mode ess auto-correct)))
+
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
+;; el-get
+;; (add-to-list 'load-path "~/.emacs.d/el-get/")
+;; (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+
+;; (unless (require 'el-get nil 'noerror)
+;;   (with-current-buffer
+;;       (url-retrieve-synchronously "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+;;     (goto-char (point-max))
+;;     (eval-print-last-sexp)
+;;     )
+;;   )
+
+;; (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+;; (el-get 'sync)
+
+;; auto break lines in paragraphs
+;; add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+
+;;      _/_/    _/_/_/    _/_/_/_/_/  _/_/_/    _/_/    _/      _/    _/_/_/   
+;;   _/    _/  _/    _/      _/        _/    _/    _/  _/_/    _/  _/          
+;;  _/    _/  _/_/_/        _/        _/    _/    _/  _/  _/  _/    _/_/       
+;; _/    _/  _/            _/        _/    _/    _/  _/    _/_/        _/      
+;;  _/_/    _/            _/      _/_/_/    _/_/    _/      _/  _/_/_/         
+
 
 ;; no welcome message please
 (setq inhibit-startup-message t)
@@ -78,15 +122,19 @@ There are two things you can do about this warning:
 
 ;; highlighting lock
 (custom-set-faces
- `(hi-black-b  ((t (:inherit (bold) :foreground ,theme-color-level-1 :background ,theme-color-gray))))
- `(hi-black-hb ((t (:inherit (bold) :foreground ,theme-color-level-3 :background ,theme-color-gray))))
- `(hi-blue     ((t (:foreground ,theme-color-level-1 :background ,theme-color-blue))))
- `(hi-blue-b   ((t (:inherit (hi-blue bold) :inverse-video t))))
- `(hi-green    ((t (:foreground ,theme-color-level-1 :background ,theme-color-green))))
- `(hi-green-b  ((t (:inherit (hi-green bold) :inverse-video t))))
- `(hi-pink     ((t (:foreground ,theme-color-level-1 :background ,theme-color-magenta))))
- `(hi-red-b    ((t (:inherit (bold) :foreground ,theme-color-red))))
- `(hi-yellow   ((t (:foreground ,theme-color-level-1 :background ,theme-color-yellow)))))
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(hi-black-b ((t (:inherit (bold) :foreground "#1D1F21" :background "#707880"))))
+ '(hi-black-hb ((t (:inherit (bold) :foreground "#C5C8C6" :background "#707880"))))
+ '(hi-blue ((t (:foreground "#1D1F21" :background "#5F819D"))))
+ '(hi-blue-b ((t (:inherit (hi-blue bold) :inverse-video t))))
+ '(hi-green ((t (:foreground "#1D1F21" :background "#8C9440"))))
+ '(hi-green-b ((t (:inherit (hi-green bold) :inverse-video t))))
+ '(hi-pink ((t (:foreground "#1D1F21" :background "#85678F"))))
+ '(hi-red-b ((t (:inherit (bold) :foreground "#A54242"))))
+ '(hi-yellow ((t (:foreground "#1D1F21" :background "#DE935F")))))
 
 ;; show me line and column nos
 (line-number-mode 't)
@@ -179,6 +227,30 @@ There are two things you can do about this warning:
 ;; custom keyboard shortcuts
 (global-set-key (kbd "C-c m") 'compile)
 
+;; emacs paste on line curser (not mouse)
+(setq mouse-yank-at-point t)
+
+;; printer command
+(setq lpr-command "lp")
+(setq lpr-add-switches nil)
+
+;; subword mode (camelcase mode)
+(global-subword-mode 1)
+
+;; i hate tabs!
+(setq-default indent-tabs-mode nil)
+
+;; refresh buffers on change
+(global-auto-revert-mode t)
+
+
+;;     _/_/_/_/  _/    _/  _/      _/    _/_/_/
+;;    _/        _/    _/  _/_/    _/  _/      
+;;   _/_/_/    _/    _/  _/  _/  _/  _/      
+;;  _/        _/    _/  _/    _/_/  _/      
+;; _/          _/_/    _/      _/    _/_/_/
+
+
 ;; current date
 (defun insert-current-date() (interactive)
        (insert (shell-command-to-string "echo -n $(date '+%Y-%m-%d %k:%M')"))
@@ -192,13 +264,6 @@ There are two things you can do about this warning:
   (find-file "~/.emacs")
   )
 
-;; emacs paste on line curser (not mouse)
-(setq mouse-yank-at-point t)
-
-;; printer command
-(setq lpr-command "lp")
-(setq lpr-add-switches nil)
-
 ;; switch window with tab
 (global-set-key [C-tab] 'other-window)
 (global-set-key [C-C-tab]
@@ -207,53 +272,6 @@ There are two things you can do about this warning:
                   (other-window -1)
                   )
                 )
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(ansi-color-names-vector
-   ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
- '(package-selected-packages
-   '(ample-regexps fuzzy auto-complete-auctex luarocks highlight-unique-symbol highlight-defined highlight-function-calls highlight-thing highlight-symbol highlight-parentheses highlight-operators highlight highlight-blocks highlight-escape-sequences highlight-quoted highlight-numbers color-identifiers-mode lua-mode flycheck arduino-cli-mode arduino-mode markdown-mode company auto-complete auctex matlab-mode live-py-mode rainbow-identifiers rainbow-mode ess auto-correct)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-
-;; subword mode (camelcase mode)
-(global-subword-mode 1)
-
-;; i hate tabs!
-(setq-default indent-tabs-mode nil)
-
-;; refresh buffers on change
-(global-auto-revert-mode t)
-
-;; el-get
-;; (add-to-list 'load-path "~/.emacs.d/el-get/")
-;; (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-
-;; (unless (require 'el-get nil 'noerror)
-;;   (with-current-buffer
-;;       (url-retrieve-synchronously "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
-;;     (goto-char (point-max))
-;;     (eval-print-last-sexp)
-;;     )
-;;   )
-
-;; (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-;; (el-get 'sync)
-
-;; auto break lines in paragraphs
-;; add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 ;; un/compact block
 (defun fill-or-unfill ()
@@ -293,12 +311,11 @@ Version 2017-01-08"
 (global-set-key (kbd "M-q") 'fill-or-unfill)
 
 
-;;                               ___         ___   ___                           ___         ___  ___   ___ 
-;;   .'|        .'|=|`.     .'| |   |   .'|=|_.'  |   | |`.     .'|=|`.     .'|=|_.'    .'|=|_.' |   |=|_.' 
-;; .'  |      .'  | |  `. .'  |\|   | .'  |___    |   | |  `. .'  | |  `. .'  |___    .'  |  ___ `.  |      
-;; |   |      |   |=|   | |   | |   | |   |`._|=. |   | |   | |   |=|   | |   |`._|=. |   |=|_.'   `.|=|`.  
-;; |   |  ___ |   | |   | |   | |  .' `.  |  __|| `.  | |   | |   | |   | `.  |  __|| |   |  ___  ___  |  `.
-;; |___|=|_.' |___| |___| |___| |.'     `.|=|_.''   `.|=|___| |___| |___|   `.|=|_.'' |___|=|_.'  `._|=|___|
+;;     _/          _/_/    _/      _/    _/_/_/   
+;;    _/        _/    _/  _/_/    _/  _/          
+;;   _/        _/_/_/_/  _/  _/  _/  _/  _/_/     
+;;  _/        _/    _/  _/    _/_/  _/    _/      
+;; _/_/_/_/  _/    _/  _/      _/    _/_/_/       
 
 
 ;; start auto-complete-mode
@@ -347,12 +364,11 @@ Version 2017-01-08"
 ;        (TeX-command-sequence '("Arara" "View") t))))
 
 
-;;  ___   ___        __          ___                        ___   ___ 
-;; |   |=|_.'   .'|=|  |    .'|=|_.'   .'|        .'|      |   |=|_.' 
-;; `.  |      .'  | |  |  .'  |  ___ .'  |      .'  |      `.  |      
-;;   `.|=|`.  |   |=|.'   |   |=|_.' |   |      |   |        `.|=|`.  
-;;  ___  |  `.|   |       |   |  ___ |   |  ___ |   |  ___  ___  |  `.
-;;  `._|=|___||___|       |___|=|_.' |___|=|_.' |___|=|_.'  `._|=|___|
+;;       _/_/_/  _/_/_/    _/_/_/_/  _/        _/          _/_/_/   
+;;    _/        _/    _/  _/        _/        _/        _/          
+;;     _/_/    _/_/_/    _/_/_/    _/        _/          _/_/       
+;;        _/  _/        _/        _/        _/              _/      
+;; _/_/_/    _/        _/_/_/_/  _/_/_/_/  _/_/_/_/  _/_/_/         
 
 
 ;; Flyspell mode
