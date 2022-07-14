@@ -72,7 +72,7 @@ conky.config = {
 conky.text = [[
 
 $alignr}su mo tu we th fr sa 
-${execpi 60 today=`date +%_d`; cal | sed -n '3,8 p' | sed 's/^/${alignr} /' | sed s/"\(^\|[^0-9]\)$today"'\b'/'\1${color1}'"$today"'${color}'/}
+${execpi 60 today=`date +%_d`; cal -w | sed -n '3,8 p' | sed 's/^/${alignr} /' | sed s/"\(^\|[^0-9]\)$today"'\b'/'\1${color1}'"$today"'${color}'/}
 
   cpu    $color1 ${cpu cpu0} ${alignr} ${color} ${cpu cpu1}/${cpu cpu2}/${cpu cpu3}/${cpu cpu4}
   └ft    $color1 $freq ${color} ${alignr} ${hwmon 2 temp 1}/${hwmon 2 temp 2}/${hwmon 2 temp 3}/${hwmon 2 temp 4} / $color1${hwmon 2 temp 5}${color}
