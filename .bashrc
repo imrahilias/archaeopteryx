@@ -13,13 +13,10 @@ do
     esac
 done
 
-#                                           ___   ___ 
-#   .'|=|`.     .'|        .'|   .'|=|`.   |   |=|_.' 
-# .'  | |  `. .'  |      .'  | .'  | |  `. `.  |      
-# |   |=|   | |   |      |   | |   |=|   |   `.|=|`.  
-# |   | |   | |   |  ___ |   | |   | |   |  ___  |  `.
-# |___| |___| |___|=|_.' |___| |___| |___|  `._|=|___|
-#
+#        |_)            
+#   _` | | |  _` |  __| 
+#  (   | | | (   |\__ \ 
+# \__,_|_|_|\__,_|____/ 
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -49,13 +46,11 @@ alias dfa='df -ah'
 alias cp='rsync -aP' # show percentage
 alias e='emacs '
 
-#                    __    ___  ___   ___                          ___   ___   ___ 
-#   .'|=|`.     .'|=|  |  `._|=|   |=|_.'   .'|   .'|=|`.     .'| |   | |   |=|_.' 
-# .'  | |  `. .'  | |  |       |   |      .'  | .'  | |  `. .'  |\|   | `.  |      
-# |   | |   | |   |=|.'        |   |      |   | |   | |   | |   | |   |   `.|=|`.  
-# `.  | |  .' |   |            `.  |      |   | `.  | |  .' |   | |  .'  ___  |  `.
-#   `.|=|.'   |___|              `.|      |___|   `.|=|.'   |___| |.'    `._|=|___|
-#
+#              |  _)                  
+#   _ \  __ \  __| |  _ \  __ \   __| 
+#  (   | |   | |   | (   | |   |\__ \ 
+# \___/  .__/ \__|_|\___/ _|  _|____/ 
+#       _|                  
 
 shopt -s autocd # auto enter
 shopt -s checkwinsize # check the window size after each command and, if necessary,update the values of LINES and COLUMNS.
@@ -74,15 +69,19 @@ HISTCONTROL=ignoreboth
 # make less more friendly for non-text input files, see lesspipe(1)
 #[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+#   _|                  |  _)                  
+#  |   |   | __ \   __| __| |  _ \  __ \   __| 
+#  __| |   | |   | (    |   | (   | |   |\__ \ 
+# _|  \__,_|_|  _|\___|\__|_|\___/ _|  _|____/ 
 
-#        ___  ___               ___         ___  ___  ___   ___                          ___   ___   ___ 
-#   .'|=|_.' |   | |`.     .'| |   |   .'|=|_.' `._|=|   |=|_.'   .'|   .'|=|`.     .'| |   | |   |=|_.' 
-# .'  |  ___ |   | |  `. .'  |\|   | .'  |           |   |      .'  | .'  | |  `. .'  |\|   | `.  |      
-# |   |=|_.' |   | |   | |   | |   | |   |           |   |      |   | |   | |   | |   | |   |   `.|=|`.  
-# |   |      `.  | |   | |   | |  .' `.  |  ___      `.  |      |   | `.  | |  .' |   | |  .'  ___  |  `.
-# |___|        `.|=|___| |___| |.'     `.|=|_.'        `.|      |___|   `.|=|.'   |___| |.'    `._|=|___|
-#
-
+## This will print the readable ~/ and ./ when starting which from
+## your prompt, while still printing the full path when used from a
+## script
+which ()
+{
+  (alias; declare -f) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@
+}
+export -f which
 
 ## man coloring
 man() {
@@ -140,14 +139,11 @@ rationalize-dot() {
 bind -m vi-insert -x '"\ed": rationalize-dot'
 # bind -m emacs -x     '".": rationalize-dot'
 
-
-#        __          __                                  __    ___  ___   ___ 
-#   .'|=|  |    .'|=|  |   .'|=|`.     .'|\/|`.     .'|=|  |  `._|=|   |=|_.' 
-# .'  | |  |  .'  | |  | .'  | |  `. .'  |  |  `. .'  | |  |       |   |      
-# |   |=|.'   |   |=|.'  |   | |   | |   |  |   | |   |=|.'        |   |      
-# |   |       |   |  |`. `.  | |  .' |   |  |   | |   |            `.  |      
-# |___|       |___|  |_|   `.|=|.'   |___|  |___| |___|              `.|     
-#
+#                                  |   
+#  __ \   __| _ \  __ `__ \  __ \  __| 
+#  |   | |   (   | |   |   | |   | |   
+#  .__/ _|  \___/ _|  _|  _| .__/ \__| 
+# _|                        _|         
 
 # Colors
 bb="\[\e[34;1m\]" # bold blue

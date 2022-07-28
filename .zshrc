@@ -1,20 +1,15 @@
 #!/bin/false
 #blabla
 
+#        |_)            
+#   _` | | |  _` |  __| 
+#  (   | | | (   |\__ \ 
+# \__,_|_|_|\__,_|____/ 
+
 ## colors
 red="\e[31m"
 blue="\e[34m"
 default="\e[0m"
-
-#       _/_/    _/        _/_/_/    _/_/      _/_/_/   
-#    _/    _/  _/          _/    _/    _/  _/          
-#   _/_/_/_/  _/          _/    _/_/_/_/    _/_/       
-#  _/    _/  _/          _/    _/    _/        _/      
-# _/    _/  _/_/_/_/  _/_/_/  _/    _/  _/_/_/         
-
-if [ -e $HOME/.vsc ]; then
-    source $HOME/.vsc
-fi
 
 ## systemd alias
 user_commands=(
@@ -123,18 +118,18 @@ alias u='urxvtc'
 alias rename='perl-rename'
 #alias zephyr='/usr/bin/git --git-dir=$HOME/.zephyr --work-tree=$HOME'
 alias rainbow='for (( i = 30; i < 38; i++ )); do echo -e "\033[0;"$i"m Normal: (0;$i); \033[1;"$i"m Light: (1;$i)"; done'
-alias fifi='figlet -w 200 -f lean'
+alias fifi='figlet -w 200 -f "shadow" '
 alias cp='rsync -aP' # show percentage
 #alias ap='adb pull /sdcard/DCIM/Camera/ /mnt/troika/photos/2021/'
 
-#      _/_/    _/_/_/    _/_/_/_/_/  _/_/_/    _/_/    _/      _/    _/_/_/   
-#   _/    _/  _/    _/      _/        _/    _/    _/  _/_/    _/  _/          
-#  _/    _/  _/_/_/        _/        _/    _/    _/  _/  _/  _/    _/_/       
-# _/    _/  _/            _/        _/    _/    _/  _/    _/_/        _/      
-#  _/_/    _/            _/      _/_/_/    _/_/    _/      _/  _/_/_/          
+#              |  _)                  
+#   _ \  __ \  __| |  _ \  __ \   __| 
+#  (   | |   | |   | (   | |   |\__ \ 
+# \___/  .__/ \__|_|\___/ _|  _|____/ 
+#       _|                            
 
 setopt extendedglob             # inverted expansion like: ls *~*.txt
-setopt correct                  # correct mistakes
+#setopt correct                  # correct mistakes
 setopt auto_list                # list choice on ambiguous command
 setopt listtypes                # %1 killed. will show up exactly when it is killed.
 setopt auto_cd                  # change dir by just typing its name wo cd
@@ -152,12 +147,11 @@ setopt hist_ignore_space        # do not remember commands starting with space
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
-                                                                                                   
-#     _/_/_/_/  _/    _/  _/      _/    _/_/_/  _/_/_/_/_/  _/_/_/    _/_/    _/      _/    _/_/_/   
-#    _/        _/    _/  _/_/    _/  _/            _/        _/    _/    _/  _/_/    _/  _/          
-#   _/_/_/    _/    _/  _/  _/  _/  _/            _/        _/    _/    _/  _/  _/  _/    _/_/       
-#  _/        _/    _/  _/    _/_/  _/            _/        _/    _/    _/  _/    _/_/        _/      
-# _/          _/_/    _/      _/    _/_/_/      _/      _/_/_/    _/_/    _/      _/  _/_/_/         
+
+#   _|                  |  _)                  
+#  |   |   | __ \   __| __| |  _ \  __ \   __| 
+#  __| |   | |   | (    |   | (   | |   |\__ \ 
+# _|  \__,_|_|  _|\___|\__|_|\___/ _|  _|____/ 
 
 ## archive extraction
 extract() {
@@ -366,12 +360,11 @@ function clicolors() {
     echo $c | sed 's/%//g' | sed 's/{//g' | sed 's/}//g' | sed '$s/..$//';
     c=''
 }
-                                                                  
-#     _/_/_/      _/_/    _/      _/    _/_/_/  _/_/_/_/  _/_/_/    
-#    _/    _/  _/    _/  _/_/    _/  _/        _/        _/    _/   
-#   _/_/_/    _/_/_/_/  _/  _/  _/  _/  _/_/  _/_/_/    _/_/_/      
-#  _/    _/  _/    _/  _/    _/_/  _/    _/  _/        _/    _/     
-# _/    _/  _/    _/  _/      _/    _/_/_/  _/_/_/_/  _/    _/      
+                                 
+#   __| _` | __ \   _` |  _ \  __| 
+#  |   (   | |   | (   |  __/ |    
+# _|  \__,_|_|  _|\__, |\___|_|    
+#                 |___/            
 
 ## This is based on: https://github.com/ranger/ranger/blob/master/examples/bash_automatic_cd.sh
 ## Paste this into your .zshrc:
@@ -405,12 +398,11 @@ zranger() {
         exit
     fi
 }
-
-#     _/_/_/_/_/  _/_/_/      _/_/    _/      _/    _/_/_/  _/_/_/_/  _/_/_/    
-#          _/    _/    _/  _/    _/  _/_/    _/  _/        _/        _/    _/   
-#       _/      _/_/_/    _/_/_/_/  _/  _/  _/  _/  _/_/  _/_/_/    _/_/_/      
-#    _/        _/    _/  _/    _/  _/    _/_/  _/    _/  _/        _/    _/     
-# _/_/_/_/_/  _/    _/  _/    _/  _/      _/    _/_/_/  _/_/_/_/  _/    _/      
+                                     
+# _  /  __| _` | __ \   _` |  _ \  __| 
+#   /  |   (   | |   | (   |  __/ |    
+# ___|_|  \__,_|_|  _|\__, |\___|_|    
+#                     |___/            
 
 ## based on https://github.com/Vifon/zranger
 ## switching retains tabs!
@@ -443,11 +435,11 @@ zranger() {
 # #autoload -U zranger # embedded in zshrc
 # bindkey -s '^D' "\eq zranger\n"
 
-#     _/_/_/    _/_/_/      _/_/    _/      _/  _/_/_/    _/_/_/_/_/   
-#    _/    _/  _/    _/  _/    _/  _/_/  _/_/  _/    _/      _/        
-#   _/_/_/    _/_/_/    _/    _/  _/  _/  _/  _/_/_/        _/         
-#  _/        _/    _/  _/    _/  _/      _/  _/            _/          
-# _/        _/    _/    _/_/    _/      _/  _/            _/           
+#                                  |   
+#  __ \   __| _ \  __ `__ \  __ \  __| 
+#  |   | |   (   | |   |   | |   | |   
+#  .__/ _|  \___/ _|  _|  _| .__/ \__| 
+# _|                        _|         
 
 BLACK="%{"$'\033[00;30m'"%}"
 BBLACK="%{"$'\033[01;30m'"%}"
@@ -474,12 +466,9 @@ RPROMPT='$(git_branch)%T'
 #PROMPT='[%{$fg[blue]%}%n$white@$cyan%m$reset:%~]$(prompt_char) ' # @jinn
 #RPROMPT='$(cmd_fail)$(git_branch)%T' 
 
-#     _/_/_/_/  _/      _/  _/      _/   
-#    _/        _/_/    _/  _/      _/    
-#   _/_/_/    _/  _/  _/  _/      _/     
-#  _/        _/    _/_/    _/  _/        
-# _/_/_/_/  _/      _/      _/           
-
+#   _ \ __ \\ \   / 
+#   __/ |   |\ \ /  
+# \___|_|  _| \_/   
 
 #export HS='alsa_output.usb-047f_c001-00-U0x47f0xc001.analog-stereo'
 #export SP='alsa_output.pci-0000_00_1b.0.analog-stereo'
@@ -497,11 +486,10 @@ export ALSA_CTL='PCH'
 export CALIBRE_USE_DARK_PALETTE=1
 export XDG_CURRENT_DESKTOP='GNOME'
 
-#       _/_/_/  _/_/_/_/_/  _/    _/  _/_/_/_/  _/_/_/_/   
-#    _/            _/      _/    _/  _/        _/          
-#     _/_/        _/      _/    _/  _/_/_/    _/_/_/       
-#        _/      _/      _/    _/  _/        _/            
-# _/_/_/        _/        _/_/    _/        _/             
+#       |          _|  _| 
+#   __| __| |   | |   |   
+# \__ \ |   |   | __| __| 
+# ____/\__|\__,_|_|  _|
 
 ## turn off XOFF/XON
 stty -ixon
@@ -521,12 +509,11 @@ bindkey "[D" backward-word
 bindkey ";5A" up-line
 bindkey ";5B" down-line
 
-#     _/_/_/    _/        _/    _/    _/_/_/  _/_/_/  _/      _/    _/_/_/   
-#    _/    _/  _/        _/    _/  _/          _/    _/_/    _/  _/          
-#   _/_/_/    _/        _/    _/  _/  _/_/    _/    _/  _/  _/    _/_/       
-#  _/        _/        _/    _/  _/    _/    _/    _/    _/_/        _/      
-# _/        _/_/_/_/    _/_/      _/_/_/  _/_/_/  _/      _/  _/_/_/         
-
+#        |            _)            
+#  __ \  | |   |  _` | | __ \   __| 
+#  |   | | |   | (   | | |   |\__ \ 
+#  .__/ _|\__,_|\__, |_|_|  _|____/ 
+# _|            |___/               
 
 ## auto suggestion
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -548,15 +535,14 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 ## more colors! > manually copied
 #source ~/.zsh/zsh-dircolors/zsh-dircolors.plugin.zsh 
 
-#       _/_/    _/    _/  _/_/_/_/_/    _/_/    
-#    _/    _/  _/    _/      _/      _/    _/   
-#   _/_/_/_/  _/    _/      _/      _/    _/    
-#  _/    _/  _/    _/      _/      _/    _/     
-# _/    _/    _/_/        _/        _/_/        
+#              |         
+#   _` | |   | __|  _ \  
+#  (   | |   | |   (   | 
+# \__,_|\__,_|\__|\___/  
 
 autoload -Uz compinit; compinit
 autoload -U colors && colors
-zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*' completer _match _expand _complete _correct _approximate
 zstyle ':completion:*' completions 1
 zstyle ':completion:*' file-sort name
 zstyle ':completion:*' glob 1
@@ -571,7 +557,6 @@ zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p
 zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.config/shell/zsh_cache
-zstyle ':completion:*' completer _complete _match
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:match:*' original only
 zstyle ':completion:*' verbose true
@@ -580,14 +565,5 @@ zstyle ':completion:*:*:kill:*:processes' command 'ps haxopid:5,user:4,%cpu:4,ni
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' force-list always
 zstyle ':completion:*:processes' command "ps -au${USER}"
-#zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin
 zstyle ':completion:*:sudo:*' command-path /bin /usr/bin /usr/local/bin /home/m/bin /sbin /usr/sbin /usr/local/sbin /usr/games /usr/local/games
 
-#     _/      _/  _/_/_/    _/_/_/    _/_/_/   
-#    _/_/  _/_/    _/    _/        _/          
-#   _/  _/  _/    _/      _/_/    _/           
-#  _/      _/    _/          _/  _/            
-# _/      _/  _/_/_/  _/_/_/      _/_/_/    
-
-## sound on, pulseaudio mutes front out of no reason
-amixer -c 0 set Front 100% on 1&>/dev/null

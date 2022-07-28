@@ -11,12 +11,15 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
--- {{{ Error handling
--- Check if awesome encountered an error during startup and fell back to
--- another config (This code will only ever execute for the fallback config)
+--   _ \  __|  __| _ \   __| 
+--   __/ |    |   (   | |    
+-- \___|_|   _|  \___/ _|    
+
+-- Check if awesome encountered an error during startup and fall back to
+-- another config (This code will only ever execute for the fallback config).
 if awesome.startup_errors then
    naughty.notify({ preset = naughty.config.presets.critical,
-                    title = "Oops, there were errors during startup!",
+                    title = "Error 3.1415: Error Database not found!",
                     text = awesome.startup_errors })
 end
 
@@ -34,14 +37,16 @@ do
                              in_error = false
    end)
 end
--- }}}
 
--- {{{ Variable definitions
+-- \ \   / _` |  __| __| 
+--  \ \ / (   | |  \__ \ 
+--   \_/ \__,_|_|  ____/ 
+
 -- Themes define colours, icons, font and wallpapers.
 --beautiful.init(".config/awesome/desert.lua")
 beautiful.init(awful.util.getdir("config") .. "/themes/canyon.lua")
 
--- init network-manager applet
+-- Init network-manager applet.
 awful.util.spawn("nm-applet")
 
 -- This is used later as the default terminal and editor to run.
@@ -74,14 +79,33 @@ awful.layout.layouts = {
    -- awful.layout.suit.corner.ne,
    -- awful.layout.suit.corner.sw,
    -- awful.layout.suit.corner.se,
-   awful.layout.suit.floating,
 }
--- }}}
 
--- {{{ Helper functions
+--   _|                  |  _)                  
+--  |   |   | __ \   __| __| |  _ \  __ \   __| 
+--  __| |   | |   | (    |   | (   | |   |\__ \ 
+-- _|  \__,_|_|  _|\___|\__|_|\___/ _|  _|____/ 
+
+-- Create reminder function.
+local function remind_prompt()
+    awful.prompt.run {
+        prompt       = '<span color="#FF8E38">Remind: </span>',
+--        text         = 'remind ',
+        bg_cursor    = '#FF8E38',
+        textbox      = mouse.screen.mypromptbox.widget,
+        exe_callback = function(input)
+           if not input or #input == 0 then
+              naughty.notify{ text = 'error: set reminder with "remind $time $name" eg "remind 10s asdf"'..input }
+              return
+           end
+           awful.spawn( 'remind '..input ) 
+           -- naughty.notify{ text = 'reminder set: '..input }
+        end
+    }
+end
+
 local function client_menu_toggle_fn()
    local instance = nil
-   
    return function ()
       if instance and instance.wibox.visible then
          instance:hide()
@@ -91,39 +115,23 @@ local function client_menu_toggle_fn()
       end
    end
 end
--- }}}
 
--- {{{ Menu
---[[
-   -- Create a launcher widget and a main menu
-   myawesomemenu = {
-   { "hotkeys", function() return false, hotkeys_popup.show_help end},
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end}
-   }
---]]
-
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                             -- { "open terminal", terminal },
-                       }})
-
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
-
--- Menubar configuration
+-- Menubar configuration.
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
--- Keyboard map indicator and switcher
+-- Keyboard map indicator and switcher.
 mykeyboardlayout = awful.widget.keyboardlayout()
 
--- {{{ Wibar
--- Create a textclock widget
---mytextclock = wibox.widget.textclock()
+--           _) |                
+-- \ \  \   / | __ \   _` |  __| 
+--  \ \  \ /  | |   | (   | |    
+--   \_/\_/  _|_.__/ \__,_|_|    
+
+-- Create a textclock widget.
 mytextclock = wibox.widget.textclock(' %a %e %b <span color="#FF8E38"> %_H:%M </span> ', 5)  -- blue: #1793D1
 
--- Create a wibox for each screen and add it
+-- Create a wibox for each screen and add it.
 local taglist_buttons = awful.util.table.join(
    awful.button({ }, 1, function(t) t:view_only() end),
    awful.button({ modkey }, 1, function(t)
@@ -165,9 +173,13 @@ local tasklist_buttons = awful.util.table.join(
    awful.button({ }, 5, function ()
          awful.client.focus.byidx(-1)
 end))
+                               
+--   __|  __|  __| _ \  _ \ __ \  
+-- \__ \ (    |    __/  __/ |   | 
+-- ____/\___|_|  \___|\___|_|  _|
 
+-- Wallpaper.
 local function set_wallpaper(s)
-   -- Wallpaper
    if beautiful.wallpaper then
       local wallpaper = beautiful.wallpaper
       -- If wallpaper is a function, call it with the screen
@@ -227,43 +239,25 @@ awful.screen.connect_for_each_screen(function(s)
          },
       }
 end)
--- }}}
+                              
+--  __ `__ \   _ \  |   |  __|  _ \ 
+--  |   |   | (   | |   |\__ \  __/ 
+-- _|  _|  _|\___/ \__,_|____/\___| 
 
-
-
-
-
--- Create a shortcut function
-local function remind_prompt()
-    awful.prompt.run {
-        prompt       = '<span color="#FF8E38">Remind: </span>',
---        text         = 'remind ',
-        bg_cursor    = '#FF8E38',
-        textbox      = mouse.screen.mypromptbox.widget,
-        exe_callback = function(input)
-           if not input or #input == 0 then
-              naughty.notify{ text = 'error: set reminder with "remind $time $name" eg "remind 10s asdf"'..input }
-              return
-           end
-           awful.spawn( 'remind '..input ) 
-           -- naughty.notify{ text = 'reminder set: '..input }
-        end
-    }
-end
-
-
-
-
-
--- {{{ Mouse bindings
+-- Mouse bindings.
 root.buttons(awful.util.table.join(
                 awful.button({ }, 3, function () mymainmenu:toggle() end),
                 awful.button({ }, 4, awful.tag.viewnext),
                 awful.button({ }, 5, awful.tag.viewprev)
 ))
--- }}}
 
--- {{{ Key bindings
+--  |                    
+--  |  /  _ \ |   |  __| 
+--    <   __/ |   |\__ \ 
+-- _|\_\\___|\__, |____/ 
+--           ____/       
+
+-- Key bindings.
 globalkeys = awful.util.table.join(
    
    -- Awesome program
@@ -367,7 +361,11 @@ globalkeys = awful.util.table.join(
    -- Slurm
    awful.key({ modkey }, "c", function () awful.spawn("schnegg -p", false) end), -- snooze whole (drain node + suspend all jobs) slurm for 1h
    awful.key({ modkey, "Shift" }, "c", function () awful.spawn("schnegg -r", false) end), -- resume all
-   
+
+   -- rotate
+   awful.key({ modkey, "Shift" }, "r", function () awful.spawn("xrandr -o 1", false) end),
+   awful.key({ modkey, "Control", "Shift" }, "r", function () awful.spawn("xrandr -o 0", false) end),
+ 
    -- Fun
    awful.key({ modkey }, "z", function () awful.spawn.with_shell('notify-send "$(cowsay $(fortune))"', false) end)
    --awful.key({ modkey }, "w", function () awful.spawn.with_shell("killall conky && feh --bg-fill ~/wind/canvas/wrld12.png & conky -c ~/wind/wind_blow.lua", false) end),
@@ -412,14 +410,19 @@ clientkeys = awful.util.table.join(
    
 )
 
--- {{{ run or raise
+-- Run or raise.
 local ror = require("aweror")
 
--- generate and add the 'run or raise' key bindings to the globalkeys table
+-- generate and add the 'run or raise' key bindings to the globalkeys table.
 globalkeys = awful.util.table.join(globalkeys, ror.genkeys(modkey))
 
 root.keys(globalkeys)
--- }}}
+
+--  |                    
+--  __|  _` |  _` |  __| 
+--  |   (   | (   |\__ \ 
+-- \__|\__,_|\__, |____/ 
+--           |___/       
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
@@ -475,9 +478,12 @@ clientbuttons = awful.util.table.join(
 
 -- Set keys
 root.keys(globalkeys)
--- }}}
 
--- {{{ Rules
+--             |           
+--   __| |   | |  _ \  __| 
+--  |    |   | |  __/\__ \ 
+-- _|   \__,_|_|\___|____/ 
+
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
    -- All clients will match this rule.
@@ -597,8 +603,8 @@ awful.rules.rules = {
            "zoom",
         },
         name = {
-              "Zoom Meeting",
-              "Zoom Cloud Meetings",
+           "Zoom Meeting",
+           "Zoom Cloud Meetings",
    }}, properties = { tag = "♞", switchtotag = true }},
    
    { rule_any = {    	    -- CLUBS
@@ -620,9 +626,12 @@ awful.rules.rules = {
    }}, properties = { tag = "♣", switchtotag = true }},
 }
 
--- }}}
+--      _)                   | 
+--   __| |  _` | __ \   _` | | 
+-- \__ \ | (   | |   | (   | | 
+-- ____/_|\__, |_|  _|\__,_|_| 
+--        |___/                
 
--- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
                          -- Set the windows at the slave,
@@ -636,6 +645,22 @@ client.connect_signal("manage", function (c)
                             awful.placement.no_offscreen(c)
                          end
 end)
+
+-- Enable sloppy focus, so that focus follows mouse.
+client.connect_signal("mouse::enter", function(c)
+                         if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
+                            and awful.client.focus.filter(c) then
+                            client.focus = c
+                         end
+end)
+
+client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+
+--  |  _) |   |      
+--  __| | __| |  _ \ 
+--  |   | |   |  __/ 
+-- \__|_|\__|_|\___| 
 
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 client.connect_signal("request::titlebars", function(c)
@@ -679,14 +704,3 @@ client.connect_signal("request::titlebars", function(c)
                                                    }
 end)
 
--- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal("mouse::enter", function(c)
-                         if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-                            and awful.client.focus.filter(c) then
-                            client.focus = c
-                         end
-end)
-
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
--- }}}
