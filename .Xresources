@@ -16,132 +16,114 @@ Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
 
-!! urxvt (case sensitive?)
+!! URxvt (case sensitive?)
 !! ttps://wiki.archlinux.org/index.php/Rxvt-unicode
-!urxvt*termname: consolicus
-!urxvt*title: consolicus
-urxvt*loginshell: true 
-urxvt*saveLines: 10000
-urxvt*pointerblank: true
-urxvt*letterSpace: 0
-urxvt*font: xft:DejaVuSansMono Nerd Font:size=12:antialias=true
-urxvt*boldFont: xft:DejaVuSansMono Nerd Font:size=12:antialias=true:style=Bold
-!urxvt*font: xft: Bitstream Vera Sans Mono:size=12
-!urxvt*boldFont: xft: Bitstream Vera Sans Mono:size=12:style=Bold
+!URxvt*termname: consolicus
+!URxvt*title: consolicus
+URxvt*loginshell: true 
+URxvt*saveLines: 10000
+URxvt*pointerblank: true
+URxvt*letterSpace: 0
+URxvt*font: xft:DejaVuSansMono Nerd Font:size=12:antialias=true
+URxvt*boldFont: xft:DejaVuSansMono Nerd Font:size=12:antialias=true:style=Bold
+!URxvt*font: xft: Bitstream Vera Sans Mono:size=12
+!URxvt*boldFont: xft: Bitstream Vera Sans Mono:size=12:style=Bold
 !Xterm escapes, word by word movement
-urxvt.secondaryScreen: true
-
+URxvt*secondaryScreen: true
 
 !! SCROLLING
-
-urxvt*scrollTtyOutput: true
+! do not scroll with output
+URxvt*scrollTtyOutput: false
 !! scroll in relation to buffer (with mouse scroll or Shift+Page Up):
-urxvt*scrollWithBuffer: true
+URxvt*scrollWithBuffer: true
 !! scroll back to the bottom on keypress:
-urxvt*scrollTtyKeypress: true
-urxvt.secondaryScroll: false
-urxvt.secondaryWheel: true
-!urxvt*scrollStyle:rxvt
-urxvt*scrollBar: true
-urxvt*scrollBar_right: true
-urxvt*scrollBar_floating: true
-urxvt*scrollColor: darkgrey
-urxvt*scrollstyle: plain
-urxvt*scrollBar_align: centre
-urxvt*jumpScroll: true
-urxvt*mouseWheelScrollPage: true
+URxvt*scrollTtyKeypress: true
+URxvt*secondaryScroll: false
+URxvt*secondaryWheel: true
+!URxvt*scrollStyle:rxvt
+URxvt*scrollBar: false
+URxvt*scrollBar_right: true
+URxvt*scrollBar_floating: true
+URxvt*scrollColor: darkgrey
+URxvt*scrollstyle: plain
+URxvt*scrollBar_align: centre
+URxvt*jumpScroll: true
+URxvt*mouseWheelScrollPage: true
 !! scroll up/down 10 lines
-urxvt.keysym.Shift-Up: command:\033]720;10\007
-urxvt.keysym.Shift-Down: command:\033]721;10\007
+URxvt*keysym.Shift-Up: command:\033]720;10\007
+URxvt*keysym.Shift-Down: command:\033]721;10\007
 !! scroll up/down 100 lines
-urxvt.keysym.Control-Up: command:\033]720;100\007
-urxvt.keysym.Control-Down: command:\033]721;100\007
+URxvt*keysym.Control-Up: command:\033]720;100\007
+URxvt*keysym.Control-Down: command:\033]721;100\007
 !! scroll up/down all the way (10000 lines)
-urxvt.keysym.Control-Shift-Up: command:\033]720;10000\007
-urxvt.keysym.Control-Shift-Down: command:\033]721;10000\007
+URxvt*keysym.Control-Shift-Up: command:\033]720;10000\007
+URxvt*keysym.Control-Shift-Down: command:\033]721;10000\007
 
-!! page up/page down/home/end conflicts with pager!
-! urxvt.keysym.Prior: command:\033]720;100\007
-! urxvt.keysym.Next: command:\033]721;100\007
-! urxvt.keysym.Home: command:\033]720;10000\007
-! urxvt.keysym.End: command:\033]721;10000\007
+!! page up/page down/home/end conflicts with pager (less)!
+! URxvt*keysym.Prior: command:\033]720;100\007
+! URxvt*keysym.Next: command:\033]721;100\007
+! URxvt*keysym.Home: command:\033]720;10000\007
+! URxvt*keysym.End: command:\033]721;10000\007
 
 !! if you do not use the perl extension features, you can improve the security and speed by disabling perl extensions completely.
-!urxvt.perl-ext:
-!urxvt.perl-ext-common:
+!URxvt*perl-ext:
+URxvt*perl-ext-common:resize-font
 
 
 !! GRAPHICS
 
-urxvt*skipBuiltinGlyphs: true
-urxvt*iconFile: /usr/share/icons/Adwaita/scalable/apps/utilities-terminal-symbolic.svg
+URxvt*skipBuiltinGlyphs: true
+URxvt*iconFile: /usr/share/icons/Adwaita/scalable/apps/utilities-terminal-symbolic.svg
 ! borderless conflicts with something! awesome?
-!urxvt*borderLess: true
-urxvt*cursorBlink: false
+!URxvt*borderLess: true
+URxvt*cursorBlink: false
 ! fake transparency
 ! fade the text by the given percentage when focus is lost.
-urxvt*fading: 30
-urxvt*transparent: true
+URxvt*fading: 30
+URxvt*transparent: true
 ! 0 to 99 darkens, 101 to 200 lightens
-urxvt*shading: 30
-urxvt*buffered: true
+URxvt*shading: 30
+URxvt*buffered: true
 
 ! real transparency: much to annoying
-urxvt.depth: 32
-!urxvt.background: [80]#000000
-!or urxvt*background: rgba:0000/0000/0000/c900
+URxvt*depth: 32
+!URxvt*background: [80]#000000
+!or URxvt*background: rgba:0000/0000/0000/c900
 
 
 !! COLORS
 
 !! $colortheme 4 demo
-urxvt*foreground: #A89C8C
-urxvt*background: #241e1e
-!urxvt*underlineColor:
-!urxvt*scrollColor:
-!urxvt*troughColor:
-!urxvt*highlightColor:
-!urxvt*highlightTextColor:
-urxvt*cursorColor: magenta
-!urxvt*cursorColor2:
-urxvt*pointerColor: magenta
-urxvt*pointerColor2: magenta
-*color0:  #282a2b
-*color1:  #AD513E
-*color2:  #4C7D58
-*color3:  #FFB200
-!#a8ac35
-*color4:  #B8CBE6
-*color5:  #666699
-*color6:  #8caff0
-*color7:  #a8a8a8
-*color8:  #2c2f30
-*color9:  #E0671B
-*color10: #31DE96
-*color11: #dadf45
-*color12: #3955c4
-*color13: #6698D9
-*color14: #9bbaf1
-*color15: #f0f0f0
+URxvt*foreground: #A89C8C
+!URxvt*background: #241e1e
+URxvt*background: black
+!URxvt*underlineColor:
+!URxvt*scrollColor:
+!URxvt*troughColor:
+!URxvt*highlightColor:
+!URxvt*highlightTextColor:
+URxvt*cursorColor: magenta
+!URxvt*cursorColor2:
+URxvt*pointerColor: magenta
+URxvt*pointerColor2: magenta
+! URxvt*color0:  #282a2b
+! URxvt*color1:  #AD513E
+! URxvt*color2:  #4C7D58
+! URxvt*color3:  #FFB200
+! URxvt*color4:  #B8CBE6
+! URxvt*color5:  #666699
+! URxvt*color6:  #8caff0
+! URxvt*color7:  #a8a8a8
+! URxvt*color8:  #2c2f30
+! URxvt*color9:  #E0671B
+! URxvt*color10: #31DE96
+! URxvt*color11: #dadf45
+! URxvt*color12: #3955c4
+! URxvt*color13: #6698D9
+! URxvt*color14: #9bbaf1
+! URxvt*color15: #f0f0f0
 
-! *color0: "#1d1f21" --> Default Background
-! *color1: "#282a2e" --> Lighter Background (Used for status bars)
-! *color2: "#373b41" --> Selection Background
-! *color3: "#969896" --> Comments, Invisibles, Line Highlighting
-! *color4: "#b4b7b4" --> Dark Foreground (Used for status bars)
-! *color5: "#c5c8c6" --> Default Foreground, Caret, Delimiters, Operators
-! *color6: "#e0e0e0" --> Light Foreground (Not often used)
-! *color7: "#ffffff" --> Light Background (Not often used)
-! *color8: "#CC342B" --> Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-! *color9: "#F96A38" --> Integers, Boolean, Constants, XML Attributes, Markup Link Url
-! *color10: "#FBA922" --> Classes, Markup Bold, Search Text Background
-! *color11: "#198844" --> Strings, Inherited Class, Markup Code, Diff Inserted
-! *color12: "#3971ED" --> Support, Regular Expressions, Escape Characters, Markup Quotes
-! *color13: "#3971ED" --> Functions, Methods, Attribute IDs, Headings
-! *color14: "#A36AC7" --> Keywords, Storage, Selector, Markup Italic, Diff Changed
-! *color15: "#3971ED" --> Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
-
-! # foreground
+! # foreground: background
 ! 0: 30, black
 ! 1: 31, red
 ! 2: 32, green
@@ -151,56 +133,79 @@ urxvt*pointerColor2: magenta
 ! 6: 36, cyan
 ! 7: 37, white
 ! 
-! # background
+! # bold foreground: background
 !  8: 40, black
-! 10: 41, red
-! 11: 42, green
-! 12: 43, yellow
-! 13: 44, blue
-! 14: 45, magenta
-! 15: 46, cyan
-! 16: 47, white
-! 17: 48, default
+! 9: 41, red
+! 10: 42, green
+! 11: 43, yellow
+! 12: 44, blue
+! 13: 45, magenta
+! 14: 46, cyan
+! 15: 47, white
+! 16: 48, default
 
+*color0:  #555a5c
+*color1:  #AD513E
+*color2:  #4C7D58
+*color3:  #FFB200
+*color4:  #B8CBE6
+*color5:  #666699
+*color6:  #8caff0
+*color7:  #a8a8a8
+*color8:  #6b7275
+*color9:  #E0671B
+*color10: #31DE96
+*color11: #dadf45
+*color12: #6f7bf7
+*color13: #6698D9
+*color14: #9be0f1
+*color15: #f0f0f0
+!*color16: #A89C8C
 
 !! MISC
+
+!!The 2023-01-02 update may require adding some lines into ~/.Xresources:
+URxvt*geometry: 400x400
 
 !! for otave via emacs 
 gnuplot*background: transparent truecolor
 
 
 !! XTERM
-XTerm.termName: xterm-256color
-XTerm.vt100.locale: false
-XTerm.vt100.utf8: true
-XTerm.vt100.metaSendsEscape: true
-XTerm.vt100.backarrowKey: false
-XTerm.ttyModes: erase ^?
-XTerm.vt100.saveLines: 4096
-XTerm.vt100.scrollBar: false
-XTerm.vt100.scrollbar.width: 8
-XTerm.vt100.font: 7x13
-XTerm.vt100.faceName: xft:DejaVuSansMono Nerd Font:size=12:antialias=true
-XTerm.vt100.bolddFont: xft:DejaVuSansMono Nerd Font:size=12:antialias=true:style=Bold
-XTerm.vt100.transparent: true
-XTerm.vt100.foreground: white
-!XTerm.vt100.foreground: rgb:A8/9C/8C
-!XTerm.vt100.background: black
-XTerm.vt100.background: rgb:10/10/10
-XTerm.vt100.cursorColor: magenta
-XTerm.vt100.color0:  rgb:28/2a/2b
-XTerm.vt100.color1:  rgb:AD/51/3E
-XTerm.vt100.color2:  rgb:4C/7D/58
-XTerm.vt100.color3:  rgb:FF/B2/00
-XTerm.vt100.color4:  rgb:B8/CB/E6
-XTerm.vt100.color5:  rgb:66/66/99
-XTerm.vt100.color6:  rgb:8c/af/f0
-XTerm.vt100.color7:  rgb:a8/a8/a8
-XTerm.vt100.color8:  rgb:2c/2f/30
-XTerm.vt100.color9:  rgb:E0/67/1B
-XTerm.vt100.color10: rgb:31/DE/96
-XTerm.vt100.color11: rgb:da/df/45
-XTerm.vt100.color12: rgb:39/55/c4
-XTerm.vt100.color13: rgb:66/98/D9
-XTerm.vt100.color14: rgb:9b/ba/f1
-XTerm.vt100.color15: rgb:f0/f0/f0
+!!*.termName: xterm-256color
+*.vt100.locale: false
+*.vt100.utf8: true
+*.vt100.metaSendsEscape: true
+*.vt100.backarrowKey: false
+*.ttyModes: erase ^?
+*.vt100.saveLines: 4096
+*.vt100.scrollBar: false
+*.vt100.scrollbar.width: 8
+*.vt100.geometry: 80x32
+*.vt100.faceName: DejaVuSansMono Nerd Font:size=12:antialias=true
+*.vt100.boldFont: DejaVuSansMono Nerd Font:size=12:antialias=true:style=Bold
+*.vt100.transparent: true
+!*.vt100.foreground: white
+*.vt100.foreground: rgb:A8/9C/8C
+*.vt100.background: black
+!*.vt100.background: rgb:24/1e/1e
+!*.vt100.background: rgb:10/10/10
+*.vt100.cursorColor: magenta
+*.vt100.cursorColor2: magenta
+! *.vt100.color0:  rgb:28/2a/2b
+! *.vt100.color1:  rgb:AD/51/3E
+! *.vt100.color2:  rgb:4C/7D/58
+! *.vt100.color3:  rgb:FF/B2/00
+! *.vt100.color4:  rgb:B8/CB/E6
+! *.vt100.color5:  rgb:66/66/99
+! *.vt100.color6:  rgb:8c/af/f0
+! *.vt100.color7:  rgb:a8/a8/a8
+! *.vt100.color8:  rgb:2c/2f/30
+! *.vt100.color9:  rgb:E0/67/1B
+! *.vt100.color10: rgb:31/DE/96
+! *.vt100.color11: rgb:da/df/45
+! *.vt100.color12: rgb:39/55/c4
+! *.vt100.color13: rgb:66/98/D9
+! *.vt100.color14: rgb:9b/ba/f1
+! *.vt100.color15: rgb:f0/f0/f0
+*vt100.veryBoldColors: 6

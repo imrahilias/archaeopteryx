@@ -28,6 +28,10 @@ if [ -x /usr/bin/dircolors ]; then
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
+
+    alias -g diff='diff --color=always'
+    alias -g less='less -r'
+    alias ll='less -r'
 fi
 
 # enable programmable completion features
@@ -45,6 +49,7 @@ alias df='df -h'
 alias dfa='df -ah'
 alias cp='rsync -aP' # show percentage
 alias e='emacs '
+alias c='clear'
 
 #              |  _)                  
 #   _ \  __ \  __| |  _ \  __ \   __| 
@@ -138,6 +143,13 @@ rationalize-dot() {
 }
 bind -m vi-insert -x '"\ed": rationalize-dot'
 # bind -m emacs -x     '".": rationalize-dot'
+
+# word hopping
+bind '"^[Oc": forward-word'
+bind '"^[Od": backward-word'
+bind '"^[^[[C": forward-word'
+bind '"^[^[[D": backward-word'
+
 
 #                                  |   
 #  __ \   __| _ \  __ `__ \  __ \  __| 

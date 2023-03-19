@@ -74,13 +74,17 @@ conky.text = [[
 $alignr}su mo tu we th fr sa 
 ${execpi 60 today=`date +%_d`; cal | sed -n '3,8 p' | sed 's/^/${alignr} /' | sed s/"\(^\|[^0-9]\)$today"'\b'/'\1${color1}'"$today"'${color}'/}
 
-  cpu    $color1 ${cpu cpu0} ${alignr} ${color} ${cpu cpu1}/${cpu cpu2}/${cpu cpu3}/${cpu cpu4}/${cpu cpu5}/${cpu cpu6}/${cpu cpu7}/${cpu cpu8}
-  └ft    $color1 $freq ${color} ${alignr} ${hwmon 2 temp 1} / $color1${hwmon 4 temp 1}${color}
+  cpu    $color1 ${cpu cpu0} ${alignr} ${color} ${cpu cpu1}/${cpu cpu2}/${cpu cpu3}/${cpu cpu4}
+  └ft    $color1 $freq ${color} ${alignr} ${hwmon 2 temp 1}/${hwmon 2 temp 2}/${hwmon 2 temp 3}/${hwmon 2 temp 4} / $color1${hwmon 2 temp 5}${color}
+  gpu    $color1 ${nvidia gpuutil} / ${nvidia memutil} ${color} ${alignr} ${nvidia videoutil} / ${nvidia pcieutil}${color}
+  └ft    $color1 ${nvidia gpufreq} / ${nvidia memfreq} ${color} ${alignr} ${nvidia temp}
   ram    $color1 $memperc ${color} ${alignr} $mem
-  avg    $color1 $loadavg ${color} ${alignr}
+  avg    $color1 $loadavg ${color} ${alignr}   ${acpitemp}   
   prc    $color1 $running_processes ${color} / $processes ${alignr} $uptime
-  dsk    $color1 $diskio ${color} ${alignr}
-  └─a    $color1 ${diskio_write /dev/nvme0n1} ▼ $alignr ${color} ${diskio_read /dev/sda} ▲
+  dsk    $color1 $diskio ${color} ${alignr} ${execpi 1 nc localhost 7634 | awk '{print $4,"/",$9}'}
+  ├─a    $color1 ${diskio_write /dev/sda} ▼ $alignr ${color} ${diskio_read /dev/sda} ▲
+  ├─p    $color1 ${diskio_write /dev/sdc} ▼ $alignr ${color} ${diskio_read /dev/sdc} ▲
+  └─t    $color1 ${diskio_write /dev/sdd} ▼ $alignr ${color} ${diskio_read /dev/sdd} ▲
   net    $color1 ${downspeed eno1} ▼ ${color} $alignr ${color} ${upspeed eno1} ▲
 
 ${color1}${top cpu 1}	  ${top pid 1}	   ${top name 1}${color}

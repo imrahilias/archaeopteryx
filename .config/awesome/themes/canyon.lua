@@ -5,23 +5,23 @@
 theme = {}
 
 theme.font          = "Bitstream Vera Sans 14"
-theme.taglist_font         = "Bitstream Vera Sans 20"
+theme.taglist_font  = "Bitstream Vera Sans 18"
 
-theme.bg_normal     = "#303030"
+theme.bg_normal     = "black"
 theme.bg_focus      = theme.bg_normal
-theme.bg_urgent     = "#FF8E38"
+theme.bg_urgent     = "DeepSkyBlue"
 theme.bg_minimize   = theme.bg_normal
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#777777"
-theme.fg_focus      = "#FF8E38"
+theme.fg_normal     = "DimGray"
+theme.fg_focus      = "DeepSkyBlue"
 theme.fg_urgent     = theme.bg_normal
-theme.fg_minimize   = "#dddddd"
+theme.fg_minimize   = "LightGray"
 
 theme.border_width  = 1
-theme.border_normal = "#333333"
-theme.border_focus  = "#A89C8C"
-theme.border_marked = "#91231c"
+theme.border_normal = "DimGray" -- cool: doesnt know names: transparent background!
+theme.border_focus  = "LightGray"
+theme.border_marked = "DeepSkyBlue"
 
 -- There are other variable sets
 -- overriding the default one when

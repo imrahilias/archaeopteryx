@@ -1,15 +1,14 @@
--- Standard awesome library
-local gears = require("gears")
+local gears = require("gears") -- Standard awesome library
 local awful = require("awful")
 require("awful.autofocus")
--- Widget and layout library
-local wibox = require("wibox")
--- Theme handling library
-local beautiful = require("beautiful")
--- Notification library
-local naughty = require("naughty")
+local wibox = require("wibox") -- Widget and layout library
+local beautiful = require("beautiful") -- Theme handling library
+local naughty = require("naughty") -- Notification library
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
+local ror = require("aweror") -- run or raise
+local machi = require("layout-machi") -- weird fancy layout thing
+local revelation=require("revelation") -- mac exposee mode
 
 --   _ \  __|  __| _ \   __| 
 --   __/ |    |   (   | |    
@@ -30,7 +29,6 @@ do
                              -- Make sure we don't go into an endless error loop
                              if in_error then return end
                              in_error = true
-                             
                              naughty.notify({ preset = naughty.config.presets.critical,
                                               title = "Oops, an error happened!",
                                               text = tostring(err) })
@@ -45,13 +43,15 @@ end
 -- Themes define colours, icons, font and wallpapers.
 --beautiful.init(".config/awesome/desert.lua")
 beautiful.init(awful.util.getdir("config") .. "/themes/canyon.lua")
+beautiful.layout_machi = machi.get_icon()
+revelation.init() -- load after beautiful 
 
 -- Init network-manager applet.
 awful.util.spawn("nm-applet")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvtc"
-editor = os.getenv("EDITOR") or "nano"
+editor = os.getenv("EDITOR") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -64,21 +64,22 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
    awful.layout.suit.tile,
-   --awful.layout.suit.tile.left,
+   -- awful.layout.suit.tile.left,
    awful.layout.suit.max,
    awful.layout.suit.tile.bottom,
-   --awful.layout.suit.tile.top,
-   --awful.layout.suit.fair,
-   --awful.layout.suit.fair.horizontal,
-   --awful.layout.suit.spiral,
-   --awful.layout.suit.spiral.dwindle,
+   -- awful.layout.suit.tile.top,
+   awful.layout.suit.fair,
+   -- awful.layout.suit.fair.horizontal,
+   -- awful.layout.suit.spiral,
+   -- awful.layout.suit.spiral.dwindle,
    awful.layout.suit.floating,
-   --awful.layout.suit.max.fullscreen,
-   --awful.layout.suit.magnifier,
-   --awful.layout.suit.corner.nw,
+   -- awful.layout.suit.max.fullscreen,
+   -- awful.layout.suit.magnifier,
+   -- awful.layout.suit.corner.nw,
    -- awful.layout.suit.corner.ne,
    -- awful.layout.suit.corner.sw,
    -- awful.layout.suit.corner.se,
+   machi.default_layout,
 }
 
 --   _|                  |  _)                  
@@ -89,17 +90,15 @@ awful.layout.layouts = {
 -- Create reminder function.
 local function remind_prompt()
     awful.prompt.run {
-        prompt       = '<span color="#FF8E38">Remind: </span>',
---        text         = 'remind ',
-        bg_cursor    = '#FF8E38',
+        prompt       = '<span color="orange">Remind: </span>',
+        bg_cursor    = 'orange',
         textbox      = mouse.screen.mypromptbox.widget,
         exe_callback = function(input)
            if not input or #input == 0 then
-              naughty.notify{ text = 'error: set reminder with "remind $time $name" eg "remind 10s asdf"'..input }
+              naughty.notify{ text = 'usage: set reminder with "remind $time $name" eg "remind 10s asdf"'..input }
               return
            end
            awful.spawn( 'remind '..input ) 
-           -- naughty.notify{ text = 'reminder set: '..input }
         end
     }
 end
@@ -129,7 +128,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 --   \_/\_/  _|_.__/ \__,_|_|    
 
 -- Create a textclock widget.
-mytextclock = wibox.widget.textclock(' %a %e %b <span color="#FF8E38"> %_H:%M </span> ', 5)  -- blue: #1793D1
+mytextclock = wibox.widget.textclock('<span color="DeepSkyBlue">%_H%M </span>', 5)
 
 -- Create a wibox for each screen and add it.
 local taglist_buttons = awful.util.table.join(
@@ -198,7 +197,7 @@ awful.screen.connect_for_each_screen(function(s)
       set_wallpaper(s)
       
       -- Each screen has its own tag table. ↯ 𝄞♫ ♞♟♤♡♢♧⚛'
-      awful.tag({ "∅", "@", "$", "⛁", "≣", "♬", "♻", "⚡", "✆","♞", "♠", "♥", "♦", "♣" }, s, awful.layout.layouts[1]) 
+      awful.tag({ "∅", "⚡", "$", "⛁", "≣", "♬", "♻", "@", "✆","♞", "♠", "♥", "♦", "♣" }, s, awful.layout.layouts[1]) 
       
       -- Create a promptbox for each screen
       s.mypromptbox = awful.widget.prompt()
@@ -233,9 +232,9 @@ awful.screen.connect_for_each_screen(function(s)
          { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
-            --            mykeyboardlayout,
+            --mykeyboardlayout,
             mytextclock,
-            --   s.mylayoutbox,
+            --s.mylayoutbox,
          },
       }
 end)
@@ -263,7 +262,28 @@ globalkeys = awful.util.table.join(
    -- Awesome program
    awful.key({ modkey, "Shift" }, "q", awesome.restart),
    awful.key({ modkey, "Shift", "Control" }, "q", awesome.quit),
-   
+
+   -- machi
+   awful.key({ modkey }, ".", function () machi.default_editor.start_interactive() end),
+   awful.key({ modkey }, "/", function () machi.switcher.start(client.focus) end),
+
+   -- revelation
+   awful.key({ modkey }, "w", revelation),
+   awful.key({ modkey, "Shift" }, "w", function() -- only terminals
+         revelation({rule={class="URxvt"}})
+   end),
+   -- awful.key({ modkey, "Shift", "Control" }, "w", function()
+   --       revelation({rule={class="conky"}, is_excluded=true, 
+   --                   curr_tag_only=true})
+   -- end),
+   awful.key({ modkey, "Shift", "Control" }, "w", function()
+         revelation({
+               rule{class={"URxvt", "Xterm"},
+                     any=true}
+         })
+   end),
+
+       
    -- Menubar
    awful.key({ modkey }, "p", function() menubar.show() end),
    
@@ -285,9 +305,9 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey }, "l", function () awful.tag.incmwfact( 0.05) end),
    awful.key({ modkey }, "h", function () awful.tag.incmwfact(-0.05) end),
    awful.key({ modkey }, "space", function () awful.layout.inc( 1) end),
-   awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1) end),
-   awful.key({ modkey }, m, awful.layout.suit.max.fullscreen),
-   --awful.key({ modkey }, i, awful.layout.suit.floating),
+   awful.key({ modkey, "Shift" }, "space", function () awful.layout.inc(-1) end),
+   --awful.key({ modkey }, "m", awful.layout.suit.max.fullscreen),
+   --awful.key({ modkey }, "b", awful.layout.suit.floating),
    
    awful.key({ modkey, "Shift" }, "n",
       function ()
@@ -304,23 +324,26 @@ globalkeys = awful.util.table.join(
          myscreen = awful.screen.focused()
          myscreen.mywibox.visible = not myscreen.mywibox.visible
    end),
-   
+
    -- Prompt
    awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end),
-   awful.key({ modkey }, "w", remind_prompt),
+   awful.key({ modkey }, "<", remind_prompt),
   
    -- Launch
    awful.key({ modkey }, "Return", function () awful.spawn(terminal) end),
-   awful.key({ modkey, "Shift", "Control" }, "Return", function () awful.spawn("urxvtc -title admin2 -e admin2") end),
-   awful.key({ modkey, "Shift"}, "Return", function () awful.spawn("urxvtc -title master1 -e master1") end),
+   awful.key({ modkey, "Shift", "Control" }, "Return", function () awful.spawn("urxvtc -title admin2 -e 2") end),
+   awful.key({ modkey, "Shift"}, "Return", function () awful.spawn("urxvtc -title master1 -e 1") end),
    awful.key({ modkey }, "e", function () awful.spawn("emacsclient -ca ''", false) end),
-   awful.key({ modkey, "Shift" }, "d", function () awful.spawn("thunar", false) end),    
+   awful.key({ modkey, "Shift" }, "d", function () awful.spawn("urxvtc -title Waldläufer -e sudo ranger", false) end),
    awful.key({ modkey, "Shift", "Control" }, "d", function () awful.spawn("sudo thunar", false) end),
    awful.key({ modkey, "Shift" }, "s", function () awful.spawn("open_primary_selection_in_cromium") end),
    awful.key({ modkey, "Control" }, "s", function () awful.spawn("open_primary_selection_in_google_translate") end),
    awful.key({ modkey, "Shift", "Control" }, "s", function () awful.spawn("open_primary_selection_in_thesaurus") end),
    awful.key({ modkey, "Shift" }, "t", function () awful.spawn("urxvtc -title Torronator -e rtorrent") end),
+   awful.key({ modkey }, "g", function () awful.spawn("urxvtc -title Toppings -e top") end),
+   awful.key({ modkey, "Shift" }, "g", function () awful.spawn("urxvtc -title Toppings -e htop") end),
    
+
    --awful.key({ modkey }, "o", function () awful.spawn("octave --gui") end),
    awful.key({ modkey }, "x", function () awful.spawn("xterm -T 'VSConsole' -fa 'xft:DejaVuSansMono' -fs 24 -e 'bash'") end),
    awful.key({ modkey, "Shift" }, "x", function () awful.spawn("xterm -T 'VSConsole' -fa 'xft:DejaVuSansMono' -fs 24 -e 'trainee'") end),
@@ -343,7 +366,7 @@ globalkeys = awful.util.table.join(
    awful.key({ }, "XF86Display", function () awful.spawn("xset dpms force off", false) end),    
 
    -- Screenshot
-   awful.key({ }, "Print", function () awful.spawn("scrot -e 'mv $f ~/screens/ 2>/dev/null'") end),
+   awful.key({ }, "Print", function () awful.spawn("scrot -e 'mv $f ~/.screens/ 2>/dev/null'") end),
    
    -- Killer
    awful.key({ modkey, "Shift" }, "k", function () awful.spawn("sudo xkill", false) end),
@@ -352,15 +375,15 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey }, "#86", function () awful.spawn("razercfg -l GlowingLogo:off -l Scrollwheel:on", false) end),
    awful.key({ modkey }, "#82", function () awful.spawn("razercfg -l all:off", false) end),
 
-   -- Boinc
-   awful.key({ modkey }, "b", function () awful.spawn("boinccmd --set_run_mode never 3600", false) end), -- snooze whole boinc for 1h
-   awful.key({ modkey, "Control" }, "b", function () awful.spawn("boinccmd --set_run_mode auto", false) end), -- wake up whole boinc
-   awful.key({ modkey, "Shift" }, "b", function () awful.spawn("boinccmd --set_gpu_mode never 3600", false) end),  -- snooze up boinc gpu
-   awful.key({ modkey, "Shift", "Control" }, "b", function () awful.spawn("boinccmd --set_gpu_mode auto", false) end),  -- wake up boinc gpu
+   -- -- Boinc
+   -- awful.key({ modkey }, "b", function () awful.spawn("boinccmd --set_run_mode never 3600", false) end), -- snooze whole boinc for 1h
+   -- awful.key({ modkey, "Control" }, "b", function () awful.spawn("boinccmd --set_run_mode auto", false) end), -- wake up whole boinc
+   -- awful.key({ modkey, "Shift" }, "b", function () awful.spawn("boinccmd --set_gpu_mode never 3600", false) end),  -- snooze up boinc gpu
+   -- awful.key({ modkey, "Shift", "Control" }, "b", function () awful.spawn("boinccmd --set_gpu_mode auto", false) end),  -- wake up boinc gpu
 
-   -- Slurm
-   awful.key({ modkey }, "c", function () awful.spawn("schnegg -p", false) end), -- snooze whole (drain node + suspend all jobs) slurm for 1h
-   awful.key({ modkey, "Shift" }, "c", function () awful.spawn("schnegg -r", false) end), -- resume all
+   -- -- Slurm
+   -- awful.key({ modkey }, "c", function () awful.spawn("schnegg -p", false) end), -- snooze whole (drain node + suspend all jobs) slurm for 1h
+   -- awful.key({ modkey, "Shift" }, "c", function () awful.spawn("schnegg -r", false) end), -- resume all
 
    -- rotate
    awful.key({ modkey, "Shift" }, "r", function () awful.spawn("xrandr -o 1", false) end),
@@ -370,12 +393,13 @@ globalkeys = awful.util.table.join(
    awful.key({ modkey }, "z", function () awful.spawn.with_shell('notify-send "$(cowsay $(fortune))"', false) end)
    --awful.key({ modkey }, "w", function () awful.spawn.with_shell("killall conky && feh --bg-fill ~/wind/canvas/wrld12.png & conky -c ~/wind/wind_blow.lua", false) end),
    --awful.key({ modkey , "Shift" }, "w", function () awful.spawn.with_shell("killall conky && feh --bg-fill ~/.config/awesome/themes/canyon.jpg && conky -c ~/.config/conky/left.lua && conky -c ~/.config/conky/middle.lua", false) end)
+
 )
 
 clientkeys = awful.util.table.join(
    awful.key({ modkey }, "q", function (c) c:kill() end),
    awful.key({ modkey, "Shift" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
-   awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle),
+   awful.key({ modkey }, "b",  awful.client.floating.toggle),
    
    awful.key({ modkey }, "n",
       function (c)
@@ -407,11 +431,7 @@ clientkeys = awful.util.table.join(
          c.fullscreen = not c.fullscreen
          c:raise()
    end)
-   
 )
-
--- Run or raise.
-local ror = require("aweror")
 
 -- generate and add the 'run or raise' key bindings to the globalkeys table.
 globalkeys = awful.util.table.join(globalkeys, ror.genkeys(modkey))
@@ -496,24 +516,37 @@ awful.rules.rules = {
                     buttons = clientbuttons,
                     screen = awful.screen.preferred,
                     placement = awful.placement.no_overlap+awful.placement.no_offscreen,
-                    size_hints_honor = false
+                    size_hints_honor = false,
      }
    },
+
+   -- Non Focus clients.
+   { rule_any = {
+        class = {
+           "zoom",
+        },
+        name = {
+           "Zoom Meeting",
+           "Zoom Cloud Meetings",
+        },
+   }, properties = { raise = false }},
    
-   -- -- Floating clients.
-   -- { rule_any = {
-   --      class = {
-   --         "scrcpy"},
-   --      name = {
-   --         "Event Tester",  -- xev.
-   --      },
-   --      role = {
-   --         "AlarmWindow",  -- Thunderbird's calendar.
-   --         "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
-   --      }
-   -- }, properties = { floating = true }},
-   
-   -- Add titlebars to normal clients and dialogs SERIOUSELY?
+   -- Floating clients.
+   { rule_any = {
+        class = {
+           "scrcpy",
+           "zoom",
+        },
+        name = {
+           "Event Tester",  -- xev.
+        },
+        role = {
+           "AlarmWindow",  -- Thunderbird's calendar.
+           "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
+        }
+   }, properties = { floating = true }},
+
+   -- -- Add titlebars to normal clients and dialogs SERIOUSELY?
    -- { rule_any = {type = { "normal", "dialog" }
    --              }, properties = { titlebars_enabled = true },
    -- },
@@ -529,7 +562,7 @@ awful.rules.rules = {
            "Google-chrome",
            "Chromium",
            "Firefox",
-   }}, properties = { tag = "@", switchtotag = true }},
+   }}, properties = { tag = "⚡", switchtotag = true }},
    
    { rule_any = {   	    -- CODE
         class = {
@@ -553,9 +586,11 @@ awful.rules.rules = {
            "libreoffice-startcenter",
            "libreoffice-writer",
            "libreoffice-calc",
+           "libreoffice-impress",
            "Qtiplot",
            "calibre",
            "calibre-gui",
+           "Zathura",
    }}, properties = { tag =  "≣", switchtotag = true }},
    
    { rule_any = {   	    -- MUSIC/VIDEO
@@ -581,7 +616,7 @@ awful.rules.rules = {
    { rule_any = {   	    -- DOWNLOAD
         class = {
            "Evolution",
-   }}, properties = { tag = "⚡", switchtotag = true }},
+   }}, properties = { tag = "@", switchtotag = true }},
    
    { rule_any = {    	    -- COMMUNICATION
         class = {
@@ -609,8 +644,6 @@ awful.rules.rules = {
    
    { rule_any = {    	    -- CLUBS
         name = {
-           "Grafana",
-           "Home - Grafana",
    }}, properties = { tag = "♠", switchtotag = true }},
    
    { rule_any = {    	    -- HEARTS

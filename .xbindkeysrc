@@ -83,7 +83,7 @@ b:8
 
 "xdotool key 'Alt_L+Right'"
 b:9
-  
+
 ##################################
 # End of xbindkeys configuration #
 ##################################

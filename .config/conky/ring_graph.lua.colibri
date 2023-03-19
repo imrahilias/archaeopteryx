@@ -162,15 +162,15 @@ function conky_ring_graph()
    -- get vars from conky
    cursec = tonumber( os.date("%S") + os.date("%M")*60 ) --cursec = updates % slots
    
-   cpufreq[cursec]    = tonumber(conky_parse('${freq}')) / 1700 -- in % of 1700 mhz
+   cpufreq[cursec]    = tonumber(conky_parse('${freq}')) / 40 -- in % of 4000 mhz
    mem[cursec]        = tonumber(conky_parse('${memperc}'))
    cpu0[cursec]       = tonumber(conky_parse('${cpu cpu0}'))
    -- cpu1[cursec]       = tonumber(conky_parse('${cpu cpu1}'))
    -- cpu2[cursec]       = tonumber(conky_parse('${cpu cpu2}'))
    -- cpu3[cursec]       = tonumber(conky_parse('${cpu cpu3}'))
    -- cpu4[cursec]       = tonumber(conky_parse('${cpu cpu4}'))
-   down[cursec]       = tonumber(conky_parse('${downspeedf wlan0}')) / 10000 -- in % of 10000 kib
-   up[cursec]         = tonumber(conky_parse('${upspeedf wlan0}')) / 1000 -- in % of 1000kib
+   down[cursec]       = tonumber(conky_parse('${downspeedf wlan0}')) / 24 -- in % of 2400 kib
+   up[cursec]         = tonumber(conky_parse('${upspeedf wlan0}')) / 4 -- in % of 400 kib
       
    --linewriting( texts, radi, lwd, horiz, verti,   r,   g,   b, alpha, alph, var1, var2 )
    linewriting(    cpu0,  250,   1,   900,   560, 255, 255, 255,     1,   .5,    0,    0 )

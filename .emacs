@@ -5,11 +5,11 @@
 
 
 ;; fun
-;;(global-set-key (kbd "C-x C-s") 'spook)
+;;(Global-set-key (kbd "C-x C-s") 'spook)
 
 (require 'package)
 
-;; melpa
+;; Melpa
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
        (proto (if no-ssl "http" "https")))
@@ -39,8 +39,28 @@ There are two things you can do about this warning:
 ;; inital scratch text
 (setq initial-scratch-message "")
 
+;; theme
+;(load-theme 'atom-one-dark t)
+
+;; show color as color:
+(rainbow-mode t)
+
+;; make it easy on eyes ...
+(set-foreground-color "linen")
+;(set-background-color "#202020")
+(set-background-color "black")
+(set-face-foreground 'default "linen")
+;(set-face-foreground 'default "white smoke")
+;(set-face-background 'default "#202020")
+(set-face-background 'default "black")
+(set-face-foreground 'font-lock-string-face "dark magenta")
+;(set-face-foreground 'font-lock-comment-face "saddle brown")
+(set-face-foreground 'font-lock-comment-face "teal")
+;(set-face-foreground 'font-lock-comment-face "dark slate gray")
+
 ;; UI and base colors
-(setq theme-color-accent  "#ff6000")
+;(setq theme-color-accent  "#ff6000")
+(setq theme-color-accent  "dark cyan")
 (setq theme-color-level-1 "#1D1F21")
 (setq theme-color-level-2 "#373B41")
 (setq theme-color-level-3 "#C5C8C6")
@@ -63,12 +83,10 @@ There are two things you can do about this warning:
 (global-highlight-operators-mode 't)
 (global-highlight-parentheses-mode 't)
 (global-highlight-thing-mode 't)
-(global-hl-line-mode 't)
 ;; makes ugly glyphs from greek letters!
 ;;(global-prettify-symbols-mode 't)
-;; highlight the current line
-;;(setq hl-line-face 'hl-line)
-(global-hl-line-mode '0)
+;(global-hl-line-mode 't)
+;(setq hl-line-face 'hl-line)
 (setq highlight-current-line-globally t)
 (setq highlight-current-line-high-faces nil)
 (setq highlight-current-line-whole-line nil)
@@ -76,15 +94,19 @@ There are two things you can do about this warning:
 
 ;; highlighting lock
 (custom-set-faces
- `(hi-black-b  ((t (:inherit (bold) :foreground ,theme-color-level-1 :background ,theme-color-gray))))
- `(hi-black-hb ((t (:inherit (bold) :foreground ,theme-color-level-3 :background ,theme-color-gray))))
- `(hi-blue     ((t (:foreground ,theme-color-level-1 :background ,theme-color-blue))))
- `(hi-blue-b   ((t (:inherit (hi-blue bold) :inverse-video t))))
- `(hi-green    ((t (:foreground ,theme-color-level-1 :background ,theme-color-green))))
- `(hi-green-b  ((t (:inherit (hi-green bold) :inverse-video t))))
- `(hi-pink     ((t (:foreground ,theme-color-level-1 :background ,theme-color-magenta))))
- `(hi-red-b    ((t (:inherit (bold) :foreground ,theme-color-red))))
- `(hi-yellow   ((t (:foreground ,theme-color-level-1 :background ,theme-color-yellow)))))
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(hi-black-b ((t (:inherit (bold) :foreground "#1D1F21" :background "#707880"))))
+ '(hi-black-hb ((t (:inherit (bold) :foreground "#C5C8C6" :background "#707880"))))
+ '(hi-blue ((t (:foreground "#1D1F21" :background "#5F819D"))))
+ '(hi-blue-b ((t (:inherit (hi-blue bold) :inverse-video t))))
+ '(hi-green ((t (:foreground "#1D1F21" :background "#8C9440"))))
+ '(hi-green-b ((t (:inherit (hi-green bold) :inverse-video t))))
+ '(hi-pink ((t (:foreground "#1D1F21" :background "#85678F"))))
+ '(hi-red-b ((t (:inherit (bold) :foreground "#A54242"))))
+ '(hi-yellow ((t (:foreground "#1D1F21" :background "#DE935F")))))
 
 ;; show me line and column nos
 (line-number-mode 't)
@@ -108,12 +130,6 @@ There are two things you can do about this warning:
 ;;(set-frame-font "Bitstream Vera Sans Mono Roman" nil t)
 ;;(set-frame-font "Inconsolata 12" nil t)
 (set-face-attribute 'default nil :height 120)
-
-;; make it easy on eyes ...
-(set-foreground-color "#A89C8C")
-(set-background-color "#202020")
-(set-face-foreground 'default "#A89C8C")
-(set-face-background 'default "#202020")
 
 ;; window modifications
 (global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
@@ -215,14 +231,12 @@ There are two things you can do about this warning:
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
+ '(custom-safe-themes
+   '("171d1ae90e46978eb9c342be6658d937a83aaa45997b1d7af7657546cae5985b" default))
  '(package-selected-packages
-   '(ample-regexps fuzzy auto-complete-auctex luarocks highlight-unique-symbol highlight-defined highlight-function-calls highlight-thing highlight-symbol highlight-parentheses highlight-operators highlight highlight-blocks highlight-escape-sequences highlight-quoted highlight-numbers color-identifiers-mode lua-mode flycheck arduino-cli-mode arduino-mode markdown-mode company auto-complete auctex matlab-mode live-py-mode rainbow-identifiers rainbow-mode ess auto-correct)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+   '(yaml-mode ample-regexps fuzzy auto-complete-auctex luarocks highlight-unique-symbol highlight-defined highlight-function-calls highlight-thing highlight-symbol highlight-parentheses highlight-operators highlight highlight-blocks highlight-escape-sequences highlight-quoted highlight-numbers color-identifiers-mode lua-mode flycheck arduino-cli-mode arduino-mode markdown-mode company auto-complete auctex matlab-mode live-py-mode rainbow-identifiers rainbow-mode ess auto-correct))
+ '(warning-suppress-log-types '((auto-save))))
+
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
